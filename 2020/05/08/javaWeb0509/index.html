@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>监听器 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="监听器," />
+  
+
+  <meta name="description" content="Servle监听器在Servlet规范中定义了多种类型的监听器，它们用于监听的事件源分别 ServletContext, HttpSession和ServletRequest这三个域对象 和其它事件监听器略有不同的是，servlet监听器的注册不是直接注册在事件源上，而是由WEB容器负责注册，开发人员只需在web.xml文件中使用**&lt;listener&gt;**标签配置好监听器， 监听对象">
+<meta property="og:type" content="article">
+<meta property="og:title" content="监听器">
+<meta property="og:url" content="http://paphae.top/2020/05/08/javaWeb0509/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="Servle监听器在Servlet规范中定义了多种类型的监听器，它们用于监听的事件源分别 ServletContext, HttpSession和ServletRequest这三个域对象 和其它事件监听器略有不同的是，servlet监听器的注册不是直接注册在事件源上，而是由WEB容器负责注册，开发人员只需在web.xml文件中使用**&lt;listener&gt;**标签配置好监听器， 监听对象">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-05-08T13:17:22.000Z">
+<meta property="article:modified_time" content="2020-05-08T13:29:17.332Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="监听器">
+<meta name="twitter:card" content="summary">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Servle%E7%9B%91%E5%90%AC%E5%99%A8"><span class="toc-text">Servle监听器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%91%E5%90%AC%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9B%E5%BB%BA%E5%92%8C%E9%94%80%E6%AF%81"><span class="toc-text">监听对象的创建和销毁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%91%E5%90%AC%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E5%8F%98%E5%8C%96"><span class="toc-text">监听对象属性变化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%91%E5%90%ACSession%E5%86%85%E7%9A%84%E5%AF%B9%E8%B1%A1"><span class="toc-text">监听Session内的对象</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-javaWeb0509" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">监听器</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.05.08</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/javaWeb/">javaWeb</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="Servle监听器"><a href="#Servle监听器" class="headerlink" title="Servle监听器"></a>Servle监听器</h2><p>在Servlet规范中定义了多种类型的监听器，它们<strong>用于监听的事件源分别 ServletContext, HttpSession和ServletRequest这三个域对象</strong></p>
+<p>和其它事件监听器略有不同的是，<strong>servlet监听器的注册不是直接注册在事件源上，而是由WEB容器负责注册</strong>，开发人员只需在web.xml文件中使用**<code>&lt;listener&gt;</code>**标签配置好监听器，</p>
+<h2 id="监听对象的创建和销毁"><a href="#监听对象的创建和销毁" class="headerlink" title="监听对象的创建和销毁"></a>监听对象的创建和销毁</h2><p><strong>HttpSessionListener、ServletContextListener、ServletRequestListener分别监控着Session、Context、Request对象的创建和销毁</strong></p>
+<ul>
+<li><strong>HttpSessionListener(可以用来收集在线者信息)</strong></li>
+<li><strong>ServletContextListener(可以获取web.xml里面的参数配置)</strong></li>
+<li><strong>ServletRequestListener</strong></li>
+</ul>
+<h2 id="监听对象属性变化"><a href="#监听对象属性变化" class="headerlink" title="监听对象属性变化"></a>监听对象属性变化</h2><p><strong>ServletContextAttributeListener、HttpSessionAttributeListener、ServletRequestAttributeListener分别监听着Context、Session、Request对象属性的变化</strong></p>
+<p>这三个接口中都定义了<strong>三个方法来处理被监听对象中的属性的增加，删除和替换的事件</strong>，同一个事件在这三个接口中对应的方法<strong>名称完全相同，只是接受的参数类型不同</strong>。</p>
+<ul>
+<li><strong>attributeAdded()</strong></li>
+<li><strong>attributeRemoved()</strong></li>
+<li><strong>attributeReplaced()</strong></li>
+</ul>
+<h2 id="监听Session内的对象"><a href="#监听Session内的对象" class="headerlink" title="监听Session内的对象"></a>监听Session内的对象</h2><p><strong>除了上面的6种Listener，还有两种Linstener监听Session内的对象，分别是HttpSessionBindingListener和HttpSessionActivationListener，实现这两个接口并不需要在web.xml文件中注册</strong></p>
+<ul>
+<li>实现HttpSessionBindingListener接口，**JavaBean 对象可以感知自己被绑定到 Session 中和从 Session 中删除的事件【和HttpSessionAttributeListener的作用是差不多的】 **  </li>
+<li>实现HttpSessionActivationListener接口，<strong>JavaBean 对象可以感知自己被活化和钝化的事件（当服务器关闭时，会将Session的内容保存在硬盘上【钝化】，当服务器开启时，会将Session的内容在硬盘式重新加载【活化】）</strong></li>
+</ul>
+<p><strong>想要测试出Session的硬化和钝化，需要修改Tomcat的配置的</strong>。在META-INF下的context.xml文件中添加下面的代码：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Context</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Manager</span> <span class="attr">className</span>=<span class="string">&quot;org.apache.catalina.session.PersistentManager&quot;</span> <span class="attr">maxIdleSwap</span>=<span class="string">&quot;1&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Store</span> <span class="attr">className</span>=<span class="string">&quot;org.apache.catalina.session.FileStore&quot;</span> <span class="attr">directory</span>=<span class="string">&quot;D:\session&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">Manager</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Context</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4Njg5MDA5NA==&mid=2247484862&idx=4&sn=14cbb3bc2d91696adc5d5ba7318c19c2&chksm=ebd744bfdca0cda90cf1753c2aca06fd78012698e016fd6fb5ea26d24f2faac6772e223f05e3###rd">参考文章</a></p>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/05/07/javaWeb0508/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/05/08/javaWeb0510/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>java-线程同步 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="线程," />
+  
+
+  <meta name="description" content="线程同步 如果需要将多条代码视作一个整体调度单元，希望这个调度单元在多线程环境中的调度顺序不影响任何结果，除了保证可见性、防止重排序改变语义之外，还要将该代码段进行原子保护，这种保护我们称为线程同步，其主要的作用是实现线程安全的类">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java-线程同步">
+<meta property="og:url" content="http://paphae.top/2020/03/18/java-%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="线程同步 如果需要将多条代码视作一个整体调度单元，希望这个调度单元在多线程环境中的调度顺序不影响任何结果，除了保证可见性、防止重排序改变语义之外，还要将该代码段进行原子保护，这种保护我们称为线程同步，其主要的作用是实现线程安全的类">
+<meta property="og:locale">
+<meta property="og:image" content="http://paphae.top/2020/03/18/java-%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/java-%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/%E5%9B%BE%E7%89%871.png">
+<meta property="og:image" content="http://paphae.top/2020/03/18/java-%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/java-%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/%E5%9B%BE%E7%89%872.png">
+<meta property="og:image" content="http://paphae.top/2020/03/18/java-%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/java-%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/%E5%9B%BE%E7%89%873.png">
+<meta property="og:image" content="http://paphae.top/2020/03/18/java-%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/java-%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/%E5%9B%BE%E7%89%874.png">
+<meta property="article:published_time" content="2020-03-18T00:18:50.000Z">
+<meta property="article:modified_time" content="2020-05-06T00:43:10.192Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="线程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://paphae.top/2020/03/18/java-%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/java-%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/%E5%9B%BE%E7%89%871.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5"><span class="toc-text">线程同步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E6%AD%BB%E9%94%81"><span class="toc-text">线程死锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E9%80%9A%E4%BF%A1"><span class="toc-text">线程通信</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%A1%E9%81%93%E6%B5%81"><span class="toc-text">管道流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-text">小结</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-java-线程同步" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">java-线程同步</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.03.18</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/javaSE/">javaSE</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="线程同步"><a href="#线程同步" class="headerlink" title="线程同步"></a>线程同步</h2><ul>
+<li><p>如果需要将多条代码视作一个整体调度单元，希望这个调度单元在多线程环境中的调度顺序不影响任何结果，除了保证可见性、防止重排序改变语义之外，还要将该代码段进行原子保护，这种保护我们称为线程同步，其主要的作用是实现线程安全的类 </p>
+<a id="more"></a>
+</li>
+<li><p>Java中使用synchronized关键字来对操作进行同步处理</p>
+</li>
+<li><p>在使用synchronized关键字之前，需要理解JVM中的几个规范： </p>
+</li>
+<li><p> 在JVM中，每个对象和类在逻辑上都是和一个监视器相关联的，为了实现监视器的排他性监视能力（即保证资源只能同时被一个线程访问），JVM为每一个对象和类都关联一个锁，锁住了一个对象，就是获得对象相关联的监视器 </p>
+</li>
+<li><p>监视器即类似本节初提出的令牌概念，只有获取了令牌的线程才能操作资源，操作完成后将令牌释放，下一个线程才有重新获取令牌并进行资源操作的机会</p>
+</li>
+<li><p>监视器就像一座建筑,它有一个很特别的房间,房间里有一些数据,而且在同一时间只能被一个线程占据,进入这个建筑叫做”进入监视器”,进入建筑中的那个特别的房间叫做”获得监视器”,占据房间叫做”持有监视器”,离开房间叫做”释放监视器”,离开建筑叫做”退出监视器”</p>
+</li>
+<li><p>而一个锁就像一种任何时候只允许一个线程拥有的特权 </p>
+</li>
+<li><p>一个线程可以允许多次对同一对象上锁，对于每一个对象来说,Java虚拟机维护一个计数器,记录对象被加了多少次锁,没被锁的对象的计数器是0,线程每加锁一次,计数器就加1,每释放一次,计数器就减1.当计数器跳到0的时候,锁就被完全释放了 </p>
+</li>
+<li><p>java虚拟机中的一个线程在它到达监视区域开始处的时候请求一个锁，JAVA程序中每一个监视区域都和一个对象引用相关联</p>
+</li>
+<li><p>Java中synchronized关键字获得对象锁，实现线程同步 </p>
+</li>
+<li><p>synchronized会降低程序的性能 </p>
+</li>
+<li><p>实现同步有两种方法： </p>
+<ul>
+<li>同步方法 </li>
+<li>同步代码块</li>
+</ul>
+</li>
+</ul>
+<p><img src="java-%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/%E5%9B%BE%E7%89%871.png"></p>
+<ul>
+<li>临界区同步块： </li>
+<li>有时,你只是希望防止多个线程同时访问方法内部的部分代码而不是整个方法 </li>
+<li>通过这种方式分离出来的代码被称为 “临界区” (critical section),它也使用synchronized关键字建立。 </li>
+<li>这里, synchronized被用来指定某个对象,此对象的锁被用来对花括号内的代码进行同步控制 </li>
+<li>临界区同步块可以适当降低同步整个方法带来的性能消耗<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">synchronized</span>（锁对象）&#123;  </span><br><span class="line">同步方法内容 代码</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<img src="java-%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/%E5%9B%BE%E7%89%872.png"><br>同步块使用同一个对象的监视器（this），因此当一个线程获取监视器锁定对象后，其他线程即便访问的是其他的同步方法，也需要排队等候锁</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> add = <span class="keyword">new</span> AddThread();</span><br><span class="line">        <span class="keyword">var</span> dec = <span class="keyword">new</span> DecThread();</span><br><span class="line">        add.start();</span><br><span class="line">        dec.start();</span><br><span class="line">        add.join();</span><br><span class="line">        dec.join();</span><br><span class="line">        System.out.println(Counter.count);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Object lock1 = <span class="keyword">new</span> Object();</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Object lock2 = <span class="keyword">new</span> Object();</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AddThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">10000</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span>(Counter.lock1) &#123;</span><br><span class="line">                Counter.count += <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DecThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">10000</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span>(Counter.lock2) &#123;</span><br><span class="line">                Counter.count -= <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>结果并不是0，这是因为两个线程各自的synchronized锁住的不是同一个对象！这使得两个线程各自都可以同时获得锁：因为JVM只保证同一个锁在任意时刻只能被一个线程获取，但两个不同的锁在同一时刻可以被两个线程分别获取。</p>
+<p>因此，<strong>使用synchronized的时候，获取到的是哪个锁非常重要</strong>。锁对象如果不对，代码逻辑就不对。</p>
+<h2 id="线程死锁"><a href="#线程死锁" class="headerlink" title="线程死锁"></a>线程死锁</h2><p>•因为线程可以阻塞,并且对象可以具有同步控制方法,用以防止别的线程在锁还没有释放的时候就访问这个对象.所以就可能出现这种情况:<br>•某个线程在等待另一个线程,而后者又等待别的线程,这样一直下去,直到这个链条上的线程又在等待第一个线程释放锁.你将得到一个线程之间相互等待的连续循环,没有哪个线程能继续。这被称之为 “死锁”(deadlock)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">方法一</span><br><span class="line"><span class="keyword">synchronized</span>(o1)&#123;</span><br><span class="line">	<span class="keyword">synchronized</span>(o2)&#123;</span><br><span class="line">	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">方法二</span><br><span class="line"><span class="keyword">synchronized</span>(o2)&#123;</span><br><span class="line">	<span class="keyword">synchronized</span>(o1)&#123;</span><br><span class="line">	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>方法一获取o1的锁标记，方法二获取了o2的锁标记<br>方法一等待方法二释放o2的锁标记<br>方法二等待方法一释放o1的锁标记</p>
+<ul>
+<li><p>死锁的形成是潜在的,不易发现的<br>如果你运行一个程序,而它马上就死锁了,你当时就能知道出了问题,并且可以跟踪下去，真正的问题在于,你的程序可能看起来工作良好,但是具有潜在的死锁危险。这时,死锁也可能发生,而事先却没有任何征兆,所以它会潜伏在你的程序里,直到客户发现它出乎意料的发生(并且你可能很难重现这个问题)。因此,在编写并发程序的时候,进行仔细的程序设计以防止死锁是一个关键部分</p>
+<h2 id="线程通信"><a href="#线程通信" class="headerlink" title="线程通信"></a>线程通信</h2></li>
+<li><p>线程通信的目标是使线程间能够互相发送信号。另一方面，线程通信使线程也能够等待其他线程的信号<br>例如，线程B可以等待线程A的一个信号，这个信号会通知线程B数据已经准备好了，一个比较典型的案例就是：<br><img src="java-%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/%E5%9B%BE%E7%89%873.png"></p>
+</li>
+<li><p>线程human和hen必须获得指向同一个hasEggs共享实例的引用，以便进行通信。如果它们持有的引用指向不同的实例，那么彼此将不能检测到对方的信号。需要处理的数据可以存放在一个共享缓存区里 </p>
+</li>
+<li><p>上例这种循环轮询方式被称为忙等待 </p>
+</li>
+<li><p>忙等待没有对运行等待线程的CPU进行有效的利用，除非平均等待时间非常短。否则，让等待线程进入睡眠或者非运行状态更为明智，直到它接收到它等待的信号</p>
+</li>
+</ul>
+<blockquote>
+<p>Java有一个内建的等待机制来允许线程在等待信号的时候变为非运行状态。java.lang.Object 类定义了三个方法，wait()、notify()和notifyAll()来实现这个等待机制（由于Object类是Java继承树的根节点，因此所有的Java类都具备这三个方法，这三个方法都是final的）<br>一个线程一旦调用了任意对象的wait()方法，就会变为非运行状态，直到另一个线程调用了同一个对象的notify()/notifyAll()方法<br>为了调用wait()或者notify()，线程必须先获得那个对象的锁。也就是说，线程必须在同步块里调用wait()或者notify()，JVM是这么实现的，当你调用wait时候它首先要检查下当前线程是否是锁的拥有者，不是则抛出IllegalMonitorStateException<br><img src="java-%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/%E5%9B%BE%E7%89%874.png"></p>
+</blockquote>
+<ul>
+<li>当一个线程调用一个对象的notify()方法，正在等待该对象的所有线程中将有一个线程被唤醒并允许执行（这个将被唤醒的线程是随机的，不可以指定唤醒哪个线程）。同时也提供了一个notifyAll()方法来唤醒正在等待一个给定对象的所有线程 </li>
+<li>一旦线程调用了wait()方法，它就释放了所持有的监视器对象上的锁。这将允许其他线程也可以调用wait()或者notify()（这是wait方法和Thread类sleep方法的主要区别） </li>
+<li>wait()方法也具备有时间参数的重载版本，超时时间到了之后即使没有其他线程调用notify方法，线程也将唤醒（如果超时时间设置为0，则和无参版本wait方法功能保持一致）</li>
+<li>notify()和notifyAll()方法不会保存调用它们的方法，因为当这两个方法被调用时，有可能没有线程处于等待状态。通知信号过后便丢弃了。因此，如果一个线程先于被通知线程调用wait()前调用了notify()，等待的线程将错过这个信号 </li>
+<li>这可能是也可能不是个问题。不过，在某些情况下，这可能使等待线程永远在等待，不再醒来，因为线程错过了唤醒信号。</li>
+</ul>
+<h2 id="管道流"><a href="#管道流" class="headerlink" title="管道流"></a>管道流</h2><ul>
+<li>Java中的Pipe管道输入流与Pipe管道输出流实现了类似管道的功能，用于不同线程之间的相互通信;</li>
+<li>Java在它的jdk文档中提到不要在一个线程中同时使用管道输入流和管道输出流，这可能会造成死锁</li>
+</ul>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>sleep方法由Thread类提供，它不会释放线程锁，wait方法由Object类提供，这就意味着所有的Java类都具备wait方法，wait方法调用后会释放线程具备的锁，同一个对象的notify和notifyAll方法能够唤醒线程，wait方法和notify方法需要在同步块中调用</p>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/03/17/java-%E7%BA%BF%E7%A8%8B%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/03/18/java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

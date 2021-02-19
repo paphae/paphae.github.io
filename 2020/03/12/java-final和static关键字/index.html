@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>java-final和static关键字 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="final,static," />
+  
+
+  <meta name="description" content="final在Java中，final关键字有最终的，不可修改的含义final关键字有三种用途，可以分别应用于变量、成员方法和类">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java-final和static关键字">
+<meta property="og:url" content="http://paphae.top/2020/03/12/java-final%E5%92%8Cstatic%E5%85%B3%E9%94%AE%E5%AD%97/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="final在Java中，final关键字有最终的，不可修改的含义final关键字有三种用途，可以分别应用于变量、成员方法和类">
+<meta property="og:locale">
+<meta property="og:image" content="http://paphae.top/2020/03/12/java-final%E5%92%8Cstatic%E5%85%B3%E9%94%AE%E5%AD%97/java-final%E5%92%8Cstatic%E5%85%B3%E9%94%AE%E5%AD%97/%E5%9B%BE%E7%89%871.png">
+<meta property="og:image" content="http://paphae.top/2020/03/12/java-final%E5%92%8Cstatic%E5%85%B3%E9%94%AE%E5%AD%97/java-final%E5%92%8Cstatic%E5%85%B3%E9%94%AE%E5%AD%97/%E5%9B%BE%E7%89%872.png">
+<meta property="og:image" content="http://paphae.top/2020/03/12/java-final%E5%92%8Cstatic%E5%85%B3%E9%94%AE%E5%AD%97/java-final%E5%92%8Cstatic%E5%85%B3%E9%94%AE%E5%AD%97/%E5%9B%BE%E7%89%873.png">
+<meta property="og:image" content="http://paphae.top/2020/03/12/java-final%E5%92%8Cstatic%E5%85%B3%E9%94%AE%E5%AD%97/java-final%E5%92%8Cstatic%E5%85%B3%E9%94%AE%E5%AD%97/%E5%9B%BE%E7%89%874.png">
+<meta property="og:image" content="http://paphae.top/2020/03/12/java-final%E5%92%8Cstatic%E5%85%B3%E9%94%AE%E5%AD%97/java-final%E5%92%8Cstatic%E5%85%B3%E9%94%AE%E5%AD%97/%E5%9B%BE%E7%89%875.png">
+<meta property="og:image" content="http://paphae.top/2020/03/12/java-final%E5%92%8Cstatic%E5%85%B3%E9%94%AE%E5%AD%97/java-final%E5%92%8Cstatic%E5%85%B3%E9%94%AE%E5%AD%97/%E5%9B%BE%E7%89%876.png">
+<meta property="og:image" content="http://paphae.top/2020/03/12/java-final%E5%92%8Cstatic%E5%85%B3%E9%94%AE%E5%AD%97/java-final%E5%92%8Cstatic%E5%85%B3%E9%94%AE%E5%AD%97/%E5%9B%BE%E7%89%877.png">
+<meta property="og:image" content="http://paphae.top/2020/03/12/java-final%E5%92%8Cstatic%E5%85%B3%E9%94%AE%E5%AD%97/java-final%E5%92%8Cstatic%E5%85%B3%E9%94%AE%E5%AD%97/%E5%9B%BE%E7%89%878.png">
+<meta property="og:image" content="http://paphae.top/2020/03/12/java-final%E5%92%8Cstatic%E5%85%B3%E9%94%AE%E5%AD%97/java-final%E5%92%8Cstatic%E5%85%B3%E9%94%AE%E5%AD%97/%E5%9B%BE%E7%89%879.png">
+<meta property="article:published_time" content="2020-03-12T12:27:15.000Z">
+<meta property="article:modified_time" content="2020-05-06T00:45:03.957Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="final">
+<meta property="article:tag" content="static">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://paphae.top/2020/03/12/java-final%E5%92%8Cstatic%E5%85%B3%E9%94%AE%E5%AD%97/java-final%E5%92%8Cstatic%E5%85%B3%E9%94%AE%E5%AD%97/%E5%9B%BE%E7%89%871.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#final"><span class="toc-text">final</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#static"><span class="toc-text">static</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F"><span class="toc-text">静态成员变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95"><span class="toc-text">静态方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E5%AF%BC%E5%85%A5"><span class="toc-text">静态导入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD"><span class="toc-text">类加载</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-java-final和static关键字" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">java-final和static关键字</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.03.12</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/javaSE/">javaSE</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="final"><a href="#final" class="headerlink" title="final"></a>final</h2><p>在Java中，final关键字有最终的，不可修改的含义<br>final关键字有三种用途，可以分别应用于变量、成员方法和类</p>
+<a id="more"></a>
+<p>如果将某个变量修饰为final，那么该变量就成为常量，一般语法：<br>     [访问权限] final 数据类型 常量名 = 值;<br>常量在声明时必须初始化，声明之后不能对其进行二次赋值，其后任何试图对常量进行赋值的语句都将报错<br>成员final属性，可以用过构造方法进行初始化<br><img src="java-final%E5%92%8Cstatic%E5%85%B3%E9%94%AE%E5%AD%97/%E5%9B%BE%E7%89%871.png"><br>如果将某个成员方法修饰为final，则意味着该方法不能被子类覆盖，这就和抽象方法必须由子类实现的规定互相矛盾，因此，final和abstract不能同时修饰一个方法<br>final方法的一般声明格式是：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[访问权限] <span class="keyword">final</span> 返回值类型 方法名(参数列表) &#123;</span><br><span class="line">		……</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>如果将某个类修饰为final，则说明该类无法被继承，一般语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[访问权限] final class 类名 &#123;</span><br><span class="line">		成员列表</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>String 类型  Java中有一个最常用的final类：java.lang.String</p>
+<h2 id="static"><a href="#static" class="headerlink" title="static"></a>static</h2><p>针对一个类所有对象的共性属性，Java采用static成员完成统一调用<br>static 在变量或方法之前，表明它们是属于类的，称为类方法（静态方法）或类变量（静态变量）。若无static修饰，则是实例方法和实例变量<br>和类的其他成员属性不同，static成员并不存放在对象对应的堆空间中，通过对JVM的分析发现，其会将static成员存放在方法区中，每个对象的相应static共享同一段内存<br><img src="java-final%E5%92%8Cstatic%E5%85%B3%E9%94%AE%E5%AD%97/%E5%9B%BE%E7%89%872.png"></p>
+<h2 id="静态成员变量"><a href="#静态成员变量" class="headerlink" title="静态成员变量"></a>静态成员变量</h2><p>在成员变量前加static关键字，可以将其声明为静态成员变量<br>如果类中成员变量被定义为静态，那么不论有多少个对象，静态成员变量只有一份内存拷贝，即所有对象共享该成员变量<br>静态成员变量的作用域只在类内部，但其生命周期却贯穿整个程序<br>在没有实例化对象时，可以通过类名访问静态成员变量<br>也可以通过对象访问静态成员变量，但不论使用的是哪个对象，访问到的都是同一个变量(因此建议不管是否有对象均由类名调用，更符合逻辑)<br><img src="java-final%E5%92%8Cstatic%E5%85%B3%E9%94%AE%E5%AD%97/%E5%9B%BE%E7%89%873.png"><br><img src="java-final%E5%92%8Cstatic%E5%85%B3%E9%94%AE%E5%AD%97/%E5%9B%BE%E7%89%874.png"><br>可以将static和final联合起来使用<br>当一个变量被static和final共同修饰时，其和仅用static修饰的变量的差异在于声明时必须初始化，而且在整个程序生命周期内不能再对这个变量进行二次赋值<br>static final常量通常用于保存整个应用程序共享的常量值</p>
+<h2 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h2><p>在成员方法前加static关键字，可以将其声明为静态成员方法<br>静态成员方法只能对方法自生的局部变量或类的静态成员变量进行操作(我说的:静态方法只能访问当前类中静态成员，而不能访问非静态<br>1、静态方法，只能调用当前类中其他的静态方法和当前类中的静态成员属性，不能访问其他非静态的方法和属性</p>
+<p>普通方法可以调用静态的方法和属性<br>和静态成员变量一样，可以通过类名或对象访问静态成员方法（建议使用类名）</p>
+<p>记下来<br>实例方法中可以直接调用static方法<br>static方法中无法直接调用本类中声明的其他实例方法，如果需要调用，只能在方法体中构建本类的对象，然后利用该对象调用实例方法<br>static方法可以直接调用本类中声明的其他static方法<br>实例方法中可以直接访问static成员变量而static方法中不能直接访问非static的成员变量</p>
+<h2 id="静态导入"><a href="#静态导入" class="headerlink" title="静态导入"></a>静态导入</h2><p>JDK1.5中引入了“Static Import”机制，借助这一机制，可以用略掉所在的类或接口名的方式，来使用静态成员<br>之前我们是这样调用静态方法的：<br>现在可以这样简化：<br><img src="java-final%E5%92%8Cstatic%E5%85%B3%E9%94%AE%E5%AD%97/%E5%9B%BE%E7%89%875.png"><br>static import也可以使用通配符，如import static java.lang.Math.*表示导入Math类中所有的静态成员<br>使用import static语句，可以导入一个类里的一切被static修饰的东西，包括变量、常量、方法和内类<br>去掉静态成员前面的类型名，固然有助于在频繁调用时显得简洁，但是同时也失去了关于“这个东西在哪里定义”的提示信息，增加了阅读理解的麻烦。如果导入的来源很著名（比如java.lang.Math），或者来源的总数比较少，这个问题并不严重；但是在不属于这两种的情况下，这就不是基本可以忽略的问题了</p>
+<p>Static Import不能突破Java语言中原有的访问控制机制的限制，不过也并不在这方面增加新的约束。原来有权限访问的静态成员，都可以被导入和使用；而原来无权限访问的静态成员，用了这个方法之后也仍然是不能访问<br>同的类（接口）可以包括名称相同的静态成员。因此，在进行Static Import的时候，可能会出现“两个语句导入同名的静态成员”的情况。在这种时候，Java会这样来加以处理：<br>如果两个语句都是精确导入的形式，或者都是按需导入的形式，那么会造成编译错误。<br><img src="java-final%E5%92%8Cstatic%E5%85%B3%E9%94%AE%E5%AD%97/%E5%9B%BE%E7%89%876.png"><br>*<em>如果一个语句采用精确导入的形式，一个采用通配符</em>按需导入的形式，那么采用精确导入的形式的一个有效。**<br><img src="java-final%E5%92%8Cstatic%E5%85%B3%E9%94%AE%E5%AD%97/%E5%9B%BE%E7%89%877.png"><br>如果两个同名的静态成员一个是属性，而另一个是方法，那么因为使用时的写法有差异，不会造成任何的冲突</p>
+<p><strong>静态成员方法没有this引用</strong><br>之所以在非静态方法中可以使用this，是因为非静态方法参数传递时，有一个隐式参数this，这个this就是调用该方法的对象本身比如：<br> Object o=new Object();<br> o.toString(); <br>实际上是有参数传递的toString(Object this),且o==this这样在非静态方法中就可以通过this来得到调用对象的其他成员和方法，私有成员的也行<br>静态方法是属于类而并不属于某个对象。其在加载类时就已经被虚拟机初始化，此时不存在任何对象的概念，所以没有办法传递隐式参数this，自然也就不能通过this调用对象本身了，    但这并不意味这不能调用非静态域。我们可以通过显示参数传递来做到这一点</p>
+<h2 id="类加载"><a href="#类加载" class="headerlink" title="类加载"></a>类加载</h2><p><img src="java-final%E5%92%8Cstatic%E5%85%B3%E9%94%AE%E5%AD%97/%E5%9B%BE%E7%89%878.png"><br>static 静态代码块 是在类加载的时候调用，而且 只调用一次<br>类加载：JVM第一次加载.class文件的时候<br>{代码块}   c创建对象时，会执行，创建几个对象 执行几次<br>1、静态代码块先执行，2、执行代码块，3、执行构造方法<br><img src="java-final%E5%92%8Cstatic%E5%85%B3%E9%94%AE%E5%AD%97/%E5%9B%BE%E7%89%879.png"></p>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/03/12/java-%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E7%AC%A6%E4%B8%8E%E6%8A%BD%E8%B1%A1%E7%B1%BB/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/03/12/java-%E6%8E%A5%E5%8F%A3/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

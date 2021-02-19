@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>ZooKeeper入门 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Zookeeper," />
+  
+
+  <meta name="description" content="zookeeper的⼯作原理1、定义：zookeeper是⼀种为分布式应⽤所设计的⾼可⽤、⾼性能且⼀致的开源协调服务，它提供了⼀项基本服务：分布式锁服务。后来摸索出了其他使⽤⽅法：配置维护、组服务、分布式消息队列、分布式通知&#x2F;协调等。 2、特点：  1、能够⽤在⼤型分布式系统中；  2、具有⼀致性、可⽤性、容错性，不会因为⼀个节点的错误⽽崩溃； 3、⽤途：⽤户⼤型分布式系统，作协调服务⻆⾊； 1、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ZooKeeper入门">
+<meta property="og:url" content="http://paphae.top/2020/07/14/ZooKeeper%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="zookeeper的⼯作原理1、定义：zookeeper是⼀种为分布式应⽤所设计的⾼可⽤、⾼性能且⼀致的开源协调服务，它提供了⼀项基本服务：分布式锁服务。后来摸索出了其他使⽤⽅法：配置维护、组服务、分布式消息队列、分布式通知&#x2F;协调等。 2、特点：  1、能够⽤在⼤型分布式系统中；  2、具有⼀致性、可⽤性、容错性，不会因为⼀个节点的错误⽽崩溃； 3、⽤途：⽤户⼤型分布式系统，作协调服务⻆⾊； 1、">
+<meta property="og:locale">
+<meta property="og:image" content="http://paphae.top/2020/07/14/ZooKeeper%E5%85%A5%E9%97%A8/ZooKeeper%E5%85%A5%E9%97%A8/image-20200714212023286.png">
+<meta property="og:image" content="http://paphae.top/2020/07/14/ZooKeeper%E5%85%A5%E9%97%A8/ZooKeeper%E5%85%A5%E9%97%A8/image-20200714211937817.png">
+<meta property="article:published_time" content="2020-07-14T13:11:33.000Z">
+<meta property="article:modified_time" content="2020-07-15T10:34:59.095Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="Zookeeper">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://paphae.top/2020/07/14/ZooKeeper%E5%85%A5%E9%97%A8/ZooKeeper%E5%85%A5%E9%97%A8/image-20200714212023286.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#zookeeper%E7%9A%84%E2%BC%AF%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-text">zookeeper的⼯作原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#zookeeper%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E6%A0%91%EF%BC%89"><span class="toc-text">zookeeper数据结构（树）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4"><span class="toc-text">常用指令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#java%E6%93%8D%E4%BD%9Czookeeper"><span class="toc-text">java操作zookeeper</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0"><span class="toc-text">学习</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-ZooKeeper入门" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">ZooKeeper入门</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.07.14</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="zookeeper的⼯作原理"><a href="#zookeeper的⼯作原理" class="headerlink" title="zookeeper的⼯作原理"></a>zookeeper的⼯作原理</h2><p>1、定义：zookeeper是⼀种为分布式应⽤所设计的⾼可⽤、⾼性能且⼀致的开源协调服务，它提供了⼀项基本服务：分布式锁服务。后来摸索出了其他使⽤⽅法：配置维护、组服务、分布式消息队列、分布式通知/协调等。</p>
+<p>2、特点：</p>
+<p> 1、能够⽤在⼤型分布式系统中；</p>
+<p> 2、具有⼀致性、可⽤性、容错性，不会因为⼀个节点的错误⽽崩溃；</p>
+<p>3、⽤途：⽤户⼤型分布式系统，作协调服务⻆⾊；</p>
+<p>1、分布式锁应⽤：通过对集群进⾏master选举，来解决分布式系统中的单点故障（⼀主n从，主挂全挂）。</p>
+<p>2、协调服务；</p>
+<p>3、注册中⼼；</p>
+<p>4、原理：</p>
+<p> 术语：</p>
+<p> 数据结构Znode：zookeeper数据采⽤树形层次结构，和标准⽂件系统⾮常相似，树中每个节点被称为Znode；</p>
+<p> 通知机制Watcher：zookeeper可以为所有的读操作（exists()、getChilden()及getData()）设置watch，</p>
+<p>watch事件是⼀次性出发器，当watch的对象状态发⽣改变时，将会触发次对象上watch所对应的事件。watch事件将被异步的发送</p>
+<p>给客户端，并且zookeeper为watch机制提供了有序的⼀致性保证。</p>
+<p> 基本流程：分布式锁应⽤场景</p>
+<p> 1、传统的⼀主n从分布式系统，容易发⽣单点故障，传统解决⽅式是增加⼀个备⽤节点，定期给主节点发送Ping包，主节</p>
+<p>点回复ack，但是如果⽹络原因ack丢失，那么会出现两个主节点，造成数据混乱。</p>
+<p> 2、zookeeper的引⼊可以管理两个主节点，其中挂了⼀个，会将另外⼀个作为新的主节点，挂的节点回来时担任备⽤节点；</p>
+<p><img src="ZooKeeper%E5%85%A5%E9%97%A8/image-20200714212023286.png" alt="image-20200714212023286"></p>
+<p><img src="ZooKeeper%E5%85%A5%E9%97%A8/image-20200714211937817.png" alt="image-20200714211937817"></p>
+<h2 id="zookeeper数据结构（树）"><a href="#zookeeper数据结构（树）" class="headerlink" title="zookeeper数据结构（树）"></a>zookeeper数据结构（树）</h2><p>​        1.节点名称 ：唯一。</p>
+<p>​        2.节点类型(持久,临时)</p>
+<p>​            1.持久节点。</p>
+<p>​            2.有序持久节点。</p>
+<p>​            3.临时节点</p>
+<p>​            4.有序临时节点。</p>
+<p>​        补充：临时节点当连接关闭的时候，临时节点消失。</p>
+<h2 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h2><p>​            1. 显示根目录下、文件： ls / 使用 ls 命令来查看当前 ZooKeeper 中所包含的内容</p>
+<p>​            2. 显示根目录下、文件： ls2 / 查看当前节点数据并能看到更新次数等数据</p>
+<p>​            3. 创建文件，并设置初始内容： create /zk “test” 创建一个新的 znode节点“ zk ”以及与它关联的字符串</p>
+<p>​            4. 获取文件内容： get /zk 确认 znode 是否包含我们所创建的字符串</p>
+<p>​            5. 修改文件内容： set /zk “zkbak” 对 zk 所关联的字符串进行设置</p>
+<p>​            6. 删除文件： delete /zk 将刚才创建的 znode 删除</p>
+<p>​            7. 退出客户端： quit</p>
+<p>​            8. 帮助命令： help 1. 使用 ZK 命令的简单操作</p>
+<ol>
+<li><p>ls / : 使用ls命令查看当前Zookeeper中所包含的内容</p>
+</li>
+<li><p>create /aa “my first zk” ：创建一个新的Znode节点”aa”，以及和它相关字符，默认是不带编号的</p>
+</li>
+<li><p>create -s /bb “bb” ： 创建带编号的持久性节点”bb”</p>
+</li>
+<li><p>create -e /cc “cc” ： 创建不带编号的临时节点”cc”</p>
+</li>
+<li><p>create -s -e /dd “dd” ： 创建带编号的临时节点”dd”</p>
+</li>
+<li><p>再次 ls / </p>
+</li>
+</ol>
+<p>​      [aa, cc, dd0000000003, zookeeper, bb0000000001]</p>
+<ol start="7">
+<li>close ： 关闭本次连接会话session，再重新打开一个连接</li>
+</ol>
+<p>​      需要再输入一个回车，</p>
+<p>​      输入： connect host:port </p>
+<p>​        connect slave01:2181</p>
+<p>​      才会打开下一个新连接会话session</p>
+<ol start="8">
+<li>ls / ： 临时节点已经随着上一次的会话关闭自动删除</li>
+</ol>
+<p>​      [aa, zookeeper, bb0000000001]</p>
+<p>​    -——-</p>
+<ol start="9">
+<li>get /aa :  查看创建的（/aa）Znode的信息，显示：</li>
+</ol>
+<p>​        my first zk</p>
+<p>​        cZxid = 0x100000009</p>
+<p>​        ctime = Thu Jan 10 00:43:28 CST 2019</p>
+<p>​        mZxid = 0x100000009</p>
+<p>​        mtime = Thu Jan 10 00:43:28 CST 2019</p>
+<p>​        pZxid = 0x100000009</p>
+<p>​        cversion = 0</p>
+<p>​        dataVersion = 0</p>
+<p>​        aclVersion = 0</p>
+<p>​        ephemeralOwner = 0x0</p>
+<p>​        dataLength = 11</p>
+<p>​        numChildren = 0</p>
+<ol start="10">
+<li>set /aa haha123 : 通过set命令来对zk所关联的字符串进行设置</li>
+</ol>
+<p>​      get /aa   查看 </p>
+<p>​      set /aa “my first zk”  再次设置</p>
+<ol start="11">
+<li>delete /aa    删除Znode</li>
+</ol>
+<p>​    -——-</p>
+<ol start="12">
+<li>stat /aa : 查看一个文件的状态信息。</li>
+</ol>
+<p>​      显示：</p>
+<p>​        cZxid = 0x100000009</p>
+<p>​        ctime = Thu Jan 10 00:43:28 CST 2019</p>
+<p>​        mZxid = 0x100000012</p>
+<p>​        mtime = Thu Jan 10 01:00:26 CST 2019</p>
+<p>​        pZxid = 0x100000009</p>
+<p>​        cversion = 0</p>
+<p>​        dataVersion = 2</p>
+<p>​        aclVersion = 0</p>
+<p>​        ephemeralOwner = 0x0</p>
+<p>​        dataLength = 11</p>
+<p>​        numChildren = 0</p>
+<p>​      详细解释：</p>
+<p>​        zxid： 一个事务编号，zookeeper集群内部的所有事务，都有一个全局的唯一的顺序的编号</p>
+<p>​          由两部分组成： 就是一个 64位的长整型 long</p>
+<p>​            高32位: 用来标识leader关系是否改变，如  0x1　　</p>
+<p>​            低32位： 用来做当前这个leader领导期间的全局的递增的事务编号，如   00000009</p>
+<p>​        zxid前面加上各种前缀，表示各种类型的事务ID，如：</p>
+<p>​          状态属性         说明</p>
+<p>​          cZxid          数据节点创建时的事务ID</p>
+<p>​          ctime          数据节点创建时的时间</p>
+<p>​          mZxid          数据节点最后一次更新时的事务ID</p>
+<p>​          mtime          数据节点最后一次更新时的时间</p>
+<p>​          pZxid       数据节点的子节点列表最后一次被修改（是子节点列表变更，而不是子节点内容变更）时的事务ID</p>
+<p>​          cversion       子节点的版本号</p>
+<p>​          dataVersion     数据节点的版本号</p>
+<p>​          aclVersion       数据节点的ACL版本号 </p>
+<p>​          ephemeralOwner    如节点是临时节点，则表示创建该节点的会话SessionID；如节点是持久节点，该属性值为0</p>
+<p>​          dataLength      数据内容的长度（就是其字符串的长度）</p>
+<p> numChildren     数据节点当前的子节点个数</p>
+<p>​      1. 修改节点aa的数据，mZxid、dataVersion、dataLength 存储信息发生变化</p>
+<p>​        set /aa ‘aaa’</p>
+<p>​      2. 创建新的节点b，状态信息都会发生变化，zxid的事物ID也会增加</p>
+<p>​        create /b</p>
+<p>​        stat /b</p>
+<p>​      3. 在aa节点下面新增节点c，pZxid、cversion、numChildren 发生改变</p>
+<p>​        create /aa/c ‘c’</p>
+<p>​        stat /aa</p>
+<p>​      4. ephemeralOwner </p>
+<p>​        持久性的节点信息是0x0</p>
+<p>​        临时的节点信息是本次会话的sessionid</p>
+<p>​      5. </p>
+<p>​        slave01：停止ZK，</p>
+<p>​          zkServer.sh status</p>
+<p>​          zkServer.sh stop 停止 Leader</p>
+<p>​        slave02、master：</p>
+<p>​          zkServer.sh status</p>
+<p>​            其中有一个被选举成为 Leader</p>
+<p>​        slave01：</p>
+<p>​          zkServer.sh start  此时作为 follower </p>
+<p>​          create /y ‘yy’</p>
+<p>​          get /yy     此时cZxid会变化</p>
+<p>​            从之前的  0x1某某某， 变为0x2某某某，标识leader关系已经改变，如  0x2    </p>
+<h2 id="java操作zookeeper"><a href="#java操作zookeeper" class="headerlink" title="java操作zookeeper"></a>java操作zookeeper</h2><p>1.事件类型（znode节点相关）：</p>
+<p>​            ①EventType.NodeCreated：节点创建</p>
+<p>​            ②EventType.NodeDataChanged：节点数据变更</p>
+<p>​            ③EventType.NodeChildrenChanged：子节点变更</p>
+<p>​            ④EventType.NodeDeleted：节点删除</p>
+<p>​            EventType.None  连接创建的时候的通知。</p>
+<p>​        2.状态类型</p>
+<p>​            ①KeeperState.Disconnected：未连接</p>
+<p>​            ②KeeperState.SyncConnected：已连接</p>
+<p>​            ③KeeperState.AuthFailed：认证失败</p>
+<p>​            ④KeeperState.Expired：会话失效</p>
+<p>​        添加依赖：注意：在mvn网址上复制的zookeeper的依赖要去掉&lt;type&gt;pom&lt;/type&gt;</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.zookeeper<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>zookeeper<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.4.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>​        3.代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.tjetc.test;</span><br><span class="line"><span class="keyword">import</span> org.apache.zookeeper.*;</span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestDemo</span> </span>&#123;</span><br><span class="line">    <span class="comment">//在公司里常类的命名规范就是全大写。</span></span><br><span class="line">    <span class="comment">//创建俩个常类  CONNECTIONSTRING 连接字符串。   SESSION_OUTTIME 会话超时时间。</span></span><br><span class="line">    <span class="keyword">private</span>  <span class="keyword">static</span>   <span class="keyword">final</span>  String CONNECTIONSTRING=<span class="string">&quot;127.0.0.1:2181&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span>  <span class="keyword">static</span>  <span class="keyword">final</span>  Integer SESSION_OUTTIME=<span class="number">2000</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException, KeeperException, InterruptedException </span>&#123;</span><br><span class="line">        <span class="comment">//创建 zookeeper 连接对象 (连接字符串，会话超时时间，事件通知对象)</span></span><br><span class="line">        ZooKeeper zk = <span class="keyword">new</span> ZooKeeper(CONNECTIONSTRING, SESSION_OUTTIME, <span class="keyword">new</span> Watcher() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(WatchedEvent event)</span> </span>&#123;</span><br><span class="line">                <span class="comment">//事件的状态</span></span><br><span class="line">                Event.KeeperState state = event.getState();</span><br><span class="line">                <span class="comment">//事件的类型</span></span><br><span class="line">                Event.EventType type = event.getType();</span><br><span class="line">                <span class="comment">// 状态等于已连接</span></span><br><span class="line">                <span class="keyword">if</span>(Event.KeeperState.SyncConnected==state)&#123;</span><br><span class="line">                    <span class="comment">//连接创建的时候的通知。</span></span><br><span class="line">                    <span class="keyword">if</span>(Event.EventType.None==type)&#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;############zookeeper开始启动连接####################&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">//   create   （节点路径，节点的值（注意最终要转成字节数组），节点访问权限，节点类型PERSISTENT持久节点EPHEMERAL临时节点）</span></span><br><span class="line">        <span class="comment">//  临时节点 连接会话关闭的时候临时节点自动删除。</span></span><br><span class="line">        String result = zk.create(<span class="string">&quot;/zk1&quot;</span>, <span class="string">&quot;helloworld&quot;</span>.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);</span><br><span class="line">        System.out.println(result);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">5000</span>);</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        zk.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;	</span><br></pre></td></tr></table></figure>
+<p>​    4.问题：在连接打印信息之前加了一个睡眠等待5000.结果节点被创建好。</p>
+<p>​            说明这段代码不是在一个线程中。</p>
+<p>​            main就是主线程。 watcher是主线程的子线程。</p>
+<p>​            为什么这么设计？这个设计后，我们创建对象的速度可以加快。</p>
+<p>​        5.如何让这代码中连接打印信息永远在输出结果前面打印。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.tjetc.test;</span><br><span class="line"><span class="keyword">import</span> org.apache.zookeeper.*;</span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.CountDownLatch;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestDemo</span> </span>&#123;</span><br><span class="line">    <span class="comment">//在公司里常类的命名规范就是全大写。</span></span><br><span class="line">    <span class="comment">//创建俩个常类  CONNECTIONSTRING 连接字符串。   SESSION_OUTTIME 会话超时时间。</span></span><br><span class="line">    <span class="keyword">private</span>  <span class="keyword">static</span>   <span class="keyword">final</span>  String CONNECTIONSTRING=<span class="string">&quot;127.0.0.1:2181&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span>  <span class="keyword">static</span>  <span class="keyword">final</span>  Integer SESSION_OUTTIME=<span class="number">2000</span>;</span><br><span class="line">    <span class="keyword">private</span>  <span class="keyword">static</span>  <span class="keyword">final</span> CountDownLatch coutDownLatch = <span class="keyword">new</span> CountDownLatch(<span class="number">1</span>);</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException, KeeperException, InterruptedException </span>&#123;</span><br><span class="line">        <span class="comment">//创建 zookeeper 连接对象 (连接字符串，会话超时时间，事件通知对象)</span></span><br><span class="line">        ZooKeeper zk = <span class="keyword">new</span> ZooKeeper(CONNECTIONSTRING, SESSION_OUTTIME, <span class="keyword">new</span> Watcher() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(WatchedEvent event)</span> </span>&#123;</span><br><span class="line">                <span class="comment">//事件的状态</span></span><br><span class="line">                Event.KeeperState state = event.getState();</span><br><span class="line">                <span class="comment">//事件的类型</span></span><br><span class="line">                Event.EventType type = event.getType();</span><br><span class="line">                <span class="comment">// 状态等于已连接</span></span><br><span class="line">                <span class="keyword">if</span>(Event.KeeperState.SyncConnected==state)&#123;</span><br><span class="line">                    <span class="comment">//连接创建的时候的通知。</span></span><br><span class="line">                    <span class="keyword">if</span>(Event.EventType.None==type)&#123;</span><br><span class="line">                        <span class="keyword">try</span> &#123;</span><br><span class="line">                            Thread.sleep(<span class="number">5000</span>);</span><br><span class="line">                        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">                            e.printStackTrace();</span><br><span class="line">                        &#125;</span><br><span class="line">                        System.out.println(<span class="string">&quot;############zookeeper开始启动连接####################&quot;</span>);</span><br><span class="line">                        coutDownLatch.countDown();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        coutDownLatch.await();</span><br><span class="line">        <span class="comment">//   create   （节点路径，节点的值（注意最终要转成字节数组），节点访问权限，节点类型PERSISTENT持久节点EPHEMERAL临时节点）</span></span><br><span class="line">        <span class="comment">//  临时节点 连接会话关闭的时候临时节点自动删除。</span></span><br><span class="line">        String result = zk.create(<span class="string">&quot;/zk2&quot;</span>, <span class="string">&quot;helloworld&quot;</span>.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);</span><br><span class="line">        System.out.println(<span class="string">&quot;创建节点：&quot;</span>+result);</span><br><span class="line">        zk.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>watcher代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.tjetc.test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.zookeeper.*;</span><br><span class="line"><span class="keyword">import</span> org.apache.zookeeper.data.Stat;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.CountDownLatch;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ZkClientWatcher</span> <span class="keyword">implements</span> <span class="title">Watcher</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 单机连接地址</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String CONNECT_ADDRES = <span class="string">&quot;127.0.0.1:2181&quot;</span>;</span><br><span class="line">    <span class="comment">// 会话超时时间</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> SESSIONTIME = <span class="number">2000</span>;</span><br><span class="line">    <span class="keyword">private</span> ZooKeeper zk;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span>  <span class="keyword">final</span>  String LOG_MAIN =<span class="string">&quot;Main&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span>  <span class="keyword">static</span>  <span class="keyword">final</span> CountDownLatch coutDownLatch = <span class="keyword">new</span> CountDownLatch(<span class="number">1</span>);</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span>  <span class="title">createConnection</span><span class="params">(String CONNECT_ADDRES,Integer SESSIONTIME)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            zk = <span class="keyword">new</span> ZooKeeper(CONNECT_ADDRES,SESSIONTIME,<span class="keyword">this</span>);</span><br><span class="line">            System.out.println(LOG_MAIN + <span class="string">&quot;zk 开始启动连接服务器....&quot;</span>);</span><br><span class="line">            coutDownLatch.await(); <span class="comment">//await</span></span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Stat <span class="title">exists</span><span class="params">(String path, <span class="keyword">boolean</span> needWatch)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span>  <span class="keyword">this</span>.zk.exists(path,needWatch);</span><br><span class="line">        &#125;  <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">return</span>  <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">createPath</span><span class="params">(String path, String data)</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">this</span>.exists(path,<span class="keyword">true</span>);</span><br><span class="line">            <span class="keyword">this</span>.zk.create(path,data.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE,CreateMode.PERSISTENT);</span><br><span class="line">            System.out.println(LOG_MAIN + <span class="string">&quot;节点创建成功, Path:&quot;</span> + path + <span class="string">&quot;,data:&quot;</span> + data);</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">return</span>  <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">updateNode</span><span class="params">(String path,String data)</span> <span class="keyword">throws</span> KeeperException, InterruptedException </span>&#123;</span><br><span class="line">        exists(path, <span class="keyword">true</span>);</span><br><span class="line">        <span class="comment">//修改节点的值，-1表示跳过版本检查，其他正数表示如果传入的版本号与当前版本号不一致，则修改不成功，删除是同样的道理。</span></span><br><span class="line">        <span class="keyword">this</span>.zk.setData(path, data.getBytes(), -<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(WatchedEvent event)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 获取事件状态</span></span><br><span class="line">        Event.KeeperState keeperState = event.getState();</span><br><span class="line">        <span class="comment">// 获取事件类型</span></span><br><span class="line">        Event.EventType eventType = event.getType();</span><br><span class="line">        <span class="comment">// zk 路径</span></span><br><span class="line">        String path = event.getPath();</span><br><span class="line">        System.out.println(<span class="string">&quot;进入到 process() keeperState:&quot;</span> + keeperState + <span class="string">&quot;, eventType:&quot;</span> + eventType + <span class="string">&quot;, path:&quot;</span> + path);</span><br><span class="line">        <span class="keyword">if</span> (Event.KeeperState.SyncConnected == keeperState) &#123;</span><br><span class="line">            <span class="keyword">if</span> (Event.EventType.None == eventType) &#123;</span><br><span class="line">                <span class="comment">// 如果建立建立成功,让后程序往下走</span></span><br><span class="line">                System.out.println(LOG_MAIN + <span class="string">&quot;zk 建立连接成功!&quot;</span>);</span><br><span class="line">                coutDownLatch.countDown();</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (Event.EventType.NodeCreated == eventType) &#123;</span><br><span class="line">                System.out.println(LOG_MAIN + <span class="string">&quot;事件通知,新增node节点&quot;</span> + path);</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (Event.EventType.NodeDataChanged == eventType) &#123;</span><br><span class="line">                System.out.println(LOG_MAIN + <span class="string">&quot;事件通知,当前node节点&quot;</span> + path + <span class="string">&quot;被修改....&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (Event.EventType.NodeDeleted == eventType)</span><br><span class="line">                System.out.println(LOG_MAIN + <span class="string">&quot;事件通知,当前node节点&quot;</span> + path + <span class="string">&quot;被删除....&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;--------------------------------------------------------&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> KeeperException, InterruptedException </span>&#123;</span><br><span class="line">        ZkClientWatcher zkClientWatcher = <span class="keyword">new</span> ZkClientWatcher();</span><br><span class="line">        zkClientWatcher.createConnection(CONNECT_ADDRES,SESSIONTIME);</span><br><span class="line">        <span class="keyword">boolean</span> createConnectionResult = zkClientWatcher.createPath(<span class="string">&quot;/p15&quot;</span>, <span class="string">&quot;pa-644064&quot;</span>);</span><br><span class="line">        zkClientWatcher.updateNode(<span class="string">&quot;/p15&quot;</span>,<span class="string">&quot;7894561&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h2><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/ZqQHWLfVD1Rz1agmH3LWrg">分布式锁之Zookeeper</a></p>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/07/14/Redis%E5%85%A5%E9%97%A8/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/07/14/%E9%9D%A2%E8%AF%95%E9%A2%98-%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

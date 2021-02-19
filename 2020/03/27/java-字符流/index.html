@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>java-字符流 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="io," />
+  
+
+  <meta name="description" content="字符流FileInputStram类和FileOutputStream类虽然可以高效率地读&#x2F;写文件，但对于Unicode编码的文件，我们需要自行将读取到的字节数据根据编码规则还原为字符串，因此使用它们有可能出现乱码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java-字符流">
+<meta property="og:url" content="http://paphae.top/2020/03/27/java-%E5%AD%97%E7%AC%A6%E6%B5%81/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="字符流FileInputStram类和FileOutputStream类虽然可以高效率地读&#x2F;写文件，但对于Unicode编码的文件，我们需要自行将读取到的字节数据根据编码规则还原为字符串，因此使用它们有可能出现乱码">
+<meta property="og:locale">
+<meta property="og:image" content="http://paphae.top/2020/03/27/java-%E5%AD%97%E7%AC%A6%E6%B5%81/java-%E5%AD%97%E7%AC%A6%E6%B5%81/%E5%9B%BE%E7%89%871.png">
+<meta property="og:image" content="http://paphae.top/2020/03/27/java-%E5%AD%97%E7%AC%A6%E6%B5%81/java-%E5%AD%97%E7%AC%A6%E6%B5%81/%E5%9B%BE%E7%89%872.png">
+<meta property="og:image" content="http://paphae.top/2020/03/27/java-%E5%AD%97%E7%AC%A6%E6%B5%81/java-%E5%AD%97%E7%AC%A6%E6%B5%81/%E5%9B%BE%E7%89%873.png">
+<meta property="og:image" content="http://paphae.top/2020/03/27/java-%E5%AD%97%E7%AC%A6%E6%B5%81/java-%E5%AD%97%E7%AC%A6%E6%B5%81/%E5%9B%BE%E7%89%874.png">
+<meta property="og:image" content="http://paphae.top/2020/03/27/java-%E5%AD%97%E7%AC%A6%E6%B5%81/java-%E5%AD%97%E7%AC%A6%E6%B5%81/%E5%9B%BE%E7%89%875.png">
+<meta property="og:image" content="http://paphae.top/2020/03/27/java-%E5%AD%97%E7%AC%A6%E6%B5%81/java-%E5%AD%97%E7%AC%A6%E6%B5%81/%E5%9B%BE%E7%89%876.png">
+<meta property="og:image" content="http://paphae.top/2020/03/27/java-%E5%AD%97%E7%AC%A6%E6%B5%81/java-%E5%AD%97%E7%AC%A6%E6%B5%81/%E5%9B%BE%E7%89%877.png">
+<meta property="og:image" content="http://paphae.top/2020/03/27/java-%E5%AD%97%E7%AC%A6%E6%B5%81/java-%E5%AD%97%E7%AC%A6%E6%B5%81/%E5%9B%BE%E7%89%878.png">
+<meta property="og:image" content="http://paphae.top/2020/03/27/java-%E5%AD%97%E7%AC%A6%E6%B5%81/java-%E5%AD%97%E7%AC%A6%E6%B5%81/%E5%9B%BE%E7%89%879.png">
+<meta property="og:image" content="http://paphae.top/2020/03/27/java-%E5%AD%97%E7%AC%A6%E6%B5%81/java-%E5%AD%97%E7%AC%A6%E6%B5%81/%E5%9B%BE%E7%89%8710.png">
+<meta property="og:image" content="http://paphae.top/2020/03/27/java-%E5%AD%97%E7%AC%A6%E6%B5%81/java-%E5%AD%97%E7%AC%A6%E6%B5%81/%E5%9B%BE%E7%89%8711.png">
+<meta property="og:image" content="http://paphae.top/2020/03/27/java-%E5%AD%97%E7%AC%A6%E6%B5%81/java-%E5%AD%97%E7%AC%A6%E6%B5%81/%E5%9B%BE%E7%89%8712.png">
+<meta property="article:published_time" content="2020-03-27T00:16:38.000Z">
+<meta property="article:modified_time" content="2020-05-06T00:37:07.640Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="io">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://paphae.top/2020/03/27/java-%E5%AD%97%E7%AC%A6%E6%B5%81/java-%E5%AD%97%E7%AC%A6%E6%B5%81/%E5%9B%BE%E7%89%871.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E6%B5%81"><span class="toc-text">字符流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FileReader"><span class="toc-text">FileReader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E8%8A%82%E6%B5%81%E4%B8%8E%E5%AD%97%E7%AC%A6%E6%B5%81%E9%80%82%E9%85%8D%E5%99%A8-%E6%A1%A5%E8%BD%AC%E6%8D%A2"><span class="toc-text">字节流与字符流适配器(桥转换)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E5%BA%8F%E5%88%97%E5%8C%96"><span class="toc-text">对象序列化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="toc-text">序列化与反序列化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BF%BD%E7%95%A5%E5%BA%8F%E5%88%97%E5%8C%96%E5%B1%9E%E6%80%A7"><span class="toc-text">忽略序列化属性</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Externalizable"><span class="toc-text">Externalizable</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NIO"><span class="toc-text">NIO</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Buffer"><span class="toc-text">Buffer</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Channel"><span class="toc-text">Channel</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#nio%E5%92%8Cio%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-text">nio和io有什么区别？</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98"><span class="toc-text">例题</span></a></li></ol></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-java-字符流" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">java-字符流</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.03.27</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/javaSE/">javaSE</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="字符流"><a href="#字符流" class="headerlink" title="字符流"></a>字符流</h2><p>FileInputStram类和FileOutputStream类虽然可以高效率地读/写文件，但对于Unicode编码的文件，我们需要自行将读取到的字节数据根据编码规则还原为字符串，因此使用它们有可能出现乱码</p>
+<a id="more"></a>
+<p>考虑到Java是跨平台的语言，要经常操作Unicode编码的文件，使用基于字符为读、写基本单元的字符流操作文件是有必要的,以字符为单位进行数据输出的工具继承自Writer<br>Writer和OutputStream类似也提供了统一的往流中写入数据的方法，和OutputStream不同的是，写入数据的单位由字节变成了字符：<br><img src="java-%E5%AD%97%E7%AC%A6%E6%B5%81/%E5%9B%BE%E7%89%871.png"><br><img src="java-%E5%AD%97%E7%AC%A6%E6%B5%81/%E5%9B%BE%E7%89%872.png"><br><img src="java-%E5%AD%97%E7%AC%A6%E6%B5%81/%E5%9B%BE%E7%89%873.png"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">FileWriter fw = <span class="keyword">new</span> FileWriter(<span class="string">&quot;write.txt&quot;</span>,<span class="keyword">true</span>);</span><br><span class="line">fw.write(<span class="string">&quot;asljfk&quot;</span>);</span><br><span class="line">fw.close();</span><br><span class="line">	</span><br></pre></td></tr></table></figure>
+<p>以字符为单位进行数据读取的工具继承自Reader，Reader会将读取到的数据按照标准的规则转换为Java字符串对象<br>字符输入流Reader也提供的统一读取数据的方法（和InputStream不同，实际开发时更多的调用不同Reader提供的特殊读取方法，如BufferedReader的readLine()，能够简化操作）：<br><img src="java-%E5%AD%97%E7%AC%A6%E6%B5%81/%E5%9B%BE%E7%89%874.png"></p>
+<h3 id="FileReader"><a href="#FileReader" class="headerlink" title="FileReader"></a>FileReader</h3><p>类称为文件读取流，允许以字符流的形式对文件进行读操作，其构造方法有3种重载方式，以下是常用的几种：<br><img src="java-%E5%AD%97%E7%AC%A6%E6%B5%81/%E5%9B%BE%E7%89%875.png"><br>与FileWriter相似，该类将从文件中逐个地读取字符，效率比较低下，因此一般也将该类对象包装到缓冲流中进行操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">FileReader fr = <span class="keyword">new</span> FileReader(<span class="string">&quot;write.txt&quot;</span>);</span><br><span class="line"><span class="keyword">char</span>[] buf = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">1024</span>];</span><br><span class="line">fr.read(buf);</span><br><span class="line">fr.close();</span><br><span class="line">String s = <span class="keyword">new</span> String(buf);</span><br><span class="line">System.out.println(s);</span><br></pre></td></tr></table></figure>
+<p>FileWriter将逐个向文件写入字符，效率比较低下，因此一般将该类对象包装到缓冲流BufferedWriter中进行操作<br>还可以使用PrintWriter对流进行包装，提供更方便的字符输出格式控制</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		Writer fw = <span class="keyword">new</span> FileWriter(<span class="string">&quot;ritex.txt&quot;</span>,<span class="keyword">true</span>);</span><br><span class="line"><span class="comment">//		BufferedWriter bs = new BufferedWriter(fw);</span></span><br><span class="line"><span class="comment">//		bs.write(&quot;xx&quot;);</span></span><br><span class="line"><span class="comment">//		bs.newLine();</span></span><br><span class="line"><span class="comment">//		bs.write(&quot;xx&quot;);</span></span><br><span class="line"><span class="comment">//		bs.newLine();</span></span><br><span class="line"><span class="comment">//		bs.write(&quot;xx&quot;);</span></span><br><span class="line"><span class="comment">//		bs.newLine();</span></span><br><span class="line"><span class="comment">//		bs.write(&quot;xx&quot;);</span></span><br><span class="line"><span class="comment">//		bs.newLine();</span></span><br><span class="line"><span class="comment">//		bs.flush();</span></span><br><span class="line"><span class="comment">//		bs.close();</span></span><br><span class="line"><span class="comment">//		fw.close();</span></span><br><span class="line">		PrintWriter pw = <span class="keyword">new</span> PrintWriter(fw);</span><br><span class="line">		pw.println(<span class="string">&quot;nihao &quot;</span>);</span><br><span class="line">		pw.println(<span class="string">&quot;nihao &quot;</span>);</span><br><span class="line">		pw.println(<span class="string">&quot;nihao &quot;</span>);</span><br><span class="line">		pw.flush();</span><br><span class="line">		pw.close();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>利用缓冲流包装FileReader</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		Reader rd = <span class="keyword">new</span> FileReader(<span class="string">&quot;ritex.txt&quot;</span>);</span><br><span class="line">		BufferedReader br = <span class="keyword">new</span> BufferedReader(rd);</span><br><span class="line">		String s = <span class="string">&quot;&quot;</span>;</span><br><span class="line">		<span class="keyword">while</span>((s=br.readLine())!=<span class="keyword">null</span>) &#123;</span><br><span class="line">			System.out.println(s);</span><br><span class="line">		&#125;</span><br><span class="line"><span class="comment">//		System.out.println(br.readLine());</span></span><br><span class="line"><span class="comment">//		System.out.println(br.readLine());</span></span><br><span class="line"><span class="comment">//		System.out.println(br.readLine());</span></span><br><span class="line"><span class="comment">//		System.out.println(br.readLine());</span></span><br><span class="line"><span class="comment">//		System.out.println(br.readLine());</span></span><br><span class="line"><span class="comment">//		System.out.println(br.readLine());</span></span><br><span class="line">		br.close();</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="字节流与字符流适配器-桥转换"><a href="#字节流与字符流适配器-桥转换" class="headerlink" title="字节流与字符流适配器(桥转换)"></a>字节流与字符流适配器(桥转换)</h3><p>在某些时候虽然我们操作的是字符串，但是不得不面对数据来源是InputStream（字节输入流）的情况，在这种情况下，Java提供了将InputStream和Reader之间进行转换的工具，事实上，字节输出流和字符输出流之间也存在这种工具，称为：字节流与字符流的适配器：<br>InputStreamReader：<br>字节流通向字符流的桥梁，它使用指定的 charset 读取字节并将其解码为字符。它使用的字符集可以由名称指定或显式给定，或者可以接受平台默认的字符集<br>每次调用 InputStreamReader 中的一个 read() 方法都会导致从底层输入流读取一个或多个字节。要启用从字节到字符的有效转换，可以提前从底层流读取更多的字节，使其超过满足当前读取操作所需的字节<br>OutputStreamWriter：<br>字符流通向字节流的桥梁，使用指定的 charset 将要写入流中的字符编码成字节。它使用的字符集可以由名称指定或显式给定，否则将接受平台默认的字符集<br>每次调用 write() 方法都会导致在给定字符（或字符集）上调用编码转换器。在写入底层输出流之前，得到的这些字节将在缓冲区中累积。可以指定此缓冲区的大小，不过，默认的缓冲区对多数用途来说已足够大。注意，传递给 write() 方法的字符没有缓冲</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">	File f = <span class="keyword">new</span> File(<span class="string">&quot;write.txt&quot;</span>);</span><br><span class="line">	PrintWriter bw = <span class="keyword">new</span> PrintWriter(<span class="keyword">new</span> OutputStreamWriter(<span class="keyword">new</span> FileOutputStream(f,<span class="keyword">true</span>),<span class="string">&quot;utf-8&quot;</span>));		</span><br><span class="line">	bw.println(<span class="string">&quot;aslfzhxicbvnkdxbxc.31465&quot;</span>);</span><br><span class="line">	bw.close();</span><br><span class="line">	FileInputStream fis = <span class="keyword">new</span> FileInputStream(f);</span><br><span class="line">	InputStreamReader isr = <span class="keyword">new</span> InputStreamReader(fis,<span class="string">&quot;utf-8&quot;</span>);</span><br><span class="line">	BufferedReader br = <span class="keyword">new</span> BufferedReader(isr);</span><br><span class="line">	String s = <span class="string">&quot;&quot;</span>;</span><br><span class="line">	<span class="keyword">while</span>((s=br.readLine())!=<span class="keyword">null</span>) &#123;</span><br><span class="line">		System.out.println(s);</span><br><span class="line">	&#125;</span><br><span class="line">	br.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>例如，为了提高效率，可以将代表基本输入的字节流System.in包装到BufferedReader中用以一次性捕获键盘输入的一行字符串数据：<br><img src="java-%E5%AD%97%E7%AC%A6%E6%B5%81/%E5%9B%BE%E7%89%876.png"><br>Java还提供了另一个包装工具来方便的进行流中数据的读取:Scanner<br>Scanner类位于java.util包中，不在java.io包中，不属于IO流<br>Scanner是一个工具类，主要目标是简化文本的扫描，最常使用此类获取控制台输入,Scanner获取控制台输入的步骤:<br>使用控制台输入创建Scanner对象<br>    <code>Scanner  scanner=new  Scanner(System.in);</code><br>调用Scanner中的nextXXX方法，获得需要的数据类型<br>例如：next、 nextLine、nextInt、nextByte等</p>
+<h3 id="对象序列化"><a href="#对象序列化" class="headerlink" title="对象序列化"></a>对象序列化</h3><p>Java平台允许我们在内存中创建可复用的Java对象，但一般情况下，只有当JVM处于运行时，这些对象才可能存在，即，这些对象的生命周期不会比JVM的生命周期更长。但在现实应用中，就可能要求在JVM停止运行之后能够保存(持久化)指定的对象，并在将来重新读取被保存的对象。Java对象序列化就能够帮助我们实现该功能</p>
+<p>使用Java对象序列化，在保存对象时，会把其状态保存为一组字节，在未来，再将这些字节组装成对象。必须注意地是，对象序列化保存的是对象的”状态”，即它的成员变量。由此可知，对象序列化不会关注类中的静态变量</p>
+<p>除了在持久化对象时会用到对象序列化之外，当使用RPC(包括Java标准RMI远程方法调用)，或在网络中传递对象时，都会用到对象序列化。Java序列化API为处理对象序列化提供了一个标准机制</p>
+<p>在Java中，只要一个类实现了java.io.Serializable接口，那么它就可以被序列化<br>java.io.Serializable是一个标识接口，即意味着它仅仅是为了说明类的可序列化属性，接口没有包含任何需要子类实现的抽象方法</p>
+<h3 id="序列化与反序列化"><a href="#序列化与反序列化" class="headerlink" title="序列化与反序列化"></a>序列化与反序列化</h3><p>将对象的状态信息保存到流中的操作，称为序列化，可以使用Java提供的工具ObjectOutputStream. writeObject(Serializable obj)来完成<br>从流中读取对心状态信息的操作称为反序列化，可以使用Java提供的工具ObjectInputStream.readObject()来完成<br><img src="java-%E5%AD%97%E7%AC%A6%E6%B5%81/%E5%9B%BE%E7%89%877.png"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Person p = <span class="keyword">new</span> Person(<span class="number">15</span>,<span class="string">&quot;zhangbo&quot;</span>,<span class="string">&quot;男&quot;</span>);</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line"><span class="comment">//			ObjectOutputStream op = new ObjectOutputStream(new FileOutputStream(&quot;person.bin&quot;));</span></span><br><span class="line"><span class="comment">//			op.writeObject(p);</span></span><br><span class="line"><span class="comment">//			op.writeObject(p);</span></span><br><span class="line"><span class="comment">//			op.close();</span></span><br><span class="line">			ObjectInputStream ip = <span class="keyword">new</span> ObjectInputStream(<span class="keyword">new</span> FileInputStream(<span class="string">&quot;person.bin&quot;</span>));</span><br><span class="line">			Person per = (Person)ip.readObject();</span><br><span class="line">			Person per2 = (Person)ip.readObject();</span><br><span class="line">			ip.close();</span><br><span class="line">			System.out.println(per);</span><br><span class="line">			System.out.println(per2);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">			<span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">			<span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">			<span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>上例是一个简单的序列化程序，它先将一个Person对象保存到缓存中，然后再从该缓存中读出被存储的Person对象，并打印该对象</p>
+<p>从上例的运行结果可以看出的要点：</p>
+<ul>
+<li>对于Serializable反序列化后的对象，不需要调用构造方法重新构造，对象完全以它存储的二进制位作为基础来构造，而不调用构造方法</li>
+<li>对象序列化过程不仅仅保存单个对象，还能追踪对象内所包含的所有引用，并保存那些对象（这些对象也需实现了Serializable接口）</li>
+<li>序列前的对象与序列化后的对象是深复制，反序列化还原后的对象地址与原来的的地址不同，但是内容是一样的，而且对象中包含的引用也相同。换句话说，通过序列化操作，我们可以实现对任何可Serializable对象的”深度复制“，这意味着复制的是整个对象网，而不仅仅是基本对象及其引用。对于同一流的对象，他们的地址是相同，说明他们是同一个对象，但是与其他流的对象地址却不相同。也就说，只要将对象序列化到单一流中，就可以恢复出与我们写出时一样的对象网，而且只要在同一流中，对象都是同一个</li>
+</ul>
+<p>上面提到，如果仅仅只是让某个类实现Serializable接口，而没有其它任何处理的话，则就是使用默认序列化机制。</p>
+<h4 id="忽略序列化属性"><a href="#忽略序列化属性" class="headerlink" title="忽略序列化属性"></a>忽略序列化属性</h4><p>使用默认机制，在序列化对象时，不仅会序列化当前对象本身，还会对该对象引用的其它对象也进行序列化，同样地，这些其它对象引用的另外对象也将被序列化，以此类推。所以，如果一个对象包含的成员变量是容器类对象，而这些容器所含有的元素也是容器类对象，那么这个序列化的过程就会较复杂，开销也较大</p>
+<p>在现实应用中，有些时候不能使用默认序列化机制。比如，希望在序列化过程中忽略掉敏感数据，或者简化序列化过程<br>当某个字段被声明为transient后，默认序列化机制就会忽略该字段<br><img src="java-%E5%AD%97%E7%AC%A6%E6%B5%81/%E5%9B%BE%E7%89%878.png"><br>对于上述已被声明为transient的字段weight，除了将transient关键字去掉之外，是否还有其它方法能使它再次可被序列化？方法之一就是在Person类中添加两个方法：writeObject()与readObject()<br><img src="java-%E5%AD%97%E7%AC%A6%E6%B5%81/%E5%9B%BE%E7%89%879.png"><br>注意：刚辞说的是添加方法而不是“覆盖”或者“实现”，因为这两个方法不是基类Object也不是接口Serializable中的方法）</p>
+<p>一旦对象被序列化或者反序列还原，就会自动地分别调用者两个方法。也就是说，只要我们提供了这两个方法，就会使用它们而不是默认的序列化机制</p>
+<p>这个两个方法必须在类内部自己实现。大家应该注意到这两个方法其实是private类型。也就是说这两个方法仅能被这个类的其他成员调用，但其实我们没有在这个类的其他的方法中调用这两个方法。那么到底是谁调用这两个方法呢？是ObjectOutputStream和ObjectInputStream对象的writeObject和readObject()方法分别调用者两个方法（通过过反射机制来访问类的私有方法），在调用ObjectOutputStream.writeObject()时，会检查所传递的Serializable对象，利用反射来搜索是否有writeObject()方法。如果有，就会跳过正常的序列化过程，转而调用这个它的writeObject()方法，readObject方法处理方式也一样</p>
+<p>writeObject()内部可以通过ObjectOutputStream.defaultWriteObject()来执行默认的writeObject()（非transient字段由这个方法保存），同样的，在类readObject内部，可以通过 ObjectInputStream.defalutReadObject()来执行默认的readObject()方法<br><img src="java-%E5%AD%97%E7%AC%A6%E6%B5%81/%E5%9B%BE%E7%89%8710.png"><br>如果我们不显式提供serialVersionUID的值，则Java会根据以下几个属性进行自动计算：<br>类的名字<br>属性字段的名字<br>方法的名字<br>已实现的接口 <br>改动上述任意一项内容（无论是增加或删除），都会引起编码值变化，从而引起类似的异常警报。这个数字序列称为“串行化版本统一标识符”（serial version universal identifier），简称UID。解决这个问题的办法是在类里面新增一个域serialVersionUID，强制类仍旧使用原来的UID</p>
+<h3 id="Externalizable"><a href="#Externalizable" class="headerlink" title="Externalizable"></a>Externalizable</h3><p>无论是使用transient关键字，还是使用writeObject()和readObject()方法，其实都是基于Serializable接口的序列化</p>
+<p>JDK中还提供了另一个序列化接口：Externalizable，使用该接口之后，之前基于Serializable接口的序列化机制就将失效，对象将按照我们自定义的方式进行序列化或反序列化，这对于一些信息敏感应用或对序列化反序列化性能要求较高来说非常重要</p>
+<p>Externalizable继承于Serializable，当使用该接口时，序列化的细节需要由我们自己完成<br>另外，使用Externalizable进行序列化时，当读取对象时，会调用被序列化类的无参构造器去创建一个新的对象，然后再将被保存对象的字段的值分别填充到新对象中。由于这个原因，实现Externalizable接口的类必须要提供一个无参的构造器，且它的访问权限为public<br><img src="java-%E5%AD%97%E7%AC%A6%E6%B5%81/%E5%9B%BE%E7%89%8711.png"></p>
+<h3 id="NIO"><a href="#NIO" class="headerlink" title="NIO"></a>NIO</h3><p>NIO和IO之间最大的区别是：IO是面向流的，NIO是面向块（缓冲区）的</p>
+<p>Java IO面向流意味着每次从流中读一个或多个字节，直至读取所有字节，它们没有被缓存在任何地方。此外，它不能前后移动流中的数据。如果需要前后移动从流中读取的数据，需要先将它缓存到一个缓冲区。 Java NIO的缓冲导向方法略有不同。数据读取到一个它稍后处理的缓冲区，需要时可在缓冲区中前后移动。这就增加了处理过程中的灵活性</p>
+<h4 id="Buffer"><a href="#Buffer" class="headerlink" title="Buffer"></a>Buffer</h4><p>Java NIO中的Buffer用于和NIO通道进行交互。数据是从通道读入缓冲区，从缓冲区写入到通道中的<br>缓冲区本质上是一块可以写入数据，然后可以从中读取数据的内存。这块内存被包装成NIO Buffer对象，并提供了一组方法，用来方便的访问该块内存</p>
+<h4 id="Channel"><a href="#Channel" class="headerlink" title="Channel"></a>Channel</h4><p>Java NIO的通道类似流，但又有些不同：<br>既可以从通道中读取数据，又可以写数据到通道。但流的读写通常是单向的<br>通道可以异步地读写<br>通道中的数据总是要先读到一个Buffer，或者总是要从一个Buffer中写入</p>
+<p>Java NIO的事件选择器允许一个单独的线程来监视多个输入通道，你可以注册多个通道使用一个选择器，然后使用一个单独的线程来“选择”通道：这些通道里已经有可以处理的输入，或者选择已准备写入的通道。这种选择机制，使得一个单独的线程很容易来管理多个通道<br>由于有了事件选择器，因此NIO可以以非阻塞的方式读取数据<br>NIO的这些特性在网络通讯方面非常有用<br><img src="java-%E5%AD%97%E7%AC%A6%E6%B5%81/%E5%9B%BE%E7%89%8712.png"></p>
+<h5 id="nio和io有什么区别？"><a href="#nio和io有什么区别？" class="headerlink" title="nio和io有什么区别？"></a>nio和io有什么区别？</h5><p>Java IO面向流意味着每次从流中读一个或多个字节，直至读取所有字节，它们没有被缓存在任何地方。此外，它不能前后移动流中的数据。如果需要前后移动从流中读取的数据，需要先将它缓存到一个缓冲区。 </p>
+<p>Java NIO的缓冲导向方法略有不同。数据读取到一个它稍后处理的缓冲区，需要时可在缓冲区中前后移动。这就增加了处理过程中的灵活性<br>nio提供了事件选择器和非阻塞访问</p>
+<h4 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h4><p>15.*（字符流、桥转换）完成下面功能：<br>事先在当前目录下准备好一个 test.txt 的文本文件，要求该文本文件是使用<br>GBK 编码的多行文本文件。如：<br>test.txt<br>窗前明月光<br>疑是地上霜<br>举头望明月<br>低头思故乡<br>利用字节流+桥转换读入这个文本文件，然后按照行的顺序，以 UTF-8 的编码方<br>式，写到 test2.txt 文件中，例：<br>test2.txt<br>低头思故乡<br>举头望明月<br>疑是地上霜<br>窗前明月光</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.BufferedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.FileNotFoundException;</span><br><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"><span class="keyword">import</span> java.io.OutputStreamWriter;</span><br><span class="line"><span class="keyword">import</span> java.io.PrintWriter;</span><br><span class="line"><span class="keyword">import</span> java.io.UnsupportedEncodingException;</span><br><span class="line"><span class="keyword">import</span> java.util.Stack;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileTest</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		File f = <span class="keyword">new</span> File(<span class="string">&quot;test.txt&quot;</span>);</span><br><span class="line">		ready(f);</span><br><span class="line">		BufferedReader br = <span class="keyword">null</span>;</span><br><span class="line">		PrintWriter pw = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			br = <span class="keyword">new</span> BufferedReader(</span><br><span class="line">					<span class="keyword">new</span> InputStreamReader(</span><br><span class="line">							<span class="keyword">new</span> FileInputStream(f),<span class="string">&quot;gbk&quot;</span>));</span><br><span class="line">			pw = <span class="keyword">new</span> PrintWriter(<span class="keyword">new</span> OutputStreamWriter(<span class="keyword">new</span> FileOutputStream(<span class="string">&quot;test2.txt&quot;</span>), <span class="string">&quot;utf-8&quot;</span>));</span><br><span class="line">			Stack&lt;String&gt; temp = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">			String r = <span class="string">&quot;&quot;</span>;</span><br><span class="line">			<span class="keyword">while</span>((r= br.readLine())!=<span class="keyword">null</span>) &#123;</span><br><span class="line">				temp.push(r);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">while</span>(!temp.isEmpty())</span><br><span class="line">				pw.println(temp.pop());</span><br><span class="line">		&#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				<span class="keyword">if</span> (pw != <span class="keyword">null</span>)</span><br><span class="line">					pw.close();</span><br><span class="line">				<span class="keyword">if</span> (br != <span class="keyword">null</span>)</span><br><span class="line">					br.close();</span><br><span class="line">			&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">				e.printStackTrace();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">ready</span><span class="params">(File f)</span> </span>&#123;</span><br><span class="line">		String s = <span class="string">&quot;窗前明月光\n&quot;</span> + <span class="string">&quot;疑是地上霜\n&quot;</span> + <span class="string">&quot;举头望明月\n&quot;</span> + <span class="string">&quot;低头思故乡&quot;</span>;</span><br><span class="line">		PrintWriter pw = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			pw = <span class="keyword">new</span> PrintWriter(<span class="keyword">new</span> OutputStreamWriter(<span class="keyword">new</span> FileOutputStream(f), <span class="string">&quot;gbk&quot;</span>));</span><br><span class="line">			pw.write(s);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (UnsupportedEncodingException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				<span class="keyword">if</span> (pw != <span class="keyword">null</span>)</span><br><span class="line">					pw.close();</span><br><span class="line">			&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">				e.printStackTrace();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/03/26/java-%E5%AD%97%E8%8A%82%E6%B5%81/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/03/31/json/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

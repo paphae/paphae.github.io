@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>java-异常 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="异常," />
+  
+
+  <meta name="description" content="异常异常（Exception）：异常指的是程序运行时发生的不正常事件；异常能够被程序处理，保证程序继续运行下去；例如除数为0、文件没有找到、输入的数字格式不对……">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java-异常">
+<meta property="og:url" content="http://paphae.top/2020/03/16/java-%E5%BC%82%E5%B8%B8/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="异常异常（Exception）：异常指的是程序运行时发生的不正常事件；异常能够被程序处理，保证程序继续运行下去；例如除数为0、文件没有找到、输入的数字格式不对……">
+<meta property="og:locale">
+<meta property="og:image" content="http://paphae.top/2020/03/16/java-%E5%BC%82%E5%B8%B8/java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%8710.png">
+<meta property="og:image" content="http://paphae.top/2020/03/16/java-%E5%BC%82%E5%B8%B8/java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%8711.png">
+<meta property="og:image" content="http://paphae.top/2020/03/16/java-%E5%BC%82%E5%B8%B8/java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%8712.png">
+<meta property="og:image" content="http://paphae.top/2020/03/16/java-%E5%BC%82%E5%B8%B8/java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%8713.png">
+<meta property="og:image" content="http://paphae.top/2020/03/16/java-%E5%BC%82%E5%B8%B8/java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%8714.png">
+<meta property="og:image" content="http://paphae.top/2020/03/16/java-%E5%BC%82%E5%B8%B8/java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%8715.png">
+<meta property="og:image" content="http://paphae.top/2020/03/16/java-%E5%BC%82%E5%B8%B8/java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%8716.png">
+<meta property="og:image" content="http://paphae.top/2020/03/16/java-%E5%BC%82%E5%B8%B8/java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%8717.png">
+<meta property="og:image" content="http://paphae.top/2020/03/16/java-%E5%BC%82%E5%B8%B8/java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%8718.png">
+<meta property="og:image" content="http://paphae.top/2020/03/16/java-%E5%BC%82%E5%B8%B8/java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%8719.png">
+<meta property="og:image" content="http://paphae.top/2020/03/16/java-%E5%BC%82%E5%B8%B8/java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%8720.png">
+<meta property="og:image" content="http://paphae.top/2020/03/16/java-%E5%BC%82%E5%B8%B8/java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%871.png">
+<meta property="og:image" content="http://paphae.top/2020/03/16/java-%E5%BC%82%E5%B8%B8/java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%872.png">
+<meta property="og:image" content="http://paphae.top/2020/03/16/java-%E5%BC%82%E5%B8%B8/java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%873.png">
+<meta property="og:image" content="http://paphae.top/2020/03/16/java-%E5%BC%82%E5%B8%B8/java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%874.png">
+<meta property="og:image" content="http://paphae.top/2020/03/16/java-%E5%BC%82%E5%B8%B8/java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%875.png">
+<meta property="og:image" content="http://paphae.top/2020/03/16/java-%E5%BC%82%E5%B8%B8/java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%876.png">
+<meta property="og:image" content="http://paphae.top/2020/03/16/java-%E5%BC%82%E5%B8%B8/java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%877.png">
+<meta property="og:image" content="http://paphae.top/2020/03/16/java-%E5%BC%82%E5%B8%B8/java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%878.png">
+<meta property="og:image" content="http://paphae.top/2020/03/16/java-%E5%BC%82%E5%B8%B8/java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%879.png">
+<meta property="og:image" content="http://paphae.top/2020/03/16/java-%E5%BC%82%E5%B8%B8/java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%8721.png">
+<meta property="og:image" content="http://paphae.top/2020/03/16/java-%E5%BC%82%E5%B8%B8/java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%8722.png">
+<meta property="og:image" content="http://paphae.top/2020/03/16/java-%E5%BC%82%E5%B8%B8/java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%8723.png">
+<meta property="article:published_time" content="2020-03-16T00:21:46.000Z">
+<meta property="article:modified_time" content="2020-05-06T00:44:10.286Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="异常">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://paphae.top/2020/03/16/java-%E5%BC%82%E5%B8%B8/java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%8710.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8"><span class="toc-text">异常</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#API%E6%A0%91%E7%8A%B6%E7%BB%93%E6%9E%84"><span class="toc-text">API树状结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E5%88%86%E7%B1%BB"><span class="toc-text">异常分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E5%BC%82%E5%B8%B8"><span class="toc-text">常见异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ArithmeticException-%E6%95%B0%E5%AD%A6%E5%BC%82%E5%B8%B8"><span class="toc-text">ArithmeticException-数学异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IndexOutOfBoundsException%EF%BC%9A%E7%B4%A2%E5%BC%95%E8%B6%8A%E7%95%8C%E5%BC%82%E5%B8%B8"><span class="toc-text">IndexOutOfBoundsException：索引越界异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NumberFormatException-%E6%95%B0%E5%AD%97%E6%A0%BC%E5%BC%8F%E5%BC%82%E5%B8%B8"><span class="toc-text">NumberFormatException-数字格式异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ClassCastException-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E5%BC%82%E5%B8%B8"><span class="toc-text">ClassCastException-类型转换异常</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-text">异常处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Finally"><span class="toc-text">Finally</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E5%90%88%E6%83%85%E5%86%B5"><span class="toc-text">组合情况</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#throw"><span class="toc-text">throw</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Finally%E4%B8%8Ereturn"><span class="toc-text">Finally与return</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%82%E5%B8%B8"><span class="toc-text">自定义异常</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-java-异常" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">java-异常</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.03.16</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/javaSE/">javaSE</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><p>异常（Exception）：异常指的是程序运行时发生的不正常事件；异常能够被程序处理，保证程序继续运行下去；例如除数为0、文件没有找到、输入的数字格式不对……</p>
+<a id="more"></a>
+<p>错误（Error）:错误程序没法处理，例如内存泄漏。发生错误后，一般虚拟机会选择终止程序运行，程序员需要修改代码才能解决相关错误；<br><img src="java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%8710.png"></p>
+<h3 id="API树状结构"><a href="#API树状结构" class="headerlink" title="API树状结构"></a>API树状结构</h3><p>API中标准异常的顶级父类是Throwable类；<br>Throwable类有两个子类：Exception和Error；所有异常都是Exception类的直接或间接子类；所有错误都是Error的直接或间接子类；</p>
+<h2 id="异常分类"><a href="#异常分类" class="headerlink" title="异常分类"></a>异常分类</h2><p>Exception有很多子类；这些子类又可以分为两大类；<br>即运行时异常和非运行时异常;RuntimeException的子类都是运行时异常，其他的都是非运行时异常；<br>运行时异常：也称为非检测异常（unchecked Exception）， 这些异常在编译期不检测，程序中可以选择处理，也可以不处理。如果不处理运行时会中断，但是编译没问题；<br>非运行时异常：也称为检测异常（checked Exception）, 是必须进行处理的异常，如果不处理，将发生编译期错误；<br><img src="java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%8711.png"><br>运行时异常经常在编程时发生，了解每种异常的概念有助于高效调试程序；<br>RuntimeException的子类都是运行时异常；</p>
+<h3 id="常见异常"><a href="#常见异常" class="headerlink" title="常见异常"></a>常见异常</h3><p>NullPointerException-空指针异常<br><img src="java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%8712.png"></p>
+<h3 id="ArithmeticException-数学异常"><a href="#ArithmeticException-数学异常" class="headerlink" title="ArithmeticException-数学异常"></a>ArithmeticException-数学异常</h3><p>发生前提：整数除以0时发生    浮点数除以0   0  无限接近0</p>
+<h3 id="IndexOutOfBoundsException：索引越界异常"><a href="#IndexOutOfBoundsException：索引越界异常" class="headerlink" title="IndexOutOfBoundsException：索引越界异常"></a>IndexOutOfBoundsException：索引越界异常</h3><p>包括字符串索引StringIndexOutOfBoundsException和数组索引ArrayIndexOutOfBoundsException两种；<br>发生前提：当访问字符串中的字符或者数组中的元素，超过了其长度时；<br><img src="java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%8713.png"><br><img src="java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%8714.png"></p>
+<h3 id="NumberFormatException-数字格式异常"><a href="#NumberFormatException-数字格式异常" class="headerlink" title="NumberFormatException-数字格式异常"></a>NumberFormatException-数字格式异常</h3><p>发生前提：当把一个字符串转换成数字时，字符串内容不是数字时发生；<br><img src="java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%8715.png"><br><img src="java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%8716.png"></p>
+<h3 id="ClassCastException-类型转换异常"><a href="#ClassCastException-类型转换异常" class="headerlink" title="ClassCastException-类型转换异常"></a>ClassCastException-类型转换异常</h3><p>发生前提：把父类对象转换成不相关的子类类型时；<br><img src="java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%8717.png"><br><strong>编译期的时候根本不需要任何处理，编译通过，不过在运行时抛出异常，中断执行；而非运行时异常恰恰相反，在编译期就会被检测，并强制处理，不处理发生编译错误；</strong><br><img src="java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%8718.png"></p>
+<h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><p>Java语言中异常处理主要使用到try/catch/finally三种语句，后面会分别详细学习；<br>标准异常处理流程如图所示：<br><img src="java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%8719.png"><br>把所有可能抛出异常的，或者肯定抛出异常的代码都写到try代码块中；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">      可能抛出异常的代码块;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">catch</span>语句紧随<span class="keyword">try</span>语句后，用来捕获异常并进行处理；</span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">      可能抛出异常的代码块;</span><br><span class="line">&#125;<span class="keyword">catch</span>(异常类型  变量名)&#123;</span><br><span class="line">       处理异常的代码;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>会发生三种情况：<br>1、发生异常被捕获处理；<br>2、发生异常没有被捕获处理；<br>3、没发生异常<br>当try块中中代码抛出了异常对象后，异常处理机制就将这个对象的类型与try后的catch语句中的异常类型进行匹配，如果类型相同，或者抛出的是捕获的子类，就称为匹配成功，那么异常就被捕获，就运行catch块中的语句；否则，称为异常没有被捕获，程序将中断；</p>
+<p>当try块中中代码抛出了异常对象后，异常处理机制就将这个对象的类型与try后的catch语句中的异常类型进行匹配，如果类型相同，或者抛出的是捕获的子类，就称为匹配成功，那么异常就被捕获，就运行catch块中的语句；否则，称为异常没有被捕获，程序将中断；<br><img src="java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%8720.png"><br>catch语句里都写什么代码？<br>可以写任意需要对异常进行处理的代码；<br>可以调用异常对象的方法，例如printStackTrace，查看异常发生的栈轨迹<br><img src="java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%871.png"><br>如果try块中有多行代码，有可能抛出多种类型异常，那么可以使用多个catch语句；<br>注意：catch语句的异常类型必须从子类到父类的顺序，否则编译错误；<br>从上到下 子类到父类   父类不能放在第一个catch里面</p>
+<h2 id="Finally"><a href="#Finally" class="headerlink" title="Finally"></a>Finally</h2><p>我们可以发现程序中有这样几种情况：<br>没抛出异常；<br>抛出异常并被处理了；<br>抛出异常没有被处理<br>如果希望不管什么情况，有一些代码都必须被执行，那么就可以把这些代码写到finally块中；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">finally</span>&#123;</span><br><span class="line">      不管什么情况，一定被执行的代码块；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>1、抛出异常并被处理后，finally块被执行；<br>2、抛出异常未被处理，finally块被执行<br>3、没有抛出异常，finally块被执行；<br>4、如果语句中有return，先执行finally里面的代码之后，再去return 返回结束方法<br>5、System.exit()  直接关闭程序  无法执行</p>
+<h3 id="组合情况"><a href="#组合情况" class="headerlink" title="组合情况"></a>组合情况</h3><p>必须有try，catch可以有1个或多个，finally最多1个，可以没有，不能有多个；<br>还有另外一种组合：只有try和finally，没有catch</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;<span class="keyword">finally</span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果try块中抛出了异常，则肯定不能被捕获，程序中断，但是finally代码块依然会被执行；</p>
+<h2 id="throw"><a href="#throw" class="headerlink" title="throw"></a>throw</h2><p>抛出异常其实就是创建了一个异常对象，然后用throw关键字交给异常处理机制去处理；<br>throw关键字在方法体中使用，用法如下：<br>throw 异常对象；</p>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">throw</span> <span class="keyword">new</span> Exception();</span><br><span class="line"></span><br><span class="line">或者</span><br><span class="line"><span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">    <span class="keyword">throw</span> e;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行时异常是JVM自动抛出，非运行时异常需要程序员用throw关键字抛出；<br>如下所示：<br>上述代码发生编译错误：由于抛出了Exception，是非运行时异常，所以编译期检测，要求必须处理，处理的方式有两种：<br>使用try/catch/finally进行处理；<br>不处理，用throws声明异常<br>当用throw抛出异常后，基本都使用throws进行声明！<br><img src="java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%872.png"><br><img src="java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%873.png"><br>throws用在方法声明处，声明该方法可能发生的异常类型；<br>一个方法如果使用了throws，那么调用该方法时，编译期会提醒必须处理这些异常，否则编译错误；<br>throws后可以声明多种类型，用逗号隔开即可；<br>抽象方法也可以使用throws声明该方法可能抛出的异常类型；</p>
+<p>一个方法如果使用了throws，那么调用该方法时，编译期会提醒必须处理这些异常，否则编译错误；<br><img src="java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%874.png"><br>依然可以用两种方法处理，可以try/catch，可以继续throws，一般选择try/catch；<br><img src="java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%875.png"><br>如果希望对异常先统一处理，可以处理后再抛出；<br><img src="java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%876.png"><br>调用的时候可以继续处理；<br><img src="java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%877.png"><br>如果希望不管有没有异常都做统一处理，有异常声明抛出，可以使用try/finally<br><img src="java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%878.png"><br>调用的时候可以继续处理；<br><img src="java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%879.png"><br><img src="java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%8721.png"></p>
+<h2 id="Finally与return"><a href="#Finally与return" class="headerlink" title="Finally与return"></a>Finally与return</h2><p>finally块前有return语句，finally依然被执行；<br>finally块前有System.exit(0)语句，finally不被执行；</p>
+<h2 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h2><p>为了能够标记项目中的异常事件，需要使用throw抛出异常；<br>如果抛出的是API中的标准异常，那么很可能与API中方法抛出的异常混淆，因此需要自定义异常；<br>项目组根据业务需求定义业务异常，对团队协作开发非常有意义；<br>自定义异常类非常简单，只要继承API中任意一个标准异常类即可；<br>多数情况下，继承Exception类；也可以选择继承其他类型异常；<br>一般自定义异常类中不写其他方法，只重载必要的构造方法；<br>使用自定义异常与使用API中标准异常一样；<br>可以用throw抛出自定义异常对象，使用throws声明自定义异常类型；<br>可以使用try/catch/finally处理异常；<br><img src="java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%8722.png"><br><img src="java-%E5%BC%82%E5%B8%B8/%E5%9B%BE%E7%89%8723.png"></p>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/03/16/java-%E6%9E%9A%E4%B8%BE/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/03/17/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9D%E8%AF%86/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

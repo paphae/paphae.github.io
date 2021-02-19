@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>java-字节流 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="io," />
+  
+
+  <meta name="description" content="Filejava.io.File类的对象可以表示文件和目录，在程序中一个File类对象可以代表一个文件或目录当创建一个File对象后，就可以利用它来对文件或目录的属性进行操作，如：文件名、最后修改日期、文件大小等等需要注意的是，File对象并不能直接对文件内容进行读&#x2F;写操作，只能查看文件的属性">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java-字节流">
+<meta property="og:url" content="http://paphae.top/2020/03/26/java-%E5%AD%97%E8%8A%82%E6%B5%81/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="Filejava.io.File类的对象可以表示文件和目录，在程序中一个File类对象可以代表一个文件或目录当创建一个File对象后，就可以利用它来对文件或目录的属性进行操作，如：文件名、最后修改日期、文件大小等等需要注意的是，File对象并不能直接对文件内容进行读&#x2F;写操作，只能查看文件的属性">
+<meta property="og:locale">
+<meta property="og:image" content="http://paphae.top/2020/03/26/java-%E5%AD%97%E8%8A%82%E6%B5%81/java-%E5%AD%97%E8%8A%82%E6%B5%81/%E5%9B%BE%E7%89%871.png">
+<meta property="og:image" content="http://paphae.top/2020/03/26/java-%E5%AD%97%E8%8A%82%E6%B5%81/java-%E5%AD%97%E8%8A%82%E6%B5%81/%E5%9B%BE%E7%89%872.png">
+<meta property="og:image" content="http://paphae.top/2020/03/26/java-%E5%AD%97%E8%8A%82%E6%B5%81/java-%E5%AD%97%E8%8A%82%E6%B5%81/%E5%9B%BE%E7%89%873.png">
+<meta property="og:image" content="http://paphae.top/2020/03/26/java-%E5%AD%97%E8%8A%82%E6%B5%81/java-%E5%AD%97%E8%8A%82%E6%B5%81/%E5%9B%BE%E7%89%874.png">
+<meta property="og:image" content="http://paphae.top/2020/03/26/java-%E5%AD%97%E8%8A%82%E6%B5%81/java-%E5%AD%97%E8%8A%82%E6%B5%81/%E5%9B%BE%E7%89%875.png">
+<meta property="og:image" content="http://paphae.top/2020/03/26/java-%E5%AD%97%E8%8A%82%E6%B5%81/java-%E5%AD%97%E8%8A%82%E6%B5%81/%E5%9B%BE%E7%89%876.png">
+<meta property="og:image" content="http://paphae.top/2020/03/26/java-%E5%AD%97%E8%8A%82%E6%B5%81/java-%E5%AD%97%E8%8A%82%E6%B5%81/%E5%9B%BE%E7%89%877.png">
+<meta property="og:image" content="http://paphae.top/2020/03/26/java-%E5%AD%97%E8%8A%82%E6%B5%81/java-%E5%AD%97%E8%8A%82%E6%B5%81/%E5%9B%BE%E7%89%878.png">
+<meta property="article:published_time" content="2020-03-26T00:22:22.000Z">
+<meta property="article:modified_time" content="2020-05-06T00:36:51.382Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="io">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://paphae.top/2020/03/26/java-%E5%AD%97%E8%8A%82%E6%B5%81/java-%E5%AD%97%E8%8A%82%E6%B5%81/%E5%9B%BE%E7%89%871.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#File"><span class="toc-text">File</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-text">常用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81"><span class="toc-text">输入输出流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E8%8A%82%E6%B5%81"><span class="toc-text">字节流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E7%B1%BBFileOutputStream"><span class="toc-text">实现类FileOutputStream</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E8%8A%82%E8%BE%93%E5%85%A5%E6%B5%81"><span class="toc-text">字节输入流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DataOutput"><span class="toc-text">DataOutput</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FilterOutputStream"><span class="toc-text">FilterOutputStream</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RandomAccessFile"><span class="toc-text">RandomAccessFile</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ByteArrayOutputStream"><span class="toc-text">ByteArrayOutputStream</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98"><span class="toc-text">例题</span></a></li></ol></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-java-字节流" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">java-字节流</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.03.26</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/javaSE/">javaSE</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="File"><a href="#File" class="headerlink" title="File"></a>File</h2><p>java.io.File类的对象可以表示文件和目录，在程序中一个File类对象可以代表一个文件或目录<br>当创建一个File对象后，就可以利用它来对文件或目录的属性进行操作，如：文件名、最后修改日期、文件大小等等<br>需要注意的是，File对象并不能直接对文件内容进行读/写操作，只能查看文件的属性</p>
+<a id="more"></a>
+<p>File类的构造方法有4种重载方式，常用的如下：<br><img src="java-%E5%AD%97%E8%8A%82%E6%B5%81/%E5%9B%BE%E7%89%871.png"><br>File f1 = new File(“chinasofti.txt”);   //相对路径  以当前类为参照物找文件<br>File f2 = new File(“D:\Java\Hello.java”);//绝对路径  从磁盘路径取查询</p>
+<p>构建File对象是需要注意的要点：</p>
+<ul>
+<li>提供给构造方法的路径可以指向一个具体的文件，这时候File对象能够操作这个文件的属性，也可以指向一个文件夹，这时候File对象操作的就是文件夹的属性</li>
+<li>注意上例第二个对象的路径表达，由于在Java中“\”符号表示转意，因此如果使用”\”作为路径分割符，则实际需要编写“\”，当然一个更好的替代方法是使用Unix系统中常用的”/”作为路径分割，则不需要转意</li>
+<li>特别注意，Java中的相对路径体系和我们日常所见的文件系统相对路径体系有较大的区别：如果以路径以“/”或“\”开头，则相对路径的根为当前项目所在磁盘的根目录（Unix没有磁盘分区的概念，因此直接使用/，即文件系统的根作为相对路劲的根）</li>
+<li>如果不以“/”开头则相对路径的根为项目根目录，而不是当前类所在目录，这一点非常容易引起误区，因为类从属于某个包之后，类文件实际是位于项目中的某个子文件夹中的，如com.chinasoft.Hello这个类是位于项目中的com\chinasofti子文件夹中，如果在Hello类中构建一个File对象：FIle f = new File(“icss/chinasofti.txt”)，那么这个文件位于项目根目录的icss子文件中，跟当前类自己的位置无关</li>
+</ul>
+<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><p><img src="java-%E5%AD%97%E8%8A%82%E6%B5%81/%E5%9B%BE%E7%89%872.png"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">		File f = <span class="keyword">new</span> File(<span class="string">&quot;../data/a.txt&quot;</span>);</span><br><span class="line">		System.out.println(f.exists());</span><br><span class="line">		System.out.println(f.isDirectory());</span><br><span class="line">		System.out.println(f.isFile());</span><br><span class="line">		System.out.println(f.getAbsolutePath());</span><br><span class="line">		System.out.println(f.length());</span><br><span class="line">		</span><br><span class="line">		File file = <span class="keyword">new</span> File(<span class="string">&quot;D:/&quot;</span>);</span><br><span class="line">		File[] listFiles = file.listFiles();</span><br><span class="line">		<span class="keyword">for</span> (File file2 : listFiles) &#123;</span><br><span class="line">			System.out.println(file2.getName());</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		File file2 = <span class="keyword">new</span> File(<span class="string">&quot;ahhah&quot;</span>);</span><br><span class="line">		file2.createNewFile();</span><br><span class="line">		System.out.println(file2.exists());</span><br><span class="line"><span class="comment">//		file2.delete();</span></span><br><span class="line">		System.out.println(file2.exists());</span><br><span class="line"><span class="comment">//		file2.mkdir();</span></span><br><span class="line">		System.out.println(file2.getAbsolutePath());</span><br></pre></td></tr></table></figure>
+<h2 id="输入输出流"><a href="#输入输出流" class="headerlink" title="输入输出流"></a>输入输出流</h2><p>对于输入和输出流，由于传输格式的不同，又分为字节流和字符流：<br>字节流是指8位的通用字节流，以字节为基本单位，在java.io包中，对于字节流进行操作的类大部分继承于InputStream（输入字节流）类和OutputStream（输出字节流）类<br>字符流是指16位的Unicode字符流，以字符（两个字节）为基本单位，非常适合处理字符串和文本，对于字符流进行操作的类大部分继承于Reader（读取流）类和Writer（写入流）类</p>
+<p>Java I/O主要包括如下几个层次，包含三个部分：<br>流式部分:IO的主体部分；<br>非流式部分:主要包含一些辅助流式部分的类，如：File类、RandomAccessFile类和FileDescriptor等类；<br>其他类:文件读取部分的与安全相关的类，如：SerializablePermission类，以及与本地操作系统相关的文件系统的类，如：FileSystem类和Win32FileSystem类和WinNTFileSystem类。</p>
+<p><img src="java-%E5%AD%97%E8%8A%82%E6%B5%81/%E5%9B%BE%E7%89%873.png"><br><img src="java-%E5%AD%97%E8%8A%82%E6%B5%81/%E5%9B%BE%E7%89%874.png"><br><img src="java-%E5%AD%97%E8%8A%82%E6%B5%81/%E5%9B%BE%E7%89%875.png"></p>
+<h2 id="字节流"><a href="#字节流" class="headerlink" title="字节流"></a>字节流</h2><p>如果需要将Java中能够表达所有数据缓存在内存中（包括字符类型或二进制类型），最适宜于使用的数据类型是：byte[]<br>OutputStream是一个抽象类，提供了Java向流中以字节为单位写入数据的公开接口，大部分字节输出流都继承自OutputStream类，重要的写入方法如下：<br>原因是Java中所有的数据类型占据的空间都是byte型的整数倍数<br><code>void write(byte[] b, int off, int len)：</code>将字节数组b进行写出 从oof下标开始，一直len结束<br><img src="java-%E5%AD%97%E8%8A%82%E6%B5%81/%E5%9B%BE%E7%89%876.png"></p>
+<h3 id="实现类FileOutputStream"><a href="#实现类FileOutputStream" class="headerlink" title="实现类FileOutputStream"></a>实现类FileOutputStream</h3><p>为了解决之前提出的向数据文件中写入持久化运算结果的问题，我们需要使用FileOutputStream类，它称为文件输出流，继承于OutputStream类，是进行文件内容写操作的最基本类工具<br>FileOutputStream能够将内存中的数据输出到文件中<br><img src="java-%E5%AD%97%E8%8A%82%E6%B5%81/%E5%9B%BE%E7%89%877.png"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">File f = <span class="keyword">new</span> File(<span class="string">&quot;src/data/a.txt&quot;</span>);</span><br><span class="line">	InputStream in = <span class="keyword">null</span>;</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		in = <span class="keyword">new</span> FileInputStream(f);</span><br><span class="line">		<span class="keyword">int</span> length = in.available();</span><br><span class="line">		<span class="keyword">byte</span>[] by = <span class="keyword">new</span> <span class="keyword">byte</span>[length];</span><br><span class="line">		in.read(by);</span><br><span class="line">		String s = <span class="keyword">new</span> String(by);</span><br><span class="line">		System.out.println(s);</span><br><span class="line">	&#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">		e.printStackTrace();</span><br><span class="line">	&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">		e.printStackTrace();</span><br><span class="line">	&#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">		<span class="keyword">if</span>(in!=<span class="keyword">null</span>)</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				in.close();</span><br><span class="line">			&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">				e.printStackTrace();</span><br><span class="line">			&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="字节输入流"><a href="#字节输入流" class="headerlink" title="字节输入流"></a>字节输入流</h3><p>java的IO模型设计非常优秀，它使用Decorator模式，按功能划分Stream，我们可以动态装配这些Stream，以便获得需要的功能。例如需要一个具有缓冲的文件输入流，则应当组合使用FileInputStream和BufferedInputStream<br>InputStream也是一个抽象类，提供了Java中从流中以字节为单位读取数据的公开接口，大部分字节输入流都继承自InputStream类<br>InputStream提供了针对数据流读取的公共接口，其中比较重要的数据读取方法如下：<br>int read(byte[] b, int off, int len)<br><img src="java-%E5%AD%97%E8%8A%82%E6%B5%81/%E5%9B%BE%E7%89%878.png"></p>
+<h3 id="DataOutput"><a href="#DataOutput" class="headerlink" title="DataOutput"></a>DataOutput</h3><p>DataOutput接口规定一组操作，用于以一种与机器无关（当前操作系统等）的方式，直接向流中写入基本类型的数据和字符串：<br>DataInput对基本数据类型的写入分别提供了不同的方法，方法名满足writeXXX()的规律，其中XXX即为基本类型说明符（首字母大写），如writeInt()表示向流中写入一个int型数据<br>写入字符串的方法为writeUTF()，该方法的功能声明将标准的UTF-8字符编码表示形式做出了稍许修改<br>DataInput接口规定一组操作，用于以一种与机器无关（当前操作系统等）的方式，直接在流中读取基本类型的数据和字符串：<br>DataInput对基本数据类型的读取分别提供了不同的方法，方法名满足readXXX()的规律，其中XXX即为基本类型说明符（首字母大写），如readInt()表示从流中读取一个int型数据<br>读取字符串的方法为readUTF()，该方法的功能声明将标准的UTF-8字符编码表示形式做出了稍许修改，接口还提供了readLine()方法，但是在一些常用的实现中不建议使用<br>事实上，DataInput和DataOutput对应，即DataInput读取由DataOutput写入的数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		write();</span><br><span class="line">		read();</span><br><span class="line">	&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">		e.printStackTrace();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">	File f = <span class="keyword">new</span> File(<span class="string">&quot;src/data/b.bin&quot;</span>);</span><br><span class="line">	OutputStream os = <span class="keyword">new</span> FileOutputStream(f);</span><br><span class="line">	DataOutput out = <span class="keyword">new</span> DataOutputStream(os);</span><br><span class="line">	</span><br><span class="line">	out.writeInt(<span class="number">10</span>);</span><br><span class="line">	out.writeDouble(<span class="number">20.5</span>);</span><br><span class="line">	out.writeChar(<span class="number">56</span>);</span><br><span class="line">	out.writeUTF(<span class="string">&quot;asasf&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">read</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">	File file = <span class="keyword">new</span> File(<span class="string">&quot;src/data/b.bin&quot;</span>);</span><br><span class="line">	InputStream is = <span class="keyword">new</span> FileInputStream(file);</span><br><span class="line">	DataInput in = <span class="keyword">new</span> DataInputStream(is);</span><br><span class="line">	System.out.println(in.readInt());</span><br><span class="line">	System.out.println(in.readDouble());</span><br><span class="line">	System.out.println(in.readChar());</span><br><span class="line">	System.out.println(in.readUTF());</span><br><span class="line">	</span><br><span class="line">	is.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="FilterOutputStream"><a href="#FilterOutputStream" class="headerlink" title="FilterOutputStream"></a>FilterOutputStream</h2><p>在使用输出流之前需要了解一下FilterOutputStream 的作用 用来进行装饰 （功能加强）<br>FilterOutputStream是用来封装其它的输出流，并为它们提供额外的功能。它的实现主要包括BufferedOutputStream, DataOutputStream和PrintStream<br>BufferedOutputStream的作用就是为输出流提供缓冲功能<br>DataOutputStream 是用来装饰其它输出流，它实现了DataOutput接口，将DataOutputStream和DataInputStream输入流配合使用，允许应用程序以与机器无关方式从底层输入流中读写基本 Java 数据类型和字符串<br>PrintStream 是用来装饰其它输出流。它能为其他输出流添加了功能，使它们能够方便地打印各种数据值表示形式</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">	String s = <span class="string">&quot;jingtiantianqibuchuo0怎么能写出空间&quot;</span>;</span><br><span class="line">	<span class="keyword">byte</span>[] bs = s.getBytes();</span><br><span class="line">	<span class="comment">//追加</span></span><br><span class="line">	File f = <span class="keyword">new</span> File(<span class="string">&quot;src/data/a.txt&quot;</span>);</span><br><span class="line">	OutputStream out = <span class="keyword">new</span> FileOutputStream(f,<span class="keyword">true</span>);</span><br><span class="line">	out.write(bs);</span><br><span class="line">	<span class="comment">//字节输出流</span></span><br><span class="line">	OutputStream out2 = <span class="keyword">new</span> FileOutputStream(<span class="string">&quot;src/data/a.txt&quot;</span>, <span class="keyword">false</span>);</span><br><span class="line">	out2.write(bs);</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>缓存的新应用之一就是回推的实现。回推用于输入流，以允许读取字节，然后再将它们返回（回推）到流中，PushbackInputStream类实现了这一思想，提供了一种机制，可以“偷窥”来自输入流的内容而不对它们进行破坏<br>PushbackInputStream类具有以下构造函数：<br>PushbackInputStream(InputStream inputStream)<br>PushbackInputStream(InputStream inputStream,int numBytes)<br>第一种形式创建的流对象允许将一个字节返回到输入流； 第二种形式创建的流对象具有一个长度为numBytes的回推缓存，从而允许将多个字节回推到输入流中<br>除了熟悉的来自InputStream的方法外，PushbackInputStream类还提供了unread()方法：<br>void unread(int b)<br>void unread(byte[] buffer)<br>void unread(byte[] buffer,int offset,int numBytes)<br>第一种形式回推b的低字节，这会使得后续的read()调用会把这个字节再次读取出来。第二种形式回推buffer中的字节。第三种形式回推buffer中从offset开始的numBytes个字节。当回推缓存已满时，如果试图回推字节，就会抛出IOException异常</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		String s = <span class="string">&quot;xzczxczsfgnxv&quot;</span>;</span><br><span class="line">		ByteArrayInputStream bais = <span class="keyword">new</span> ByteArrayInputStream(s.getBytes());</span><br><span class="line">		PushbackInputStream pis = <span class="keyword">new</span> PushbackInputStream(bais,<span class="number">5</span>);</span><br><span class="line">		</span><br><span class="line"><span class="comment">//		int i = 0;</span></span><br><span class="line"><span class="comment">//		while((i=pis.read())!=-1) &#123;</span></span><br><span class="line"><span class="comment">//			System.out.println((char)i);</span></span><br><span class="line"><span class="comment">//			if((char)i==&#x27;x&#x27;) &#123;</span></span><br><span class="line"><span class="comment">//				pis.unread(&#x27;U&#x27;);</span></span><br><span class="line"><span class="comment">//			&#125;</span></span><br><span class="line"><span class="comment">//		&#125;</span></span><br><span class="line">		<span class="keyword">byte</span>[] arr = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">5</span>];</span><br><span class="line">		<span class="keyword">while</span>(pis.read(arr)!=-<span class="number">1</span>) &#123;</span><br><span class="line">			String str = <span class="keyword">new</span> String(arr);</span><br><span class="line">			System.out.println(str);</span><br><span class="line">			<span class="keyword">if</span>(str.equals(<span class="string">&quot;xzczx&quot;</span>))pis.unread(<span class="keyword">new</span> <span class="keyword">byte</span>[] &#123;<span class="number">49</span>,<span class="number">50</span>,<span class="number">51</span>,<span class="number">52</span>,<span class="number">53</span>&#125;);</span><br><span class="line">			arr = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">5</span>];</span><br><span class="line">		&#125;</span><br><span class="line">		pis.close();</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="RandomAccessFile"><a href="#RandomAccessFile" class="headerlink" title="RandomAccessFile"></a>RandomAccessFile</h3><p>之前通过流访问文件都是循序访问的，在某些时候我们需要对文件进行随机访问，就需要借助与RandomAccessFile工具<br>RandomAccessFile类可以在文件中任何位置查找或写入数据<br>RandomAccessFile同时实现了DataInput和DataOutput接口<br>磁盘文件都是可以随机访问的， 但是从网络而来的数据流却不是<br>通过构造器打开一个随机访问文件工具对象，通过参数可以确定只用于读取数据或同时用于读写：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">RandomAccessFile in= <span class="keyword">new</span> RandomAccessFile(<span class="string">&quot;data.bin&quot;</span>, <span class="string">&quot;r&quot;</span>);<span class="comment">//读取</span></span><br><span class="line">RandomAccessFile inOut = <span class="keyword">new</span> RandomAccessFile(<span class="string">&quot;data.bin&quot;</span>, <span class="string">&quot;rw&quot;</span>);<span class="comment">//写w 读写rw</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>seek 方法：<ul>
+<li>随机访问文件有一个表示下一个将被读入或写出的字节所处的位置的文件指针， seek方法可以将这个文件指针设置到文件中任意字节的位置</li>
+</ul>
+</li>
+</ul>
+<p>假设想读入第三条数据： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">long n &#x3D; 3; </span><br><span class="line">in.seek((n-1) * RECORD_SIZE);</span><br><span class="line">如果希望修改数据，切记将文件指针重置到希望写入文件的开始处： </span><br><span class="line">in.seek((n-1) * RECORD_SIZE); </span><br><span class="line">e.writeData(out);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>length()方法:<ul>
+<li>确定文件大小，使用 length 方法；</li>
+</ul>
+</li>
+</ul>
+<p>整数和浮点值在二进制格式中都有固定的尺寸， 但处理字符串就存在麻烦，之前提到过如果使用writeUTF()实际是对Unicode编码做了简单的处理，每个字符长度并不相同，因此在示例代码中我们提供了两个自定义方法来读写具有固定尺寸的字符串：</p>
+<ul>
+<li>writeFixedString 方法： <ul>
+<li>写出从字符串开头开始的指定数量的字符编码</li>
+</ul>
+</li>
+<li>readFixedString 方法：<ul>
+<li>从输入流中读入字符，直至读入参数个字符编码， 或者直至到具有0值的字符值，然后跳过输入字段中剩余的0值；为了提高效率，使用 StringBuilder 类来读入字符串</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	RandomAccessFile out = <span class="keyword">null</span>;</span><br><span class="line">	RandomAccessFile in = <span class="keyword">null</span>;</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		out= <span class="keyword">new</span> RandomAccessFile(<span class="string">&quot;src/data/c.bin&quot;</span>, <span class="string">&quot;rw&quot;</span>);</span><br><span class="line">		in= <span class="keyword">new</span> RandomAccessFile(<span class="string">&quot;src/data/c.bin&quot;</span>, <span class="string">&quot;r&quot;</span>);</span><br><span class="line">		out.writeInt(<span class="number">10</span>);</span><br><span class="line">		out.writeDouble(<span class="number">100.2</span>);</span><br><span class="line">		out.writeUTF(<span class="string">&quot;as&quot;</span>);</span><br><span class="line">		in.seek(<span class="number">0</span>);</span><br><span class="line">		System.out.println(in.readInt());</span><br><span class="line">		in.seek(<span class="number">4</span>);</span><br><span class="line">		System.out.println(in.readDouble());</span><br><span class="line">		in.seek(<span class="number">12</span>);</span><br><span class="line">		System.out.println(in.readUTF());</span><br><span class="line">		</span><br><span class="line">	&#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">		e.printStackTrace();</span><br><span class="line">	&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">		e.printStackTrace();</span><br><span class="line">	&#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			out.close();</span><br><span class="line">			in.close();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">			<span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="ByteArrayOutputStream"><a href="#ByteArrayOutputStream" class="headerlink" title="ByteArrayOutputStream"></a>ByteArrayOutputStream</h3><p>ByteArrayOutputStream提供工具将内存中以串行序列存在的流式数据以一个字节为单位进行切分，形成一个byte[]数组<br>而ByteArrayInputStream则正好相反，提供工具将内存中的byte[]数组中的数据进行串行序列化拼接，形成一个可供操作的流式数据<br>从功能上看，ByteArrayOutpuStream可以将任意数据组合转换为byte[]，而ByteArrayInputStream可以将这个数组还原，从而以流的形式读取任意数据组合</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">	ByteArrayOutputStream bs = <span class="keyword">new</span> ByteArrayOutputStream();</span><br><span class="line">	DataOutputStream dos = <span class="keyword">new</span> DataOutputStream(bs);</span><br><span class="line">	dos.writeInt(<span class="number">10</span>);</span><br><span class="line">	dos.writeDouble(<span class="number">10.5</span>);</span><br><span class="line">	<span class="keyword">byte</span>[] by = bs.toByteArray();</span><br><span class="line">	System.out.println(<span class="keyword">new</span> String(by,<span class="number">4</span>,<span class="number">8</span>));</span><br><span class="line">	bs.close();</span><br><span class="line">	dos.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h4><p>9.（ FileInputStream 和 FileOutputStream ） 利 用 FileInputStream 和<br>FileOutputStream，完成下面的要求：<br>1） 用 FileOutputStream 在当前目录下创建一个文件“test.txt”，并向文件<br>输出“Hello World”，如果文件已存在，则在原有文件内容后面追加。<br>2）用 FileInputStream 读入 test.txt 文件，并在控制台上打印出 test.txt 中<br>的内容。<br>3） 要求用 try-catch-finally 处理异常，并且关闭流应放在 finally 块中。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.FileNotFoundException;</span><br><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileTest</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		File f = <span class="keyword">new</span> File(<span class="string">&quot;test.txt&quot;</span>);</span><br><span class="line">		FileOutputStream out = <span class="keyword">null</span>;</span><br><span class="line">		FileInputStream in = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			out = <span class="keyword">new</span> FileOutputStream(f, <span class="keyword">true</span>);</span><br><span class="line">			out.write(<span class="string">&quot;Hello World&quot;</span>.getBytes());</span><br><span class="line"></span><br><span class="line">			in = <span class="keyword">new</span> FileInputStream(f);</span><br><span class="line">			<span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">				<span class="keyword">int</span> n = in.read();</span><br><span class="line">				<span class="keyword">if</span> (n == -<span class="number">1</span>)</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				System.out.print((<span class="keyword">char</span>) n);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				<span class="keyword">if</span> (out != <span class="keyword">null</span>)</span><br><span class="line">					out.close();</span><br><span class="line">				<span class="keyword">if</span> (in != <span class="keyword">null</span>)</span><br><span class="line">					in.close();</span><br><span class="line">			&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">				e.printStackTrace();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>10.（Data 流）利用 Data 流，完成下面操作：<br>1） 判断当前目录下是否存在一个“test.dat”的文件，如果该文件不存在，<br>则往该文件中写入一个 long 类型的数值：10000L<br>2） 如果该文件存在，则从该文件中读出数值，并把该数值加 1 之后，再存<br>回文件中。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.DataInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.DataOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DataTest</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		File f = <span class="keyword">new</span> File(<span class="string">&quot;test.dat&quot;</span>);</span><br><span class="line">		DataOutputStream out = <span class="keyword">null</span>;</span><br><span class="line">		DataInputStream in = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="keyword">if</span> (f.exists()) &#123;</span><br><span class="line">				in = <span class="keyword">new</span> DataInputStream(<span class="keyword">new</span> FileInputStream(f));</span><br><span class="line">				<span class="keyword">long</span> l = in.readLong() + <span class="number">1</span>;</span><br><span class="line">				out = <span class="keyword">new</span> DataOutputStream(<span class="keyword">new</span> FileOutputStream(f));</span><br><span class="line">				out.writeLong(l);</span><br><span class="line">				System.out.println(l);</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				out = <span class="keyword">new</span> DataOutputStream(<span class="keyword">new</span> FileOutputStream(f));</span><br><span class="line">				out.writeLong(<span class="number">10000L</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				<span class="keyword">if</span> (out != <span class="keyword">null</span>)</span><br><span class="line">					out.close();</span><br><span class="line">				<span class="keyword">if</span> (in != <span class="keyword">null</span>)</span><br><span class="line">					in.close();</span><br><span class="line">			&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">				e.printStackTrace();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>11.查询个人电脑D盘（没有d盘查自己有的盘）下所有文件，将文件名字进行输出（记住所有文件，包含子文件夹中的所有文件都要输出）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AllFile</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		File f = <span class="keyword">new</span> File(<span class="string">&quot;D:/&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;目录：&quot;</span>+f.getAbsolutePath());</span><br><span class="line">		<span class="keyword">for</span> (File i : f.listFiles()) &#123;	</span><br><span class="line">			findFile(i);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">findFile</span><span class="params">(File f)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(!f.isDirectory()) &#123;</span><br><span class="line">			System.out.println(f.getName());</span><br><span class="line">			<span class="keyword">return</span> ;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(!f.isHidden()) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;目录：&quot;</span>+f.getAbsolutePath());</span><br><span class="line">			<span class="keyword">for</span> (File i : f.listFiles()) &#123;</span><br><span class="line">				findFile(i);				</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/03/25/java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/03/27/java-%E5%AD%97%E7%AC%A6%E6%B5%81/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

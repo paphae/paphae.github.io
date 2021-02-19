@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>SQL_server | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="sql_server," />
+  
+
+  <meta name="description" content="SQL Server的数据库是有组织的数据的集合，这种数据集合具有逻辑结构并得到数据库系统的管理的维护。数据库由包含数据的基本表和对象（如视图，索引，存储过程和触发器等）组成,其主要用途时处理数据管理活动产生的信息.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL_server">
+<meta property="og:url" content="http://paphae.top/2019/12/01/SQL-server/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="SQL Server的数据库是有组织的数据的集合，这种数据集合具有逻辑结构并得到数据库系统的管理的维护。数据库由包含数据的基本表和对象（如视图，索引，存储过程和触发器等）组成,其主要用途时处理数据管理活动产生的信息.">
+<meta property="og:locale">
+<meta property="article:published_time" content="2019-12-01T11:09:07.000Z">
+<meta property="article:modified_time" content="2020-05-06T00:32:19.899Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="sql_server">
+<meta name="twitter:card" content="summary">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8T-SQL%E8%AF%AD%E5%8F%A5%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-text">使用T-SQL语句创建数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8T-SQL%E8%AF%AD%E5%8F%A5%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-text">使用T-SQL语句修改数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8T-SQL%E8%AF%AD%E5%8F%A5%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-text">使用T-SQL语句删除数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8T-SQL%E8%AF%AD%E5%8F%A5%E5%88%9B%E5%BB%BA%E8%A1%A8"><span class="toc-text">使用T-SQL语句创建表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8T-SQL%E8%AF%AD%E5%8F%A5%E4%BF%AE%E6%94%B9%E8%A1%A8"><span class="toc-text">使用T-SQL语句修改表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8T-SQL%E8%AF%AD%E5%8F%A5%E5%88%9B%E5%BB%BA%E4%B8%BB%E9%94%AE%E5%92%8C%E5%A4%96%E9%94%AE%E7%BA%A6%E6%9D%9F"><span class="toc-text">使用T-SQL语句创建主键和外键约束</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E4%BF%AE%E6%94%B9%E8%A1%A8%E6%97%B6%E8%AE%BE%E7%BD%AE%E4%B8%BB%E9%94%AE%E7%BA%A6%E6%9D%9F"><span class="toc-text">在修改表时设置主键约束</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E4%BF%AE%E6%94%B9%E8%A1%A8%E6%97%B6%E8%AE%BE%E7%BD%AEUNIQUE%E7%BA%A6%E6%9D%9F"><span class="toc-text">在修改表时设置UNIQUE约束</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%A8%E4%BD%BF%E7%94%A8UNIQUE%E7%BA%A6%E6%9D%9F%E6%97%B6%E5%BA%94%E8%80%83%E8%99%91%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-text">在使用UNIQUE约束时应考虑的问题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E4%BF%AE%E6%94%B9%E8%A1%A8%E6%97%B6%E5%AE%9A%E4%B9%89%E9%BB%98%E8%AE%A4%E5%80%BC%E7%BA%A6%E6%9D%9F"><span class="toc-text">在修改表时定义默认值约束</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E4%BF%AE%E6%94%B9%E8%A1%A8%E6%97%B6%E5%88%9B%E5%BB%BACHECK%E7%BA%A6%E6%9D%9F"><span class="toc-text">在修改表时创建CHECK约束</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8T-SQL%E8%AF%AD%E5%8F%A5%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE"><span class="toc-text">使用T-SQL语句插入数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8T-SQL%E8%AF%AD%E5%8F%A5%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE"><span class="toc-text">使用T-SQL语句修改数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8T-SQL%E8%AF%AD%E5%8F%A5%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="toc-text">使用T-SQL语句删除数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8MERGE%E8%AF%AD%E5%8F%A5%E6%8F%92%E5%85%A5%EF%BC%8C%E4%BF%AE%E6%94%B9%EF%BC%8C%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="toc-text">使用MERGE语句插入，修改，删除数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8T-SQL%E8%AF%AD%E5%8F%A5%E6%8A%95%E5%BD%B1%E6%9F%A5%E8%AF%A2"><span class="toc-text">使用T-SQL语句投影查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8T-SQL%E8%AF%AD%E5%8F%A5%E9%80%89%E6%8B%A9%E6%9F%A5%E8%AF%A2"><span class="toc-text">使用T-SQL语句选择查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8T-SQL%E8%AF%AD%E5%8F%A5%E5%88%86%E7%BB%84%E5%92%8C%E6%B1%87%E6%80%BB"><span class="toc-text">使用T-SQL语句分组和汇总</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CUBE%E5%92%8CROLLUP%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">CUBE和ROLLUP的使用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E8%BF%9E%E6%8E%A5%E5%92%8C%E5%85%A8%E8%BF%9E%E6%8E%A5"><span class="toc-text">内连接和全连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%96%E8%BF%9E%E6%8E%A5"><span class="toc-text">外连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="toc-text">子查询</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CAST%E5%87%BD%E6%95%B0"><span class="toc-text">CAST函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SQL-Server%E2%80%94%E6%9F%A5%E8%AF%A2%E8%A1%A8%E7%BB%93%E6%9E%84"><span class="toc-text">SQL Server—查询表结构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%B5%8C%E8%A1%A8%E5%80%BC%E5%87%BD%E6%95%B0"><span class="toc-text">内嵌表值函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E8%AF%AD%E5%8F%A5%E8%A1%A8%E5%80%BC%E5%87%BD%E6%95%B0"><span class="toc-text">多语句表值函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%97%A0%E5%8F%82%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B"><span class="toc-text">创建无参存储过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%B8%A6output%E5%8F%82%E6%95%B0%E7%9A%84%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B"><span class="toc-text">创建带output参数的存储过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E6%88%96%E7%A6%81%E7%94%A8%E8%A1%A8%E4%B8%8A%E6%89%80%E6%9C%89%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="toc-text">启动或禁用表上所有触发器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1"><span class="toc-text">事务</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-SQL-server" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">SQL_server</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2019.12.01</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p>SQL Server的数据库是有组织的数据的集合，这种数据集合具有逻辑结构并得到数据库系统的管理的维护。<br>数据库由包含数据的基本表和对象（如视图，索引，存储过程和触发器等）组成,其主要用途时处理数据管理活动产生的信息.</p>
+<a id="more"></a>
+
+<h3 id="使用T-SQL语句创建数据库"><a href="#使用T-SQL语句创建数据库" class="headerlink" title="使用T-SQL语句创建数据库"></a>使用T-SQL语句创建数据库</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> database zhangboSTU</span><br><span class="line"><span class="keyword">on</span> <span class="keyword">primary</span>	<span class="operator">/</span><span class="operator">/</span>数据库文件</span><br><span class="line">(</span><br><span class="line">	name <span class="operator">=</span> <span class="string">&#x27;zhangbo_data&#x27;</span>,</span><br><span class="line">	filename <span class="operator">=</span> <span class="string">&#x27;C:\data\zhangbo_data.mdf&#x27;</span>,</span><br><span class="line">	size <span class="operator">=</span> <span class="number">5</span>MB,</span><br><span class="line">	maxsize <span class="operator">=</span> <span class="number">20</span>MB,</span><br><span class="line">	filegrowth <span class="operator">=</span> <span class="number">20</span><span class="operator">%</span>	<span class="operator">/</span><span class="operator">/</span>曾长方式</span><br><span class="line">)</span><br><span class="line">log <span class="keyword">on</span>		<span class="operator">/</span><span class="operator">/</span>日志文件</span><br><span class="line">(</span><br><span class="line">	name <span class="operator">=</span> <span class="string">&#x27;zhangbo_log&#x27;</span>,</span><br><span class="line">	filename <span class="operator">=</span> <span class="string">&#x27;C:\data\zhangbo_log.log&#x27;</span>,</span><br><span class="line">	size <span class="operator">=</span> <span class="number">2</span>MB,</span><br><span class="line">	maxsize <span class="operator">=</span> <span class="number">10</span>MB,</span><br><span class="line">	filegrowth <span class="operator">=</span> <span class="number">2</span>MB</span><br><span class="line">)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="使用T-SQL语句修改数据库"><a href="#使用T-SQL语句修改数据库" class="headerlink" title="使用T-SQL语句修改数据库"></a>使用T-SQL语句修改数据库</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">/</span><span class="operator">/</span>增加数据库空间</span><br><span class="line"><span class="keyword">alter</span> database 数据库名</span><br><span class="line">modify file</span><br><span class="line">(name <span class="operator">=</span> 逻辑文件名，,</span><br><span class="line">size <span class="operator">=</span> 文件大小)</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>增加数据库文件</span><br><span class="line"><span class="keyword">alter</span> database 数据库名</span><br><span class="line"><span class="keyword">add</span> file <span class="operator">|</span> <span class="keyword">add</span> log file</span><br><span class="line">(</span><br><span class="line"></span><br><span class="line">)</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>删除数据库文件</span><br><span class="line"><span class="keyword">alter</span> database 数据库名</span><br><span class="line">remove file 文件名</span><br></pre></td></tr></table></figure>
+<h3 id="使用T-SQL语句删除数据库"><a href="#使用T-SQL语句删除数据库" class="headerlink" title="使用T-SQL语句删除数据库"></a>使用T-SQL语句删除数据库</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> database 数据库名</span><br></pre></td></tr></table></figure>
+<h3 id="使用T-SQL语句创建表"><a href="#使用T-SQL语句创建表" class="headerlink" title="使用T-SQL语句创建表"></a>使用T-SQL语句创建表</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> course(</span><br><span class="line">	cno <span class="type">char</span>(<span class="number">4</span>) <span class="keyword">primary</span> key <span class="keyword">not</span> <span class="keyword">null</span>,	<span class="operator">/</span><span class="operator">/</span>主键</span><br><span class="line">	cname <span class="type">char</span>(<span class="number">10</span>),</span><br><span class="line">	classhour tinyint,</span><br><span class="line">	credit tinyint</span><br><span class="line">)</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> student(</span><br><span class="line">	sno <span class="type">char</span>(<span class="number">7</span>) <span class="keyword">primary</span> key <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">	sname nvarchar(<span class="number">10</span>) <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">	ssex <span class="type">nchar</span>(<span class="number">1</span>) <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">	sage tinyint ,</span><br><span class="line">	en_time datetime,</span><br><span class="line">	specialty nvarchar(<span class="number">50</span>),</span><br><span class="line">	grade nvarchar(<span class="number">50</span>)</span><br><span class="line">)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="使用T-SQL语句修改表"><a href="#使用T-SQL语句修改表" class="headerlink" title="使用T-SQL语句修改表"></a>使用T-SQL语句修改表</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">use teaching</span><br><span class="line">go</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">column</span> sname nvarchar(<span class="number">20</span>) <span class="keyword">NULL</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> course</span><br><span class="line"><span class="keyword">add</span> teacher nvarchar(<span class="number">20</span>)</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student</span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">column</span> sage</span><br></pre></td></tr></table></figure>
+<h3 id="使用T-SQL语句创建主键和外键约束"><a href="#使用T-SQL语句创建主键和外键约束" class="headerlink" title="使用T-SQL语句创建主键和外键约束"></a>使用T-SQL语句创建主键和外键约束</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> sc</span><br><span class="line">(</span><br><span class="line">	sno <span class="type">char</span>(<span class="number">7</span>) <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">	cno <span class="type">char</span>(<span class="number">4</span>)<span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">	score <span class="type">int</span></span><br><span class="line">	<span class="keyword">constraint</span> pk_ss <span class="keyword">primary</span> key(sno,cno),</span><br><span class="line">	<span class="keyword">constraint</span> stu_foreign <span class="keyword">foreign</span> key(sno) <span class="keyword">references</span> student(sno),</span><br><span class="line">	<span class="keyword">constraint</span> cou_foreign <span class="keyword">foreign</span> key(cno) <span class="keyword">references</span> course(cno)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="在修改表时设置主键约束"><a href="#在修改表时设置主键约束" class="headerlink" title="在修改表时设置主键约束"></a>在修改表时设置主键约束</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student</span><br><span class="line"><span class="keyword">add</span> <span class="keyword">constraint</span> pk_st <span class="keyword">primary</span> key(sno)</span><br></pre></td></tr></table></figure>
+<h3 id="在修改表时设置UNIQUE约束"><a href="#在修改表时设置UNIQUE约束" class="headerlink" title="在修改表时设置UNIQUE约束"></a>在修改表时设置UNIQUE约束</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student</span><br><span class="line"><span class="keyword">add</span> <span class="keyword">constraint</span> uk_st <span class="keyword">unique</span>(id)</span><br></pre></td></tr></table></figure>
+<h4 id="在使用UNIQUE约束时应考虑的问题"><a href="#在使用UNIQUE约束时应考虑的问题" class="headerlink" title="在使用UNIQUE约束时应考虑的问题"></a>在使用UNIQUE约束时应考虑的问题</h4><p>UNIQUE约束所在列允许空值，但是主键约束所在的列不允许空值；<br>在一个表可以有多个UNIQUE约束；<br>UNIQUE约束强制在指定的列上创建一个唯一性索引</p>
+<h3 id="在修改表时定义默认值约束"><a href="#在修改表时定义默认值约束" class="headerlink" title="在修改表时定义默认值约束"></a>在修改表时定义默认值约束</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student</span><br><span class="line"><span class="keyword">add</span> <span class="keyword">constraint</span> dk_stu <span class="keyword">default</span>(getdate()) <span class="keyword">for</span> en_time <span class="keyword">with</span> <span class="keyword">values</span></span><br></pre></td></tr></table></figure>
+<h3 id="在修改表时创建CHECK约束"><a href="#在修改表时创建CHECK约束" class="headerlink" title="在修改表时创建CHECK约束"></a>在修改表时创建CHECK约束</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> sc</span><br><span class="line"><span class="keyword">add</span> <span class="keyword">constraint</span> cj_constraint <span class="keyword">CHECK</span>(score<span class="operator">&gt;=</span><span class="number">0</span> <span class="keyword">and</span> score<span class="operator">&lt;=</span><span class="number">100</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="使用T-SQL语句插入数据"><a href="#使用T-SQL语句插入数据" class="headerlink" title="使用T-SQL语句插入数据"></a>使用T-SQL语句插入数据</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> score(sno,cno,score)</span><br><span class="line"><span class="keyword">values</span>(<span class="number">130200</span>,<span class="string">&#x27;C01&#x27;</span>,<span class="number">90</span>),(<span class="number">130220</span>,<span class="string">&#x27;C02&#x27;</span>,<span class="number">50</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="使用T-SQL语句修改数据"><a href="#使用T-SQL语句修改数据" class="headerlink" title="使用T-SQL语句修改数据"></a>使用T-SQL语句修改数据</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update score <span class="keyword">set</span> cno<span class="operator">=</span><span class="string">&#x27;C03&#x27;</span> <span class="keyword">where</span> sno<span class="operator">=</span><span class="string">&#x27;130220&#x27;</span></span><br></pre></td></tr></table></figure>
+<h3 id="使用T-SQL语句删除数据"><a href="#使用T-SQL语句删除数据" class="headerlink" title="使用T-SQL语句删除数据"></a>使用T-SQL语句删除数据</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> student <span class="keyword">where</span> sno<span class="operator">=</span><span class="string">&#x27;130200&#x27;</span></span><br></pre></td></tr></table></figure>
+<h3 id="使用MERGE语句插入，修改，删除数据"><a href="#使用MERGE语句插入，修改，删除数据" class="headerlink" title="使用MERGE语句插入，修改，删除数据"></a>使用MERGE语句插入，修改，删除数据</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">merge</span> ProductNew <span class="keyword">as</span> d <span class="keyword">using</span> Product <span class="keyword">as</span> s</span><br><span class="line"><span class="keyword">on</span> s.ProductID <span class="operator">=</span> d.ProductID</span><br><span class="line"><span class="keyword">when</span> <span class="keyword">not</span> matched <span class="keyword">then</span> <span class="keyword">insert</span>(ProductID,ProductName,price)</span><br><span class="line"><span class="keyword">values</span>(s.ProductID,s.ProductName,price);</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> ProductNew</span><br></pre></td></tr></table></figure>
+<h3 id="使用T-SQL语句投影查询"><a href="#使用T-SQL语句投影查询" class="headerlink" title="使用T-SQL语句投影查询"></a>使用T-SQL语句投影查询</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> sno <span class="keyword">as</span> 学号 , sname 姓名 <span class="keyword">from</span> student</span><br><span class="line"><span class="keyword">select</span> sno,cno,score150 <span class="operator">=</span> score <span class="operator">*</span><span class="number">1.5</span> <span class="keyword">from</span> sc</span><br></pre></td></tr></table></figure>
+<h3 id="使用T-SQL语句选择查询"><a href="#使用T-SQL语句选择查询" class="headerlink" title="使用T-SQL语句选择查询"></a>使用T-SQL语句选择查询</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> sc <span class="keyword">where</span> score<span class="operator">&gt;=</span><span class="number">60</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> student <span class="keyword">where</span> specialty<span class="operator">=</span><span class="string">&#x27;计算机&#x27;</span> <span class="keyword">and</span> ssex<span class="operator">=</span><span class="string">&#x27;男&#x27;</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> student <span class="keyword">where</span> specialty<span class="operator">=</span><span class="string">&#x27;计算机&#x27;</span> <span class="keyword">or</span> ssex<span class="operator">=</span><span class="string">&#x27;男&#x27;</span> </span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> sc <span class="keyword">where</span> score <span class="keyword">not</span> <span class="keyword">between</span>  <span class="number">80</span> <span class="keyword">and</span> <span class="number">90</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> student <span class="keyword">where</span> specialty <span class="keyword">in</span>(<span class="string">&#x27;计算机&#x27;</span>,<span class="string">&#x27;通信&#x27;</span>)</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> student <span class="keyword">where</span> sname <span class="keyword">like</span> <span class="string">&#x27;张%&#x27;</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> sc <span class="keyword">where</span> score <span class="keyword">is</span> <span class="keyword">null</span></span><br></pre></td></tr></table></figure>
+<h3 id="使用T-SQL语句分组和汇总"><a href="#使用T-SQL语句分组和汇总" class="headerlink" title="使用T-SQL语句分组和汇总"></a>使用T-SQL语句分组和汇总</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> ssex , <span class="built_in">COUNT</span>(ssex) <span class="keyword">as</span> 人数 <span class="keyword">from</span> student</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> ssex</span><br><span class="line"><span class="keyword">select</span> sno ,<span class="built_in">COUNT</span>(cno) <span class="keyword">as</span> 学修课程数 <span class="keyword">from</span> sc</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> sno <span class="keyword">having</span> <span class="built_in">COUNT</span>(cno)<span class="operator">&gt;=</span><span class="number">2</span></span><br><span class="line"><span class="keyword">select</span> <span class="built_in">AVG</span>(score) <span class="keyword">as</span> 平均成绩 <span class="keyword">from</span> sc <span class="keyword">where</span> sno<span class="operator">=</span><span class="number">1302001</span></span><br><span class="line"><span class="keyword">select</span> cno,<span class="built_in">AVG</span>(score) <span class="keyword">as</span> 平均成绩 ,<span class="built_in">count</span>(sno) <span class="keyword">as</span> 选课人数 <span class="keyword">from</span> sc</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> cno</span><br><span class="line"><span class="keyword">with</span> <span class="keyword">cube</span></span><br><span class="line"><span class="keyword">select</span> specialty,ssex,<span class="built_in">count</span>(<span class="operator">*</span>) <span class="keyword">as</span> 人数 <span class="keyword">from</span> student</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> specialty,ssex</span><br><span class="line"><span class="keyword">with</span> <span class="keyword">rollup</span></span><br><span class="line"><span class="keyword">select</span> specialty,ssex,<span class="built_in">count</span>(<span class="operator">*</span>) <span class="keyword">as</span> 人数 <span class="keyword">from</span> student</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> ssex,specialty</span><br><span class="line"><span class="keyword">with</span> <span class="keyword">cube</span></span><br></pre></td></tr></table></figure>
+<h4 id="CUBE和ROLLUP的使用"><a href="#CUBE和ROLLUP的使用" class="headerlink" title="CUBE和ROLLUP的使用"></a>CUBE和ROLLUP的使用</h4><p>cube指定在结果集内不仅包含由GROUP BY提供的行，还包含汇总行<br>汇总行针对每个可能的组和子组组合在结果集内返回<br>rollup指定在结果集内不仅包含由GROUP BY提供的行，还包含汇总行，按层次结构顺序，从组内的最低级别到最高级别汇总行<br>使用CUBE和ROLLUP时，不支持区分性聚合函数，例如AVG，COUNT等</p>
+<h3 id="内连接和全连接"><a href="#内连接和全连接" class="headerlink" title="内连接和全连接"></a>内连接和全连接</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> student.sname,sc.cno,sc.score <span class="keyword">from</span> student <span class="keyword">inner</span> <span class="keyword">join</span> sc <span class="keyword">on</span> student.sno<span class="operator">=</span>sc.sno</span><br><span class="line"><span class="keyword">select</span> a.sname,b.cno,b.score <span class="keyword">from</span> student <span class="keyword">as</span> a <span class="keyword">inner</span> <span class="keyword">join</span> sc <span class="keyword">as</span> b <span class="keyword">on</span> a.sno<span class="operator">=</span>b.sno</span><br><span class="line"><span class="keyword">where</span> a.specialty<span class="operator">=</span><span class="string">&#x27;计算机&#x27;</span> </span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> a.sname</span><br><span class="line">compute <span class="built_in">avg</span>(b.score) <span class="keyword">by</span> a.sname</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> student a <span class="keyword">inner</span> <span class="keyword">join</span> student b</span><br><span class="line"><span class="keyword">on</span> a.sname<span class="operator">=</span>b.sname <span class="keyword">and</span> a.sno<span class="operator">&lt;&gt;</span>b.sno</span><br></pre></td></tr></table></figure>
+<h3 id="外连接"><a href="#外连接" class="headerlink" title="外连接"></a>外连接</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> student.<span class="operator">*</span>,sc.cno,sc.score <span class="keyword">from</span> student <span class="keyword">left</span> <span class="keyword">join</span> sc <span class="keyword">on</span> student.sno<span class="operator">=</span>sc.sno</span><br><span class="line"><span class="keyword">select</span> course.<span class="operator">*</span> ,sc.score,student.sname,student.sno <span class="keyword">from</span> course <span class="keyword">full</span> <span class="keyword">join</span> sc <span class="keyword">on</span> course.cno<span class="operator">=</span>sc.cno</span><br><span class="line"><span class="keyword">full</span> <span class="keyword">join</span> student <span class="keyword">on</span> student.sno<span class="operator">=</span>sc.sno</span><br></pre></td></tr></table></figure>
+<h3 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> a.sno,a.sname,a.specialty</span><br><span class="line"><span class="keyword">from</span> student a,student b</span><br><span class="line"><span class="keyword">where</span> a.specialty<span class="operator">=</span>b.specialty <span class="keyword">and</span> b.sname <span class="operator">=</span> <span class="string">&#x27;沈艳&#x27;</span></span><br><span class="line"><span class="keyword">select</span> sname,score <span class="keyword">from</span> student,sc <span class="keyword">where</span> student.sno<span class="operator">=</span>sc.sno <span class="keyword">and</span> cno <span class="operator">=</span> <span class="string">&#x27;C001&#x27;</span> <span class="keyword">and</span> sc.score <span class="operator">&gt;</span>(</span><br><span class="line">	<span class="keyword">select</span> score <span class="keyword">from</span> sc <span class="keyword">where</span> cno <span class="operator">=</span> <span class="string">&#x27;C001&#x27;</span> <span class="keyword">and</span> sno <span class="operator">=</span>(</span><br><span class="line">		<span class="keyword">select</span> sno <span class="keyword">from</span> student <span class="keyword">where</span> sname <span class="operator">=</span> <span class="string">&#x27;郑丽&#x27;</span></span><br><span class="line">	)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h4 id="CAST函数"><a href="#CAST函数" class="headerlink" title="CAST函数"></a>CAST函数</h4><p>使用CAST函数进行数据类型转换时，在下列情况下能够被接受：</p>
+<pre><code>（1）两个表达式的数据类型完全相同。
+（2）两个表达式可隐性转换。
+（3）必须显式转换数据类型。
+</code></pre>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">CAST</span>(<span class="string">&#x27;12.5&#x27;</span> <span class="keyword">AS</span> <span class="type">int</span>)</span><br><span class="line"><span class="built_in">cast</span>(<span class="variable">@i</span> <span class="keyword">as</span> <span class="type">varchar</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="SQL-Server—查询表结构"><a href="#SQL-Server—查询表结构" class="headerlink" title="SQL Server—查询表结构"></a>SQL Server—查询表结构</h4><p>在SQL Server中不同于在MySQL或者Oracle中使用desc来查询数据表的表结构，而是使用如下两条语句查询：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sp_help student</span><br><span class="line">sp_columns student</span><br></pre></td></tr></table></figure>
+<h3 id="内嵌表值函数"><a href="#内嵌表值函数" class="headerlink" title="内嵌表值函数"></a>内嵌表值函数</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">function</span> stu_func(<span class="variable">@specialty</span> nvarchar(<span class="number">50</span>)) <span class="keyword">returns</span> <span class="keyword">table</span></span><br><span class="line"><span class="keyword">as</span> <span class="keyword">return</span> </span><br><span class="line">(<span class="keyword">select</span> a.sno,a.sname,b.cno,b.score <span class="keyword">from</span> student a,sc b <span class="keyword">where</span> specialty<span class="operator">=</span><span class="variable">@specialty</span> <span class="keyword">and</span> a.sno<span class="operator">=</span>b.sno)</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> stu_func(<span class="string">&#x27;计算机&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="多语句表值函数"><a href="#多语句表值函数" class="headerlink" title="多语句表值函数"></a>多语句表值函数</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">function</span> stu_score(<span class="variable">@no</span> <span class="type">char</span>(<span class="number">7</span>)) <span class="keyword">returns</span> <span class="variable">@score</span> <span class="keyword">table</span>(xs_no <span class="type">char</span>(<span class="number">7</span>),xs_name <span class="type">char</span>(<span class="number">6</span>),kc_name <span class="type">char</span>(<span class="number">10</span>),cj <span class="type">int</span>,xf <span class="type">int</span>)</span><br><span class="line"><span class="keyword">as</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">	<span class="keyword">insert</span> <span class="keyword">into</span> <span class="variable">@score</span> <span class="keyword">select</span> s.sno,s.sname,c.cname,c.credit,sc.score <span class="keyword">from</span> student s,course c,sc sc <span class="keyword">where</span> s.sno<span class="operator">=</span>sc.sno <span class="keyword">and</span> c.cno<span class="operator">=</span>sc.cno <span class="keyword">and</span> s.sno<span class="operator">=</span><span class="variable">@no</span></span><br><span class="line"><span class="keyword">return</span> </span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3 id="创建无参存储过程"><a href="#创建无参存储过程" class="headerlink" title="创建无参存储过程"></a>创建无参存储过程</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">procedure</span> stu_avg</span><br><span class="line"><span class="keyword">as</span></span><br><span class="line"><span class="keyword">select</span> sno,<span class="built_in">AVG</span>(score) <span class="keyword">as</span> <span class="string">&#x27;avgstore&#x27;</span> <span class="keyword">from</span> sc</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> sno</span><br><span class="line">go</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">procedure</span> getstu <span class="variable">@number</span> <span class="type">char</span>(<span class="number">7</span>)</span><br><span class="line"><span class="keyword">as</span></span><br><span class="line"><span class="keyword">select</span> stu.sno,sname,specialty,s.cno,s.score <span class="keyword">from</span> sc s,student stu</span><br><span class="line"><span class="keyword">where</span> s.sno<span class="operator">=</span><span class="variable">@number</span> <span class="keyword">and</span> s.sno<span class="operator">=</span>stu.sno</span><br><span class="line">compute <span class="built_in">avg</span>(score)</span><br><span class="line">go</span><br><span class="line"><span class="keyword">exec</span> getstu <span class="number">1302001</span></span><br></pre></td></tr></table></figure>
+<h3 id="创建带output参数的存储过程"><a href="#创建带output参数的存储过程" class="headerlink" title="创建带output参数的存储过程"></a>创建带output参数的存储过程</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">procedure</span> avg_price <span class="variable">@gn</span> <span class="type">varchar</span>(<span class="number">20</span>) , <span class="variable">@avgp</span> <span class="type">int</span> output</span><br><span class="line"><span class="keyword">as</span></span><br><span class="line">	<span class="keyword">select</span> <span class="variable">@avgp</span><span class="operator">=</span><span class="built_in">AVG</span>(price) <span class="keyword">from</span> goods <span class="keyword">where</span> gname<span class="operator">=</span><span class="variable">@gn</span> </span><br><span class="line"><span class="keyword">declare</span> <span class="variable">@avgprice</span> <span class="type">int</span></span><br><span class="line"><span class="keyword">exec</span> avg_price <span class="string">&#x27;电视&#x27;</span>,<span class="variable">@avgprice</span> output</span><br><span class="line">print <span class="built_in">cast</span>(<span class="variable">@avgprice</span> <span class="keyword">as</span> <span class="type">char</span>(<span class="number">10</span>))</span><br><span class="line">go</span><br></pre></td></tr></table></figure>
+<h3 id="启动或禁用表上所有触发器"><a href="#启动或禁用表上所有触发器" class="headerlink" title="启动或禁用表上所有触发器"></a>启动或禁用表上所有触发器</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student</span><br><span class="line">disable <span class="keyword">trigger</span> <span class="keyword">all</span></span><br><span class="line">enable <span class="keyword">trigger</span> <span class="keyword">all</span></span><br></pre></td></tr></table></figure>
+<h3 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">begin</span> transaction	定义一个事务的开始</span><br><span class="line"><span class="keyword">commit</span> tran			提交一个事务</span><br><span class="line"><span class="keyword">rollback</span> tran		回滚事务</span><br><span class="line">save transaction	在事务内设置保存点</span><br></pre></td></tr></table></figure>
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2019/12/01/Linux%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86-%E6%96%87%E4%BB%B6/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2019/12/02/Linux%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86-NFS%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

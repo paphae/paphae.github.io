@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>面试题-Spring框架 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Spring,SpringMVC,Mybatis," />
+  
+
+  <meta name="description" content="1. SpringMVC 的工作原理 用户向服务器发送请求，请求被 springMVC 前端控制器 DispatchServlet 捕获；  DispatcherServle 对请求 URL 进行解析，得到请求资源标识符（URL），然后根据该 URL 调用 HandlerMapping将请求映射到处理器 HandlerExcutionChain；  DispatcherServlet 根据获得 H">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试题-Spring框架">
+<meta property="og:url" content="http://paphae.top/2020/07/14/%E9%9D%A2%E8%AF%95%E9%A2%98-SSM%E6%A1%86%E6%9E%B6%E9%9B%86/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="1. SpringMVC 的工作原理 用户向服务器发送请求，请求被 springMVC 前端控制器 DispatchServlet 捕获；  DispatcherServle 对请求 URL 进行解析，得到请求资源标识符（URL），然后根据该 URL 调用 HandlerMapping将请求映射到处理器 HandlerExcutionChain；  DispatcherServlet 根据获得 H">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-07-14T13:38:23.000Z">
+<meta property="article:modified_time" content="2020-07-14T14:01:51.872Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="Spring">
+<meta property="article:tag" content="SpringMVC">
+<meta property="article:tag" content="Mybatis">
+<meta name="twitter:card" content="summary">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-SpringMVC-%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-text">1. SpringMVC 的工作原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-SpringMVC-%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-text">2. SpringMVC 常用注解都有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3-get-%E5%92%8C-post-%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98"><span class="toc-text">3. 如何解决 get 和 post 乱码问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E8%B0%88%E8%B0%88%E4%BD%A0%E5%AF%B9-Spring-%E7%9A%84%E7%90%86%E8%A7%A3-IOC-AOP-DI"><span class="toc-text">4. 谈谈你对 Spring 的理解 IOC  AOP  DI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Spring-%E4%B8%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="toc-text">5. Spring 中的设计模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-Spring-%E7%9A%84%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3"><span class="toc-text">6. Spring 的常用注解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8B-Spring-bean-%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-text">7. 简单介绍一下 Spring bean 的生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E8%AF%B7%E6%8F%8F%E8%BF%B0%E4%B8%80%E4%B8%8B-Spring-%E7%9A%84%E4%BA%8B%E5%8A%A1"><span class="toc-text">8. 请描述一下 Spring 的事务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-BeanFactory-%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AE%9E%E7%8E%B0%E7%B1%BB%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-text">9. BeanFactory 常用的实现类有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-%E8%A7%A3%E9%87%8A-Spring-JDBC%E3%80%81Spring-DAO-%E5%92%8C-Spring-ORM"><span class="toc-text">10. 解释 Spring JDBC、Spring DAO 和 Spring ORM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-%E4%BD%A0%E6%89%80%E7%9F%A5%E9%81%93%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%9C%89%E5%93%AA%E4%BA%9B-mybatis-spring%E4%B8%AD%E4%BD%BF%E7%94%A8%E9%82%A3%E4%BA%9B%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E3%80%82"><span class="toc-text">11. 你所知道的设计模式有哪些?mybatis,spring中使用那些设计模式。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-Spring-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%9C%89%E4%BB%80%E4%B9%88%E4%BD%9C%E7%94%A8%EF%BC%9F"><span class="toc-text">12. Spring 配置文件有什么作用？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-%E4%BB%80%E4%B9%88%E6%98%AF-Spring-IOC-%E5%AE%B9%E5%99%A8%EF%BC%9F"><span class="toc-text">13. 什么是 Spring IOC 容器？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-IOC-%E7%9A%84%E4%BC%98%E7%82%B9%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">14. IOC 的优点是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-ApplicationContext-%E7%9A%84%E5%AE%9E%E7%8E%B0%E7%B1%BB%E6%9C%89%E5%93%AA%E4%BA%9B-BeanFactory-%E4%B8%8E-AppliacationContext-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="toc-text">15. ApplicationContext 的实现类有哪些?, BeanFactory 与 AppliacationContext 有什么区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#16-%E4%BB%80%E4%B9%88%E6%98%AF-Spring-%E7%9A%84%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%EF%BC%9F"><span class="toc-text">16. 什么是 Spring 的依赖注入？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17-%E6%9C%89%E5%93%AA%E4%BA%9B%E4%B8%8D%E5%90%8C%E7%B1%BB%E5%9E%8B%E7%9A%84-IOC%EF%BC%88%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%EF%BC%89%E6%96%B9%E5%BC%8F%EF%BC%9F"><span class="toc-text">17. 有哪些不同类型的 IOC（依赖注入）方式？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#18-%E4%BB%80%E4%B9%88%E6%98%AF-Spring-beans"><span class="toc-text">18. 什么是 Spring beans?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-%E4%BD%A0%E6%80%8E%E6%A0%B7%E5%AE%9A%E4%B9%89%E7%B1%BB%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F-%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%9C%89%E9%82%A3%E4%BA%9B%EF%BC%8C%E4%BD%9C%E7%94%A8%E3%80%82Spring-%E6%94%AF%E6%8C%81%E7%9A%84%E5%87%A0%E7%A7%8D-bean-%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-text">19. 你怎样定义类的作用域? 作用域有那些，作用。Spring 支持的几种 bean 的作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#20-%E4%BB%80%E4%B9%88%E6%98%AF-bean-%E7%9A%84%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D%EF%BC%9F%E8%A7%A3%E9%87%8A%E4%B8%8D%E5%90%8C%E6%96%B9%E5%BC%8F%E7%9A%84%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D-%E3%80%82"><span class="toc-text">20. 什么是 bean 的自动装配？解释不同方式的自动装配 。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#21-%E4%BB%80%E4%B9%88%E6%98%AF%E5%9F%BA%E4%BA%8E%E6%B3%A8%E8%A7%A3%E7%9A%84%E5%AE%B9%E5%99%A8%E9%85%8D%E7%BD%AE"><span class="toc-text">21. 什么是基于注解的容器配置?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#22-Spring-%E4%B8%AD-BeanFactory-%E5%92%8C-ApplicationContext-%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-text">22. Spring 中 BeanFactory 和 ApplicationContext 的区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#23-%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8B-MyBatis-%E4%B8%AD%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%EF%BC%88namespace%EF%BC%89%E7%9A%84%E4%BD%9C%E7%94%A8%E3%80%82"><span class="toc-text">23. 解释一下 MyBatis 中命名空间（namespace）的作用。</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-面试题-SSM框架集" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">面试题-Spring框架</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.07.14</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h3 id="1-SpringMVC-的工作原理"><a href="#1-SpringMVC-的工作原理" class="headerlink" title="1. SpringMVC 的工作原理"></a>1. SpringMVC 的工作原理</h3><ol>
+<li><p>用户向服务器发送请求，请求被 springMVC 前端控制器 DispatchServlet 捕获；</p>
+</li>
+<li><p>DispatcherServle 对请求 URL 进行解析，得到请求资源标识符（URL），然后根据该 URL 调用 HandlerMapping将请求映射到处理器 HandlerExcutionChain；</p>
+</li>
+<li><p>DispatcherServlet 根据获得 Handler 选择一个合适的 HandlerAdapter 适配器处理；</p>
+</li>
+<li><p>Handler 对数据处理完成以后将返回一个 ModelAndView（）对象给 DisPatchServlet;</p>
+</li>
+<li><p>Handler 返回的 ModelAndView()只是一个逻辑视图并不是一个正式的视图，DispatcherSevlet 通过ViewResolver 视图解析器将逻辑视图转化为真正的视图 View;</p>
+</li>
+<li><p>DispatcherServle 通过 model 解析出 ModelAndView()中的参数进行解析最终展现出完整的 view 并返回给客户端;</p>
+</li>
+</ol>
+<h3 id="2-SpringMVC-常用注解都有哪些？"><a href="#2-SpringMVC-常用注解都有哪些？" class="headerlink" title="2. SpringMVC 常用注解都有哪些？"></a>2. SpringMVC 常用注解都有哪些？</h3><ul>
+<li>@Controller这个注解，表明是一个SpringMVC的控制器</li>
+<li>@RequestMapping能够控制请求路径和请求方式</li>
+<li>@RequestParam 解决form和参数名称不一致</li>
+<li>@PathVariable 可以把地址上一个字段赋值给属性</li>
+<li>@ResponseBody指定方法把返回对象变成json的字符串进行返回</li>
+</ul>
+<h3 id="3-如何解决-get-和-post-乱码问题"><a href="#3-如何解决-get-和-post-乱码问题" class="headerlink" title="3. 如何解决 get 和 post 乱码问题"></a>3. 如何解决 get 和 post 乱码问题</h3><ul>
+<li><p>解决 post 请求乱码：</p>
+<ul>
+<li>在 web.xml 里边配置一个 CharacterEncodingFilter 过滤器。 设置为 utf-8. </li>
+<li><strong>request.setCharacterEncoding(“utf-8”);</strong></li>
+<li><strong>String name = new String(request.getParameter(“name”).getBytes(“ISO-8859-1”), “UTF-8”);</strong></li>
+<li>response.setContentType(“text/html;charset=utf-8”);</li>
+</ul>
+</li>
+<li><p>解决 get 请求的乱码:</p>
+<ul>
+<li><p>修改Tomcat安装目录下conf子目录下的server.xml文件</p>
+</li>
+<li><p><code>&lt;Connector connectionTimeout=&quot;20000&quot; port=&quot;8080&quot; protocol=&quot;HTTP/1.1&quot; redirectPort=&quot;8443&quot;/&gt;</code></p>
+</li>
+<li><p>在里面加上这样一段：URIEncoding=”UTF-8” 即变成下面这段<br><code>&lt;Connector connectionTimeout=&quot;20000&quot; port=&quot;8080&quot; protocol=&quot;HTTP/1.1&quot; redirectPort=&quot;8443&quot; URIEncoding=&quot;UTF-8&quot; /&gt;</code></p>
+</li>
+<li><p>另 外 一 种 方 法 对 参 数 进 行 重 新 编 码 String userName = New </p>
+<p>String(Request.getParameter(“userName”).getBytes(“ISO8859-1”), “utf-8”); </p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-谈谈你对-Spring-的理解-IOC-AOP-DI"><a href="#4-谈谈你对-Spring-的理解-IOC-AOP-DI" class="headerlink" title="4. 谈谈你对 Spring 的理解 IOC  AOP  DI"></a>4. 谈谈你对 Spring 的理解 IOC  AOP  DI</h3><ul>
+<li><p>控制反转（IOC），传统的 java 开发模式中，当需要一个对象时，我们会自己使用 new 或者 getInstance 等直接或者间接调用构造方法创建一个对象。而在 spring 开发模式中，spring 容器使用了工厂模式为我们创建了所需要的对象，不需要我们自己创建了，直接调用 spring 提供的对象就可以了，这是控制反转的思想。</p>
+</li>
+<li><p>依赖注入（DI），spring 使用 javaBean 对象的 set 方法或者带参数的构造方法为我们在创建所需对象时将其属性自动设置所需要的值的过程，就是依赖注入的思想。</p>
+</li>
+<li><p>面向切面编程（AOP），在面向对象编程（oop）思想中，我们将事物纵向抽成一个个的对象。而在面向切面编程中，我们将一个个的对象某些类似的方面横向抽成一个切面，对这个切面进行一些如权限控制、事物管理，记录日志等，公用操作处理的过程就是面向切面编程的思想。</p>
+</li>
+<li><p>AOP 底层是动态代理</p>
+<ul>
+<li><p>如果目标对象实现了接口，默认情况下会采用JDK的动态代理实现AOP。</p>
+</li>
+<li><p>如果目标对象实现了接口，可以强制使用CGLIB实现AOP。</p>
+</li>
+<li><p>如果目标对象没有实现了接口，必须采用CGLIB库，Spring会自动在JDK动态代理和CGLIB之间转换。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-Spring-中的设计模式"><a href="#5-Spring-中的设计模式" class="headerlink" title="5. Spring 中的设计模式"></a>5. Spring 中的设计模式</h3><ul>
+<li>代理模式——spring 中两种代理方式，若目标对象实现了若干接口，spring 使用 jdk 的 java.lang.reflect.Proxy类代理。若目标兑现没有实现任何接口，spring 使用 CGLIB 库生成目标类的子类。</li>
+<li>单例模式——在 spring 的配置文件中设置 bean 默认为单例模式。</li>
+<li>工厂模式——在工厂模式中，我们在创建对象时不会对客户端暴露创建逻辑，并且是通过使用同一个接口来指向新创建的对象。Spring 中使用 beanFactory 来创建对象的实例。</li>
+<li>模板模式——用来解决代码重复的问题。</li>
+<li>适配器模式——在Spring MVC中，DispatcherServlet 根据请求信息调用 HandlerMapping，解析请求对应的 Handler。解析到对应的 Handler（也就是我们平常说的 Controller 控制器）后，开始由HandlerAdapter 适配器处理。HandlerAdapter 作为期望接口，具体的适配器实现类用于对目标类进行适配，Controller 作为需要适配的类。</li>
+<li>装饰者模式——MyBatis中关于Cache和CachingExecutor接口的实现类也使用了装饰者设计模式。Executor是MyBatis执行器，是MyBatis 调度的核心，负责SQL语句的生成和查询缓存的维护；CachingExecutor是一个Executor的装饰器，给一个Executor增加了缓存的功能。</li>
+</ul>
+<h3 id="6-Spring-的常用注解"><a href="#6-Spring-的常用注解" class="headerlink" title="6. Spring 的常用注解"></a>6. Spring 的常用注解</h3><ul>
+<li><p>@Component注解就相当于定义了一个Bean，它有一个可选的名称，默认是小写开头的类名。</p>
+</li>
+<li><p>@Service（service层）</p>
+</li>
+<li><p>@Repository（仓库的意思用于dao层连接数据库）（dao层）</p>
+</li>
+<li><p>@Autowired 根据类型注入</p>
+</li>
+<li><p>@Qualifier 注解，当你创建多个具有相同类型的 bean 时，并且想要用一个属性只为它们其中的一个进行装配，在这种情况下，你可以使用 @Qualifier 注释和 @Autowired 注释通过指定哪一个真正的 bean 将会被装配</p>
+</li>
+<li><p>@Resource注解使用一个 ‘name’ 属性，该属性以一个 bean 名称的形式被注入</p>
+</li>
+<li><p>@Value 赋值 属性上</p>
+</li>
+<li><p>@Scope 单例 多例 类上面</p>
+</li>
+<li><p>@Controller这个注解，表明是一个SpringMVC的控制器</p>
+</li>
+<li><p>@RequestMapping能够控制请求路径和请求方式</p>
+</li>
+<li><p>@RequestParam 解决form和参数名称不一致</p>
+</li>
+<li><p>@PathVariable 可以把地址上一个字段赋值给属性</p>
+</li>
+<li><p>@ResponseBody指定方法把返回对象变成json的字符串进行返回</p>
+</li>
+</ul>
+<h3 id="7-简单介绍一下-Spring-bean-的生命周期"><a href="#7-简单介绍一下-Spring-bean-的生命周期" class="headerlink" title="7. 简单介绍一下 Spring bean 的生命周期"></a>7. 简单介绍一下 Spring bean 的生命周期</h3><ol>
+<li><p>单例对象</p>
+<p>出生：当容器创建时对象出生</p>
+<p>活着：只要容器还在，对象一直活着</p>
+<p>死亡：容器销毁，对象消亡</p>
+<p>总结：单例对象的生命周期和容器相同</p>
+</li>
+<li><p>多例对象</p>
+<p>出生：当我们使用对象时spring框架为我们创建</p>
+<p>活着：对象只要是在使用过程中就一直活着。</p>
+<p>死亡：当对象长时间不用，且没有别的对象引用时，由Java的垃圾回收</p>
+</li>
+</ol>
+<h3 id="8-请描述一下-Spring-的事务"><a href="#8-请描述一下-Spring-的事务" class="headerlink" title="8. 请描述一下 Spring 的事务"></a>8. 请描述一下 Spring 的事务</h3><ul>
+<li><p>声明式事务</p>
+<ul>
+<li><p>基于·<code>&lt;tx&gt; </code>命名空间的声明式事务治理</p>
+</li>
+<li><p>```xml</p>
+<!--    创建事务通知-->
+<p>&lt;tx:advice id=”myAdvice” transaction-manager=”txManager”&gt;</p>
+<pre><code>&lt;tx:attributes&gt;
+    &lt;tx:method name=&quot;update*&quot; propagation=&quot;REQUIRED&quot;/&gt;
+    &lt;tx:method name=&quot;add*&quot; propagation=&quot;REQUIRED&quot;/&gt;
+    &lt;tx:method name=&quot;delete*&quot; propagation=&quot;REQUIRED&quot;/&gt;
+    &lt;tx:method name=&quot;find*&quot; propagation=&quot;SUPPORTS&quot; read-only=&quot;true&quot;/&gt;
+&lt;/tx:attributes&gt;
+</code></pre>
+<p></tx:advice><br><a href="aop:config">aop:config</a></p>
+<pre><code>&lt;aop:pointcut id=&quot;pointcut&quot; expression=&quot;execution(* com.tjetc.service..*.*(..))&quot;/&gt;
+&lt;aop:advisor advice-ref=&quot;myAdvice&quot; pointcut-ref=&quot;pointcut&quot;&gt;&lt;/aop:advisor&gt;
+</code></pre>
+<p></aop:config></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 基于 @Transactional 的声明式事务管理</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;java</span><br><span class="line">  @Transactional</span><br><span class="line">  public User register(String email, String password, String name) &#123;</span><br><span class="line">      &#x2F;&#x2F; 插入用户记录:</span><br><span class="line">      User user &#x3D; jdbcTemplate.insert(&quot;...&quot;);</span><br><span class="line">      &#x2F;&#x2F; 增加100积分:</span><br><span class="line">      bonusService.addBonus(user.id, 100);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>编程式事物管理的定义：在代码中显式挪用 beginTransaction()、commit()、rollback()等事务治理相关的方法，这就是编程式事务管理。Spring 对事物的编程式管理有基于底层 API 的编程式管理和基于 TransactionTemplate 的编程式事务管理两种方式。</p>
+</li>
+</ul>
+<h3 id="9-BeanFactory-常用的实现类有哪些？"><a href="#9-BeanFactory-常用的实现类有哪些？" class="headerlink" title="9. BeanFactory 常用的实现类有哪些？"></a>9. BeanFactory 常用的实现类有哪些？</h3><ul>
+<li>Bean 工厂是工厂模式的一个实现，提供了控制反转功能，用来把应用的配置和依赖从正真的应用代码中分离。常用的 BeanFactory 实现有 DefaultListableBeanFactory 、 XmlBeanFactory 、 ApplicationContext 等。XMLBeanFactory，最常用的就是 org.springframework.beans.factory.xml.XmlBeanFactory ，它根据 XML 文件中的定义加载 beans。该容器从 XML 文件读取配置元数据并用它去创建一个完全配置的系统或应用。</li>
+</ul>
+<h3 id="10-解释-Spring-JDBC、Spring-DAO-和-Spring-ORM"><a href="#10-解释-Spring-JDBC、Spring-DAO-和-Spring-ORM" class="headerlink" title="10. 解释 Spring JDBC、Spring DAO 和 Spring ORM"></a>10. 解释 Spring JDBC、Spring DAO 和 Spring ORM</h3><ul>
+<li>Spring-DAO 并非 Spring 的一个模块，它实际上是指示你写 DAO 操作、写好 DAO 操作的一些规范。因此，对于访问你的数据它既没有提供接口也没有提供实现更没有提供模板。在写一个 DAO 的时候，你应该使用 @Repository 对其进行注解，这样底层技术(JDBC，Hibernate，JPA，等等)的相关异常才能一致性地翻译为相应的 DataAccessException 子类。</li>
+<li>Spring-JDBC 提供了 Jdbc 模板类，它移除了连接代码以帮你专注于 SQL 查询和相关参数。Spring-JDBC 还提供了一个 JdbcDaoSupport，这样你可以对你的 DAO 进行扩展开发。它主要定义了两个属性：一个 DataSource 和一个 JdbcTemplate，它们都可以用来实现 DAO 方法。JdbcDaoSupport 还提供了一个将 SQL 异常转换为Spring DataAccessExceptions 的异常翻译器。</li>
+<li>Spring-ORM 是一个囊括了很多持久层技术(JPA，JDO，Hibernate，iBatis)的总括模块。对于这些技术中的每一个，Spring 都提供了集成类，这样每一种技术都能够在遵循 Spring 的配置原则下进行使用，并平稳地和 Spring 事务管理进行集成。</li>
+<li>对于每一种技术 ， 配 置 主 要 在 于 将 一 个 DataSource bean 注入到某种 SessionFactory 或 者 EntityManagerFactory 等 bean 中。纯 JDBC 不需要这样的一个集成类(JdbcTemplate 除外)，因为 JDBC 仅依赖于一个 DataSource。如果你计划使用一种 ORM 技术，比如 JPA 或者 Hibernate，那么你就不需要 Spring-JDBC 模块了，你需要的是这个 Spring-ORM 模块。</li>
+</ul>
+<h3 id="11-你所知道的设计模式有哪些-mybatis-spring中使用那些设计模式。"><a href="#11-你所知道的设计模式有哪些-mybatis-spring中使用那些设计模式。" class="headerlink" title="11. 你所知道的设计模式有哪些?mybatis,spring中使用那些设计模式。"></a>11. 你所知道的设计模式有哪些?mybatis,spring中使用那些设计模式。</h3><ol>
+<li>Builder模式，例如SqlSessionFactoryBuilder、XMLConfigBuilder、XMLMapperBuilder、XMLStatementBuilder、CacheBuilder；</li>
+<li>工厂模式，例如SqlSessionFactory、ObjectFactory、MapperProxyFactory；</li>
+<li>单例模式，例如ErrorContext和LogFactory；</li>
+<li>代理模式，Mybatis实现的核心，比如MapperProxy、ConnectionLogger，用的jdk的动态代理；还有executor.loader包使用了cglib或者javassist达到延迟加载的效果；</li>
+<li>组合模式，例如SqlNode和各个子类ChooseSqlNode等；</li>
+<li>模板方法模式，例如BaseExecutor和SimpleExecutor，还有BaseTypeHandler和所有的子类例如IntegerTypeHandler；</li>
+<li>适配器模式，例如Log的Mybatis接口和它对jdbc、log4j等各种日志框架的适配实现；</li>
+<li>装饰者模式，例如Cache包中的cache.decorators子包中等各个装饰者的实现；</li>
+<li>迭代器模式，例如迭代器模式PropertyTokenizer；</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://www.javazhiyin.com/38065.html">Mybatis 使用的 9 种设计模式详解</a></p>
+<h3 id="12-Spring-配置文件有什么作用？"><a href="#12-Spring-配置文件有什么作用？" class="headerlink" title="12. Spring 配置文件有什么作用？"></a>12. Spring 配置文件有什么作用？</h3><ul>
+<li>spring使用的核心配置文件<ul>
+<li>主要配置spring在启动过程中需要加载的数据库访问层、服务层对应的bean,以及一些spring启动时需要加载的bean、数据源的配置等等</li>
+</ul>
+</li>
+<li>spring使用的控制器配置文件<ul>
+<li>主要配置视图解析器和文件上传解析器、控制器对应的包、静态资源目录位置等等</li>
+</ul>
+</li>
+<li>web.xml作用<ul>
+<li>主要定义应用的上下文applicationContext、spring使用的核心配置文件地址、spring对http请求使用的dispatcherServlet、相应的控制器配置文件地址、匹配怎样的url地址到控制器中</li>
+</ul>
+</li>
+</ul>
+<h3 id="13-什么是-Spring-IOC-容器？"><a href="#13-什么是-Spring-IOC-容器？" class="headerlink" title="13. 什么是 Spring IOC 容器？"></a>13. 什么是 Spring IOC 容器？</h3><ul>
+<li>IOC 控制反转：Spring IOC 负责创建对象，管理对象。通过依赖注入（DI），装配对象，配置对象，并且管理这些对象的整个生命周期。</li>
+</ul>
+<h3 id="14-IOC-的优点是什么？"><a href="#14-IOC-的优点是什么？" class="headerlink" title="14. IOC 的优点是什么？"></a>14. IOC 的优点是什么？</h3><ul>
+<li>资源集中管理，实现<strong>资源的可配置和易管理</strong>。</li>
+<li>降低了使用资源双方的依赖程度，也就是我们说的<strong>耦合度</strong>。</li>
+</ul>
+<h3 id="15-ApplicationContext-的实现类有哪些-BeanFactory-与-AppliacationContext-有什么区别"><a href="#15-ApplicationContext-的实现类有哪些-BeanFactory-与-AppliacationContext-有什么区别" class="headerlink" title="15. ApplicationContext 的实现类有哪些?, BeanFactory 与 AppliacationContext 有什么区别"></a>15. ApplicationContext 的实现类有哪些?, BeanFactory 与 AppliacationContext 有什么区别</h3><ul>
+<li>实现类<ul>
+<li>FileSystemXmlApplicationContext ：此容器从一个 XML 文件中加载 beans 的定义，XML Bean 配置文件的全路径名必须提供给它的构造函数。</li>
+<li>ClassPathXmlApplicationContext：此容器也从一个 XML 文件中加载 beans 的定义，这里，你需要正确设置classpath 因为这个容器将在 classpath 里找 bean 配置。</li>
+<li>WebXmlApplicationContext：此容器加载一个 XML 文件，此文件定义了一个 WEB 应用的所有 bean。</li>
+</ul>
+</li>
+<li>区别<ul>
+<li>BeanFactory<ul>
+<li>基础类型的 IOC 容器，提供完成的 IOC 服务支持。如果没有特殊指定，默认采用延迟初始化策略。相对来说，容器启动初期速度较快，所需资源有限。</li>
+</ul>
+</li>
+<li>ApplicationContext<ul>
+<li>ApplicationContext 是在 BeanFactory 的基础上构建，是相对比较高级的容器实现，除了 BeanFactory 的所有支持外，ApplicationContext 还提供了事件发布、国际化支持等功能。ApplicationContext 管理的对象，在容器启动后默认全部初始化并且绑定完成。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="16-什么是-Spring-的依赖注入？"><a href="#16-什么是-Spring-的依赖注入？" class="headerlink" title="16. 什么是 Spring 的依赖注入？"></a>16. 什么是 Spring 的依赖注入？</h3><ul>
+<li>当某个 Java 实例需要另一个 Java 实例时，传统的方法是由调用者创建被调用者的实例（例如，使用 new 关键字获得被调用者实例），而使用 Spring 框架后，被调用者的实例不再由调用者创建，而是由 Spring 容器创建，这称为控制反转。</li>
+<li>Spring 容器在创建被调用者的实例时，会自动将调用者需要的对象实例注入给调用者，这样，调用者通过Spring 容器获得被调用者实例，这称为依赖注入。</li>
+</ul>
+<h3 id="17-有哪些不同类型的-IOC（依赖注入）方式？"><a href="#17-有哪些不同类型的-IOC（依赖注入）方式？" class="headerlink" title="17. 有哪些不同类型的 IOC（依赖注入）方式？"></a>17. 有哪些不同类型的 IOC（依赖注入）方式？</h3><ul>
+<li>xml<ul>
+<li>构造方法，必须要有对应的构造方法，不灵活</li>
+<li>setter方法，调用无参构造方法，使用setter赋值</li>
+<li>接口，代码冗余</li>
+</ul>
+</li>
+<li>注解<ul>
+<li>@Autowired：自动装配，默认是根据类型注入，可以用于构造器、字段、方法注入</li>
+<li>@Resource:：使用一个 ‘name’ 属性，该属性以一个 bean 名称的形式被注入</li>
+</ul>
+</li>
+</ul>
+<h3 id="18-什么是-Spring-beans"><a href="#18-什么是-Spring-beans" class="headerlink" title="18. 什么是 Spring beans?"></a>18. 什么是 Spring beans?</h3><ul>
+<li>bean是一个由Spring IoC容器实例化、组装和管理的对象。</li>
+</ul>
+<h3 id="19-你怎样定义类的作用域-作用域有那些，作用。Spring-支持的几种-bean-的作用域"><a href="#19-你怎样定义类的作用域-作用域有那些，作用。Spring-支持的几种-bean-的作用域" class="headerlink" title="19. 你怎样定义类的作用域? 作用域有那些，作用。Spring 支持的几种 bean 的作用域"></a>19. 你怎样定义类的作用域? 作用域有那些，作用。Spring 支持的几种 bean 的作用域</h3><ul>
+<li><p>java类的作用域</p>
+<ul>
+<li><p>public :公共的，可以供所有的类访问</p>
+</li>
+<li><p>protected：保护的，可以供同包下的类访问，子孙类不在同包中也可以访问</p>
+</li>
+<li><p>defaule:默认的，不写任何访问修饰符时，可以供同包下的访问</p>
+</li>
+<li><p>private：私有的，只供本类访问</p>
+</li>
+<li><p>作用域范围从大到小：public、protected、defaule、private</p>
+</li>
+</ul>
+</li>
+<li><p>Spring bean的作用域</p>
+<ul>
+<li><p>Spring容器中的bean可以分为5个范围：</p>
+<ul>
+<li><p>singleton：默认，每个容器中只有一个bean的实例，单例的模式由BeanFactory自身来维护。</p>
+</li>
+<li><p>prototype：为每一个bean请求提供一个实例。</p>
+</li>
+<li><p>request：为每一个网络请求创建一个实例，在请求完成以后，bean会失效并被垃圾回收器回收。</p>
+</li>
+<li><p>session：与request范围类似，确保每个session中有一个bean的实例，在session过期后，bean会随之失效。</p>
+</li>
+<li><p>global-session：全局作用域，global-session和Portlet应用相关。当你的应用部署在Portlet容器中工作时，它包含很多portlet。如果你想要声明让所有的portlet共用全局的存储变量的话，那么这全局变量需要存储在global-session中。全局作用域与Servlet中的session作用域效果相同。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="20-什么是-bean-的自动装配？解释不同方式的自动装配-。"><a href="#20-什么是-bean-的自动装配？解释不同方式的自动装配-。" class="headerlink" title="20. 什么是 bean 的自动装配？解释不同方式的自动装配 。"></a>20. 什么是 bean 的自动装配？解释不同方式的自动装配 。</h3><ul>
+<li><p>Spring 自动解决 bean 之间的关系. 无需使用<code>&lt;constructor-arg&gt;</code>和<code>&lt;property&gt;</code>元素显式注入属性</p>
+</li>
+<li><p>方式</p>
+<ul>
+<li><code>byName</code> 此选项启用基于<code>bean</code>名称的依赖项注入</li>
+<li><code>byType</code> 此选项支持基于<code>bean</code>类型的依赖项注入</li>
+</ul>
+</li>
+</ul>
+<h3 id="21-什么是基于注解的容器配置"><a href="#21-什么是基于注解的容器配置" class="headerlink" title="21. 什么是基于注解的容器配置?"></a>21. 什么是基于注解的容器配置?</h3><ul>
+<li>通过在相应的类，方法或属性上使用注解的方式，直接类中进行配置</li>
+</ul>
+<h3 id="22-Spring-中-BeanFactory-和-ApplicationContext-的区别？"><a href="#22-Spring-中-BeanFactory-和-ApplicationContext-的区别？" class="headerlink" title="22. Spring 中 BeanFactory 和 ApplicationContext 的区别？"></a>22. Spring 中 BeanFactory 和 ApplicationContext 的区别？</h3><ul>
+<li><p>概念： </p>
+<ul>
+<li><p>BeanFactory： </p>
+<p>BeanFactory 是 spring 中比较原始，比较古老的 Factory。因为比较古老，所以 BeanFactory </p>
+<p>无法支持 spring 插件，例如：AOP、Web 应用等功能。 </p>
+</li>
+<li><p>ApplicationContext </p>
+<p>ApplicationContext 是 BeanFactory 的子类，因为古老的 BeanFactory 无法满足不断更新的 </p>
+<p>spring 的需求，于是 ApplicationContext 就基本上代替了 BeanFactory 的工作，以一种更面向 </p>
+<p>框架的工作方式以及对上下文进行分层和实现继承，并在这个基础上对功能进行扩展： </p>
+<p>&lt;1&gt;MessageSource, 提供国际化的消息访问 </p>
+<p>&lt;2&gt;资源访问（如 URL 和文件） </p>
+<p>&lt;3&gt;事件传递 </p>
+<p>&lt;4&gt;Bean 的自动装配 </p>
+<p>&lt;5&gt;各种不同应用层的 Context 实现 </p>
+</li>
+<li><p>区别： </p>
+<p>&lt;1&gt;如果使用 ApplicationContext，如果配置的 bean 是 singleton，那么不管你有没有或想 </p>
+<p>不想用它，它都会被实例化。好处是可以预先加载，坏处是浪费内存。 </p>
+<p>&lt;2&gt;BeanFactory，当使用 BeanFactory 实例化对象时，配置的 bean 不会马上被实例化，而是等 </p>
+<p>到你使用该 bean 的时候（getBean）才会被实例化。好处是节约内存，坏处是速度比较慢。多用 </p>
+<p>于移动设备的开发。 </p>
+<p>&lt;3&gt;没有特殊要求的情况下，应该使用 ApplicationContext 完成。因为 BeanFactory 能完成的事 </p>
+<p>情，ApplicationContext 都能完成，并且提供了更多接近现在开发的功能。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="23-解释一下-MyBatis-中命名空间（namespace）的作用。"><a href="#23-解释一下-MyBatis-中命名空间（namespace）的作用。" class="headerlink" title="23. 解释一下 MyBatis 中命名空间（namespace）的作用。"></a>23. 解释一下 MyBatis 中命名空间（namespace）的作用。</h3><ul>
+<li><p>在大型项目中，可能存在大量的 SQL 语句，这时候为每个 SQL 语句起一个唯一的标识（ID） </p>
+<p>就变得并不容易了。为了解决这个问题，在 MyBatis 中，可以为每个映射文件起一个唯一的命名 </p>
+<p>空间，这样定义在这个映射文件中的每个 SQL 语句就成了定义在这个命名空间中的一个 ID。只 </p>
+<p>要我们能够保证每个命名空间中这个 ID 是唯一的，即使在不同映射文件中的语句 ID 相同，也不 </p>
+<p>会再产生冲突了。</p>
+</li>
+</ul>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/07/14/%E9%9D%A2%E8%AF%95%E9%A2%98-%E6%95%B0%E6%8D%AE%E5%BA%93/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/07/15/JPA%E5%85%A5%E9%97%A8/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

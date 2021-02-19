@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>hexo+阿里云服务器搭建博客 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="hexo," />
+  
+
+  <meta name="description" content="前言之前使用的GitHub+Hexo 搭建个人博客，昨天买了个云主机，将之前的博客迁移。还是使用Hexo来作为自己的博客框架。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo+阿里云服务器搭建博客">
+<meta property="og:url" content="http://paphae.top/2020/01/05/hexo-%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="前言之前使用的GitHub+Hexo 搭建个人博客，昨天买了个云主机，将之前的博客迁移。还是使用Hexo来作为自己的博客框架。">
+<meta property="og:locale">
+<meta property="og:image" content="http://paphae.top/2020/01/05/hexo-%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/hexo-%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/QQ%E6%88%AA%E5%9B%BE20200105141825.png">
+<meta property="og:image" content="http://paphae.top/2020/01/05/hexo-%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/hexo-%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/QQ%E6%88%AA%E5%9B%BE20200105144843.png">
+<meta property="og:image" content="http://paphae.top/2020/01/05/hexo-%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/hexo-%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/QQ%E6%88%AA%E5%9B%BE20200105145649.png">
+<meta property="og:image" content="http://paphae.top/2020/01/05/hexo-%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/hexo-%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/QQ%E6%88%AA%E5%9B%BE20200105150415.png">
+<meta property="og:image" content="http://paphae.top/2020/01/05/hexo-%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/hexo-%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/QQ%E6%88%AA%E5%9B%BE20200105154221.png">
+<meta property="article:published_time" content="2020-01-05T06:08:31.000Z">
+<meta property="article:modified_time" content="2020-05-06T01:42:16.939Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="hexo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://paphae.top/2020/01/05/hexo-%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/hexo-%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/QQ%E6%88%AA%E5%9B%BE20200105141825.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE"><span class="toc-text">云服务器配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E4%B8%BB%E6%9C%BA%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-text">本地主机的操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-text">结语</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-hexo-阿里云服务器搭建博客" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">hexo+阿里云服务器搭建博客</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.01.05</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>之前使用的GitHub+Hexo 搭建个人博客，昨天买了个云主机，将之前的博客迁移。还是使用Hexo来作为自己的博客框架。</p>
+<a id="more"></a>
+<ul>
+<li>云服务器<br>轻量级应用服务器<br><img src="hexo-%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/QQ%E6%88%AA%E5%9B%BE20200105141825.png"></li>
+<li>域名<br><a target="_blank" rel="noopener" href="http://www.paphae.top/">拥有武侠梦的猫</a></li>
+</ul>
+<h4 id="云服务器配置"><a href="#云服务器配置" class="headerlink" title="云服务器配置"></a>云服务器配置</h4><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/32212996">tomcat 与 nginx，apache的区别是什么？</a></p>
+<blockquote>
+<p>Nginx优点：负载均衡、反向代理、处理静态文件优势。nginx处理静态请求的速度高于apache；<br>Apache优点：相对于Tomcat服务器来说处理静态文件是它的优势，速度快。Apache是静态解析，适合静态HTML、图片等。<br>Tomcat：动态解析容器，处理动态请求，是编译JSP\Servlet的容器，Nginx有动态分离机制，静态请求直接就可以通过Nginx处理，动态请求才转发请求到后台交由Tomcat进行处理。<br>Apache在处理动态有优势，Nginx并发性比较好，CPU内存占用低，如果rewrite频繁，那还是Apache较适合。</p>
+</blockquote>
+<ul>
+<li> 服务器环境搭建</li>
+</ul>
+<p>安装nginx。可以使用yum命令直接进行安装。 安装执行命令如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y nginx</span><br></pre></td></tr></table></figure>
+<p>启动服务器：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start nginx</span><br><span class="line">systemctl enable nginx</span><br></pre></td></tr></table></figure>
+<ul>
+<li>修改配置文件<br>安装并启动服务器后，我们就完成了第一步，现在我们可以尝试使用自己的电脑去访问服务器的公网IP。<br><img src="hexo-%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/QQ%E6%88%AA%E5%9B%BE20200105144843.png"><br>服务器上，在/etc/nginx/目录下创建一个文件夹 叫 vhost<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/nginx</span><br><span class="line">   mkdir vhost</span><br><span class="line">   cd vhost</span><br><span class="line">   vim blog.conf</span><br></pre></td></tr></table></figure>
+编辑 blog.conf文件内容<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">		listen    <span class="number">80</span>;</span><br><span class="line">		root /home/www/website;这里填博客目录存放的地址</span><br><span class="line">		server_name 这里填域名如(www.baidu.com) 如果暂时没有域名就填阿里云的公网ip，以后有了再改回来;</span><br><span class="line">		location /&#123;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+打开/etc/nginx/目录下的nginx.conf文件 vi /etc/nginx/nginx.conf<br><img src="hexo-%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/QQ%E6%88%AA%E5%9B%BE20200105145649.png"><br>如果以后还想添加新的网站，也可以在vhost目录下新建一个conf配置文件。<br>在刚才我们自己写的blog.conf配置文件中root的路径相应路径建立博客的目录/home/www/website</li>
+<li>安装Node.js<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -sL https:&#x2F;&#x2F;rpm.nodesource.com&#x2F;setup_10.x | bash -</span><br><span class="line">yum install -y nodejs</span><br></pre></td></tr></table></figure>
+安装完成后执行 node -v 和 npm -v 如果打印版本号则安装成功<br><img src="hexo-%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/QQ%E6%88%AA%E5%9B%BE20200105150415.png"></li>
+<li>安装Git及配置仓库</li>
+</ul>
+<blockquote>
+<p>安装git: yum install git<br> 配置git用户 adduser git<br> 修改用户权限:<br> 修改 /etc/sudoers 文件，找到下面一行，在root下面添加一行，如下所示：<br> ## Allow root to run any commands anywhere<br> root    ALL=(ALL)     ALL<br> git     ALL=(ALL)     ALL<br> 设置git用户的密码:passwd git<br> 切换到git用户，然后在~目录下创建.ssh文件夹<br>         su git<br>        cd ~<br>        mkdir .ssh<br>        cd .ssh<br> 生成公钥密钥文件ssh-keygen<br> 此时在目录下就会有两个文件，分别是id_rsa 和 id_rsa.pub<br> 其中 id_rsa.pub 就是公钥文件 我们复制一份<br> cp id_rsa.pub authorized_keys<br> 这样目录下就会有一个authorized_keys文件，它和id_rsa.pub一模一样。<br> 最后我们修改它的权限<br>        chmod 600 ~/.ssh/authorized_keys<br>        chmod 700 ~/.ssh</p>
+</blockquote>
+<p>然后我们在自己的电脑上，打开cmd，使用ssh方式连接我们的云服务器。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -v username<span class="meta">@ip</span></span><br></pre></td></tr></table></figure>
+<p>最后提示</p>
+<blockquote>
+<p>Welcome to Alibaba Cloud Elastic Compute Service !</p>
+</blockquote>
+<p>现在我们要创建一个git的仓库，并且新建一个post-receive文件，操作如下:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br><span class="line">git init --bare blog.git</span><br><span class="line">vi ~/blog.git/hooks/post-receive</span><br></pre></td></tr></table></figure>
+<p>复制代码输入以下内容：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git --work-tree=/home/www/website --git-dir=/home/git/blog.git checkout -f</span><br></pre></td></tr></table></figure>
+<p>复制代码<br>保存退出并授予该文件可执行权限</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x ~/blog.git/hooks/post-receive</span><br></pre></td></tr></table></figure>
+<p>至此我们就完成了所有关于服务器端的配置</p>
+<h4 id="本地主机的操作"><a href="#本地主机的操作" class="headerlink" title="本地主机的操作"></a>本地主机的操作</h4><ul>
+<li>安装Node.js<br>下载地址：<a target="_blank" rel="noopener" href="https://nodejs.org/en/">Node.js</a> 安装过程基本直接 下一步 就可以了。 安装完成后使用cmd查看是否安装成功<br><img src="hexo-%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/QQ%E6%88%AA%E5%9B%BE20200105154221.png"></li>
+<li>安装Hexo<br>由于使用npm直接下载会有很多人遇到卡顿的问题(国外服务器)，所以我们要做的第一步工作是将npm换成淘宝的服务器。 cmd输入下面的命令：<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry https://registry.npm.taobao.org</span><br><span class="line"><span class="meta">#</span><span class="bash"> 然后安装cnpm</span></span><br><span class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+接下来就直接安装 hexo<br>cnpm install -g hexo-cli<br>然后我们选一个目录用来初始化博客程序 例如E:/blog<br>cmd输入：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">E:</span><br><span class="line">cd blog</span><br><span class="line">hexo init</span><br></pre></td></tr></table></figure>
+执行成功后安装两个插件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br><span class="line">npm install hexo-server</span><br></pre></td></tr></table></figure>
+之后我们就可以在自己的本机上查看自己的博客了<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+打开浏览器访问 <a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000</a></li>
+<li>修改_config.yml完成服务器的部署<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">title: 拥有武侠梦的猫</span><br><span class="line">subtitle: <span class="string">&#x27;&#x27;</span></span><br><span class="line">description: <span class="string">&#x27;&#x27;</span></span><br><span class="line">keywords: <span class="keyword">null</span></span><br><span class="line">author: Paphae</span><br><span class="line">language: zh</span><br><span class="line">timezone: <span class="string">&#x27;&#x27;</span></span><br><span class="line">url: <span class="string">&#x27;http://www.paphae.top/&#x27;</span></span><br><span class="line">root: /</span><br><span class="line">permalink: <span class="string">&#x27;:year/:month/:day/:title/&#x27;</span></span><br><span class="line">permalink_defaults: <span class="keyword">null</span></span><br><span class="line">pretty_urls:</span><br><span class="line">  trailing_index: <span class="keyword">true</span></span><br><span class="line">source_dir: source</span><br><span class="line">public_dir: <span class="keyword">public</span></span><br><span class="line">tag_dir: tags</span><br><span class="line">archive_dir: archives</span><br><span class="line">category_dir: categories</span><br><span class="line">code_dir: downloads/code</span><br><span class="line">i18n_dir: <span class="string">&#x27;:lang&#x27;</span></span><br><span class="line">skip_render: <span class="keyword">null</span></span><br><span class="line">new_post_name: <span class="string">&#x27;:title.md&#x27;</span></span><br><span class="line">default_layout: post</span><br><span class="line">titlecase: <span class="keyword">false</span></span><br><span class="line">external_link:</span><br><span class="line">  enable: <span class="keyword">true</span></span><br><span class="line">  field: site</span><br><span class="line">  exclude: <span class="string">&#x27;&#x27;</span></span><br><span class="line">filename_case: <span class="number">0</span></span><br><span class="line">render_drafts: <span class="keyword">false</span></span><br><span class="line">post_asset_folder: <span class="keyword">true</span></span><br><span class="line">relative_link: <span class="keyword">false</span></span><br><span class="line">future: <span class="keyword">true</span></span><br><span class="line">highlight:</span><br><span class="line">  enable: <span class="keyword">true</span></span><br><span class="line">  line_number: <span class="keyword">true</span></span><br><span class="line">  auto_detect: <span class="keyword">false</span></span><br><span class="line">  tab_replace: <span class="string">&#x27;&#x27;</span></span><br><span class="line">index_generator:</span><br><span class="line">  path: <span class="string">&#x27;&#x27;</span></span><br><span class="line">  per_page: <span class="number">10</span></span><br><span class="line">  order_by: <span class="string">&#x27;-date&#x27;</span></span><br><span class="line">default_category: uncategorized</span><br><span class="line">category_map: <span class="keyword">null</span></span><br><span class="line">tag_map: <span class="keyword">null</span></span><br><span class="line">meta_generator: <span class="keyword">true</span></span><br><span class="line">date_format: YYYY-MM-DD</span><br><span class="line">time_format: <span class="string">&#x27;HH:mm:ss&#x27;</span></span><br><span class="line">use_date_for_updated: <span class="keyword">false</span></span><br><span class="line">per_page: <span class="number">10</span></span><br><span class="line">pagination_dir: page</span><br><span class="line">include: <span class="keyword">null</span></span><br><span class="line">exclude: <span class="keyword">null</span></span><br><span class="line">ignore: <span class="keyword">null</span></span><br><span class="line">theme: yilia</span><br><span class="line">jsonContent:</span><br><span class="line">    meta: <span class="keyword">false</span></span><br><span class="line">    pages: <span class="keyword">false</span></span><br><span class="line">    posts:</span><br><span class="line">      title: <span class="keyword">true</span></span><br><span class="line">      date: <span class="keyword">true</span></span><br><span class="line">      path: <span class="keyword">true</span></span><br><span class="line">      text: <span class="keyword">false</span></span><br><span class="line">      raw: <span class="keyword">false</span></span><br><span class="line">      content: <span class="keyword">false</span></span><br><span class="line">      slug: <span class="keyword">false</span></span><br><span class="line">      updated: <span class="keyword">false</span></span><br><span class="line">      comments: <span class="keyword">false</span></span><br><span class="line">      link: <span class="keyword">false</span></span><br><span class="line">      permalink: <span class="keyword">false</span></span><br><span class="line">      excerpt: <span class="keyword">false</span></span><br><span class="line">      categories: <span class="keyword">false</span></span><br><span class="line">      tags: <span class="keyword">true</span></span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: <span class="string">&#x27;username@ip:/root/blog.git&#x27;</span></span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+<h4 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h4>欢迎大家访问我的个人博客：<a target="_blank" rel="noopener" href="http://www.paphae.top/">Paphae’s Blog</a></li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://juejin.im/post/5d54f29af265da03cc08b45a#heading-15">从零搭建Hexo博客并部署阿里云服务器(奶妈级教学)</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/stormbjm/article/details/9086163">linux下添加用户并赋予root权限</a><br><a target="_blank" rel="noopener" href="http://pad.haroopress.com/user.html">写作工具Haroopad</a></p>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2019/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/03/02/java0302/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>SpringBoot-初识 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="SpringBoot," />
+  
+
+  <meta name="description" content="Spring Boot的主要优点： 为所有Spring开发者更快的入门 开箱即用，提供各种默认配置来简化项目配置 内嵌式容器简化Web项目 没有冗余代码生成和XML配置的要求  第一个springboot程序环境约束 jdk1.8：Spring Boot 推荐jdk1.7及以上；java version “1.8.0_211”  maven3.x：maven 3.3以上版本；Apache Mave">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot-初识">
+<meta property="og:url" content="http://paphae.top/2020/07/10/SpringBoot-%E5%88%9D%E8%AF%86/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="Spring Boot的主要优点： 为所有Spring开发者更快的入门 开箱即用，提供各种默认配置来简化项目配置 内嵌式容器简化Web项目 没有冗余代码生成和XML配置的要求  第一个springboot程序环境约束 jdk1.8：Spring Boot 推荐jdk1.7及以上；java version “1.8.0_211”  maven3.x：maven 3.3以上版本；Apache Mave">
+<meta property="og:locale">
+<meta property="og:image" content="http://paphae.top/2020/07/10/SpringBoot-%E5%88%9D%E8%AF%86/SpringBoot-%E5%88%9D%E8%AF%86/image-20200715154717029.png">
+<meta property="og:image" content="http://paphae.top/2020/07/10/SpringBoot-%E5%88%9D%E8%AF%86/SpringBoot-%E5%88%9D%E8%AF%86/image-20200715160652028.png">
+<meta property="article:published_time" content="2020-07-10T09:39:17.000Z">
+<meta property="article:modified_time" content="2020-07-15T08:58:41.941Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="SpringBoot">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://paphae.top/2020/07/10/SpringBoot-%E5%88%9D%E8%AF%86/SpringBoot-%E5%88%9D%E8%AF%86/image-20200715154717029.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring-Boot%E7%9A%84%E4%B8%BB%E8%A6%81%E4%BC%98%E7%82%B9%EF%BC%9A"><span class="toc-text">Spring Boot的主要优点：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E4%B8%AAspringboot%E7%A8%8B%E5%BA%8F"><span class="toc-text">第一个springboot程序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E7%BA%A6%E6%9D%9F"><span class="toc-text">环境约束</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AAmaven%E5%B7%A5%E7%A8%8B"><span class="toc-text">创建一个maven工程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%BC%E5%85%A5springboot%E7%9B%B8%E5%85%B3%E7%9A%84%E4%BE%9D%E8%B5%96"><span class="toc-text">导入springboot相关的依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AA%E4%B8%BB%E7%A8%8B%E5%BA%8F%EF%BC%9B%E5%90%AF%E5%8A%A8Spring-Boot%E5%BA%94%E7%94%A8"><span class="toc-text">编写一个主程序；启动Spring Boot应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E7%9B%B8%E5%85%B3%E7%9A%84Controller"><span class="toc-text">编写相关的Controller</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%EF%BC%9A"><span class="toc-text">注意：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E5%8C%96%E9%83%A8%E7%BD%B2"><span class="toc-text">简化部署</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Springboot%E7%9A%84%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84"><span class="toc-text">Springboot的项目结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring-Initializr%E5%88%9B%E5%BB%BASpring-boot%E9%A1%B9%E7%9B%AE"><span class="toc-text">Spring Initializr创建Spring boot项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BD%E9%99%85%E5%8C%96"><span class="toc-text">国际化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%93%BE%E6%8E%A5%E9%AB%98%E4%BA%AE"><span class="toc-text">链接高亮</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CRUD%E6%A1%88%E4%BE%8B"><span class="toc-text">CRUD案例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%8D%E5%8E%86%E5%91%98%E5%B7%A5%E4%BF%A1%E6%81%AF"><span class="toc-text">遍历员工信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%98%E5%B7%A5%E6%B7%BB%E5%8A%A0"><span class="toc-text">员工添加</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%8D%E5%8E%86dept%E7%9A%84%E5%90%8D%E7%A7%B0%E5%92%8Cid"><span class="toc-text">遍历dept的名称和id</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A5%E6%9C%9F%E8%BD%AC%E6%8D%A2"><span class="toc-text">日期转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%98%E5%B7%A5%E7%9A%84%E4%BF%AE%E6%94%B9"><span class="toc-text">员工的修改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%98%E5%B7%A5%E7%9A%84%E5%88%A0%E9%99%A4"><span class="toc-text">员工的删除</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-SpringBoot-初识" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">SpringBoot-初识</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.07.10</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/%E6%A1%86%E6%9E%B6/">框架</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="Spring-Boot的主要优点："><a href="#Spring-Boot的主要优点：" class="headerlink" title="Spring Boot的主要优点："></a>Spring Boot的主要优点：</h2><ul>
+<li>为所有Spring开发者更快的入门</li>
+<li>开箱即用，提供各种默认配置来简化项目配置</li>
+<li>内嵌式容器简化Web项目</li>
+<li>没有冗余代码生成和XML配置的要求</li>
+</ul>
+<h2 id="第一个springboot程序"><a href="#第一个springboot程序" class="headerlink" title="第一个springboot程序"></a>第一个springboot程序</h2><h3 id="环境约束"><a href="#环境约束" class="headerlink" title="环境约束"></a>环境约束</h3><ul>
+<li><p>jdk1.8：Spring Boot 推荐jdk1.7及以上；java version “1.8.0_211”</p>
+</li>
+<li><p>maven3.x：maven 3.3以上版本；Apache Maven 3.6.1</p>
+</li>
+</ul>
+<h3 id="创建一个maven工程"><a href="#创建一个maven工程" class="headerlink" title="创建一个maven工程"></a>创建一个maven工程</h3><p><img src="SpringBoot-%E5%88%9D%E8%AF%86/image-20200715154717029.png" alt="image-20200715154717029"></p>
+<h3 id="导入springboot相关的依赖"><a href="#导入springboot相关的依赖" class="headerlink" title="导入springboot相关的依赖"></a>导入springboot相关的依赖</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.1.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">relativePath</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="编写一个主程序；启动Spring-Boot应用"><a href="#编写一个主程序；启动Spring-Boot应用" class="headerlink" title="编写一个主程序；启动Spring Boot应用"></a>编写一个主程序；启动Spring Boot应用</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorldMainApplication</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(HelloWorldMainApplication.class,args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="编写相关的Controller"><a href="#编写相关的Controller" class="headerlink" title="编写相关的Controller"></a>编写相关的Controller</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/hello&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;hello world&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h3><ul>
+<li>springmvc 或spring 的使用我们使用注解后。要在spring或springmvc的配置文件中。</li>
+<li>配置要扫描的包。springboot 我们没有设置扫描包。</li>
+<li>springboot设置自动扫描 程序主应用HelloWorldMainApplicaiton所在位置，它下面或同级的包。</li>
+<li>@ResponseBody放在控制器类上。该控制所有的方法的返回类型都是json。</li>
+<li>@RestController ==@ResponseBody+@Controller</li>
+</ul>
+<h2 id="简化部署"><a href="#简化部署" class="headerlink" title="简化部署"></a>简化部署</h2><ul>
+<li>在pom文件进行导入build。</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>maven –&gt; 项目名称 –&gt; lifecycle –&gt; 双击packaage</p>
+</li>
+<li><p>在target文件夹下生成该项目的jar包。</p>
+</li>
+<li><p>避免端口号冲突。要确保idea中的程序停止运行。</p>
+</li>
+<li><p>在jar包所在目录下cmd。</p>
+</li>
+<li><p>java -jar  springboot-demo01-1.0-SNAPSHOT.jar 执行。</p>
+</li>
+<li><p>将这个应用打成jar包，直接使用java -jar的命令进行执行；</p>
+</li>
+<li><p>如果是springboot进行应用部署的话只需要jdk和相应数据库。</p>
+</li>
+</ul>
+<h2 id="Springboot的项目结构"><a href="#Springboot的项目结构" class="headerlink" title="Springboot的项目结构"></a>Springboot的项目结构</h2><ul>
+<li><p>Resource</p>
+<ul>
+<li><p>Static 静态资源</p>
+</li>
+<li><p>Templates 模板  è jsp,thymeleaf, Freemarker</p>
+</li>
+<li><p>Application.properties Springboot核心配置文件</p>
+</li>
+<li><p>```properties<br>server.port=8888   设置启动项目的web容器的端口号<br>server.servlet.context-path=/hello  设置启动项目的访问路径。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- application.yml</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;yaml</span><br><span class="line">  server:</span><br><span class="line">    port: 8888&#x2F;&#x2F;配置端口号</span><br><span class="line">    servlet:</span><br><span class="line">      context-path: &#x2F;hello &#x2F;&#x2F;配置项目访问路径</span><br></pre></td></tr></table></figure></li>
+<li><p>未来很有可能springboot的配置直接变成yml。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Spring-Initializr创建Spring-boot项目"><a href="#Spring-Initializr创建Spring-boot项目" class="headerlink" title="Spring Initializr创建Spring boot项目"></a>Spring Initializr创建Spring boot项目</h2><p><img src="SpringBoot-%E5%88%9D%E8%AF%86/image-20200715160652028.png" alt="image-20200715160652028"></p>
+<h2 id="国际化"><a href="#国际化" class="headerlink" title="国际化"></a>国际化</h2><ul>
+<li><p>创建一个i18n的文件夹</p>
+<ul>
+<li><p>1.创建login.properties</p>
+</li>
+<li><p>2.创建login_zh_CN.properties</p>
+</li>
+<li><p>3.在Resource Bundle ‘login’</p>
+<ul>
+<li>右键—&gt;new—&gt;Add Locale —-&gt;+ —-&gt;login_en_US.properties</li>
+</ul>
+</li>
+<li><p>4.Resource Bundle 视图。</p>
+<ul>
+<li>1.添加要取代的信息。</li>
+</ul>
+</li>
+<li><p>5.在页面上使用thymeleaf覆盖效果。</p>
+</li>
+<li><p>6.核心配置文件中配置</p>
+</li>
+<li><pre><code class="yaml">spring:
+  messages:
+    basename: i18n.login
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 7.使用th：href 给中文和英文加上超级连接。&#96;@&#123;&#x2F;login.html(l&#x3D;zh_CN)&#125;&#96;</span><br><span class="line"></span><br><span class="line">- 8.编写国际化视图LocaleResolver</span><br><span class="line"></span><br><span class="line">  - 实现LocaleResolver接口</span><br><span class="line"></span><br><span class="line">  - 实现未实现的方法。</span><br><span class="line"></span><br><span class="line">    - 在resolveLocale方法中</span><br><span class="line">    - 接受页面中l值。</span><br><span class="line">    - 创建Locale赋值默认值。</span><br><span class="line">    - Locale loacle &#x3D; Locale.getDefault();</span><br><span class="line">    - 使用StringUtils.isEmpty()是否为空</span><br><span class="line"></span><br><span class="line">    - 使用spilt方法将接过来的值进行拆分</span><br><span class="line">    - 重新实例化loacle</span><br><span class="line">      - loacle &#x3D; new Locale(s[0],s[1]);</span><br><span class="line">      - 返回loacle</span><br><span class="line"></span><br><span class="line">- 9.MyMvcConfig 中配置localeResolver的@bean</span><br><span class="line"></span><br><span class="line">  - &#96;&#96;&#96;java</span><br><span class="line">    @Bean</span><br><span class="line">    public LocaleResolver localeResolver()&#123;</span><br><span class="line">        return new MyLocaleResolver();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+## 登录拦截器
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">拦截器</span><br><span class="line">    <span class="number">1.</span>创建拦截实现HandlerInterceptor</span><br><span class="line">    <span class="number">2.</span>MyMvcConfig配置过滤拦截规程</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span> </span>&#123;</span><br><span class="line">    registry.addInterceptor(<span class="keyword">new</span> LoignIntercepter()).addPathPatterns(<span class="string">&quot;/**&quot;</span>)</span><br><span class="line">        .excludePathPatterns(<span class="string">&quot;/login.html&quot;</span>,<span class="string">&quot;/&quot;</span>,<span class="string">&quot;/user/login&quot;</span>,</span><br><span class="line">                             <span class="string">&quot;/**/*.css&quot;</span>, <span class="string">&quot;/**/*.js&quot;</span>, <span class="string">&quot;/**/*.png&quot;</span>, <span class="string">&quot;/**/*.jpg&quot;</span>,</span><br><span class="line">                             <span class="string">&quot;/**/*.jpeg&quot;</span>, <span class="string">&quot;/**/*.gif&quot;</span>, <span class="string">&quot;/**/fonts/*&quot;</span>, <span class="string">&quot;/**/*.svg&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="链接高亮"><a href="#链接高亮" class="headerlink" title="链接高亮"></a>链接高亮</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">th:class=&quot;$&#123;activeUri==&#x27;list.html&#x27;?&#x27;nav-link active&#x27;:&#x27;nav-link&#x27;&#125;&quot;</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">th:replace</span>=<span class="string">&quot;~&#123;common/bar::#sidebar(activeUri=&#x27;list.html&#x27;)&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">th:replace</span>=<span class="string">&quot;~&#123;common/bar::#sidebar(activeUri=&#x27;main.html&#x27;)&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="CRUD案例"><a href="#CRUD案例" class="headerlink" title="CRUD案例"></a>CRUD案例</h2><h3 id="遍历员工信息"><a href="#遍历员工信息" class="headerlink" title="遍历员工信息"></a>遍历员工信息</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">tr</span> <span class="attr">th:each</span>=<span class="string">&quot;emp:$&#123;emps&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span> <span class="attr">th:text</span>=<span class="string">&quot;$&#123;emp.id&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span> <span class="attr">th:text</span>=<span class="string">&quot;$&#123;emp.lastName&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span> <span class="attr">th:text</span>=<span class="string">&quot;$&#123;emp.email&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span> <span class="attr">th:text</span>=<span class="string">&quot;$&#123;emp.gender&#125;==0?&#x27;男&#x27;:&#x27;女&#x27;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span> <span class="attr">th:text</span>=<span class="string">&quot;$&#123;emp.department.departmentName&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span> <span class="attr">th:text</span>=<span class="string">&quot;$&#123;#dates.format(emp.birth,&#x27;yyyy-MM-dd&#x27;)&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-sm btn-primary&quot;</span>&gt;</span>编辑<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-sm btn-danger&quot;</span>&gt;</span>删除<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">tr</span>&gt;</span> </span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-sm btn-success&quot;</span> <span class="attr">href</span>=<span class="string">&quot;emp&quot;</span> <span class="attr">th:href</span>=<span class="string">&quot;@&#123;/emp&#125;&quot;</span>&gt;</span>员工添加<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="员工添加"><a href="#员工添加" class="headerlink" title="员工添加"></a>员工添加</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-sm btn-success&quot;</span> <span class="attr">href</span>=<span class="string">&quot;emp&quot;</span> <span class="attr">th:href</span>=<span class="string">&quot;@&#123;/emp&#125;&quot;</span>&gt;</span>员工添加<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">th:action</span>=<span class="string">&quot;@&#123;/emp&#125;&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-group&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span>&gt;</span>LastName<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">class</span>=<span class="string">&quot;form-control&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;zhangsan&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form‐group&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span>&gt;</span>Email<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;email&quot;</span> <span class="attr">class</span>=<span class="string">&quot;form-control&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;zhangsan@atguigu.com&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-group&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span>&gt;</span>Gender<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-check form-check-inline&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">&quot;form-check-input&quot;</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;gender&quot;</span> <span class="attr">value</span>=<span class="string">&quot;1&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">label</span> <span class="attr">class</span>=<span class="string">&quot;form-check-label&quot;</span>&gt;</span>男<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-check form-check-inline&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">&quot;form-check‐input&quot;</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;gender&quot;</span> <span class="attr">value</span>=<span class="string">&quot;0&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">label</span> <span class="attr">class</span>=<span class="string">&quot;form-check-label&quot;</span>&gt;</span>女<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-group&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span>&gt;</span>department<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">select</span> <span class="attr">class</span>=<span class="string">&quot;form-control&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">option</span> <span class="attr">th:value</span>=<span class="string">&quot;$&#123;dept.id&#125;&quot;</span> <span class="attr">th:each</span>=<span class="string">&quot;dept:$&#123;depts&#125;&quot;</span> <span class="attr">th:text</span>=<span class="string">&quot;$&#123;dept.departmentName&#125;&quot;</span>&gt;</span>1<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-group&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span>&gt;</span>Birth<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">class</span>=<span class="string">&quot;form-control&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;zhangsan&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-primary&quot;</span>&gt;</span>添加<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="遍历dept的名称和id"><a href="#遍历dept的名称和id" class="headerlink" title="遍历dept的名称和id"></a>遍历dept的名称和id</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">option</span>  <span class="attr">th:value</span>=<span class="string">&quot;$&#123;dept.id&#125;&quot;</span> <span class="attr">th:each</span>=<span class="string">&quot;dept:$&#123;depts&#125;&quot;</span> <span class="attr">th:text</span>=<span class="string">&quot;$&#123;dept.departmentName&#125;&quot;</span>&gt;</span>1<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="日期转换"><a href="#日期转换" class="headerlink" title="日期转换"></a>日期转换</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">mvc:</span></span><br><span class="line">    <span class="attr">format:</span></span><br><span class="line">      <span class="attr">date:</span> <span class="string">yyyy-MM-dd</span></span><br><span class="line">    <span class="attr">hiddenmethod:</span></span><br><span class="line">      <span class="attr">filter:</span></span><br><span class="line">        <span class="attr">enabled:</span> <span class="string">on</span></span><br></pre></td></tr></table></figure>
+<h3 id="员工的修改"><a href="#员工的修改" class="headerlink" title="员工的修改"></a>员工的修改</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">1.重写修改按钮</span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-sm btn-primary&quot;</span> <span class="attr">th:href</span>=<span class="string">&quot;@&#123;/emp/&#125;+$&#123;emp.id&#125;&quot;</span>&gt;</span>编辑<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">2.重写添加页面</span><br><span class="line">1.修改需要的方法类型和id</span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;hidden&quot;</span> <span class="attr">name</span>=<span class="string">&quot;_method&quot;</span> <span class="attr">value</span>=<span class="string">&quot;put&quot;</span> <span class="attr">th:if</span>=<span class="string">&quot;$&#123;emp!=null&#125;&quot;</span>/&gt;</span></span><br><span class="line">注意：使用隐藏文本域修改请求方式。</span><br><span class="line">在yml配置文件开启过滤器（2.1.6默认就是开启）</span><br><span class="line">spring</span><br><span class="line">mvc：</span><br><span class="line">hiddenmethod:</span><br><span class="line">filter:</span><br><span class="line">enabled: true</span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;hidden&quot;</span> <span class="attr">name</span>=<span class="string">&quot;id&quot;</span> <span class="attr">th:if</span>=<span class="string">&quot;$&#123;emp!=null&#125;&quot;</span> <span class="attr">th:value</span>=<span class="string">&quot;$&#123;emp.id&#125;&quot;</span>&gt;</span></span><br><span class="line">2.回显值</span><br><span class="line">th:value=&quot;$&#123;emp!=null&#125;?$&#123;emp.lastName&#125;&quot;</span><br><span class="line">th:value=&quot;$&#123;emp!=null&#125;?$&#123;emp.email&#125;&quot;</span><br><span class="line">th:checked=&quot;$&#123;emp!=null&#125;?$&#123;emp.gender==1&#125;&quot;</span><br><span class="line">th:checked=&quot;$&#123;emp!=null&#125;?$&#123;emp.gender==0&#125;&quot;</span><br><span class="line">3.被选中</span><br><span class="line">th:selected=&quot;$&#123;emp!=null&#125;?$&#123;dept.id == emp.department.id&#125;&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="员工的删除"><a href="#员工的删除" class="headerlink" title="员工的删除"></a>员工的删除</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1.编写form</span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">id</span>=<span class="string">&quot;deleteEmpForm&quot;</span>  <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;hidden&quot;</span> <span class="attr">name</span>=<span class="string">&quot;_method&quot;</span> <span class="attr">value</span>=<span class="string">&quot;delete&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">2.修改按钮</span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">th:attr</span>=<span class="string">&quot;del_uri=@&#123;/emp/&#125;+$&#123;emp.id&#125;&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-sm btn-danger deleteBtn&quot;</span>&gt;</span>删除<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">3.JavaScript</span><br><span class="line">$(&quot;.deleteBtn&quot;).click(function()&#123;</span><br><span class="line">//删除当前员工的</span><br><span class="line">$(&quot;#deleteEmpForm&quot;).attr(&quot;action&quot;,$(this).attr(&quot;del_uri&quot;)).submit();</span><br><span class="line">return false;</span><br><span class="line">&#125;);	</span><br></pre></td></tr></table></figure>
+<p><a href="%5Bhttps://gitee.com/hed_gehog/project/tree/master/SpringBoot%E6%A1%88%E4%BE%8B/mydemo%5D(https://gitee.com/hed_gehog/project/tree/master/SpringBoot%E6%A1%88%E4%BE%8B/mydemo)">案例源码</a></p>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/06/13/%E4%BD%BF%E7%94%A8idea%E8%87%AA%E5%AE%9A%E4%B9%89maven%E9%AA%A8%E6%9E%B6/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/07/10/Shiro%E5%AE%89%E5%85%A8%E6%A1%86%E6%9E%B6/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

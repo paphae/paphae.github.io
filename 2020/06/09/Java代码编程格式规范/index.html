@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java代码编程格式规范 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Java代码编程格式规范," />
+  
+
+  <meta name="description" content="java代码规范–注意和个人习惯不同，平时没有注意的规范 1. 前后台变量名称前台变量 fg_变量名 后台变量 bg_变量名 2. 类成员变量和方法的编写顺序建议编写顺序为： public  protected  private final   static   transient 3. 克隆方法如果这个类是可以被克隆的：  1234567891011121314public Object clo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java代码编程格式规范">
+<meta property="og:url" content="http://paphae.top/2020/06/09/Java%E4%BB%A3%E7%A0%81%E7%BC%96%E7%A8%8B%E6%A0%BC%E5%BC%8F%E8%A7%84%E8%8C%83/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="java代码规范–注意和个人习惯不同，平时没有注意的规范 1. 前后台变量名称前台变量 fg_变量名 后台变量 bg_变量名 2. 类成员变量和方法的编写顺序建议编写顺序为： public  protected  private final   static   transient 3. 克隆方法如果这个类是可以被克隆的：  1234567891011121314public Object clo">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-06-09T00:58:55.000Z">
+<meta property="article:modified_time" content="2020-06-09T03:22:31.557Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="Java代码编程格式规范">
+<meta name="twitter:card" content="summary">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#java%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83%E2%80%93%E6%B3%A8%E6%84%8F"><span class="toc-text">java代码规范–注意</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%89%8D%E5%90%8E%E5%8F%B0%E5%8F%98%E9%87%8F%E5%90%8D%E7%A7%B0"><span class="toc-text">1. 前后台变量名称</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%B1%BB%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F%E5%92%8C%E6%96%B9%E6%B3%95%E7%9A%84%E7%BC%96%E5%86%99%E9%A1%BA%E5%BA%8F"><span class="toc-text">2. 类成员变量和方法的编写顺序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%85%8B%E9%9A%86%E6%96%B9%E6%B3%95"><span class="toc-text">3. 克隆方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E4%BB%A3%E7%A0%81%E6%A0%B7%E5%BC%8F"><span class="toc-text">4. 代码样式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%B8%B8%E8%A7%84%E6%B3%A8%E9%87%8A%E6%A0%87%E8%AE%B0%E8%AF%B4%E6%98%8E"><span class="toc-text">5. 常规注释标记说明</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#since"><span class="toc-text">@since</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#deprecated"><span class="toc-text">@deprecated</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#see"><span class="toc-text">@see</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%8B%A5%E6%8C%87%E5%90%91%E7%B1%BB%E3%80%81%E6%96%B9%E6%B3%95%E6%88%96%E5%8F%98%E9%87%8F%E5%90%8D"><span class="toc-text">若指向类、方法或变量名</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%8B%A5%E6%8C%87%E5%90%91%E4%B8%80%E4%B8%AA%E5%85%B7%E4%BD%93%E7%9A%84URL%EF%BC%8C%E5%88%99%E7%9B%B4%E6%8E%A5%E4%B9%A6%E5%86%99HTML%E6%A0%87%E7%AD%BE%E9%94%9A%E3%80%82%E5%A6%82%EF%BC%9A"><span class="toc-text">若指向一个具体的URL，则直接书写HTML标签锚。如：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%8B%A5%E6%8C%87%E5%90%91%E5%88%B0%E2%80%9Cseealso%EF%BC%88%E5%8F%82%E8%80%83%EF%BC%89%E2%80%9D%E5%B0%8F%E8%8A%82%E6%98%BE%E7%A4%BA%E5%87%BA%E6%9D%A5%EF%BC%8C%E4%BD%BF%E7%94%A8%E2%80%9C%E2%80%9D%E2%80%9D%E2%80%9D%EF%BC%88%E5%8F%8C%E5%BC%95%E5%8F%B7%EF%BC%89%E3%80%82%E5%A6%82%EF%BC%9A"><span class="toc-text">若指向到“seealso（参考）”小节显示出来，使用“”””（双引号）。如：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#link"><span class="toc-text">@link</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3%E6%B3%A8%E9%87%8A%E8%AF%B4%E6%98%8E"><span class="toc-text">6. 类和接口注释说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E6%96%B9%E6%B3%95%E6%B3%A8%E9%87%8A%E8%AF%B4%E6%98%8E"><span class="toc-text">7. 方法注释说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-if%E7%AD%89%E8%AF%AD%E5%8F%A5%E5%86%99%E6%B3%95"><span class="toc-text">8. if等语句写法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-%E4%B8%80%E8%A1%8C%E5%8F%AA%E5%86%99%E4%B8%80%E6%9D%A1%E8%AF%AD%E5%8F%A5"><span class="toc-text">9. 一行只写一条语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-exit"><span class="toc-text">10. exit()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-%E5%BC%82%E5%B8%B8"><span class="toc-text">11. 异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86"><span class="toc-text">12. 垃圾收集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-final-%E7%B1%BB"><span class="toc-text">13. final 类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-%E5%87%8F%E5%B0%91%E9%80%92%E5%BD%92%E8%B0%83%E7%94%A8"><span class="toc-text">14. 减少递归调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-%E5%BE%AA%E7%8E%AF%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="toc-text">15. 循环的位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#16-%E5%8F%AF%E6%B5%8B%E6%80%A7"><span class="toc-text">16. 可测性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B0%83%E6%B5%8B"><span class="toc-text">调测</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B0%83%E6%B5%8B%E4%BF%A1%E6%81%AF%E4%B8%B2%E6%A0%BC%E5%BC%8F"><span class="toc-text">调测信息串格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%A8%E7%BC%96%E7%A8%8B%E4%B8%AD%E6%B3%A8%E6%84%8F%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95"><span class="toc-text">在编程中注意单元测试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E5%87%86%E5%A4%87"><span class="toc-text">测试准备</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E6%89%8B%E6%AE%B5"><span class="toc-text">测试手段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B0%83%E6%B5%8B%E5%BC%80%E5%85%B3"><span class="toc-text">调测开关</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B0%83%E8%AF%95%E4%B8%8E%E6%B5%8B%E8%AF%95"><span class="toc-text">调试与测试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B0%83%E6%B5%8B%E5%BC%80%E5%85%B3%E7%9A%84%E7%BA%A7%E5%88%AB%E5%92%8C%E7%B1%BB%E5%9E%8B"><span class="toc-text">调测开关的级别和类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E9%98%B2%E9%94%99%E7%A8%8B%E5%BA%8F"><span class="toc-text">编写防错程序</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17-switch%E8%AF%AD%E5%8F%A5%E5%BF%85%E9%A1%BB%E6%9C%89default%E5%88%86%E6%94%AF"><span class="toc-text">17. switch语句必须有default分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#18-%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%9B%AE%E5%BD%95"><span class="toc-text">18. 软件系统目录</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-Java代码编程格式规范" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Java代码编程格式规范</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.06.09</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/%E8%A7%84%E8%8C%83/">规范</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="java代码规范–注意"><a href="#java代码规范–注意" class="headerlink" title="java代码规范–注意"></a>java代码规范–注意</h2><p>和个人习惯不同，平时没有注意的规范</p>
+<h3 id="1-前后台变量名称"><a href="#1-前后台变量名称" class="headerlink" title="1. 前后台变量名称"></a>1. 前后台变量名称</h3><p>前台变量 fg_变量名</p>
+<p>后台变量 bg_变量名</p>
+<h3 id="2-类成员变量和方法的编写顺序"><a href="#2-类成员变量和方法的编写顺序" class="headerlink" title="2. 类成员变量和方法的编写顺序"></a>2. 类成员变量和方法的编写顺序</h3><p>建议编写顺序为：</p>
+<p>public  protected  private</p>
+<p>final   static   transient</p>
+<h3 id="3-克隆方法"><a href="#3-克隆方法" class="headerlink" title="3. 克隆方法"></a>3. 克隆方法</h3><p>如果这个类是可以被克隆的： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">clone</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">try</span> </span><br><span class="line">    &#123;</span><br><span class="line">        CounterSet obj = (CounterSet)<span class="keyword">super</span>.clone();</span><br><span class="line">        obj.packets = (<span class="keyword">int</span>[])packets.clone();</span><br><span class="line">        obj.size = size;</span><br><span class="line">        <span class="keyword">return</span> obj;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span>(CloneNotSupportedException e) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> InternalError(<span class="string">&quot;Unexpected CloneNotSUpportedException: &quot;</span>+ e.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-代码样式"><a href="#4-代码样式" class="headerlink" title="4. 代码样式"></a>4. 代码样式</h3><p>代码应该用 unix 的格式，而不是 windows 的（比如：回车变成回车+换行）</p>
+<h3 id="5-常规注释标记说明"><a href="#5-常规注释标记说明" class="headerlink" title="5. 常规注释标记说明"></a>5. 常规注释标记说明</h3><p>注释起始为“/*<em>…</em>/”，注释文档的第一条为总结性语句，可在注释文档中使用HTML的标签语句，但要杜绝使用“HL”“HR”标签。注释全部采用中文，并依据以下标记规范进行书写。</p>
+<h4 id="since"><a href="#since" class="headerlink" title="@since"></a>@since</h4><p>@since 文字：可生成一个“自从”条目，通过其中的“文字”，可说明一项特性是“自从”哪个版本开始引入的。</p>
+<h4 id="deprecated"><a href="#deprecated" class="headerlink" title="@deprecated"></a>@deprecated</h4><p>@deprecated 文字：可增加一条注释，指定特定的类、方法或变量不应继续使用，在这里，deprecated是“不赞成”，“不推荐”之意。利用其中的“文字”，可向用户推荐另一种方法来达到同样的目的。如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  ...</span></span><br><span class="line"><span class="comment">  <span class="doctag">@deprecated</span> 使用setVisible</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h4 id="see"><a href="#see" class="headerlink" title="@see"></a>@see</h4><p>@see 链接：增加一个超链接。</p>
+<h5 id="若指向类、方法或变量名"><a href="#若指向类、方法或变量名" class="headerlink" title="若指向类、方法或变量名"></a>若指向类、方法或变量名</h5><p>可在@see后直接写上类 、方法或变量名，书写方法时可省略包、类名，特性会默认为当前包或类。注意：类、方法、变量名间使用“#”分隔。如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  ...</span></span><br><span class="line"><span class="comment"><span class="doctag">@see</span> packeg.class#readInt(String)</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h5 id="若指向一个具体的URL，则直接书写HTML标签锚。如："><a href="#若指向一个具体的URL，则直接书写HTML标签锚。如：" class="headerlink" title="若指向一个具体的URL，则直接书写HTML标签锚。如："></a>若指向一个具体的URL，则直接书写HTML标签锚。如：</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  ...</span></span><br><span class="line"><span class="comment"><span class="doctag">@see</span> &lt;a href=&quot;www.java.com&quot;&gt;The Java Site&lt;/a&gt;</span></span><br><span class="line"><span class="comment">（HTML标签的书写，参见关于HTML的书籍）</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h5 id="若指向到“seealso（参考）”小节显示出来，使用“”””（双引号）。如："><a href="#若指向到“seealso（参考）”小节显示出来，使用“”””（双引号）。如：" class="headerlink" title="若指向到“seealso（参考）”小节显示出来，使用“”””（双引号）。如："></a>若指向到“seealso（参考）”小节显示出来，使用“”””（双引号）。如：</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">  ...</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"><span class="doctag">@see</span> “java1.2 volume2”</span></span><br><span class="line"><span class="comment">注：可书写多个标记，但必须放在一起，以下全部一样。</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h4 id="link"><a href="#link" class="headerlink" title="@link"></a>@link</h4><p>@link：可在注释中建立特殊的超链接，令其指向其他类或方法，标记规则同@see。</p>
+<h3 id="6-类和接口注释说明"><a href="#6-类和接口注释说明" class="headerlink" title="6. 类和接口注释说明"></a>6. 类和接口注释说明</h3><p>类注释必须置于任何一个import语句后面，同时位于class定义的前面。</p>
+<p>@author 名字：建立一个“作者”条目。</p>
+<p>@version 文字：建立一个“版本”条目。</p>
+<h3 id="7-方法注释说明"><a href="#7-方法注释说明" class="headerlink" title="7. 方法注释说明"></a>7. 方法注释说明</h3><p>紧靠在每条方法的前面，必须有一个它所描述的那个方法的签名。</p>
+<p>@param 变量描述：给“parameters”（参数）小节增添一个条目。</p>
+<p>@return 描述：增添一个“returns”（返回值）小节。</p>
+<p>@throws 类描述：为方法的“throws”（产生违例）小节增添一个条目。</p>
+<p>如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	将一个双精度数格式化成一个字串</span></span><br><span class="line"><span class="comment">	<span class="doctag">@param</span> x 要格式化的数字</span></span><br><span class="line"><span class="comment">	<span class="doctag">@return</span> 格式化成的字串</span></span><br><span class="line"><span class="comment">	<span class="doctag">@throws</span> 如参数错误，产生IllegalArgumentException（非法参数违例）</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="8-if等语句写法"><a href="#8-if等语句写法" class="headerlink" title="8. if等语句写法"></a>8. if等语句写法</h3><p>在 if/else/for/while/do 语句中必须使用大括号。即使只有一行代码，避免采用</p>
+<p>单行的编码方式：if (condition) statements; </p>
+<h3 id="9-一行只写一条语句"><a href="#9-一行只写一条语句" class="headerlink" title="9. 一行只写一条语句"></a>9. 一行只写一条语句</h3><p>不允许把多个短语句写在一行中，即一行只写一条语句。</p>
+<p>示例：如下例子不符合规范。</p>
+<p>rect.length = 0;  rect.width = 0;</p>
+<p>应如下书写</p>
+<p>rect.length = 0;</p>
+<p>rect.width  = 0;</p>
+<h3 id="10-exit"><a href="#10-exit" class="headerlink" title="10. exit()"></a>10. exit()</h3><p>exit 除了在 main 中可以被调用外，其他的地方不应该调用。因为这样做不给任何代码机会来截获退出。一个类似后台服务的程序不应该因为某一个库模块决定了要退出就退出。 </p>
+<h3 id="11-异常"><a href="#11-异常" class="headerlink" title="11. 异常"></a>11. 异常</h3><p>申明的错误应该抛出一个RuntimeException或者派生的异常。申明的错误主要指前提条件违例、处理流程违例的情况。对于功能性的分支建议采用返回值的方式。</p>
+<p>异常建议根据模块结构，采用逐级处理的方式，并打印（或者记录在日志中）。同一模块层次的异常，按功能可由某一模块集中处理。</p>
+<h3 id="12-垃圾收集"><a href="#12-垃圾收集" class="headerlink" title="12. 垃圾收集"></a>12. 垃圾收集</h3><p>JAVA使用成熟的后台垃圾收集技术来代替引用计数。但是这样会导致一个问题：你必须在使用完对象的实例以后进行清场工作（将对象置为NULL后，引用计数自动－1）。</p>
+<h3 id="13-final-类"><a href="#13-final-类" class="headerlink" title="13. final 类"></a>13. final 类</h3><p>绝对不要因为性能的原因将类定义为 final 的（除非程序的框架要求）</p>
+<p>如果一个类还没有准备好被继承，最好在注释中注明，而不要将它定义为 final 的。这是因为没有人可以保证会不会由于什么原因需要继承。 </p>
+<h3 id="14-减少递归调用"><a href="#14-减少递归调用" class="headerlink" title="14. 减少递归调用"></a>14. 减少递归调用</h3><p>说明：递归调用影响程序的可理解性；递归调用一般都占用较多的系统资源（如栈空间）；递归调用对程序的测试有一定影响。故除非为某些算法或功能的实现方便，应减少没必要的递归调用。</p>
+<h3 id="15-循环的位置"><a href="#15-循环的位置" class="headerlink" title="15. 循环的位置"></a>15. 循环的位置</h3><p>在多重循环中，应将最忙的循环放在最内层。</p>
+<p>说明：减少CPU切入循环层的次数。</p>
+<p>示例：如下代码效率不高。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (row = <span class="number">0</span>; row &lt; <span class="number">100</span>; row++)&#123;</span><br><span class="line">    <span class="keyword">for</span> (col = <span class="number">0</span>; col &lt; <span class="number">5</span>; col++)&#123;</span><br><span class="line">        sum += a[row][col];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以改为如下方式，以提高效率。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (col = <span class="number">0</span>; col &lt; <span class="number">5</span>; col++)&#123;</span><br><span class="line">    <span class="keyword">for</span> (row = <span class="number">0</span>; row &lt; <span class="number">100</span>; row++)&#123;</span><br><span class="line">        sum += a[row][col];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="16-可测性"><a href="#16-可测性" class="headerlink" title="16. 可测性"></a>16. 可测性</h3><h4 id="调测"><a href="#调测" class="headerlink" title="调测"></a>调测</h4><p>在同一项目组或产品组内，要有一套统一的为集成测试与系统联调准备的调测开关及相应打印方法，并且要有详细的说明。</p>
+<p>说明：本规则是针对项目组或产品组的。</p>
+<h4 id="调测信息串格式"><a href="#调测信息串格式" class="headerlink" title="调测信息串格式"></a>调测信息串格式</h4><p>在同一项目组或产品组内，调测打印出的信息串的格式要有统一的形式。信息串中至少要有所在模块名（或源文件名）。</p>
+<p>说明：统一的调测信息格式便于集成测试。</p>
+<h4 id="在编程中注意单元测试"><a href="#在编程中注意单元测试" class="headerlink" title="在编程中注意单元测试"></a>在编程中注意单元测试</h4><p>编程的同时要为单元测试选择恰当的测试点，并仔细构造测试代码、测试用例，同时给出明确的注释说明。测试代码部分应作为（模块中的）一个子模块，以方便测试代码在模块中的安装与拆卸（通过调测开关）。</p>
+<p>说明：为单元测试而准备。</p>
+<h4 id="测试准备"><a href="#测试准备" class="headerlink" title="测试准备"></a>测试准备</h4><p>在进行集成测试/系统联调之前，要构造好测试环境、测试项目及测试用例，同时仔细分析并优化测试用例，以提高测试效率。</p>
+<p>说明：好的测试用例应尽可能模拟出程序所遇到的边界值、各种复杂环境及一些极端情况等。</p>
+<h4 id="测试手段"><a href="#测试手段" class="headerlink" title="测试手段"></a>测试手段</h4><p>在软件系统中设置与取消有关测试手段，不能对软件实现的功能等产生影响。</p>
+<p>说明：即有测试代码的软件和关掉测试代码的软件，在功能行为上应一致。</p>
+<h4 id="调测开关"><a href="#调测开关" class="headerlink" title="调测开关"></a>调测开关</h4><p>用调测开关来切换软件的DEBUG版和正式版，而不要同时存在正式版本和DEBUG版本的不同源文件，以减少维护的难度。</p>
+<h4 id="调试与测试"><a href="#调试与测试" class="headerlink" title="调试与测试"></a>调试与测试</h4><p>在编写代码之前，应预先设计好程序调试与测试的方法和手段，并设计好各种调测开关及相应测试代码如打印函数等。</p>
+<p>说明：程序的调试与测试是软件生存周期中很重要的一个阶段，如何对软件进行较全面、高率的测试并尽可能地找出软件中的错误就成为很关键的问题。因此在编写源代码之前，除了要有一套比较完善的测试计划外，还应设计出一系列代码测试手段，为单元测试、集成测试及系统联调提供方便。</p>
+<h4 id="调测开关的级别和类型"><a href="#调测开关的级别和类型" class="headerlink" title="调测开关的级别和类型"></a>调测开关的级别和类型</h4><p>调测开关应分为不同级别和类型。</p>
+<p>说明：调测开关的设置及分类应从以下几方面考虑：针对模块或系统某部分代码的调测；针对模块或系统某功能的调测；出于某种其它目的，如对性能、容量等的测试。这样做便于软件功能的调测，并且便于模块的单元测试、系统联调等。</p>
+<h4 id="编写防错程序"><a href="#编写防错程序" class="headerlink" title="编写防错程序"></a>编写防错程序</h4><p>编写防错程序，然后在处理错误之后可用断言宣布发生错误。</p>
+<p>示例：假如某模块收到通信链路上的消息，则应对消息的合法性进行检查，若消息类别不是通信协议中规定的，则应进行出错处理</p>
+<h3 id="17-switch语句必须有default分支"><a href="#17-switch语句必须有default分支" class="headerlink" title="17. switch语句必须有default分支"></a>17. switch语句必须有default分支</h3><h3 id="18-软件系统目录"><a href="#18-软件系统目录" class="headerlink" title="18. 软件系统目录"></a>18. 软件系统目录</h3><p>合理地设计软件系统目录，方便开发人员使用。</p>
+<p>说明：方便、合理的软件系统目录，可提高工作效率。目录构造的原则是方便有关源程序的存储、查询、编译、链接等工作，同时目录中还应具有工作目录—-所有的编译、链接等工作应在此目录中进行，工具目录—-有关文件编辑器、文件查找等工具可存放在此目录中。</p>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/06/09/Mybatis-%E5%85%A5%E9%97%A8/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/06/10/Mybatis-%E7%BC%93%E5%AD%98/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

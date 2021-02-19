@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>java-类之间的关系 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="关系," />
+  
+
+  <meta name="description" content="关联关联是一种结构关系，说明一个事物的对象与另一个事物的对象相联系。给定有关联的两个类，可以从一个类的对象得到一个类的对象。关联有两元关系和多元关系。两元关系是指一种一对一的关系，多元关系是一对多或多对一的关系">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java-类之间的关系">
+<meta property="og:url" content="http://paphae.top/2020/03/12/java-%E7%B1%BB%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="关联关联是一种结构关系，说明一个事物的对象与另一个事物的对象相联系。给定有关联的两个类，可以从一个类的对象得到一个类的对象。关联有两元关系和多元关系。两元关系是指一种一对一的关系，多元关系是一对多或多对一的关系">
+<meta property="og:locale">
+<meta property="og:image" content="http://paphae.top/2020/03/12/java-%E7%B1%BB%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB/java0310/%E5%9B%BE%E7%89%8711.png">
+<meta property="og:image" content="http://paphae.top/2020/03/12/java-%E7%B1%BB%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB/java0310/%E5%9B%BE%E7%89%8712.png">
+<meta property="og:image" content="http://paphae.top/2020/03/12/java-%E7%B1%BB%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB/java0310/%E5%9B%BE%E7%89%8713.png">
+<meta property="og:image" content="http://paphae.top/2020/03/12/java-%E7%B1%BB%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB/java0310/%E5%9B%BE%E7%89%8714.png">
+<meta property="og:image" content="http://paphae.top/2020/03/12/java-%E7%B1%BB%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB/java0310/%E5%9B%BE%E7%89%8715.png">
+<meta property="article:published_time" content="2020-03-12T12:46:05.000Z">
+<meta property="article:modified_time" content="2020-05-06T00:50:47.182Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="关系">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://paphae.top/2020/03/12/java-%E7%B1%BB%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB/java0310/%E5%9B%BE%E7%89%8711.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E8%81%94"><span class="toc-text">关联</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E5%AF%B9%E4%B8%80"><span class="toc-text">一对一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E5%AF%B9%E5%A4%9A"><span class="toc-text">一对多</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E8%81%94%E5%85%B3%E7%B3%BB%E8%BF%98%E5%8F%AF%E4%BB%A5%E7%BB%86%E5%88%86%E4%B8%BA%E8%81%9A%E5%90%88%E5%92%8C%E7%BB%84%E5%90%88%E4%B8%A4%E7%A7%8D"><span class="toc-text">关联关系还可以细分为聚合和组合两种</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB"><span class="toc-text">依赖关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E4%B9%8B%E9%97%B4%E5%85%B3%E7%B3%BB"><span class="toc-text">类之间关系</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-java-类之间的关系" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">java-类之间的关系</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.03.12</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/javaSE/">javaSE</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="关联"><a href="#关联" class="headerlink" title="关联"></a>关联</h2><p>关联是一种结构关系，说明一个事物的对象与另一个事物的对象相联系。给定有关联的两个类，可以从一个类的对象得到一个类的对象。关联有两元关系和多元关系。两元关系是指一种一对一的关系，多元关系是一对多或多对一的关系</p>
+<a id="more"></a>
+<p>关联就是某个对象会长期的持有另一个对象的引用，而二者的关联往往也是相互的。关联的两个对象彼此间没有任何强制性的约束，只要二者同意，可以随时解除关系或是进行关联，它们在生命期问题上没有任何约定。被关联的对象还可以再被别的对象关联，所以关联是可以共享的。<br>两个类之间的简单关联表示了两个同等地位类之间的结构关系。当你想要表示结构化关系时使用关联<br>关联表示has-a关系，如学生拥有一个课程，往往表现为B作为A的属性存在（A关联B）</p>
+<h3 id="一对一"><a href="#一对一" class="headerlink" title="一对一"></a>一对一</h3><p>最典型的一对一关系莫过于人和证件之间的关联，例如：一个人只能有一个驾照，而一个驾照只能归属与一个人：<br><img src="java0310/%E5%9B%BE%E7%89%8711.png"></p>
+<h3 id="一对多"><a href="#一对多" class="headerlink" title="一对多"></a>一对多</h3><p>人还可以跟其他事物构建一对多的关联关系，比如将驾照换为荣誉证书，那么一个人可以有多个荣誉证书，我们可以使用数组或集合来描述这个关系<br><img src="java0310/%E5%9B%BE%E7%89%8712.png"></p>
+<h3 id="关联关系还可以细分为聚合和组合两种"><a href="#关联关系还可以细分为聚合和组合两种" class="headerlink" title="关联关系还可以细分为聚合和组合两种"></a>关联关系还可以细分为聚合和组合两种</h3><ol>
+<li>聚合是一种特殊的关联，表示整体对象拥有部分对象。 关联关系和聚合关系来语法上是没办法区分的，从语义上才能更好的区分两者的区别。聚合是较强的关联关系，强调的是整体与部分之间的关系。聚合的整体和部分之间在生命周期上没有什么必然的联系，部分对象可以在整体对象创建之前创建，也可以在整体对象销毁之后销毁。</li>
+</ol>
+<p>人和自行车:人有一个自行车</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">人&#123;</span><br><span class="line">自行车</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>聚合是强版本的关联。它暗含着一种所属关系以及生命期关系。被聚合的对象还可以再被别的对象关联，所以被聚合对象是可以共享的。虽然是共享的，聚合代表的是一种更亲密的关系。典型的例子很多，比如：<br><img src="java0310/%E5%9B%BE%E7%89%8713.png"><br>我的家和我之间具有着一种强烈的所属关系，我的家是可以分享的，而这里的分享又可以有两种。其一是聚合间的分享，这正如你和你媳妇儿都对这个家有着同样的强烈关联；其二是聚合与关联的分享，如果你的朋友来家里吃个便饭，估计你不会给他配一把钥匙</p>
+<ol start="2">
+<li>组合是聚合的一种形式，它具有更强的拥有关系，强调整体与部分的生命周期是一致的，整体负责部分的生命周期的管理。生命周期一致指的是部分必须在组合创建的同时或者之后创建，在组合销毁之前或者同时销毁，部分的生命周期不会超出组合的生命周期。例如Windows的窗口和窗口上的菜单就是组合关系。如果整体被销毁，部分也必须跟着一起被销毁，如果所有者被复制，部分也必须一起被复制。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">人&#123;</span><br><span class="line">人有心脏 有手</span><br><span class="line">心脏</span><br><span class="line">手</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+组合是关系当中的最强版本，它直接要求包含对象对被包含对象的拥有以及包含对象与被包含对象生命期的关系<br><img src="java0310/%E5%9B%BE%E7%89%8714.png"><br>组合关系就是整体与部分的关系，部分属于整体，整体不存在，部分一定不存在<h2 id="依赖关系"><a href="#依赖关系" class="headerlink" title="依赖关系"></a>依赖关系</h2>依赖关系是一种使用关系，特定事物的改变有可能会影响到使用该事物的事物，反之不成立<br>此关系最为简单，也最好理解，所谓依赖就是某个对象的功能依赖于另外的某个对象，而被依赖的对象只是作为一种工具在使用，而并不持有对它的引用<br>依赖体现了“ use a”关系<br>依赖关系一般使用方法的参数体系<h2 id="类之间关系"><a href="#类之间关系" class="headerlink" title="类之间关系"></a>类之间关系</h2>类与类之间的横向关系较为微妙，大体上可以分为四种：依赖 、关联、聚合、组合。<br>依赖体现了use a关系，通常使用方法的参数描述<br>关联体现了has a关系，通常使用类的成员属性描述</li>
+</ol>
+<p><strong>几种关系的强弱如下：依赖 &lt; 关联 &lt; 聚合 &lt; 组合</strong><br><img src="java0310/%E5%9B%BE%E7%89%8715.png"></p>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/03/12/java-%E6%8E%A5%E5%8F%A3/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/03/12/java-%E5%8C%85%E7%9A%84%E6%A6%82%E5%BF%B5%E4%BB%A5%E5%8F%8A%E6%84%8F%E4%B9%89/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

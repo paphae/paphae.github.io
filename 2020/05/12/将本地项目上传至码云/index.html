@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>将本地项目上传至码云 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="git," />
+  
+
+  <meta name="description" content="本地新建项目后，如何同步到 码云上呢？  在码云上新建项目 进入本地项目目录，依次执行  12345git initgit add .git commit -m &quot;提交说明&quot;git remote add origin 仓库地址git push -u origin master 命令说明git init初始化本地仓库 git add .添加全部已经修改的文件，准备commit 提">
+<meta property="og:type" content="article">
+<meta property="og:title" content="将本地项目上传至码云">
+<meta property="og:url" content="http://paphae.top/2020/05/12/%E5%B0%86%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E4%B8%8A%E4%BC%A0%E8%87%B3%E7%A0%81%E4%BA%91/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="本地新建项目后，如何同步到 码云上呢？  在码云上新建项目 进入本地项目目录，依次执行  12345git initgit add .git commit -m &quot;提交说明&quot;git remote add origin 仓库地址git push -u origin master 命令说明git init初始化本地仓库 git add .添加全部已经修改的文件，准备commit 提">
+<meta property="og:locale">
+<meta property="og:image" content="http://paphae.top/2020/05/12/%E5%B0%86%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E4%B8%8A%E4%BC%A0%E8%87%B3%E7%A0%81%E4%BA%91/%E5%B0%86%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E4%B8%8A%E4%BC%A0%E8%87%B3%E7%A0%81%E4%BA%91/image-20200512222639076.png">
+<meta property="article:published_time" content="2020-05-12T14:20:21.000Z">
+<meta property="article:modified_time" content="2020-05-12T14:32:19.612Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="git">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://paphae.top/2020/05/12/%E5%B0%86%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E4%B8%8A%E4%BC%A0%E8%87%B3%E7%A0%81%E4%BA%91/%E5%B0%86%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E4%B8%8A%E4%BC%A0%E8%87%B3%E7%A0%81%E4%BA%91/image-20200512222639076.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E8%AF%B4%E6%98%8E"><span class="toc-text">命令说明</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#git-init"><span class="toc-text">git init</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git-add"><span class="toc-text">git add .</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git-commit-m-%E2%80%98%E6%8F%90%E4%BA%A4%E8%AF%B4%E6%98%8E%E2%80%99"><span class="toc-text">git commit -m ‘提交说明’</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git-remote-add-origin-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E5%9C%B0%E5%9D%80"><span class="toc-text">git remote add origin 远程仓库地址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git-push-u-origin-master"><span class="toc-text">git push -u origin master</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%92%E9%94%99"><span class="toc-text">排错</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-将本地项目上传至码云" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">将本地项目上传至码云</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.05.12</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p>本地新建项目后，如何同步到 码云上呢？</p>
+<ol>
+<li>在码云上新建项目</li>
+<li>进入本地项目目录，依次执行</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;提交说明&quot;</span></span><br><span class="line">git remote add origin 仓库地址</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+<h3 id="命令说明"><a href="#命令说明" class="headerlink" title="命令说明"></a>命令说明</h3><h4 id="git-init"><a href="#git-init" class="headerlink" title="git init"></a>git init</h4><p>初始化本地仓库</p>
+<h4 id="git-add"><a href="#git-add" class="headerlink" title="git add ."></a>git add .</h4><p>添加全部已经修改的文件，准备commit 提交</p>
+<h4 id="git-commit-m-‘提交说明’"><a href="#git-commit-m-‘提交说明’" class="headerlink" title="git commit -m ‘提交说明’"></a>git commit -m ‘提交说明’</h4><p>将修改后的文件提交到本地仓库，如：git commit -m ‘新增xxx功能’</p>
+<h4 id="git-remote-add-origin-远程仓库地址"><a href="#git-remote-add-origin-远程仓库地址" class="headerlink" title="git remote add origin 远程仓库地址"></a>git remote add origin 远程仓库地址</h4><p>连接到远程仓库并为该仓库创建别名 , 别名为origin . 这个别名是自定义的，通常用origin ; 远程仓库地址，就是你自己新建的那个仓库的地址，复制地址的方法参考 </p>
+<p><img src="%E5%B0%86%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E4%B8%8A%E4%BC%A0%E8%87%B3%E7%A0%81%E4%BA%91/image-20200512222639076.png" alt="image-20200512222639076"></p>
+<p>如：git remote add origin <a target="_blank" rel="noopener" href="https://gitee.com/hed_gehog/project.git">https://gitee.com/hed_gehog/project.git</a> 这段代码的含义是： 连接到码云project仓库，并创建别名为origin . （之后push 或者pull 的时候就需要使用到这个 origin 别名）</p>
+<h4 id="git-push-u-origin-master"><a href="#git-push-u-origin-master" class="headerlink" title="git push -u origin master"></a>git push -u origin master</h4><p>创建一个 upStream （上传流），并将本地代码通过这个 upStream 推送到 别名为 origin 的仓库中的 master 分支上</p>
+<p>-u ，就是创建 upStream 上传流，如果没有这个上传流就无法将代码推送到 github；同时，这个 upStream 只需要在初次推送代码的时候创建，以后就不用创建了</p>
+<p>另外，在初次 push 代码的时候，可能会因为网络等原因导致命令行终端上的内容一直没有变化，耐心等待一会就好。</p>
+<h3 id="排错"><a href="#排错" class="headerlink" title="排错"></a>排错</h3><p>如果执行 <code>git push -u origin master</code> 报错，是因为在 github 上项目不是空的，大部分情况是因为有 <code>README.md</code>,<code>README.en.md</code>,<code>LICENSE</code> 文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">error: failed to push some refs to <span class="string">&#x27;git@gitee.com:hed_gehog/project.git&#x27;</span></span><br><span class="line">hint: Updates were rejected because the remote contains work that you <span class="keyword">do</span></span><br><span class="line">hint: not have locally. This is usually caused by another repository pushing</span><br><span class="line">hint: to the same ref. You may want to first integrate the remote changes</span><br><span class="line">hint: (e.g., <span class="string">&#x27;git pull ...&#x27;</span>) before pushing again.</span><br><span class="line">hint: See the <span class="string">&#x27;Note about fast-forwards&#x27;</span> <span class="keyword">in</span> <span class="string">&#x27;git push --help&#x27;</span> <span class="keyword">for</span> details.</span><br></pre></td></tr></table></figure>
+<p>执行下面的代码，把码云上没有拉下来的代码或文件拉下来</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull --rebase origin master</span><br></pre></td></tr></table></figure>
+<p>然后再执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://juejin.im/post/5b727485518825614d0bf7c9">原文链接</a></p>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/05/11/JSP%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AF%AD%E8%A8%80(EL)/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/05/13/javaWeb0513/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

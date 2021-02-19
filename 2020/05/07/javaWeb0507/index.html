@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>servlet总结 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="jsp内置对象,作用域," />
+  
+
+  <meta name="description" content="@WebServlet   属性名 类型 描述    name String 指定 Servlet 的 name 属性，等价于 。如果没有显式指定，则该 Servlet 的取值即为类的全限定名。   value String[] 该属性等价于 urlPatterns 属性。两个属性不能同时使用。   urlPatterns String[] 指定一组 Servlet 的 URL 匹配模式。等价于">
+<meta property="og:type" content="article">
+<meta property="og:title" content="servlet总结">
+<meta property="og:url" content="http://paphae.top/2020/05/07/javaWeb0507/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="@WebServlet   属性名 类型 描述    name String 指定 Servlet 的 name 属性，等价于 。如果没有显式指定，则该 Servlet 的取值即为类的全限定名。   value String[] 该属性等价于 urlPatterns 属性。两个属性不能同时使用。   urlPatterns String[] 指定一组 Servlet 的 URL 匹配模式。等价于">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-05-07T01:53:58.000Z">
+<meta property="article:modified_time" content="2020-05-08T00:14:26.986Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="jsp内置对象">
+<meta property="article:tag" content="作用域">
+<meta name="twitter:card" content="summary">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#WebServlet"><span class="toc-text">@WebServlet</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#load-on-startup"><span class="toc-text">load-on-startup</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#initParams"><span class="toc-text">initParams</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#xml%E9%85%8D%E7%BD%AE"><span class="toc-text">xml配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E8%A7%A3%E9%85%8D%E7%BD%AE"><span class="toc-text">注解配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%8E%A5%E5%8F%97init-param"><span class="toc-text">如何接受init-param</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1"><span class="toc-text">内置对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#application"><span class="toc-text">application</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-text">作用域</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-text">方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Servlet%E4%B8%8A%E6%80%8E%E4%B9%88%E8%8E%B7%E5%BE%97application%EF%BC%88servetcontext%EF%BC%89"><span class="toc-text">Servlet上怎么获得application（servetcontext）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#getInitParameter"><span class="toc-text">getInitParameter()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Init-param%E5%92%8Ccontext-param%E7%9A%84%E8%8E%B7%E5%8F%96"><span class="toc-text">Init-param和context-param的获取</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jsp%E7%9A%84%E5%9B%9B%E5%A4%A7%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-text">jsp的四大作用域</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-javaWeb0507" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">servlet总结</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.05.07</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/javaWeb/">javaWeb</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="WebServlet"><a href="#WebServlet" class="headerlink" title="@WebServlet"></a>@WebServlet</h2><table>
+<thead>
+<tr>
+<th align="left"><strong>属性名</strong></th>
+<th align="left"><strong>类型</strong></th>
+<th align="left"><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">name</td>
+<td align="left">String</td>
+<td align="left">指定 Servlet 的 name 属性，等价于 <servlet-name>。如果没有显式指定，则该 Servlet 的取值即为类的全限定名。</td>
+</tr>
+<tr>
+<td align="left">value</td>
+<td align="left">String[]</td>
+<td align="left">该属性等价于 urlPatterns 属性。两个属性不能同时使用。</td>
+</tr>
+<tr>
+<td align="left">urlPatterns</td>
+<td align="left">String[]</td>
+<td align="left">指定一组 Servlet 的 URL 匹配模式。等价于 <url-pattern> 标签。</td>
+</tr>
+<tr>
+<td align="left">loadOnStartup</td>
+<td align="left">int</td>
+<td align="left">指定 Servlet 的加载顺序，等价于 <load-on-startup> 标签。</td>
+</tr>
+<tr>
+<td align="left">initParams</td>
+<td align="left">WebInitParam[]</td>
+<td align="left">指定一组 Servlet 初始化参数，等价于 <init-param> 标签。</td>
+</tr>
+<tr>
+<td align="left">asyncSupported</td>
+<td align="left">boolean</td>
+<td align="left">声明 Servlet 是否支持异步操作模式，等价于 <async-supported> 标签。</td>
+</tr>
+<tr>
+<td align="left">description</td>
+<td align="left">String</td>
+<td align="left">该 Servlet 的描述信息，等价于 <description> 标签。</td>
+</tr>
+<tr>
+<td align="left">displayName</td>
+<td align="left">String</td>
+<td align="left">该 Servlet 的显示名，通常配合工具使用，等价于 <display-name> 标签。</td>
+</tr>
+</tbody></table>
+<h3 id="load-on-startup"><a href="#load-on-startup" class="headerlink" title="load-on-startup"></a>load-on-startup</h3><p>（1）、load-on-startup元素标记容器是否在启动的时候就加载这个servlet(实例化并调用其init()方法)。</p>
+<p>（2）、它的值必须是一个整数，表示servlet应该被载入的顺序。</p>
+<p>（3）、当值为0或者大于0时，表示容器在应用启动时就加载并初始化这个servlet。</p>
+<p>（4）、当值小于0或者没有指定时，则表示容器在该servlet被选择时才会去加载。</p>
+<p>（5）、正数的值越小，该servlet的优先级越高，应用启动时就越先加载。</p>
+<p>（6）、当值相同时，容器就会自己选择顺序来加载。</p>
+<h2 id="initParams"><a href="#initParams" class="headerlink" title="initParams"></a>initParams</h2><h3 id="xml配置"><a href="#xml配置" class="headerlink" title="xml配置"></a>xml配置</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>first<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>com.tjetc.servlet.FirstServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>encoding<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>utf-8<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>1<span class="tag">&lt;/<span class="name">load-on-startup</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>first<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/demo.do<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>注意init-param 位置在servlet标签中，但是要load-on-startup上边。</p>
+<h3 id="注解配置"><a href="#注解配置" class="headerlink" title="注解配置"></a>注解配置</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(urlPatterns =&#123;&quot;/first.do&quot;,&quot;/second.do&quot;&#125;,loadOnStartup = 1</span></span><br><span class="line"><span class="meta">            ,initParams = &#123;</span></span><br><span class="line"><span class="meta">                @WebInitParam(name = &quot;encoding&quot;,value = &quot;utf-8&quot;)</span></span><br><span class="line"><span class="meta">            &#125;)</span></span><br></pre></td></tr></table></figure>
+<p>面试题：为什么xml中load-on-startup需要放在init-param的后面，而注解不用?</p>
+<ol>
+<li><p>load-on-startup 开启服务器就要加载servlet，要执行servlet的init方法。如何load-onstartup方法init-param之前，也是说init方法在加载init-param之前就执行。</p>
+</li>
+<li><p>xml加载时有xml自上倒下。注解时由源代码控制。</p>
+</li>
+</ol>
+<h3 id="如何接受init-param"><a href="#如何接受init-param" class="headerlink" title="如何接受init-param"></a>如何接受init-param</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(ServletConfig config)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line">    String encoding = config.getInitParameter(<span class="string">&quot;encoding&quot;</span>);</span><br><span class="line">    System.out.println(encoding);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="内置对象"><a href="#内置对象" class="headerlink" title="内置对象"></a>内置对象</h2><table>
+<thead>
+<tr>
+<th>request</th>
+<th><strong>HttpServletRequest</strong> 接口的实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>response</td>
+<td><strong>HttpServletResponse</strong> 接口的实例</td>
+</tr>
+<tr>
+<td>out</td>
+<td><strong>JspWriter</strong>类的实例，用于把结果输出至网页上</td>
+</tr>
+<tr>
+<td>session</td>
+<td><strong>HttpSession</strong>类的实例</td>
+</tr>
+<tr>
+<td>application</td>
+<td><strong>ServletContext</strong>类的实例，与应用上下文有关</td>
+</tr>
+<tr>
+<td>config</td>
+<td><strong>ServletConfig</strong>类的实例</td>
+</tr>
+<tr>
+<td>pageContext</td>
+<td><strong>PageContext</strong>类的实例，提供对JSP页面所有对象以及命名空间的访问</td>
+</tr>
+<tr>
+<td>page</td>
+<td>类似于Java类中的this关键字</td>
+</tr>
+<tr>
+<td>Exception</td>
+<td><strong>Exception</strong>类的对象，代表发生错误的JSP页面中对应的异常对象</td>
+</tr>
+</tbody></table>
+<h3 id="application"><a href="#application" class="headerlink" title="application"></a>application</h3><h4 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h4><p>i. 有效范围 只要不重启，或者关闭服务器就会有效。</p>
+<p>ii. Application是存储在服务器上的。</p>
+<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">String <span class="title">getAttribute</span><span class="params">(String name)</span> 根据属性名称获取属性值。</span></span><br><span class="line"><span class="function">Enumeration <span class="title">getAttributeNames</span><span class="params">()</span> 获取所有的属性名称。</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setAttribute</span><span class="params">(String name, Object object)</span> 设置属性，指定属性名称和属性值。</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">removeAttribute</span><span class="params">(String name)</span> 根据属性名称删除对应的属性。</span></span><br><span class="line"><span class="function">ServletContext <span class="title">getContext</span><span class="params">(String uripath)</span> 获取指定URL的ServletContext对象。</span></span><br><span class="line"><span class="function">String <span class="title">getContextPath</span><span class="params">()</span> 获取当前Web应用程序的根目录。</span></span><br><span class="line"><span class="function">String <span class="title">getInitParameter</span><span class="params">(String name)</span> 根据初始化参数名称，获取初始化参数值。</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getMajorVersion</span><span class="params">()</span> 获取Servlet API的主版本号。</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getMinorVersion</span><span class="params">()</span> 获取Servlet API的次版本号。</span></span><br><span class="line"><span class="function">String <span class="title">getMimeType</span><span class="params">(String file)</span> 获取指定文件的MIME 类型。</span></span><br><span class="line"><span class="function">String <span class="title">getServletInfo</span><span class="params">()</span> 获取当前Web服务器的版本信息。</span></span><br><span class="line"><span class="function">String <span class="title">getServletContextName</span><span class="params">()</span> 获取当前Web应用程序的名称。</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">log</span><span class="params">(String message)</span> 将信息写入日志文件中。</span></span><br></pre></td></tr></table></figure>
+<h4 id="Servlet上怎么获得application（servetcontext）"><a href="#Servlet上怎么获得application（servetcontext）" class="headerlink" title="Servlet上怎么获得application（servetcontext）"></a>Servlet上怎么获得application（servetcontext）</h4><p><code>ServletContext servletContext = this.getServletContext();</code></p>
+<p> application.getRealPath(“/“)获得服务器上项目的物理路径。</p>
+<h4 id="getInitParameter"><a href="#getInitParameter" class="headerlink" title="getInitParameter()"></a>getInitParameter()</h4><p>i. servletconfig  ：获得servlet的init-param(servlet的常量)</p>
+<p>ii. servletcontext ：不能获得servlet的init-param ，可以获得上下文，全局的常量。</p>
+<p>iii. 配置全局常量。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context-param</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>encoding<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>utf-8<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">context-param</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="Init-param和context-param的获取"><a href="#Init-param和context-param的获取" class="headerlink" title="Init-param和context-param的获取"></a>Init-param和context-param的获取</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String encoding = <span class="keyword">this</span>.getServletConfig().getInitParameter(<span class="string">&quot;encoding&quot;</span>);</span><br><span class="line"><span class="comment">//可以获得context-param</span></span><br><span class="line">String encoding1 = <span class="keyword">this</span>.getServletContext().getInitParameter(<span class="string">&quot;encoding&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="jsp的四大作用域"><a href="#jsp的四大作用域" class="headerlink" title="jsp的四大作用域"></a>jsp的四大作用域</h2><p>page：在一个页面内保存属性，跳转之后无效。 </p>
+<p>request：在一次请求范围内有效，服务器跳转之后依然有效。</p>
+<p>session：在一次会话范围内有效，网页重新打开之后无效。典型用法，用户登录。</p>
+<p>session失效：</p>
+<ol>
+<li><p>关闭浏览器</p>
+</li>
+<li><p>不做任何前提下（不然会重新计时），静默30分钟（session默认有效期限）</p>
+</li>
+<li><p>超出有效时间</p>
+</li>
+<li><p>Api让session失效。（invalidate，removeattribute）</p>
+</li>
+</ol>
+<p>application: 在整个服务器上保存，对所有用户都有用。典型用法，比如网站计数等，只有服务器重启之后，才能释放。</p>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/05/06/javaWeb0506/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/05/07/javaWeb0508/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

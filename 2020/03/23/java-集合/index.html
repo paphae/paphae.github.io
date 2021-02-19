@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>java-集合 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Collecttion," />
+  
+
+  <meta name="description" content="CollectionCollection接口是最基本的集合接口，它不提供直接的实现，JavaSDK提供的类都是继承自Collection的“子接口”如List和Set。Collection所代表的是一种规则，它所包含的元素都必须遵循一条或者多条规则。如有些允许重复而有些则不能重复、有些必须要按照顺序插入而有些则是散列，有些支持排序但是有些则不支持">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java-集合">
+<meta property="og:url" content="http://paphae.top/2020/03/23/java-%E9%9B%86%E5%90%88/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="CollectionCollection接口是最基本的集合接口，它不提供直接的实现，JavaSDK提供的类都是继承自Collection的“子接口”如List和Set。Collection所代表的是一种规则，它所包含的元素都必须遵循一条或者多条规则。如有些允许重复而有些则不能重复、有些必须要按照顺序插入而有些则是散列，有些支持排序但是有些则不支持">
+<meta property="og:locale">
+<meta property="og:image" content="http://paphae.top/2020/03/23/java-%E9%9B%86%E5%90%88/java-%E9%9B%86%E5%90%88/%E5%9B%BE%E7%89%871.png">
+<meta property="og:image" content="http://paphae.top/2020/03/23/java-%E9%9B%86%E5%90%88/java-%E9%9B%86%E5%90%88/%E5%9B%BE%E7%89%872.png">
+<meta property="og:image" content="http://paphae.top/2020/03/23/java-%E9%9B%86%E5%90%88/java-%E9%9B%86%E5%90%88/%E5%9B%BE%E7%89%873.png">
+<meta property="og:image" content="http://paphae.top/2020/03/23/java-%E9%9B%86%E5%90%88/java-%E9%9B%86%E5%90%88/%E5%9B%BE%E7%89%874.png">
+<meta property="og:image" content="http://paphae.top/2020/03/23/java-%E9%9B%86%E5%90%88/java-%E9%9B%86%E5%90%88/%E5%9B%BE%E7%89%878.png">
+<meta property="og:image" content="http://paphae.top/2020/03/23/java-%E9%9B%86%E5%90%88/java-%E9%9B%86%E5%90%88/%E5%9B%BE%E7%89%875.png">
+<meta property="og:image" content="http://paphae.top/2020/03/23/java-%E9%9B%86%E5%90%88/java-%E9%9B%86%E5%90%88/%E5%9B%BE%E7%89%876.png">
+<meta property="og:image" content="http://paphae.top/2020/03/23/java-%E9%9B%86%E5%90%88/java-%E9%9B%86%E5%90%88/%E5%9B%BE%E7%89%877.png">
+<meta property="og:image" content="http://paphae.top/2020/03/23/java-%E9%9B%86%E5%90%88/java-%E6%AF%94%E8%BE%83%E5%99%A8/%E5%9B%BE%E7%89%8715.png">
+<meta property="og:image" content="http://paphae.top/2020/03/23/java-%E9%9B%86%E5%90%88/java-%E6%AF%94%E8%BE%83%E5%99%A8/%E5%9B%BE%E7%89%8716.png">
+<meta property="og:image" content="http://paphae.top/2020/03/23/java-%E9%9B%86%E5%90%88/java-%E6%AF%94%E8%BE%83%E5%99%A8/%E5%9B%BE%E7%89%8717.png">
+<meta property="og:image" content="http://paphae.top/2020/03/23/java-%E9%9B%86%E5%90%88/java-%E6%AF%94%E8%BE%83%E5%99%A8/%E5%9B%BE%E7%89%8718.png">
+<meta property="og:image" content="http://paphae.top/2020/03/23/java-%E9%9B%86%E5%90%88/java-%E6%AF%94%E8%BE%83%E5%99%A8/%E5%9B%BE%E7%89%8719.png">
+<meta property="og:image" content="http://paphae.top/2020/03/23/java-%E9%9B%86%E5%90%88/java-%E6%AF%94%E8%BE%83%E5%99%A8/%E5%9B%BE%E7%89%8720.png">
+<meta property="og:image" content="http://paphae.top/2020/03/23/java-%E9%9B%86%E5%90%88/java-%E6%AF%94%E8%BE%83%E5%99%A8/%E5%9B%BE%E7%89%8721.png">
+<meta property="og:image" content="http://paphae.top/2020/03/23/java-%E9%9B%86%E5%90%88/java-%E6%AF%94%E8%BE%83%E5%99%A8/%E5%9B%BE%E7%89%8722.png">
+<meta property="article:published_time" content="2020-03-22T23:40:47.000Z">
+<meta property="article:modified_time" content="2020-05-06T00:41:07.533Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="Collecttion">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://paphae.top/2020/03/23/java-%E9%9B%86%E5%90%88/java-%E9%9B%86%E5%90%88/%E5%9B%BE%E7%89%871.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Collection"><span class="toc-text">Collection</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Map%E6%8E%A5%E5%8F%A3"><span class="toc-text">Map接口</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#HashMap"><span class="toc-text">HashMap</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#map%E5%85%B6%E4%BB%96%E5%AE%9E%E7%8E%B0%E7%B1%BB"><span class="toc-text">map其他实现类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Properties"><span class="toc-text">Properties</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Map%E9%81%8D%E5%8E%86"><span class="toc-text">Map遍历</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#List"><span class="toc-text">List</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%9F%E5%88%97"><span class="toc-text">队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ArrayList"><span class="toc-text">ArrayList</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LinkedList"><span class="toc-text">LinkedList</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Set"><span class="toc-text">Set</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#set%E5%AE%9E%E7%8E%B0%E7%B1%BB"><span class="toc-text">set实现类</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Arrays%E5%B7%A5%E5%85%B7%E7%B1%BB%E5%9E%8B"><span class="toc-text">Arrays工具类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Collections"><span class="toc-text">Collections</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B0%E5%B7%A5%E5%85%B7%E7%94%9F%E6%88%90%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E9%9B%86%E5%90%88"><span class="toc-text">新工具生成线程安全集合</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="toc-text">迭代器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="toc-text">利用迭代器</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-java-集合" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">java-集合</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.03.23</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/javaSE/">javaSE</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="Collection"><a href="#Collection" class="headerlink" title="Collection"></a>Collection</h2><p>Collection接口是最基本的集合接口，它不提供直接的实现，JavaSDK提供的类都是继承自Collection的“子接口”如List和Set。Collection所代表的是一种规则，它所包含的元素都必须遵循一条或者多条规则。如有些允许重复而有些则不能重复、有些必须要按照顺序插入而有些则是散列，有些支持排序但是有些则不支持</p>
+<a id="more"></a>
+<p><img src="java-%E9%9B%86%E5%90%88/%E5%9B%BE%E7%89%871.png"><br>在Java中所有实现了Collection接口的类都应该提供两套标准的构造函数，一个是无参，用于创建一个空的Collection，一个是带有Collection参数的有参构造函数，用于创建一个新的Collection，这个新的Collection与传入进来的Collection具备相同的元素</p>
+<p>Collection接口为集合提供一些统一的访问接口（泛型接口），覆盖了向集合中添加元素、删除元素、以及协助对集合进行遍历访问的相关方法：<br><img src="java-%E9%9B%86%E5%90%88/%E5%9B%BE%E7%89%872.png"><br><img src="java-%E9%9B%86%E5%90%88/%E5%9B%BE%E7%89%873.png"></p>
+<ul>
+<li>集合的通用遍历方法有以下几种： <ul>
+<li>使用增强型for(forEach循环)遍历 </li>
+<li>使用迭代器遍历 </li>
+</ul>
+</li>
+</ul>
+<h3 id="Map接口"><a href="#Map接口" class="headerlink" title="Map接口"></a>Map接口</h3><p>Map是由一系列键值对组成的集合，提供了key到Value的映射。同时它也没有继承Collection。在Map中它保证了key与value之间的一一对应关系。也就是说一个key对应一个value，所以它不能存在相同的key值，当然value值可以相同 </p>
+<p>Map 接口提供三种collection 视图，允许以键集、值集或键-值映射关系集的形式查看某个映射的内容。映射顺序定义为迭代器在映射的 collection 视图上返回其元素的顺序。某些映射实现可明确保证其顺序，如 TreeMap 类；另一些映射实现则不保证顺序，如 HashMap 类<br><img src="java-%E9%9B%86%E5%90%88/%E5%9B%BE%E7%89%874.png"></p>
+<h4 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h4><p>HashMap是基于哈希表的Map接口的非同步实现，继承自AbstractMap，AbstractMap是部分实现Map接口的抽象类 </p>
+<p>在之前的版本中，HashMap采用数组+链表实现，即使用链表处理冲突，同一hash值的链表都存储在一个链表里（和我们在之前自行实现的哈希表相同）。但是当链表中的元素较多，即hash值相等的元素较多时，通过key值依次查找的效率较低。而JDK1.8中，HashMap采用数组+链表+红黑树（一种平衡搜索二叉树）实现，当链表长度超过阈值（8）时，将链表转换为红黑树，这样大大减少了查找时间<br><img src="java-%E9%9B%86%E5%90%88/%E5%9B%BE%E7%89%878.png"></p>
+<h3 id="map其他实现类"><a href="#map其他实现类" class="headerlink" title="map其他实现类"></a>map其他实现类</h3><ul>
+<li>和Vector类似，Map体系也有一个自JDK1.2之前遗留的集合工具：Hashtable，它的操作接口和HashMap相同，和HashMap的区别在于：Hashtable是线程安全的，而HashMap是非线程安全的 </li>
+<li>LinkedHashMap继承自HashMap，它主要是用链表实现来扩展HashMap类，HashMap中条目是没有顺序的，但是在LinkedHashMap中元素既可以按照它们插入的顺序排序，也可以按它们最后一次被访问的顺序排序 </li>
+<li>TreeMap基于红黑树数据结构的实现，键值可以使用Comparable或Comparator接口来排序。TreeMap继承自AbstractMap，同时实现了接口NavigableMap，而接口NavigableMap则继承自SortedMap。SortedMap是Map的子接口，使用它可以确保图中的条目是排好序的</li>
+<li>在实际使用中，如果更新Map时不需要保持图中元素的顺序，就使用HashMap，如果需要保持Map中元素的插入顺序或者访问顺序，就使用LinkedHashMap，如果需要使图按照键值排序，就使用TreeMap </li>
+</ul>
+<h4 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h4><p>Properites类是Hashtable类的子类，所以也间接地实现了Map接口。<br>在实际应用中，常使用Properties类对属性文件进行处理（在国际化支持中我们也会使用另外一个工具来通过国际化方式读取属性文件： ResourceBundle ）<br>Properties类的常用方法： </p>
+<ul>
+<li>load()： <ul>
+<li>加载文件； </li>
+</ul>
+</li>
+<li>getProperty(key)： <ul>
+<li>通过key值获得对应的value值 </li>
+</ul>
+</li>
+<li>setProperty(String key,String value)<ul>
+<li>给properties文件中写值</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoProperties</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Properties pro = <span class="keyword">new</span> Properties();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			pro.load(<span class="keyword">new</span> FileInputStream(<span class="string">&quot;src/com/specification/java0320/data/hh.properties&quot;</span>));</span><br><span class="line">			System.out.println(pro.getProperty(<span class="string">&quot;ID&quot;</span>));</span><br><span class="line">			System.out.println(pro.getProperty(<span class="string">&quot;name&quot;</span>));</span><br><span class="line">		&#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Map遍历"><a href="#Map遍历" class="headerlink" title="Map遍历"></a>Map遍历</h4><p>第一种：通过Map.keySet遍历key和value：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (Integer in : map.keySet()) &#123;</span><br><span class="line">	<span class="comment">//map.keySet()返回的是所有key的值</span></span><br><span class="line">	String str = map.get(in);<span class="comment">//得到每个key多对用value的值</span></span><br><span class="line">	System.out.println(in + <span class="string">&quot;     &quot;</span> + str);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第二种：通过Map.entrySet使用iterator遍历key和value：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Iterator&lt;Map.Entry&lt;Integer, String&gt;&gt; it = map.entrySet().iterator();</span><br><span class="line"><span class="keyword">while</span> (it.hasNext()) &#123;</span><br><span class="line">	Map.Entry&lt;Integer, String&gt; entry = it.next();</span><br><span class="line">	System.out.println(<span class="string">&quot;key= &quot;</span> + entry.getKey() + <span class="string">&quot; and value= &quot;</span> + entry.getValue());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第三种：通过Map.entrySet遍历key和value:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (Map.Entry&lt;Integer, String&gt; entry : map.entrySet()) &#123;</span><br><span class="line">	<span class="comment">//Map.entry&lt;Integer,String&gt; 映射项（键-值对）  有几个方法：用上面的名字entry</span></span><br><span class="line">	<span class="comment">//entry.getKey() ;entry.getValue(); entry.setValue();</span></span><br><span class="line">	<span class="comment">//map.entrySet()  返回此映射中包含的映射关系的 Set视图。</span></span><br><span class="line">	System.out.println(<span class="string">&quot;key= &quot;</span> + entry.getKey() + <span class="string">&quot; and value= &quot;</span>+ entry.getValue());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第四种：通过Map.values()遍历所有的value，但不能遍历key:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (String v : map.values()) &#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;value= &quot;</span> + v);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="List"><a href="#List" class="headerlink" title="List"></a>List</h3><p>List接口为Collection子接口。List所代表的是有序的Collection</p>
+<p>它用某种特定的插入顺序来维护元素顺序。用户可以对列表中每个元素的插入位置进行精确地控制，同时可以根据元素的整数索引（在列表中的位置，和数组相似，从0开始，到元素个数-1）访问元素，并检索列表中的元素，由于这些特性，List在Collection的基础上扩展了一些重要方法：<br><img src="java-%E9%9B%86%E5%90%88/%E5%9B%BE%E7%89%875.png"></p>
+<h3 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h3><ul>
+<li>队列是一种先进先出的数据结构，元素在队列末尾添加，在队列头部删除。Queue接口扩展自Collection，并提供插入、提取、检验等操作 </li>
+<li>方法offer表示向队列添加一个元素，poll()与remove()方法都是移除队列头部的元素，两者的区别在于如果队列为空，那么poll()返回的是null，而remove()会抛出一个异常。方法element()与peek()主要是获取头部元素，不删除 </li>
+<li>接口Deque，是一个扩展自Queue的双端队列，它支持在两端插入和删除元素，因为LinkedList类实现了Deque接口，所以通常我们可以使用LinkedList来创建一个队列。PriorityQueue类实现了一个优先队列，优先队列中元素被赋予优先级，拥有高优先级的先被删除</li>
+</ul>
+<h3 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h3><p>ArrayList是一个用数组实现的列表，也是我们最常用的集合。它允许任何符合规则的元素插入甚至包括null</p>
+<p>每一个ArrayList都有一个初始容量（10），该容量代表了数组的大小。随着容器中的元素不断增加，容器的大小也会随着增加。在每次向容器中增加元素的同时都会进行容量检查，当快溢出时，就会进行扩容操作（构建一个新的更大的数组并将之前的内容拷贝到新书组中）。所以如果我们明确所插入元素的多少，最好指定一个初始容量值，避免过多的进行扩容操作而浪费时间、效率 </p>
+<p>ArrayList的默认扩容扩展后数组大小为：(原数组长度*3)/2+1<br>ArrayList是一个非线程安全的列表</p>
+<h3 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h3><p>同样实现List接口的LinkedList与ArrayList不同，LinkedList是一个双向链表。所以它除了有ArrayList的基本操作方法外还额外提供了get，remove，insert方法在LinkedList的首部或尾部 </p>
+<p>由于实现的方式不同，LinkedList不能随机访问，它所有的操作都是要按照双重链表的需要执行。在列表中索引的操作将从开头或结尾遍历列表（从靠近指定索引的一端）。这样做的好处就是可以通过较低的代价在List中进行插入和删除操作 </p>
+<p>与ArrayList一样，LinkedList也是非同步的。如果多个线程同时访问一个List，则必须自己实现访问同步 </p>
+<h3 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h3><p>Set是一种不包括重复元素的Collection。它维持自己的内部排序，所以随机访问没有任何意义。与List一样，它同样允许null的存在但是仅有一个 </p>
+<p>由于Set接口的特殊性，所有传入Set集合中的元素都必须不同，同时要注意任何可变对象，如果在对集合中元素进行操作时，导致e1.equals(e2)==true，则必定会产生某些问题</p>
+<h4 id="set实现类"><a href="#set实现类" class="headerlink" title="set实现类"></a>set实现类</h4><ul>
+<li>EnumSet<ul>
+<li>是枚举的专用Set。所有的元素都是枚举类型 </li>
+</ul>
+</li>
+<li>HashSet<ul>
+<li>HashSet堪称查询速度最快的集合，因为其内部是以HashCode来实现的。它内部元素的顺序是由哈希码来决定的，所以它不保证set的迭代顺序；特别是它不保证该顺序恒久不变 </li>
+</ul>
+</li>
+<li>TreeSet <ul>
+<li>基于TreeMap，生成一个总是处于排序状态的set，内部以TreeMap来实现。它是使用元素的自然顺序对元素进行排序，或者根据创建Set 时提供的 Comparator 进行排序，具体取决于使用的构造方法</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoSet</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Set&lt;Person&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">		Person p = <span class="keyword">new</span> Person(<span class="number">15</span>, <span class="string">&quot;zhangbo&quot;</span>,<span class="string">&quot;男&quot;</span>);</span><br><span class="line">		Person p2 = <span class="keyword">new</span> Person(<span class="number">16</span>, <span class="string">&quot;lihui&quot;</span>,<span class="string">&quot;男&quot;</span>);</span><br><span class="line">		Person p3 = <span class="keyword">new</span> Person(<span class="number">19</span>, <span class="string">&quot;wangsu&quot;</span>,<span class="string">&quot;男&quot;</span>);</span><br><span class="line">		Person p4 = <span class="keyword">new</span> Person(<span class="number">18</span>, <span class="string">&quot;zheli&quot;</span>,<span class="string">&quot;男&quot;</span>);</span><br><span class="line">		Person p5 = <span class="keyword">new</span> Person(<span class="number">17</span>, <span class="string">&quot;xuehu&quot;</span>,<span class="string">&quot;男&quot;</span>);</span><br><span class="line">		set.add(p);</span><br><span class="line">		set.add(p2);</span><br><span class="line">		set.add(p3);</span><br><span class="line">		set.add(p4);</span><br><span class="line">		set.add(p5);</span><br><span class="line">		set.add(p5);</span><br><span class="line">		<span class="keyword">for</span> (Person person : set) &#123;</span><br><span class="line">			System.out.println(person);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		System.out.println(<span class="string">&quot;--------------&quot;</span>);</span><br><span class="line">		Set&lt;Person&gt; tree = <span class="keyword">new</span> TreeSet&lt;Person&gt;();</span><br><span class="line">		tree.add(p5);</span><br><span class="line">		tree.add(p4);</span><br><span class="line">		tree.add(p3);</span><br><span class="line">		tree.add(p2);</span><br><span class="line">		tree.add(p);</span><br><span class="line">		<span class="keyword">for</span> (Person person : tree) &#123;</span><br><span class="line">			System.out.println(person);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>集合元素的hashCode方法返回的哈希值对HashSet而言非常重要，因为HashSet会优先使用这个哈希值来判定两个元素是否相同并确定元素的位置</p>
+<p>如果我们在自定义元素类型时hashCode方法定义不够先进，就会出现逻辑和语义上的问题，甚至会造成内存泄露 </p>
+<p>有可能造成内存泄露的原因是HashSet的remove方法也依赖于哈希值进行待删除节点定位，如果由于集合元素内容被修改而导致hashCode方法的返回值发生变更，那么，remove方法就无法定位到原来的对象，导致删除不成功，从而导致内存泄露</p>
+<p><img src="java-%E9%9B%86%E5%90%88/%E5%9B%BE%E7%89%876.png"><br><img src="java-%E9%9B%86%E5%90%88/%E5%9B%BE%E7%89%877.png"><br>TreeSet扩展自AbstractSet，并实现了NavigableSet，AbstractSet扩展自AbstractCollection， TreeSet是一个有序的Set，其底层是一颗树，这样就能从Set里面提取一个有序序列了。为了实现排序的功能，TreeSet中存放的对象需要实现Comparable。在实例化TreeSet时，我们也可以给TreeSet指定一个比较器Comparator来指定树形集中的元素顺序。树形集中提供了很多便捷的方法</p>
+<h3 id="Arrays工具类型"><a href="#Arrays工具类型" class="headerlink" title="Arrays工具类型"></a>Arrays工具类型</h3><p>java.util.Arrays类是一个针对数组进行操作的工具类，其中提供了对对象数组进行排序的方法；<br>两个常用的对象数组排序方法如下：<br><img src="java-%E6%AF%94%E8%BE%83%E5%99%A8/%E5%9B%BE%E7%89%8715.png"></p>
+<h3 id="Collections"><a href="#Collections" class="headerlink" title="Collections"></a>Collections</h3><p>和Arrays.sort()方法一样，Collections类也提供了sort()方法对集合内部中的元素按照元素的自然排序方式进行排序：<br><img src="java-%E6%AF%94%E8%BE%83%E5%99%A8/%E5%9B%BE%E7%89%8716.png"></p>
+<h3 id="新工具生成线程安全集合"><a href="#新工具生成线程安全集合" class="headerlink" title="新工具生成线程安全集合"></a>新工具生成线程安全集合</h3><p>集合框架中的新工具大多是非同步的，如果在并发环境中直接访问可能会导致各种问题，而Vector、Hashtable等老旧工具还继续保留的主要原因是维持向下兼容，因此我们希望能够获取新的集合工具的线程安全版本，而Collections工具类则为我们提供了这方面的支持</p>
+<p><img src="java-%E6%AF%94%E8%BE%83%E5%99%A8/%E5%9B%BE%E7%89%8717.png"></p>
+<h2 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h2><p><img src="java-%E6%AF%94%E8%BE%83%E5%99%A8/%E5%9B%BE%E7%89%8718.png"></p>
+<p>以上代码会出现异常<br><strong>java.util.ConcurrentModificationException</strong><br><img src="java-%E6%AF%94%E8%BE%83%E5%99%A8/%E5%9B%BE%E7%89%8719.png"><br>如果是为了删除元素，可以利用break终止循环<br><img src="java-%E6%AF%94%E8%BE%83%E5%99%A8/%E5%9B%BE%E7%89%8720.png"></p>
+<h3 id="利用迭代器"><a href="#利用迭代器" class="headerlink" title="利用迭代器"></a>利用迭代器</h3><p>获取迭代器，在Collection接口中定义了一个iterator();  方法用于返回迭代器<br>Iterator<Student> it = stuList.iterator();<br>迭代器方法介绍<br>hasNext();判断是否还有下一个元素<br>next();获取当前元素切换到下一个元素<br>remove();移除元素<br><img src="java-%E6%AF%94%E8%BE%83%E5%99%A8/%E5%9B%BE%E7%89%8721.png"><br><img src="java-%E6%AF%94%E8%BE%83%E5%99%A8/%E5%9B%BE%E7%89%8722.png"></p>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/03/20/java-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/03/23/java-%E6%AF%94%E8%BE%83%E5%99%A8/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

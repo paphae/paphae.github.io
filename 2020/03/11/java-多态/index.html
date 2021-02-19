@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>java-多态 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="多态," />
+  
+
+  <meta name="description" content="多态多态性是指允许不同类的对象对同一消息作出响应多态性语言具有灵活、抽象、行为共享、代码共享的优势">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java-多态">
+<meta property="og:url" content="http://paphae.top/2020/03/11/java-%E5%A4%9A%E6%80%81/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="多态多态性是指允许不同类的对象对同一消息作出响应多态性语言具有灵活、抽象、行为共享、代码共享的优势">
+<meta property="og:locale">
+<meta property="og:image" content="http://paphae.top/2020/03/11/java-%E5%A4%9A%E6%80%81/java0309/%E5%9B%BE%E7%89%874.png">
+<meta property="og:image" content="http://paphae.top/2020/03/11/java-%E5%A4%9A%E6%80%81/java0309/%E5%9B%BE%E7%89%875.png">
+<meta property="og:image" content="http://paphae.top/2020/03/11/java-%E5%A4%9A%E6%80%81/java0309/%E5%9B%BE%E7%89%876.png">
+<meta property="og:image" content="http://paphae.top/2020/03/11/java-%E5%A4%9A%E6%80%81/java0310/%E5%9B%BE%E7%89%871.png">
+<meta property="og:image" content="http://paphae.top/2020/03/11/java-%E5%A4%9A%E6%80%81/java0310/%E5%9B%BE%E7%89%872.png">
+<meta property="og:image" content="http://paphae.top/2020/03/11/java-%E5%A4%9A%E6%80%81/java0310/%E5%9B%BE%E7%89%873.png">
+<meta property="og:image" content="http://paphae.top/2020/03/11/java-%E5%A4%9A%E6%80%81/java0310/%E5%9B%BE%E7%89%874.png">
+<meta property="og:image" content="http://paphae.top/2020/03/11/java-%E5%A4%9A%E6%80%81/java0310/%E5%9B%BE%E7%89%875.png">
+<meta property="og:image" content="http://paphae.top/2020/03/11/java-%E5%A4%9A%E6%80%81/java0310/%E5%9B%BE%E7%89%876.png">
+<meta property="article:published_time" content="2020-03-10T23:58:06.000Z">
+<meta property="article:modified_time" content="2020-05-06T00:51:20.415Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="多态">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://paphae.top/2020/03/11/java-%E5%A4%9A%E6%80%81/java0309/%E5%9B%BE%E7%89%874.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E6%80%81"><span class="toc-text">多态</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E9%87%8D%E8%BD%BD"><span class="toc-text">方法重载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E9%87%8D%E5%86%99"><span class="toc-text">方法重写</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E6%AF%94%E6%96%B9%E6%B3%95%E9%87%8D%E5%86%99%E4%B8%8E%E9%87%8D%E8%BD%BD"><span class="toc-text">对比方法重写与重载</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E5%90%91%E4%B8%8A%E9%80%A0%E5%9E%8B"><span class="toc-text">对象向上造型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E6%9C%9F%E4%B8%8E%E8%BF%90%E8%A1%8C%E6%9C%9F"><span class="toc-text">编译期与运行期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%91%E4%B8%8B%E9%80%A0%E5%9E%8B"><span class="toc-text">向下造型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E6%80%81%E7%8E%AF%E5%A2%83%E4%B8%8B%E5%AF%B9%E5%B1%9E%E6%80%A7%E5%92%8C%E6%96%B9%E6%B3%95%E7%9A%84%E8%B0%83%E7%94%A8%E7%89%B9%E7%82%B9"><span class="toc-text">多态环境下对属性和方法的调用特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E5%86%99%E5%92%8C%E9%87%8D%E8%BD%BD"><span class="toc-text">重写和重载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E6%80%81%E5%8F%82%E6%95%B0%E5%BE%97%E4%BD%BF%E7%94%A8"><span class="toc-text">多态参数得使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Instanceof"><span class="toc-text">Instanceof</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E6%80%81%E7%9A%84%E5%A5%BD%E5%A4%84%EF%BC%9A"><span class="toc-text">多态的好处：</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-java-多态" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">java-多态</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.03.11</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/javaSE/">javaSE</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><p>多态性是指允许不同类的对象对同一消息作出响应<br>多态性语言具有灵活、抽象、行为共享、代码共享的优势</p>
+<a id="more"></a>
+<p>Java中多态性指允许不同类的对象对同一消息做出响应。即同一消息可以根据发送对象的不同而采用多种不同的行为方式<br>发送消息就是方法调用<br>现实中，关于多态的例子不胜枚举。比方说按下 F1 键这个动作，如果当前在IE界面下弹出的浏览器的帮助文档；如果当前在 Word 下弹出的就是 office帮助；在 Windows 下弹出的就是 Windows 帮助和支持<br>可见，同一个事件发生在不同的对象上会产生不同的结果，因此，多态的主要作用适用于消除类型之间的耦合关系</p>
+<h4 id="方法重载"><a href="#方法重载" class="headerlink" title="方法重载"></a>方法重载</h4><p>方法重载：同一个类中，方法名相同、参数列表不同（类型、个数、顺序）、返回类型可以相同或不同、访问权限可以相同或不同的方法</p>
+<h4 id="方法重写"><a href="#方法重写" class="headerlink" title="方法重写"></a>方法重写</h4><p>继承的作用就是复用，即子类直接使用父类的属性和方法<br>然而，有些时候，子类希望修改父类的方法的方法体，可以怎么做呢？<br>第一种做法是子类创建一个不同名字的新方法，实现新的逻辑，然而，这种做法会导致子类依然包含父类中的那个方法，却不应该使用，破坏封装性<br>我们希望子类中的方法依然和父类方法的声明形式一样，但是具体方法体却不同，这种做法就叫做方法覆盖/方法重写</p>
+<h3 id="对比方法重写与重载"><a href="#对比方法重写与重载" class="headerlink" title="对比方法重写与重载"></a>对比方法重写与重载</h3><p>发生方法覆盖的两个方法的方法名、参数列表必须完全一致(子类重写父类的方法) ，方法返回值如果是基本数据类型，则返回值应该保持一致，如果返回值是类，则子类覆盖方法的返回值必须是父类方法返回值或其的子类（协变返回类型）<br>子类抛出的异常不能超过父类相应方法抛出的异常(子类异常不能大于父类异常) （异常处理章节详细介绍）<br>子类方法的访问级别不能低于父类相应方法的访问级别(子类访问级别不能低于父类访问级别)</p>
+<p>案例：<br><img src="java0309/%E5%9B%BE%E7%89%874.png"><img src="java0309/%E5%9B%BE%E7%89%875.png"><img src="java0309/%E5%9B%BE%E7%89%876.png"></p>
+<ul>
+<li><strong>变量名  instanceof  类名 :判断变量(引用) 是否是属于  后面类型 属于 true 不属于  false</strong></li>
+<li><strong>java.lang.NullPointerException:表示空指针异常，使用对象调用方法，但是对象是null</strong></li>
+<li><strong>java.lang.ClassCastException：类型转换异常</strong><h2 id="对象向上造型"><a href="#对象向上造型" class="headerlink" title="对象向上造型"></a>对象向上造型</h2>白马是马，马非白马的问题：<br>在继承关系中，继承者完全可以替换被继承者，反之则不可以<br>例如：人类是父类，男人女人是子类，一个人是男人，一定也是人，所以向上转型不需要强制，但是一个人是人，但不一定是男人，所以需要强制转</li>
+</ul>
+<p>从上例来看:<br>”人 person = new 男人（）”是合理的<br>“男人 person = new 人()”则不合理<br>所谓的向上造型就是父类的引用（栈中）指向子类的对象（堆中）<br><img src="java0310/%E5%9B%BE%E7%89%871.png"><br><strong>父类引用指向子类对象</strong><br><strong>子类引用不能指向父类对象</strong></p>
+<h2 id="编译期与运行期"><a href="#编译期与运行期" class="headerlink" title="编译期与运行期"></a>编译期与运行期</h2><p>在进行对象造型时，用来声明引用的父类类型我们称为编译期类型，而实际用于构建对象的子类类型我们称为运行期类型<br><img src="java0310/%E5%9B%BE%E7%89%872.png"><br>那么这个时候直接使用bird对象调用成员变量和成员方法究竟应该调用编译器类型中声明的还是调用运行期类型中重写的呢？<br>引用变量在编译阶段只能调用其编译时类型所具有的方法，但运行时则执行它运行时类型所具有的方法<br>因此，编写Java代码时，引用只能调用编译器类型里包含的成员<br>例如，通过Object p =new Persion()代码定义一个变量p，则这个p只能调用Object类的方法，而不能调用Persion类里定义的方法</p>
+<h2 id="向下造型"><a href="#向下造型" class="headerlink" title="向下造型"></a>向下造型</h2><p>对象在满足条件的情况下也能进行向下造型，即显式的将父类引用指向的对象转换为子类类型向下造型的要求是：进行向下造型的对象的运行期类型必须是子类或以子类为根的继承树中的其他类型（Ostrich extends Bird）<br><img src="java0310/%E5%9B%BE%E7%89%873.png"></p>
+<h2 id="多态环境下对属性和方法的调用特点"><a href="#多态环境下对属性和方法的调用特点" class="headerlink" title="多态环境下对属性和方法的调用特点"></a>多态环境下对属性和方法的调用特点</h2><p>Java代码中的数据和行为（变量和方法）在进行绑定（即通过对象调用成员变量或方法时究竟调用哪个版本，如覆盖后的方法）的时候划分为两种类型：<br><strong>静态绑定</strong><br><strong>动态绑定</strong><br>静态绑定发生在编译时期，动态绑定发生在运行时<br>类的成员变量（属性）都是静态绑定的（编译时），也就是说，类中声明的成员变量不能被子类中的同名属性覆盖，通过该类的引用调用成员，始终调用该类自身中声明的属性（即始终调用编译期类型中的属性）<br><img src="java0310/%E5%9B%BE%E7%89%874.png"><br><img src="java0310/%E5%9B%BE%E7%89%875.png"><br><img src="java0310/%E5%9B%BE%E7%89%876.png"><br>对于Java中的方法而言，除了final，static，private和构造方法是静态绑定外，其他的方法全部为动态绑定，这就意味着方法调用将动态使用运行期类型版本</p>
+<h2 id="重写和重载"><a href="#重写和重载" class="headerlink" title="重写和重载"></a>重写和重载</h2><p>由上述特点可以看出：<br>重载方法中具体调用哪个版本是通过静态绑定在编译期就决定了的<br>重写覆盖的方法调用哪个版本是通过动态绑定在运行期决定的</p>
+<h2 id="多态参数得使用"><a href="#多态参数得使用" class="headerlink" title="多态参数得使用"></a>多态参数得使用</h2><p>如果将方法的形参参数声明为父类类型，结合前序章节介绍的方法参数的功能（即调用方法代码前会隐式执行形参和实参之间的赋值操作），由于子类的对象赋值给父类的引用是合法的，那么在调用方法时，实参就可以是以形参类型为根的继承树中的任意类型<br>此时形参对应的运行期类型和传进来的实参运行期类型保持一致</p>
+<h2 id="Instanceof"><a href="#Instanceof" class="headerlink" title="Instanceof"></a>Instanceof</h2><p>实参可能是形参的任意子孙类，某些时候需要在方法中明确究竟参数的运行期类型是什么，那么instanceof运算符提供了一种解决方法<br>运算符instanceof用来判断对象是否属于某个类的实例，具体语法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对象 instanceof 类</span><br></pre></td></tr></table></figure>
+<p>该表达式为一个boolean表达式，如果对象的类型是后面提供的类或其子类，则返回true，反之返回false</p>
+<h2 id="多态的好处："><a href="#多态的好处：" class="headerlink" title="多态的好处："></a>多态的好处：</h2><p>可替换性（substitutability）<br>多态对已存在代码具有可替换性<br>可扩充性（extensibility）<br>多态对代码具有可扩充性。增加新的子类不影响已存在类的多态性、继承性，以及其他特性的运行和操作。实际上新加子类更容易获得多态功能<br>接口性（interface-ability）<br>多态是超类通过方法签名，向子类提供了一个共同接口，由子类来完善或者覆盖它而实现的<br>灵活性（flexibility）<br>它在应用中体现了灵活多样的操作，提高了使用效率<br>简化性（simplicity）<br>多态简化对应用软件的代码编写和修改过程，尤其在处理大量对象的运算和操作时，这个特点尤为突出和重要</p>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/03/10/java-%E5%B0%81%E8%A3%85%E4%B8%8E%E7%BB%A7%E6%89%BF/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/03/12/java-%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E7%AC%A6%E4%B8%8E%E6%8A%BD%E8%B1%A1%E7%B1%BB/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

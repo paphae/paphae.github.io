@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>java-多线程初识 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="线程," />
+  
+
+  <meta name="description" content="计算机发展史在发展的初期，计算机还没有操作系统或只拥有单任务操作系统；它们自始至终执行一个程序，这个程序直接访问机器的所有资源。这样一个程序运行在无保护的电子器件上，不仅写起来困难，而且每次只运行一个程序，不能很好地利用昂贵且稀缺的计算机资源">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java-多线程初识">
+<meta property="og:url" content="http://paphae.top/2020/03/17/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9D%E8%AF%86/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="计算机发展史在发展的初期，计算机还没有操作系统或只拥有单任务操作系统；它们自始至终执行一个程序，这个程序直接访问机器的所有资源。这样一个程序运行在无保护的电子器件上，不仅写起来困难，而且每次只运行一个程序，不能很好地利用昂贵且稀缺的计算机资源">
+<meta property="og:locale">
+<meta property="og:image" content="http://paphae.top/2020/03/17/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9D%E8%AF%86/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9D%E8%AF%86/%E5%9B%BE%E7%89%871.png">
+<meta property="og:image" content="http://paphae.top/2020/03/17/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9D%E8%AF%86/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9D%E8%AF%86/%E5%9B%BE%E7%89%872.png">
+<meta property="og:image" content="http://paphae.top/2020/03/17/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9D%E8%AF%86/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9D%E8%AF%86/%E5%9B%BE%E7%89%873.png">
+<meta property="og:image" content="http://paphae.top/2020/03/17/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9D%E8%AF%86/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9D%E8%AF%86/%E5%9B%BE%E7%89%874.png">
+<meta property="article:published_time" content="2020-03-17T00:05:07.000Z">
+<meta property="article:modified_time" content="2020-05-06T00:43:56.811Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="线程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://paphae.top/2020/03/17/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9D%E8%AF%86/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9D%E8%AF%86/%E5%9B%BE%E7%89%871.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8F%91%E5%B1%95%E5%8F%B2"><span class="toc-text">计算机发展史</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E8%BF%9B%E8%A1%8C%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B"><span class="toc-text">为什么要进行多线程编程</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B"><span class="toc-text">实现线程模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-text">线程生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93%EF%BC%88%E6%B8%85%E6%A5%9A%E7%A8%8B%E5%BA%8F%E3%80%81%E8%BF%9B%E7%A8%8B%E3%80%81%E7%BA%BF%E7%A8%8B%E3%80%81%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%89"><span class="toc-text">小结（清楚程序、进程、线程、生命周期）</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-java-多线程初识" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">java-多线程初识</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.03.17</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/javaSE/">javaSE</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="计算机发展史"><a href="#计算机发展史" class="headerlink" title="计算机发展史"></a>计算机发展史</h2><p>在发展的初期，计算机还没有操作系统或只拥有单任务操作系统；它们自始至终执行一个程序，这个程序直接访问机器的所有资源。这样一个程序运行在无保护的电子器件上，不仅写起来困难，而且每次只运行一个程序，不能很好地利用昂贵且稀缺的计算机资源 </p>
+<a id="more"></a>
+<p>操作系统的发展使得多个程序能够同时运行，程序在各自的进程中运行：相互分离，各自独立执行，由操作系统来分配资源，比如内存、文件句柄、安全证书。如果需要的话，进程会通过一些原始的机制相互通信：Socket、信号处理、共享内存、信号量和文件等<br>有一些因素推动促进了操作系统支持多程序同时执行的发展：<br>资源利用：<br>程序有时候需要等待外部的操作，比如输入和输出，并且在等待的时候不可能进行有价值的工作。在等待的时候，让其他的程序运行会提高效率<br>公平：<br>多个用户或程序可能对系统资源有平等的优先级别。让他们通过更好的时间片方式来共享计算机，这要比结束个程序后才开始下一个程序更可取<br>方便：<br>写一些程序，让它们各自执行一个单独任务并进行必要的相互协调，这要比编写一个程序来执行所有的任务更容易，更让人满意<br>在了解了操作系统的并发发展趋势之后，我们需要明确几个科学定义：<br>程序：<br>是计算机指令的集合.程序是一组静态的指令集，不占用系统运行资源,不能被系统调度，也不能作为独立运行的单位,它以文件的形式存储在磁盘上<br>进程：<br>是一个程序在其自身的地址空间中的一次执行活动。比如，打开一个记事本，就是调用了一个进程。进程是资源申请、调度和独立运行的单位，因此，它使用系统中的运行资源；而程序不能申请系统资源，一个程序可以对应多个进程，例如著名的QQ多开<br>在早期的分时共享系统中，每一个进程都是一个虚拟的冯诺依曼机：<br>它拥有一个内存空间，储存着指令和数据，根据机器语言的语义来顺序地执行指令，并且通过操作系统的I/O原语集来实现与外部世界的交互<br>对于每条指令的执行，都有一个对“下条指令”的明确定义，并根据程序中的指令集来进行流程的控制，现在几乎所有广泛使用的编程语言都遵循这个顺序的编程模型，其中语言规范明确定义了在一个给定动作完成后，下一个动作是什么</p>
+<p>顺序编程模型是自然的、常规的，就像是遵守着人类的工作方式：一次做一件事情，顺序进行。通常如此：<br>在编程语言中，真实世界中的每一个动作，都会抽象成一个规则的动作序列<br><img src="java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9D%E8%AF%86/%E5%9B%BE%E7%89%871.png"><br>上例的最后一步：等待水沸腾引入了异步这个要点<br>当水在加热的时候，你可以选择做什么-等待，或者开始准备吐丝面包（另一个异步任务），还可以取一份报纸看，同时仍然要记得煮开水的壶马上就会需要你的关注<br>开水和吐丝面包的生产者知道他们的产品通常在异步的情况下使用，所以在任务结束的时候，它们会提高信号的音量。找到顺序和异步之间最好的平衡，通常是那些高效率人士的一个特点，对于程序来说也是如此</p>
+<ul>
+<li>相同的关注点（资源利用，公平和方便）不仅促进了进程的发展，也促进了线程的发展。线程允许程序控制流的多重分支同时存在于一个进程： </li>
+<li>线程共享进程范围内的资源，比如内存和文件句柄，但是每一个线程有其自己的程序计数器、栈和本地变量 </li>
+<li>线程也为多处理器系统中并行地使用硬件提供了一个自然而然的分解；同一程序内的多个线程可以在多CPU的情况下同时调度 </li>
+<li>线程有些时候被称为轻量进程，并且大多数现代操作系统把线程作为时序调度的基本单元，而不是进程，在没有明确协调的情况下，线程相互间同时或异步地执行。因为线程共享其所属进程的内存地址空间，因此所有同一进程中的线程访问相同的变量，并从同一个堆中分配对象，这相对于进程间通信机制来说实现了良好的数据共享。但是如果没有明确的同步来管理共享数据，一个线程可能会修改其他线程正在使用的数据，产生意外的结果<br><img src="java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9D%E8%AF%86/%E5%9B%BE%E7%89%872.png"></li>
+</ul>
+<h4 id="为什么要进行多线程编程"><a href="#为什么要进行多线程编程" class="headerlink" title="为什么要进行多线程编程"></a>为什么要进行多线程编程</h4><ul>
+<li>多线程优点：</li>
+<li>可以更好的实现并行</li>
+<li>恰当地使用线程时，可以降低开发和维护的开销，并且能够提高复杂应用的性能。</li>
+<li>CPU在线程之间开关时的开销远比进程要少得多。因开关线程都在同一地址空间内，只需要修改线程控制表或队列，不涉及地址空间和其他工作。</li>
+<li>创建和撤销线程的开销较之进程要少。</li>
+<li>如果没有多线程的支持，是否对之前我们讲授过的一些Java特性产生影响？</li>
+<li>对于Java的垃圾回收机制而言，没有多线程的支持，就会导致一场悲剧，垃圾回收过程将会使所有的业务操作挂起：</li>
+<li>Java在语言级提供了对多线程程序设计的支持 </li>
+<li>多线程操作会增加程序的执行效率。各线程之间切换执行，时间比较短，看似是多线程同时运行，但对于执行者CPU来说，某一个时刻只有一个线程在运行<br>（CPU分时间片  宏观并行，微观串行）<br><img src="java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9D%E8%AF%86/%E5%9B%BE%E7%89%873.png"><h2 id="实现线程模型"><a href="#实现线程模型" class="headerlink" title="实现线程模型"></a>实现线程模型</h2></li>
+<li>在JVM规范里没有规定的线程实现模型，具体的JVM实现用1:1（内核线程）、N:1（用户态线程）、M:N（混合）模型的任何一种都是允许的。Java并不暴露出不同线程模型的区别，上层应用是感知不到差异的，只是性能特性会不太一样 </li>
+<li>Java SE最常用的JVM是Oracle/Sun研发的HotSpot VM。在这个JVM的较新版本所支持的除了Solaris之外的平台上，它都是使用1:1线程模型的，而在Solaris上，HotSpot VM使用的是M:N和1：1两种模型，1：1是默认值 </li>
+<li>语言级别支持N：1线程模型为能够为Java带来一个好处：能够在受限的单线程系统中支持多线程的Java应用，但是也会带来一些隐患： </li>
+<li>只要一个应用线程产生了一次系统调用，比如I/O中断，那同一进程内的其他线程都会停止 </li>
+<li>不能利用多核，无法发挥多线程处理器优势 </li>
+<li>一部分JVM采取了折中的处理办法： </li>
+<li>用于Java ME CLDC的CLDC HotSpot Implementation（CLDC-HI）支持两种线程模型，默认使用N:1线程模型，所有Java线程都映射到一个内核线程上，是典型的用户态线程模型；它也可以使用一种特殊的混合模型，Java线程仍然全部映射到一个内核线程上，但当Java线程要执行一个阻塞调用时，CLDC-HI会为该调用单独启动一个内核线程，并且调度执行其它Java线程，等到那个阻塞调用完成之后再重新调度之前的Java线程继续执行</li>
+<li>Java对线程内置语言级别的支持是一把双刃剑。它通过提供语言和类库，以及一个规范的跨平台存储模型（这个规范的存储模型使得在Java中开发“一次开发随处运行”的并发程序成为可能），简化了并发应用的开发。这样做同时也提高了开发人员的门槛。 </li>
+<li>更多的程序需要使用多线程协作，曾几何时，当线程还十分深奥的时候，并发还是一个“高级”的话题，而现在，主流的开发人员都必须知道线程安全性的问题</li>
+</ul>
+<h2 id="线程生命周期"><a href="#线程生命周期" class="headerlink" title="线程生命周期"></a>线程生命周期</h2><ul>
+<li>Java中线程存在以下几种状态（后续将详细讲解对应代码）： </li>
+<li>新线程： </li>
+<li>当利用new关键字创建线程对象实例后，它仅仅作为一个对象实例存在， JVM没有为其分配CPU时间片和其他线程运行资源</li>
+<li>就绪状态： </li>
+<li>在处于创建状态的线程中调用start方法将线程的状态转换为就绪状态。这时，线程已经得到除CPU时间之外的其它系统资源，只等JVM的线程调度器按照线程的优先级对该线程进行调度，从而使该线程拥有能够获得CPU时间片的机会</li>
+<li>运行状态:</li>
+<li>就绪态的线程获得cpu就进入运行态</li>
+<li>等待/阻塞： </li>
+<li>线程运行过程中被剥夺资源或者，等待某些事件就进入等待/阻塞状态， suspend()方法被调用 ， sleep()方法被调用，线程使用wait()来等待条件变量;线程处于I/O等待等，调用suspend方法将线程的状态转换为挂起状态。这时，线程将释放占用的所有资源，但是并不释放锁，所以容易引发死锁，直至应用程序调用resume方法恢复线程运行。等待事件结束或者得到足够的资源就进入就绪态</li>
+<li>死亡状态：<br>当线程体运行结束或者调用线程对象的stop方法后线程将终止运行，由JVM收回线程占用的资源<br><img src="java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9D%E8%AF%86/%E5%9B%BE%E7%89%874.png"><h3 id="小结（清楚程序、进程、线程、生命周期）"><a href="#小结（清楚程序、进程、线程、生命周期）" class="headerlink" title="小结（清楚程序、进程、线程、生命周期）"></a>小结（清楚程序、进程、线程、生命周期）</h3></li>
+<li>进程是一个程序在其自身的地址空间中的一次执行活动。比如，打开一个记事本，就是调用了一个进程。进程是资源申请、调度和独立运行的单位，因此，它使用系统中的运行资源；而程序不能申请系统资源，一个程序可以对应多个进程，线程允许程序控制流的多重分支同时存在于一个进程 </li>
+<li>多线程优点：可以更好的实现并行，恰当地使用线程时，可以降低开发和维护的开销，并且能够提高复杂应用的性能。CPU在线程之间开关时的开销远比进程要少得多。因开关线程都在同一地址空间内，只需要修改线程控制表或队列，不涉及地址空间和其他工作。创建和撤销线程的开销较之进程要少<br>Java中线程存在以下几种状态：新建状态，就绪状态，运行状态，等待/阻塞状态，死亡状态</li>
+</ul>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/03/16/java-%E5%BC%82%E5%B8%B8/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/03/17/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9B%E5%BB%BA/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

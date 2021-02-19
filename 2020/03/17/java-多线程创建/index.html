@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>java-多线程创建 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="线程," />
+  
+
+  <meta name="description" content="创建线程的步骤 使用线程的步骤：  1、 创建线程  2、 实例化线程对象  3、 启动线程  4、 终止线程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java-多线程创建">
+<meta property="og:url" content="http://paphae.top/2020/03/17/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9B%E5%BB%BA/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="创建线程的步骤 使用线程的步骤：  1、 创建线程  2、 实例化线程对象  3、 启动线程  4、 终止线程">
+<meta property="og:locale">
+<meta property="og:image" content="http://paphae.top/2020/03/17/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9B%E5%BB%BA/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9B%E5%BB%BA/%E5%9B%BE%E7%89%875.png">
+<meta property="og:image" content="http://paphae.top/2020/03/17/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9B%E5%BB%BA/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9B%E5%BB%BA/%E5%9B%BE%E7%89%876.png">
+<meta property="og:image" content="http://paphae.top/2020/03/17/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9B%E5%BB%BA/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9B%E5%BB%BA/%E5%9B%BE%E7%89%877.png">
+<meta property="og:image" content="http://paphae.top/2020/03/17/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9B%E5%BB%BA/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9B%E5%BB%BA/%E5%9B%BE%E7%89%878.png">
+<meta property="og:image" content="http://paphae.top/2020/03/17/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9B%E5%BB%BA/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9B%E5%BB%BA/%E5%9B%BE%E7%89%879.png">
+<meta property="og:image" content="http://paphae.top/2020/03/17/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9B%E5%BB%BA/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9B%E5%BB%BA/%E5%9B%BE%E7%89%8710.png">
+<meta property="article:published_time" content="2020-03-17T00:13:37.000Z">
+<meta property="article:modified_time" content="2020-05-06T00:43:44.436Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="线程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://paphae.top/2020/03/17/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9B%E5%BB%BA/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9B%E5%BB%BA/%E5%9B%BE%E7%89%875.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="toc-text">创建线程的步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">实现线程的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E4%B8%AD%E9%9C%80%E8%A6%81%E6%89%A7%E8%A1%8C%E7%9A%84%E6%8C%87%E4%BB%A4%E4%BB%A3%E7%A0%81"><span class="toc-text">线程中需要执行的指令代码</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Runnable"><span class="toc-text">Runnable</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E5%90%AF%E5%8A%A8%E4%B8%8E%E5%81%9C%E6%AD%A2"><span class="toc-text">线程启动与停止</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E5%88%87%E6%8D%A2%E5%9B%BE"><span class="toc-text">状态切换图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%88%E6%8A%A4%E7%BA%BF%E7%A8%8B"><span class="toc-text">守护线程</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-java-多线程创建" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">java-多线程创建</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.03.17</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/javaSE/">javaSE</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="创建线程的步骤"><a href="#创建线程的步骤" class="headerlink" title="创建线程的步骤"></a>创建线程的步骤</h2><ul>
+<li>使用线程的步骤：<br>  1、 创建线程<br>  2、 实例化线程对象<br>  3、 启动线程<br>  4、 终止线程<a id="more"></a>
+<h2 id="实现线程的方法"><a href="#实现线程的方法" class="headerlink" title="实现线程的方法"></a>实现线程的方法</h2></li>
+<li>对于Java而言，每一个独立的线程都是java.lang.Thread类的一个对象，而线程中独立于其他线程所执行的指令代码由Thread类的run方法提供 </li>
+<li>因此，要想在Java中实现多线程协作运行，就需要创建多个独立的Thread类对象<br>而线程与线程之间所执行的指令代码会存在差异，由此可见，Java中实现独立执行不同指令代码的多线程引用程序最简单直接的方法就是：继承Thread类重写run方法并构建其对象</li>
+</ul>
+<h5 id="线程中需要执行的指令代码"><a href="#线程中需要执行的指令代码" class="headerlink" title="线程中需要执行的指令代码"></a>线程中需要执行的指令代码</h5><p>注意：<br><strong>1.需要注意run()方法的签名<br>2.run()方法中的代码和其他方法中的代码区别在于它可以和其他线程的run()方法代码并行执行<br>3.初学者经常会有的一个误区是将线程和循环混淆，线程不具备任何循环特性，一旦run()方法代码执行结束，线程的生命周期即会自动结束，因此如果需要在线程中循环执行某些代码需要自行声明循环控制</strong><br><img src="java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9B%E5%BB%BA/%E5%9B%BE%E7%89%875.png"></p>
+<h2 id="Runnable"><a href="#Runnable" class="headerlink" title="Runnable"></a>Runnable</h2><ul>
+<li>直接继承Thread类实现线程的方法存在局限性：由于Java是典型的单亲继承体系，因此一旦类继承Thread之后就不能再继承其他父类，对于一些必须通过继承关系来传播的特性这种方式显然会造成困扰 </li>
+<li>在上述情况下，可以通过实现java.lang.Runnable接口的方式来实现线程： </li>
+<li>Runnable中只有一个签名和Thread中一致的run()方法，满足函数式接口的要求，可以使用Lambda表达式 </li>
+<li>Runnable接口的子类并不是线程类，我们只是通过这种形式向线程类提供run()方法指令代码，最后还需借助Thread类和Runnable接口的依赖关系和Thread类的Thread（Runnable runnable）构造方法构建线程对象 </li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		MyThread1 t = <span class="keyword">new</span> MyThread1();</span><br><span class="line">		Thread t2 = <span class="keyword">new</span> Thread(<span class="keyword">new</span> MyThread2());</span><br><span class="line"></span><br><span class="line">		Thread t3 = <span class="keyword">new</span> Thread() &#123;</span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">				<span class="keyword">try</span> &#123;</span><br><span class="line">					Thread.sleep(<span class="number">5000</span>);</span><br><span class="line">					System.out.println(<span class="string">&quot;沏茶&quot;</span>);</span><br><span class="line">				&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">					<span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">					e.printStackTrace();</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;;</span><br><span class="line">		Thread t4 = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">				<span class="keyword">try</span> &#123;</span><br><span class="line">					Thread.sleep(<span class="number">5000</span>);</span><br><span class="line">					System.out.println(<span class="string">&quot;喝茶&quot;</span>);</span><br><span class="line">				&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">					<span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">					e.printStackTrace();</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">		Thread t5 = <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				Thread.sleep(<span class="number">4000</span>);</span><br><span class="line">			&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">				<span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">				e.printStackTrace();</span><br><span class="line">			&#125;</span><br><span class="line">			;</span><br><span class="line">			System.out.println(<span class="string">&quot;倒茶&quot;</span>);</span><br><span class="line">		&#125;);</span><br><span class="line">		t.start();</span><br><span class="line">		t2.start();</span><br><span class="line">		t3.start();</span><br><span class="line">		t4.start();</span><br><span class="line">		t5.start();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyThread1</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;开始烧水&quot;</span>);</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">6</span>; i++) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;烧水消耗&quot;</span> + i + <span class="string">&quot;秒&quot;</span>);</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">			&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">				<span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">				e.printStackTrace();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(<span class="string">&quot;烧水完成&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyThread2</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;开始洗杯子&quot;</span>);</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">6</span>; i++) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;洗杯子消耗&quot;</span> + i + <span class="string">&quot;秒&quot;</span>);</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">			&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">				<span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">				e.printStackTrace();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(<span class="string">&quot;洗杯子完成&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="线程启动与停止"><a href="#线程启动与停止" class="headerlink" title="线程启动与停止"></a>线程启动与停止</h2><ul>
+<li><p>任何一个Java程序启动时，一个线程立刻运行，它执行main方法，这个线程称为程序的主线程；也就是说，任何Java程序都至少有一个线程，即主线程</p>
+</li>
+<li><p>主线程的特殊之处在于：</p>
+</li>
+<li><p>它是产生其它线程子线程的线程；</p>
+</li>
+<li><p>通常它必须最后结束，因为它要执行其它子线程的关闭工作。</p>
+</li>
+<li><p>在主线程中启动其他线程，不能直接调用线程对象的run()方法（线程对象的run()方法可以显式调用，但在代码中显式调用run()方法不能产生并发调用的作用），而应该使用线程对象的start()方法 </p>
+</li>
+<li><p>针对同一个线程对象，不能多次执行start()方法，否则会引发程序异常近况发生</p>
+</li>
+<li><p>注意：start()方法的调用后并不是立即执行多线程代码，而是使该线程变为就绪状态，什么时候运行是由操作系统调度决定的</p>
+</li>
+<li><p>线程的停止远比线程的启动情况复杂 </p>
+</li>
+<li><p>在Thread线程类中提供了stop()方法用于停止一个已经启动的线程，但是它已经被废弃，不建议使用，因为它本质上就是不安全的，它会解锁线程所有已经锁定的监视程序，在这个过程中会出现不确定性，导致这些监视程序监视的对象出现不一致的情况，或者引发死锁 </p>
+</li>
+<li><p>事实上在Java的多线程编程中，Thread类型包含了start(), stop(), stop(Throwable) and suspend(), destroy() and resume()等方法可以对线程进行操作，但是这些方法中，只有start()方法得到了保留 </p>
+</li>
+</ul>
+<ul>
+<li><p>那么应该如何安全的停止一个正在运行的线程呢？ </p>
+</li>
+<li><p>之前提到过，线程对象的run()方法所有代码执行完成后，线程会自然消亡，因此如果需要在运行过程提前停止线程，可以通过改变共享变量值的方法让run()方法执行结束<br><img src="java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9B%E5%BB%BA/%E5%9B%BE%E7%89%876.png"></p>
+</li>
+<li><p>如果一个线程由于等待某些事件的发生而被阻塞，又该怎样停止该线程呢？ </p>
+</li>
+<li><p>这种情况经常会发生，比如当一个线程由于需要等候资源、数据而调用Thread.sleep()方法、Object类的wait()方法等，都有可能导致线程阻塞，使线程处于处于不可运行状态时，即使主程序中将该线程的共享变量设置为false，但该线程此时根本无法检查循环标志，当然也就无法立即中断<br>这里我们给出的建议是，使用Thread提供的interrupt()方法，因为该方法虽然不会中断一个正在运行的线程，但是它可以使一个被阻塞的线程抛出一个中断异常，从而使线程提前结束阻塞状态，退出堵塞代码<br><img src="java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9B%E5%BB%BA/%E5%9B%BE%E7%89%877.png"></p>
+</li>
+<li><p>在Thread类中有两个方法可以判断线程是否通过interrupt方法被终止。 </p>
+</li>
+<li><p>一个是静态的方法interrupted()</p>
+</li>
+<li><p>一个是非静态的方法isInterrupted()</p>
+</li>
+<li><p>这两个方法的区别是interrupted用来判断当前线是否被中断，而isInterrupted可以用来判断其他线程是否被中断 </p>
+</li>
+<li><p>这里还存在几个问题需要大家注意： </p>
+</li>
+<li><p>首先，需要区分捕获到的InterruptedException是否是由我们主动调用interrupt()方法所引起的，因为还有其他因素可能会导致此异常，而在某些时候即便是产生了此异常也应该能够让线程继续执行，这时候我们就需要编写代码来进行区分 </p>
+</li>
+<li><p>另一个不太好的消息是， interrupt()方法并不能阻断I/O阻塞或线程同步引起的线程阻塞，也就是说如果有一个线程在等待键盘输入或是等待网络连接等I/O资源，之前的停止方法就会失效</p>
+</li>
+<li><p>那么我们应该如何处理由I/O资源引起的线程阻塞时的线程中断问题呢？ </p>
+</li>
+<li><p>答案是关闭底层I/O通道，人为引发异常从而进行共享变量重新赋值而跳出线程的run()方法<br>一个好消息是由于nio支持非阻塞式的事件驱动读取操作，在这种模式下，不需要关闭底层资源即可通过interrupt()方法直接中断其等待操作<br><img src="java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9B%E5%BB%BA/%E5%9B%BE%E7%89%878.png"></p>
+<h2 id="状态切换图"><a href="#状态切换图" class="headerlink" title="状态切换图"></a>状态切换图</h2><p><img src="java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9B%E5%BB%BA/%E5%9B%BE%E7%89%879.png"></p>
+<h2 id="守护线程"><a href="#守护线程" class="headerlink" title="守护线程"></a>守护线程</h2></li>
+<li><p>Java中将线程划分为了两类： </p>
+</li>
+<li><p>用户线程 (User Thread)</p>
+</li>
+<li><p>守护线程 (Daemon Thread)</p>
+</li>
+<li><p>所谓守护线程，是指在程序运行的时候在后台提供一种通用服务的线程，比如垃圾回收线程就是一个很称职的守护者，并且这种线程并不属于程序中不可或缺的部分。因 此，当所有的非守护线程结束时，程序也就终止了，同时会杀死进程中的所有守护线程。反过来说，只要任何非守护线程还在运行，程序就不会终止</p>
+</li>
+<li><p>用户线程和守护线程两者几乎没有区别，唯一的不同之处就在于虚拟机的退出：如果用户线程已经全部退出运行了，只剩下守护线程存在了，虚拟机也就退出了。 因为没有了被守护者，守护线程也就没有工作可做了，也就没有继续运行程序的必要了<br><img src="java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9B%E5%BB%BA/%E5%9B%BE%E7%89%8710.png"></p>
+<blockquote>
+<p>非守护线程时：虽然main线程结束，但还有其他非守护线程在运行，因此程序并没有被结束<br>守护线程时；所有的非守护线程结束，程序结束</p>
+</blockquote>
+</li>
+</ul>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/03/17/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9D%E8%AF%86/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/03/17/java-%E7%BA%BF%E7%A8%8B%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

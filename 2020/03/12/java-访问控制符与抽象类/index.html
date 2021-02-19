@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>java-访问控制符与抽象类 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="访问控制符,抽象类," />
+  
+
+  <meta name="description" content="类访问控制符有了包的概念之后，可以通过某种方式按照权限要求过滤对类的访问要控制类的访问，需要使用访问控制符">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java-访问控制符与抽象类">
+<meta property="og:url" content="http://paphae.top/2020/03/12/java-%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E7%AC%A6%E4%B8%8E%E6%8A%BD%E8%B1%A1%E7%B1%BB/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="类访问控制符有了包的概念之后，可以通过某种方式按照权限要求过滤对类的访问要控制类的访问，需要使用访问控制符">
+<meta property="og:locale">
+<meta property="og:image" content="http://paphae.top/2020/03/12/java-%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E7%AC%A6%E4%B8%8E%E6%8A%BD%E8%B1%A1%E7%B1%BB/java0311/%E5%9B%BE%E7%89%871.png">
+<meta property="article:published_time" content="2020-03-11T23:57:21.000Z">
+<meta property="article:modified_time" content="2020-05-06T00:46:03.110Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="访问控制符">
+<meta property="article:tag" content="抽象类">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://paphae.top/2020/03/12/java-%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E7%AC%A6%E4%B8%8E%E6%8A%BD%E8%B1%A1%E7%B1%BB/java0311/%E5%9B%BE%E7%89%871.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E7%AC%A6"><span class="toc-text">类访问控制符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%88%90%E5%91%98%E7%9A%84%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6"><span class="toc-text">成员的访问控制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#public"><span class="toc-text">public</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#private"><span class="toc-text">private</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#protected"><span class="toc-text">protected</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%BB%98%E8%AE%A4%E6%9D%83%E9%99%90"><span class="toc-text">默认权限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%BD%E8%B1%A1"><span class="toc-text">抽象</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-java-访问控制符与抽象类" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">java-访问控制符与抽象类</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.03.12</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/javaSE/">javaSE</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="类访问控制符"><a href="#类访问控制符" class="headerlink" title="类访问控制符"></a>类访问控制符</h2><p>有了包的概念之后，可以通过某种方式按照权限要求过滤对类的访问<br>要控制类的访问，需要使用访问控制符</p>
+<a id="more"></a>
+<p>顶层类的访问级别：有两种（后续会内部类充当类成员时，针对该内部类可以使用类成员的访问控制符）：<br>默认的（不提供访问控制符）：仅可被同包的其他代码访问<br>public： 可以被任何代码访问</p>
+<h2 id="成员的访问控制"><a href="#成员的访问控制" class="headerlink" title="成员的访问控制"></a>成员的访问控制</h2><p>除了类自身存在访问控制外，类的成员还存在更为精确的权限控制体系<br>为了实现封装特性，可以通过对类成员的权限访问来隐藏数据而暴露操作接口（简单来说就是阻止对成员变量的直接操作而由暴露成员方法对数据进行操作）</p>
+<p>类成员的访问级别有四种：<br>private    私有的<br>default(不使用default关键字，和类的default类似，不提供修饰符即为默认权限)<br>protected        受保护的<br>public       公开的</p>
+<h3 id="public"><a href="#public" class="headerlink" title="public"></a>public</h3><p>任何其它类对象，只要可以看到这个类的话，那么它就可以存取变量的数据，或使用方法<br>不能单纯以成员访问控制符确定一个成员是否能够访问，如果类本身不能被访问，那么即便成员为public公开权限，也是不能被访问的</p>
+<h3 id="private"><a href="#private" class="headerlink" title="private"></a>private</h3><p>不允许任何其他类存取和调用</p>
+<h3 id="protected"><a href="#protected" class="headerlink" title="protected"></a>protected</h3><p>如果一个类中变量或方法有修饰字protected，同一类，同一包可使用。不同包的类要使用，必须是该类的子类（继承关系，后续详细介绍）<br>需要注意的是，即便在非同包的子类中，也只能通过直接调用继承下来的成员的方式访问protected成员，而不能使用父类的引用进行调用</p>
+<h2 id="默认权限"><a href="#默认权限" class="headerlink" title="默认权限"></a>默认权限</h2><p>在同一程序包中出现的类才可以访问<br>非同包子类无法访问<br><img src="java0311/%E5%9B%BE%E7%89%871.png"></p>
+<h2 id="抽象"><a href="#抽象" class="headerlink" title="抽象"></a>抽象</h2><p>简单的理解，Java的抽象就是只声明行为接口（方法签名）而不完成具体的实现</p>
+<p>Java中，抽象类主要用来进行类型隐藏；也就是使用抽象的类型来编程，但是具体运行时就可以使用具体类型<br>利用抽象的概念，能够在开发项目中创建扩展性很好的架构，优化程序<br>抽象类，抽象方法，在软件开发过程中都是设计层面的概念。也就是说，设计人员会设计出抽象类，抽象方法，程序员都是来继承这些抽象类并覆盖抽象方法，实现具体功能<br>理想的继承树应该是：<strong>所有叶子都是具体类，而所有的树枝都是抽象类</strong>。在实际中当然不可能完全做到，但是应尽可能向此目标靠拢（接口继承）</p>
+<p>在面向对象的概念中，知道所有的对象都是通过类来描绘的，但是反过来却不是这样。并不是所有的类都是用来描绘对象的，如形状类是抽象的类，圆、三角形等是具体类</p>
+<p>用abstract修饰的类就是抽象类。抽象类是抽象方法的容器，如果某个类中包含有抽象方法，那么该类就必须定义成抽象类。抽象类中也可以包含有非抽象的方法甚至抽象类中可以没有抽象方法（只要一个类不应该有具体对象，就应该是抽象类，不一定是有抽象方法的）</p>
+<p><strong>抽象类不可以直接实例化，只可以用来继承作为其他类的父类存在<br>抽象类的派生子类应该提供对其所有抽象方法的具体实现<br>如果抽象类的派生子类没有实现其中的所有抽象方法，那么该派生子类仍然是抽象类，只能用于继承，而不能实例化，但可以有构造函数（用于帮助子类快速初始化共有属性）</strong></p>
+<blockquote>
+<p>abstract 可以修饰类也可以修饰方法<br>public  abstract  class 类名{            //抽象类<br>}<br>访问控制符  修饰符 返回值类型 方法名(){}<br>抽象方法只有方法声明，没有方法实现没有{}<br>public abstract void method()；</p>
+<p>1、如果某个类中包含有抽象方法，那么该类就必须定义成抽象类<br>2、抽象类中也可以包含有非抽象的方法甚至抽象类中可以没有抽象方法<br>3、抽象类不可以直接实例化<br>4、如果抽象类的派生子类没有实现其中的所有抽象方法，那么该派生子类仍然是抽象类，只能用于继承，而不能实例化，但可以有构造函数</p>
+</blockquote>
+<p>抽象方法同样用abstract说明,抽象方法没有方法体，只有方法签名<br>可以这么认为，抽象方法实际上就是由抽象基类强制要求其派生子类必须实现的方法原型<br>构造方法和final、static方法,不可以修饰为abstract<br>抽象方法必须位于抽象类中<br>定义抽象类和抽象方法后，除了上述提到的作用外，对于程序来说也是一个重要的开发规范约束，如果子类继承抽象类后没有完全实现要求实现的抽象方法，编译器将会给出对应的提示：两个解决问题的方式：<br>1.实现抽象方法<br>2.将本类也定义为abstract抽象类</p>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/03/11/java-%E5%A4%9A%E6%80%81/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/03/12/java-final%E5%92%8Cstatic%E5%85%B3%E9%94%AE%E5%AD%97/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

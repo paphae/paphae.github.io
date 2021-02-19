@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>ajax和cookie | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="ajax,cookie," />
+  
+
+  <meta name="description" content="ajaxjQuery在全局对象jQuery（也就是$）绑定了ajax()函数，可以处理AJAX请求。ajax(url, settings)函数需要接收一个URL和一个可选的settings对象，常用的选项如下：  async：是否异步执行AJAX请求，默认为true，千万不要指定为false； method：发送的Method，缺省为&#39;GET&#39;，可指定为&#39;POST&#39;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ajax和cookie">
+<meta property="og:url" content="http://paphae.top/2020/04/30/javaWeb0430/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="ajaxjQuery在全局对象jQuery（也就是$）绑定了ajax()函数，可以处理AJAX请求。ajax(url, settings)函数需要接收一个URL和一个可选的settings对象，常用的选项如下：  async：是否异步执行AJAX请求，默认为true，千万不要指定为false； method：发送的Method，缺省为&#39;GET&#39;，可指定为&#39;POST&#39;">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-04-30T01:37:39.000Z">
+<meta property="article:modified_time" content="2020-05-06T07:05:34.256Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="ajax">
+<meta property="article:tag" content="cookie">
+<meta name="twitter:card" content="summary">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ajax"><span class="toc-text">ajax</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ajax-1"><span class="toc-text">$.ajax()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#get-%EF%BC%9A%E5%8F%91%E9%80%81get%E8%AF%B7%E6%B1%82"><span class="toc-text">$.get()：发送get请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#post-%EF%BC%9A%E5%8F%91%E9%80%81post%E8%AF%B7%E6%B1%82"><span class="toc-text">$.post()：发送post请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B"><span class="toc-text">案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cookie"><span class="toc-text">Cookie</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-javaWeb0430" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">ajax和cookie</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.04.30</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/javaWeb/">javaWeb</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="ajax"><a href="#ajax" class="headerlink" title="ajax"></a>ajax</h2><p>jQuery在全局对象<code>jQuery</code>（也就是<code>$</code>）绑定了<code>ajax()</code>函数，可以处理AJAX请求。<code>ajax(url, settings)</code>函数需要接收一个URL和一个可选的<code>settings</code>对象，常用的选项如下：</p>
+<ul>
+<li>async：是否异步执行AJAX请求，默认为<code>true</code>，千万不要指定为<code>false</code>；</li>
+<li>method：发送的Method，缺省为<code>&#39;GET&#39;</code>，可指定为<code>&#39;POST&#39;</code>、<code>&#39;PUT&#39;</code>等；</li>
+<li>contentType：发送POST请求的格式，默认值为<code>&#39;application/x-www-form-urlencoded; charset=UTF-8&#39;</code>，也可以指定为<code>text/plain</code>、<code>application/json</code>；</li>
+<li>data：发送的数据，可以是字符串、数组或object。如果是GET请求，data将被转换成query附加到URL上，如果是POST请求，根据contentType把data序列化成合适的格式；</li>
+<li>headers：发送的额外的HTTP头，必须是一个object；</li>
+<li>dataType：接收的数据格式，可以指定为<code>&#39;html&#39;</code>、<code>&#39;xml&#39;</code>、<code>&#39;json&#39;</code>、<code>&#39;text&#39;</code>等，缺省情况下根据响应的<code>Content-Type</code>猜测。</li>
+</ul>
+<p>前提<code>&lt;script src=&quot;js/jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;</code></p>
+<h3 id="ajax-1"><a href="#ajax-1" class="headerlink" title="$.ajax()"></a>$.ajax()</h3><p>​    语法：$.ajax({键值对});</p>
+<pre><code> //使用$.ajax()发送异步请求
+</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">    url:&quot;ajaxServlet1111&quot; , &#x2F;&#x2F; 请求路径</span><br><span class="line">    type:&quot;POST&quot; , &#x2F;&#x2F;请求方式</span><br><span class="line">    &#x2F;&#x2F;data: &quot;username&#x3D;jack&amp;age&#x3D;23&quot;,&#x2F;&#x2F;请求参数</span><br><span class="line">    data:&#123;&quot;username&quot;:&quot;jack&quot;,&quot;age&quot;:23&#125;,</span><br><span class="line">    success:function (data) &#123;</span><br><span class="line">    	alert(data);</span><br><span class="line">    &#125;,&#x2F;&#x2F;响应成功后的回调函数</span><br><span class="line">    error:function () &#123;</span><br><span class="line">    	alert(&quot;出错啦...&quot;)</span><br><span class="line">    &#125;,&#x2F;&#x2F;表示如果请求响应出现错误，会执行的回调函数</span><br><span class="line"></span><br><span class="line">    dataType:&quot;text&quot;&#x2F;&#x2F;设置接受到的响应数据的格式</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="get-：发送get请求"><a href="#get-：发送get请求" class="headerlink" title="$.get()：发送get请求"></a>$.get()：发送get请求</h3><ul>
+<li><p>语法：$.get(url, [data], [callback], [type])</p>
+</li>
+<li><p>参数：</p>
+<ul>
+<li>url：请求路径</li>
+<li>data：请求参数</li>
+<li>callback：回调函数</li>
+<li>type：响应结果的类型</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$.get(<span class="string">&quot;ajaxServlet&quot;</span>,&#123;<span class="attr">username</span>:<span class="string">&quot;rose&quot;</span>&#125;,<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">	alert(data);</span><br><span class="line">&#125;,<span class="string">&quot;text&quot;</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="post-：发送post请求"><a href="#post-：发送post请求" class="headerlink" title="$.post()：发送post请求"></a>$.post()：发送post请求</h3><ul>
+<li><p>语法：$.post(url, [data], [callback], [type])</p>
+</li>
+<li><p>参数：</p>
+<ul>
+<li>url：请求路径</li>
+<li>data：请求参数</li>
+<li>callback：回调函数</li>
+<li>type：响应结果的类型</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$.post(<span class="string">&quot;ajaxServlet&quot;</span>,&#123;<span class="attr">username</span>:<span class="string">&quot;rose&quot;</span>&#125;,<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">	alert(data);</span><br><span class="line">&#125;,<span class="string">&quot;text&quot;</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><ol>
+<li><p>使用ajax异步交互读取数据。（用户名是否可用，下拉框数据读取）</p>
+<p>a) 与数据库的交互。</p>
+<p>b) 没有与数据库的交互可以直接使用JavaScript jquery</p>
+<p>c) 减轻服务器的压力，增快浏览熟读。</p>
+</li>
+<li><p>验证码</p>
+<p>a) Servlet生成一张图片。</p>
+<p>b) 在页面中直接使用<img>进行引用。</p>
+<p>c) 在servlet上进行验证。如果在jsp上获取验证码的值，会上次生成的值。</p>
+<p>d) 减轻服务器的压力。</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.tjetc.servlet;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.awt.Color;</span><br><span class="line"><span class="keyword">import</span> java.awt.Font;</span><br><span class="line"><span class="keyword">import</span> java.awt.Graphics;</span><br><span class="line"><span class="keyword">import</span> java.awt.image.BufferedImage;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.imageio.ImageIO;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletException;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.annotation.WebServlet;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServlet;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpSession;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Servlet implementation class CodeServlet</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@WebServlet(&quot;/code.do&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CodeServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">1L</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@see</span> HttpServlet#HttpServlet()</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CodeServlet</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>();</span><br><span class="line">        <span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@see</span> HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        request.setCharacterEncoding(<span class="string">&quot;utf-8&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//图片对象</span></span><br><span class="line">        BufferedImage bfi = <span class="keyword">new</span> BufferedImage(<span class="number">80</span>,<span class="number">40</span>,BufferedImage.TYPE_INT_RGB);</span><br><span class="line">        Graphics g = bfi.getGraphics();</span><br><span class="line">        g.fillRect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">80</span>, <span class="number">40</span>);</span><br><span class="line">        <span class="comment">//62 * 62 *62 *62* 62* 62 *62</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//验证码字符范围</span></span><br><span class="line">        <span class="keyword">char</span>[] ch = <span class="string">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789&quot;</span>.toCharArray();</span><br><span class="line">        Random r = <span class="keyword">new</span> Random();</span><br><span class="line">        <span class="keyword">int</span> index;</span><br><span class="line">        StringBuffer sb = <span class="keyword">new</span> StringBuffer(); <span class="comment">//保存字符串</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">4</span>; i++)&#123;</span><br><span class="line">            index = r.nextInt(ch.length);</span><br><span class="line">            g.setColor(<span class="keyword">new</span> Color(r.nextInt(<span class="number">255</span>),r.nextInt(<span class="number">255</span>),r.nextInt(<span class="number">255</span>)));</span><br><span class="line">            Font font = <span class="keyword">new</span> Font(<span class="string">&quot;宋体&quot;</span>, <span class="number">30</span>, <span class="number">20</span>);</span><br><span class="line">            g.setFont(font);</span><br><span class="line">            g.drawString(ch[index]+<span class="string">&quot;&quot;</span>, (i*<span class="number">20</span>)+<span class="number">2</span>, <span class="number">23</span>);</span><br><span class="line">            sb.append(ch[index]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 添加噪点</span></span><br><span class="line">        <span class="keyword">int</span> area = (<span class="keyword">int</span>) (<span class="number">0.02</span> * <span class="number">80</span> * <span class="number">40</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;area; ++i)&#123;</span><br><span class="line">            <span class="keyword">int</span> x = (<span class="keyword">int</span>)(Math.random() * <span class="number">80</span>);</span><br><span class="line">            <span class="keyword">int</span> y = (<span class="keyword">int</span>)(Math.random() * <span class="number">40</span>);</span><br><span class="line">            bfi.setRGB(x, y, (<span class="keyword">int</span>)(Math.random() * <span class="number">255</span>));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//设置验证码中的干扰线</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">            <span class="comment">//随机获取干扰线的起点和终点</span></span><br><span class="line">            <span class="keyword">int</span> xstart = (<span class="keyword">int</span>)(Math.random() * <span class="number">80</span>);</span><br><span class="line">            <span class="keyword">int</span> ystart = (<span class="keyword">int</span>)(Math.random() * <span class="number">40</span>);</span><br><span class="line">            <span class="keyword">int</span> xend = (<span class="keyword">int</span>)(Math.random() * <span class="number">80</span>);</span><br><span class="line">            <span class="keyword">int</span> yend = (<span class="keyword">int</span>)(Math.random() * <span class="number">40</span>);</span><br><span class="line">            g.setColor(interLine(<span class="number">1</span>, <span class="number">255</span>));</span><br><span class="line">            g.drawLine(xstart, ystart, xend, yend);</span><br><span class="line">        &#125;</span><br><span class="line">        HttpSession session = request.getSession();  <span class="comment">//保存到session</span></span><br><span class="line">        session.setAttribute(<span class="string">&quot;code&quot;</span>, sb.toString());</span><br><span class="line">        ImageIO.write(bfi, <span class="string">&quot;JPG&quot;</span>, response.getOutputStream());  <span class="comment">//写到输出流</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Color <span class="title">interLine</span><span class="params">(<span class="keyword">int</span> Low, <span class="keyword">int</span> High)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(Low &gt; <span class="number">255</span>)</span><br><span class="line">            Low = <span class="number">255</span>;</span><br><span class="line">        <span class="keyword">if</span>(High &gt; <span class="number">255</span>)</span><br><span class="line">            High = <span class="number">255</span>;</span><br><span class="line">        <span class="keyword">if</span>(Low &lt; <span class="number">0</span>)</span><br><span class="line">            Low = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(High &lt; <span class="number">0</span>)</span><br><span class="line">            High = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> interval = High - Low;</span><br><span class="line">        <span class="keyword">int</span> r = Low + (<span class="keyword">int</span>)(Math.random() * interval);</span><br><span class="line">        <span class="keyword">int</span> g = Low + (<span class="keyword">int</span>)(Math.random() * interval);</span><br><span class="line">        <span class="keyword">int</span> b = Low + (<span class="keyword">int</span>)(Math.random() * interval);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Color(r, g, b);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>在页面显示</p>
+<p><code>验证码：&lt;input type=&quot;text&quot; name=&quot;code&quot; &gt;&lt;img id=&quot;code&quot; src=&quot;code.do&quot; alt=&quot;无&quot;&gt;</code></p>
+<h2 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.tjetc.servlet;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletException;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.annotation.WebServlet;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.Cookie;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServlet;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.net.URLDecoder;</span><br><span class="line"><span class="keyword">import</span> java.net.URLEncoder;</span><br><span class="line"><span class="keyword">import</span> java.text.SimpleDateFormat;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"></span><br><span class="line"><span class="meta">@WebServlet(&quot;/cookie.do&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CookieServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line"><span class="comment">//        1.	设置响应的消息体的数据格式以及编码</span></span><br><span class="line">        response.setContentType(<span class="string">&quot;text/html;charset=UTF-8&quot;</span>);</span><br><span class="line"><span class="comment">//        2.	得到本域名中所有的cookie</span></span><br><span class="line">        Cookie[] cookies = request.getCookies();</span><br><span class="line"><span class="comment">//        3.	创建一个boolean类型的变量 是否登录</span></span><br><span class="line">        <span class="keyword">boolean</span> flag =<span class="keyword">false</span>;</span><br><span class="line"><span class="comment">//        4.	判断cookie数据是否为空或长度为0.（满足这俩个条件的话，说明cookie为空）</span></span><br><span class="line">        <span class="keyword">if</span>(cookies!=<span class="keyword">null</span>&amp;&amp;cookies.length&gt;<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="comment">//        5.	遍历cookie数组。</span></span><br><span class="line">            <span class="keyword">for</span> (Cookie cookie : cookies) &#123;</span><br><span class="line"><span class="comment">//        6.	每得到一个cookie，得到cookie的名称。</span></span><br><span class="line">                String name = cookie.getName();</span><br><span class="line"><span class="comment">//        7.	用得到的名称和lastTime（比较）</span></span><br><span class="line">                <span class="keyword">if</span>(<span class="string">&quot;lastTime&quot;</span>.equals(name))&#123;</span><br><span class="line"><span class="comment">//        8.	如果相同：给flag赋值为真。</span></span><br><span class="line">                    flag =<span class="keyword">true</span>;</span><br><span class="line"><span class="comment">//        9.	获得该cookie的值（最后一次登录的时间）</span></span><br><span class="line">                    String value = cookie.getValue();</span><br><span class="line"><span class="comment">//        10.	cookie解码URLDecoder.decode(value,&quot;utf-8&quot;);</span></span><br><span class="line">                    value = URLDecoder.decode(value, <span class="string">&quot;utf-8&quot;</span>);</span><br><span class="line"><span class="comment">//        11.	响应到你调用的地方&lt;h1&gt;欢迎回来，您上次访问时间为:&quot;+value+&quot;&lt;/h1&gt;</span></span><br><span class="line">                    response.getWriter().write(<span class="string">&quot;&lt;h1&gt;欢迎回来，您上次访问时间为:&quot;</span>+value+<span class="string">&quot;&lt;/h1&gt;&quot;</span>);</span><br><span class="line"><span class="comment">//        12.	获得当前时间并转成字符串（&quot;yyyy年MM月dd日 HH:mm:ss&quot;）</span></span><br><span class="line">                    String str_date = <span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;yyyy年MM月dd日 HH:mm:ss&quot;</span>).format(<span class="keyword">new</span> Date());</span><br><span class="line"><span class="comment">//        13.	给时间值加密URLEncoder.encode(str_Date,&quot;utf-8&quot;);</span></span><br><span class="line">                    str_date= URLEncoder.encode(str_date,<span class="string">&quot;utf-8&quot;</span>);</span><br><span class="line"><span class="comment">//        14.	重新设置该cookie的值。</span></span><br><span class="line">                    cookie.setValue(str_date);</span><br><span class="line"><span class="comment">//        15.	设置cookie的有效时间。</span></span><br><span class="line">                    cookie.setMaxAge(<span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span> * <span class="number">30</span>);</span><br><span class="line"><span class="comment">//        16.	把cookie存储到本地。</span></span><br><span class="line">                    response.addCookie(cookie);</span><br><span class="line"><span class="comment">//        17.	结束循环。</span></span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//        18.	重新判断cookies是否为空或者长度是否为0，或者flag为假</span></span><br><span class="line">        <span class="keyword">if</span>(cookies==<span class="keyword">null</span>||cookies.length==<span class="number">0</span>||flag==<span class="keyword">false</span>)&#123;</span><br><span class="line">            <span class="comment">//        19.	获得当前时间并转成字符串（&quot;yyyy年MM月dd日 HH:mm:ss&quot;）</span></span><br><span class="line">        String str_date =<span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;yyyy年MM月dd日 HH:mm:ss&quot;</span>).format(<span class="keyword">new</span> Date());</span><br><span class="line"><span class="comment">//        20.	给时间值加密URLEncoder.encode(str_Date,&quot;utf-8&quot;);打码解码是为了中文乱码的问题</span></span><br><span class="line">            str_date=  URLEncoder.encode(str_date,<span class="string">&quot;utf-8&quot;</span>);</span><br><span class="line"><span class="comment">//        21.	创建（lastTime）Cookie并把当时时间赋值该cookie。</span></span><br><span class="line">            Cookie cookie = <span class="keyword">new</span> Cookie(<span class="string">&quot;lastTime&quot;</span>,str_date);</span><br><span class="line"><span class="comment">//        22.	设置cookie的有效时间。</span></span><br><span class="line">            cookie.setMaxAge(<span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span> * <span class="number">30</span>);</span><br><span class="line"><span class="comment">//        23.	把cookie存储到本地。</span></span><br><span class="line">            response.addCookie(cookie);</span><br><span class="line"><span class="comment">//        24.	响应&lt;h1&gt;您好，欢迎您首次访问&lt;/h1&gt;</span></span><br><span class="line">            response.getWriter().write(<span class="string">&quot;&lt;h1&gt;您好，欢迎您首次访问&lt;/h1&gt;&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/04/30/java%E8%AF%AD%E6%B3%95/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/05/06/javaWeb0506/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Thymeleaf使用 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Thymeleaf," />
+  
+
+  <meta name="description" content="模板引擎常见有JSP、Velocity、Freemarker、Thymeleaf SpringBoot推荐的Thymeleaf； 引入Thymeleaf  &lt;dependency&gt;     &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;     &lt;artifactId&gt;spring-boot-starter-t">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Thymeleaf使用">
+<meta property="og:url" content="http://paphae.top/2020/07/10/Thymeleaf%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="模板引擎常见有JSP、Velocity、Freemarker、Thymeleaf SpringBoot推荐的Thymeleaf； 引入Thymeleaf  &lt;dependency&gt;     &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;     &lt;artifactId&gt;spring-boot-starter-t">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-07-10T15:09:44.000Z">
+<meta property="article:modified_time" content="2020-07-15T08:51:37.032Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="Thymeleaf">
+<meta name="twitter:card" content="summary">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E"><span class="toc-text">模板引擎</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SpringBoot%E6%8E%A8%E8%8D%90%E7%9A%84Thymeleaf%EF%BC%9B"><span class="toc-text">SpringBoot推荐的Thymeleaf；</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%99%E4%B8%80%E4%B8%AA%E6%8E%A7%E5%88%B6%E5%99%A8%E8%B7%B3%E8%BD%AC%E5%88%B0index-html"><span class="toc-text">写一个控制器跳转到index.html</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AC%E5%85%B1%E9%A1%B5%E6%8A%BD%E5%8F%96"><span class="toc-text">公共页抽取</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Th%E6%A0%87%E7%AD%BE"><span class="toc-text">Th标签</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-Thymeleaf使用" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Thymeleaf使用</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.07.10</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/%E6%A1%86%E6%9E%B6/">框架</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="模板引擎"><a href="#模板引擎" class="headerlink" title="模板引擎"></a>模板引擎</h2><p>常见有JSP、Velocity、Freemarker、Thymeleaf</p>
+<h3 id="SpringBoot推荐的Thymeleaf；"><a href="#SpringBoot推荐的Thymeleaf；" class="headerlink" title="SpringBoot推荐的Thymeleaf；"></a>SpringBoot推荐的Thymeleaf；</h3><ul>
+<li><p>引入Thymeleaf</p>
+</li>
+<li><pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt;
+&lt;/dependency&gt;
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 导入thymeleaf的名称空间</span><br><span class="line"></span><br><span class="line">- &#96;&lt;html lang&#x3D;&quot;en&quot; xmlns:th&#x3D;&quot;http:&#x2F;&#x2F;www.thymeleaf.org&quot;&gt;&#96;</span><br><span class="line"></span><br><span class="line">### $,*,#,@语法</span><br><span class="line"></span><br><span class="line">  变量表达式： $&#123;...&#125;，是获取容器上下文变量的值.</span><br><span class="line"></span><br><span class="line">  选择变量表达式： *&#123;...&#125;，获取指定的对象中的变量值。如果是单独的对象，则等价于$&#123;&#125;。</span><br><span class="line"></span><br><span class="line">  消息表达式： #&#123;...&#125;表达式与th:text一起使用，加载数据源中的消息，用于国际化</span><br><span class="line"></span><br><span class="line">  链接网址表达式： @&#123;...&#125;，获取网址链接  th:href  th:src  写地址的时候要时用@&#123;访问地址&#125;</span><br><span class="line"></span><br><span class="line">[Thymeleaf 教程](https:&#x2F;&#x2F;www.docs4dev.com&#x2F;docs&#x2F;zh&#x2F;thymeleaf&#x2F;3.0&#x2F;reference)</span><br><span class="line"></span><br><span class="line">### 实例</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;html</span><br><span class="line">&lt;table class&#x3D;&quot;table table-striped table-sm&quot;&gt;</span><br><span class="line">    &lt;thead&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;th&gt;id&lt;&#x2F;th&gt;</span><br><span class="line">            &lt;th&gt;lastName&lt;&#x2F;th&gt;</span><br><span class="line">            &lt;th&gt;email&lt;&#x2F;th&gt;</span><br><span class="line">            &lt;th&gt;gender&lt;&#x2F;th&gt;</span><br><span class="line">            &lt;th&gt;departmentName&lt;&#x2F;th&gt;</span><br><span class="line">            &lt;th&gt;birth&lt;&#x2F;th&gt;</span><br><span class="line">            &lt;th&gt;option&lt;&#x2F;th&gt;</span><br><span class="line">        &lt;&#x2F;tr&gt;</span><br><span class="line">    &lt;&#x2F;thead&gt;</span><br><span class="line">    &lt;tbody&gt;</span><br><span class="line">        &lt;tr th:each&#x3D;&quot;emp:$&#123;emps&#125;&quot;&gt;</span><br><span class="line">            &lt;td th:text&#x3D;&quot;$&#123;emp.id&#125;&quot;&gt;&lt;&#x2F;td&gt;</span><br><span class="line">            &lt;td th:text&#x3D;&quot;$&#123;emp.lastName&#125;&quot;&gt;&lt;&#x2F;td&gt;</span><br><span class="line">            &lt;td th:text&#x3D;&quot;$&#123;emp.email&#125;&quot;&gt;&lt;&#x2F;td&gt;</span><br><span class="line">            &lt;td th:text&#x3D;&quot;$&#123;emp.gender&#125;&#x3D;&#x3D;1?&#39;男&#39;:&#39;女&#39;&quot;&gt;&lt;&#x2F;td&gt;</span><br><span class="line">            &lt;td th:text&#x3D;&quot;$&#123;emp.department.departmentName&#125;&quot;&gt;&lt;&#x2F;td&gt;</span><br><span class="line">            &lt;td th:text&#x3D;&quot;$&#123;#dates.format(emp.birth,&#39;yyyy-MM-dd&#39;)&#125;&quot;&gt;&lt;&#x2F;td&gt;</span><br><span class="line">            &lt;td&gt;</span><br><span class="line">                &lt;a th:href&#x3D;&quot;@&#123;&#39;&#x2F;emp&#x2F;&#39;+$&#123;emp.id&#125;&#125;&quot; class&#x3D;&quot;btn btn-sm btn-primary&quot;&gt;编辑&lt;&#x2F;a&gt;</span><br><span class="line">                &lt;button class&#x3D;&quot;del btn btn-sm btn-danger&quot;&gt;删除&lt;&#x2F;button&gt;</span><br><span class="line">                &lt;input type&#x3D;&quot;hidden&quot; th:value&#x3D;&quot;$&#123;emp.id&#125;&quot;&gt;</span><br><span class="line">            &lt;&#x2F;td&gt;</span><br><span class="line">        &lt;&#x2F;tr&gt;</span><br><span class="line">    &lt;&#x2F;tbody&gt;</span><br><span class="line">&lt;&#x2F;table&gt;</span><br></pre></td></tr></table></figure>
+### 优化配置
+</code></pre>
+</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">thymeleaf:</span></span><br><span class="line">    <span class="attr">prefix:</span> <span class="string">classpath:/templates/</span></span><br><span class="line">      <span class="attr">check-template-location:</span> <span class="literal">true</span></span><br><span class="line">      <span class="attr">suffix:</span> <span class="string">.html</span></span><br></pre></td></tr></table></figure>
+<h3 id="写一个控制器跳转到index-html"><a href="#写一个控制器跳转到index-html" class="headerlink" title="写一个控制器跳转到index.html"></a>写一个控制器跳转到index.html</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/login.html&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toLogin</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;index&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="公共页抽取"><a href="#公共页抽取" class="headerlink" title="公共页抽取"></a>公共页抽取</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">公共页抽取</span><br><span class="line">1、抽取公共片段</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">th:fragment</span>=<span class="string">&quot;copy&quot;</span>&gt;</span></span><br><span class="line">    <span class="symbol">&amp;copy;</span> 2011 The Good Thymes Virtual Grocery</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">2.引入公共片段</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">th:insert</span>=<span class="string">&quot;~&#123;footer :: copy&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">~&#123;templatename::selec tor&#125;：模板名::选择器</span><br><span class="line">~&#123;templatename::fragmentname&#125;:模板名::片段名</span><br><span class="line">3.三种引入公共片段的th属性：</span><br><span class="line">th:insert：将公共片段整个插入到声明引入的元素中</span><br><span class="line">th:replace：将声明引入的元素替换为公共片段</span><br><span class="line">th:include：将被引入的片段的内容包含进这个标签中</span><br><span class="line"><span class="tag">&lt;<span class="name">footer</span> <span class="attr">th:fragment</span>=<span class="string">&quot;copy&quot;</span>&gt;</span></span><br><span class="line">    <span class="symbol">&amp;copy;</span> 2011 The Good Thymes Virtual Grocery</span><br><span class="line"><span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br><span class="line">引入方式</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">th:insert</span>=<span class="string">&quot;footer :: copy&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">th:replace</span>=<span class="string">&quot;footer :: copy&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">th:include</span>=<span class="string">&quot;footer :: copy&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">效果</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">footer</span>&gt;</span></span><br><span class="line">        <span class="symbol">&amp;copy;</span> 2011 The Good Thymes Virtual Grocery</span><br><span class="line">    <span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">footer</span>&gt;</span></span><br><span class="line">    <span class="symbol">&amp;copy;</span> 2011 The Good Thymes Virtual Grocery</span><br><span class="line"><span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="symbol">&amp;copy;</span> 2011 The Good Thymes Virtual Grocery</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Th标签"><a href="#Th标签" class="headerlink" title="Th标签"></a>Th标签</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1.不改变html的源代码，可以在模板解析的时候进行生效。</span><br><span class="line">	a)Th:text   对标签  替换覆盖对标签之间的文本。</span><br><span class="line">	b)Th:name  form表单中的元素中， 在模板解析的时候，覆盖原元素的name值。</span><br><span class="line">	c)th:href和th:src  </span><br><span class="line">		i.作用：在模板解析的时候覆盖原来的src或href的属性的值。</span><br><span class="line">		ii.注意：使用@&#123;&#125;把地址括起来。 带值使用（）括起来。</span><br><span class="line">	d)Th:insert th:replace th:include</span><br><span class="line">		i.注意：模板名::选择器   模板名::片段名</span><br><span class="line">	e)Th:if 在标签中使用，如果th：if的值为真，该标签出现，如果if的值为假，该标签不出现。</span><br><span class="line">	f)Th:each </span><br><span class="line">		i.实例：<span class="tag">&lt;<span class="name">tr</span> <span class="attr">th:each</span>=<span class="string">&quot;emp:$&#123;emps&#125;&quot;</span>&gt;</span></span><br><span class="line">    	ii.把th:each所有在标签循环遍历。  </span><br><span class="line">    g)Th:action 在模板解析时覆盖原form的action 的值。</span><br><span class="line">    h)Th:attr 自定义属性及值。</span><br></pre></td></tr></table></figure>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/07/10/Shiro%E5%AE%89%E5%85%A8%E6%A1%86%E6%9E%B6/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/07/11/SpringBoot%E6%95%B4%E5%90%88/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

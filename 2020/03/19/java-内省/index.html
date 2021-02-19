@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>java-内省 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="javaBean," />
+  
+
+  <meta name="description" content="内省在实际编程中，我们常常需要一些用来包装值对象的类，例如Student、Employee、Order，这些类中往往没有业务方法，只是为了把需要处理的实体对象进行封装.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java-内省">
+<meta property="og:url" content="http://paphae.top/2020/03/19/java-%E5%86%85%E7%9C%81/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="内省在实际编程中，我们常常需要一些用来包装值对象的类，例如Student、Employee、Order，这些类中往往没有业务方法，只是为了把需要处理的实体对象进行封装.">
+<meta property="og:locale">
+<meta property="og:image" content="http://paphae.top/2020/03/19/java-%E5%86%85%E7%9C%81/java-%E5%86%85%E7%9C%81/%E5%9B%BE%E7%89%877.png">
+<meta property="og:image" content="http://paphae.top/2020/03/19/java-%E5%86%85%E7%9C%81/java-%E5%86%85%E7%9C%81/%E5%9B%BE%E7%89%878.png">
+<meta property="article:published_time" content="2020-03-19T02:01:32.000Z">
+<meta property="article:modified_time" content="2020-05-06T00:42:30.842Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="javaBean">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://paphae.top/2020/03/19/java-%E5%86%85%E7%9C%81/java-%E5%86%85%E7%9C%81/%E5%9B%BE%E7%89%877.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E7%9C%81"><span class="toc-text">内省</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-java-内省" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">java-内省</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.03.19</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/javaSE/">javaSE</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="内省"><a href="#内省" class="headerlink" title="内省"></a>内省</h2><p>在实际编程中，我们常常需要一些用来包装值对象的类，例如Student、Employee、Order，这些类中往往没有业务方法，只是为了把需要处理的实体对象进行封装.</p>
+<a id="more"></a>
+<p>有这样的特征： </p>
+<ul>
+<li>属性都是私有的； </li>
+<li>有无参的public构造方法； </li>
+<li>对私有属性根据需要提供 公有的getXxx方法以及setXxx方法；例如属性名称为name,则有getName方法返回属性name值，setName方法设置name值；注意方法的名称通常是get或set加上属性名称，并把属性名称的首字母大写；这些方法称为getters/setters；getters必须有返回值没有方法参数；setter值没有返回值，有方法参数； </li>
+</ul>
+<p>符合这些特征的类，被称为JavaBean；<br>内省（Inspector）机制就是基于反射的基础，Java语言对Bean类属性、事件的一种缺省处理方法。<br>与Java内省有关的主要类及接口有： </p>
+<ul>
+<li>java.beans.Introspector类: 为获得JavaBean属性、事件、方法提供了标准方法；通常使用其中的getBeanInfo方法返回BeanInfo对象； </li>
+<li>Java.beans.BeanInfo接口：不能直接实例化，通常通过Introspector类返回该类型对象，提供了返回属性描述符对象（PropertyDescriptor）、方法描述符对象（MethodDescriptor） 、bean描述符（BeanDescriptor）对象的方法； </li>
+<li>Java.beans.PropertyDescriptor类：用来描述一个属性，该属性有getter及setter方法；</li>
+</ul>
+<p><strong>只要类中有getXXX方法，或者setXXX方法，或者同时有getXXX及setXXX方法，其中getXXX方法没有方法参数，有返回值；setXXX方法没有返回值，有一个方法参数；那么内省机制就认为XXX为一个属性</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">可以使用PropertyDescriptor类的方法获取属性相关的信息，例如getName方法返回属性的名字;</span><br><span class="line"><span class="comment">//返回Employee类的BeanInfo对象</span></span><br><span class="line">BeanInfo employeeInfo=Introspector.getBeanInfo(Employee.class);</span><br><span class="line"><span class="comment">//使用BeanInfo返回PropertyDescriptor对象数组</span></span><br><span class="line">PropertyDescriptor[] propsDes=employeeInfo.getPropertyDescriptors();</span><br><span class="line"><span class="comment">//迭代所有的PropertyDescriptor，返回属性名字。由于从Object类继承getClass方法，所以属性名有class</span></span><br><span class="line"><span class="keyword">for</span>(PropertyDescriptor prop:propsDes)&#123;</span><br><span class="line">System.out.println(prop.getName());</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<p><img src="java-%E5%86%85%E7%9C%81/%E5%9B%BE%E7%89%877.png"><br>-很多框架都使用了内省机制检索对象的属性，定义属性名字时，名字最好起码以两个小写字母开头，例如stuName，而不要使用sName，某些情况下，可能会导致检索属性失败； </p>
+<ul>
+<li>再次强调，内省机制检索属性时，是根据getter和setter方法确认属性名字，而不是根据类里声明的属性名决定；<br><img src="java-%E5%86%85%E7%9C%81/%E5%9B%BE%E7%89%878.png"></li>
+</ul>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/03/19/java-%E6%B3%A8%E8%A7%A3/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/03/20/java-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

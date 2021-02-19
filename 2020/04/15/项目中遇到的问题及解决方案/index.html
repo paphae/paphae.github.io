@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>项目中遇到的问题及解决方案 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="ajax," />
+  
+
+  <meta name="description" content="Ajax应用serialize()提交Form表单及后端取值（Java）传送门 看到下边的评论，“只有get方式，后台才能使用request接收序列化后的数据，我试了n次post根本不行！！！post后台都是null！！！只有get才行！！” 这确实解决了我的问题，项目结束后我亲自测试了博主的代码，发现也是可行的。 我的原因在：我加了 contentType: “application&#x2F;json”">
+<meta property="og:type" content="article">
+<meta property="og:title" content="项目中遇到的问题及解决方案">
+<meta property="og:url" content="http://paphae.top/2020/04/15/%E9%A1%B9%E7%9B%AE%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="Ajax应用serialize()提交Form表单及后端取值（Java）传送门 看到下边的评论，“只有get方式，后台才能使用request接收序列化后的数据，我试了n次post根本不行！！！post后台都是null！！！只有get才行！！” 这确实解决了我的问题，项目结束后我亲自测试了博主的代码，发现也是可行的。 我的原因在：我加了 contentType: “application&#x2F;json”">
+<meta property="og:locale">
+<meta property="og:image" content="http://paphae.top/2020/04/15/%E9%A1%B9%E7%9B%AE%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/%E9%A1%B9%E7%9B%AE%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/image-20200522213759978.png">
+<meta property="article:published_time" content="2020-04-15T00:47:57.000Z">
+<meta property="article:modified_time" content="2020-05-22T13:38:31.245Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="ajax">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://paphae.top/2020/04/15/%E9%A1%B9%E7%9B%AE%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/%E9%A1%B9%E7%9B%AE%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/image-20200522213759978.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Ajax%E5%BA%94%E7%94%A8serialize-%E6%8F%90%E4%BA%A4Form%E8%A1%A8%E5%8D%95%E5%8F%8A%E5%90%8E%E7%AB%AF%E5%8F%96%E5%80%BC%EF%BC%88Java%EF%BC%89"><span class="toc-text">Ajax应用serialize()提交Form表单及后端取值（Java）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Fastjson%E7%94%9F%E6%88%90json%E6%97%B6Null%E5%B1%9E%E6%80%A7%E4%B8%8D%E6%98%BE%E7%A4%BA"><span class="toc-text">Fastjson生成json时Null属性不显示</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-项目中遇到的问题及解决方案" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">项目中遇到的问题及解决方案</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.04.15</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/%E9%94%99%E8%AF%AF%E8%AE%B0%E5%BD%95/">错误记录</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="Ajax应用serialize-提交Form表单及后端取值（Java）"><a href="#Ajax应用serialize-提交Form表单及后端取值（Java）" class="headerlink" title="Ajax应用serialize()提交Form表单及后端取值（Java）"></a>Ajax应用serialize()提交Form表单及后端取值（Java）</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010612373/article/details/52328942">传送门</a></p>
+<p>看到下边的评论，“只有get方式，后台才能使用request接收序列化后的数据，我试了n次post根本不行！！！post后台都是null！！！只有get才行！！”</p>
+<p>这确实解决了我的问题，项目结束后我亲自测试了博主的代码，发现也是可行的。</p>
+<p>我的原因在：我加了 contentType: “application/json” //post请求的信息格式</p>
+<p>我又遇到了新的问题：ajax返回的data为null怎样判断？</p>
+<p>解决：设置返回类型为dataType: “json” ，判断null != data</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page contentType=<span class="string">&quot;text/html;charset=UTF-8&quot;</span> language=<span class="string">&quot;java&quot;</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;title&gt;Ajax应用serialize()提交Form表单及后端取值（Java）&lt;/title&gt;</span><br><span class="line">        &lt;script src=&quot;$&#123;pageContext.request.contextPath&#125;/js/jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">        &lt;script type=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><br><span class="line">            $(document).ready(function()&#123;</span><br><span class="line">                $(<span class="string">&quot;#modifyForm&quot;</span>).submit(function(e)&#123;</span><br><span class="line">                    $(<span class="string">&quot;#submitButton&quot;</span>).attr(<span class="string">&#x27;disabled&#x27;</span>,<span class="string">&quot;true&quot;</span>);</span><br><span class="line">                    $.ajax(&#123;</span><br><span class="line">                        url:$(<span class="string">&quot;#modifyForm&quot;</span>).attr(<span class="string">&quot;action&quot;</span>),</span><br><span class="line">                        type:<span class="string">&quot;post&quot;</span>,</span><br><span class="line">                        <span class="comment">//contentType: &quot;application/json&quot;,//post请求的信息格式</span></span><br><span class="line">                        <span class="comment">//dataType: &quot;json&quot;,</span></span><br><span class="line">                        data:$(<span class="string">&#x27;#modifyForm&#x27;</span>).serialize(),</span><br><span class="line"></span><br><span class="line">                        success:function(data)&#123;</span><br><span class="line">                            <span class="keyword">if</span>( <span class="keyword">null</span> != data  )&#123;</span><br><span class="line">                                alert(<span class="string">&quot;操作成功&quot;</span>+data);</span><br><span class="line">                            &#125;</span><br><span class="line">                            <span class="keyword">else</span>&#123;</span><br><span class="line">                                alert(<span class="string">&quot;操作失败：&quot;</span> + $(<span class="string">&quot;#test&quot;</span>).val() + <span class="string">&quot;|&quot;</span> + data);</span><br><span class="line">                            &#125;</span><br><span class="line">                            $(<span class="string">&quot;#submitButton&quot;</span>).removeAttr(<span class="string">&quot;disabled&quot;</span>);</span><br><span class="line">                        &#125;,</span><br><span class="line">                        error:function(data)&#123;</span><br><span class="line">                            alert(<span class="string">&quot;操作异常：&quot;</span> + $(<span class="string">&quot;#test&quot;</span>).val() + data.responseText);</span><br><span class="line">                            $(<span class="string">&quot;#submitButton&quot;</span>).removeAttr(<span class="string">&quot;disabled&quot;</span>);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;);</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;);</span><br><span class="line">        &lt;/script&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;form id=<span class="string">&quot;modifyForm&quot;</span> action=<span class="string">&quot;$&#123;pageContext.request.contextPath&#125;/testFrom.do&quot;</span> method=<span class="string">&quot;post&quot;</span>&gt;</span><br><span class="line">            测试：&lt;input id=<span class="string">&quot;test&quot;</span> name=<span class="string">&quot;test&quot;</span> type=<span class="string">&quot;text&quot;</span> value=<span class="string">&quot;$&#123;test&#125;&quot;</span>/&gt;</span><br><span class="line">            …………</span><br><span class="line">            &lt;input id=<span class="string">&quot;submitButton&quot;</span> type=<span class="string">&quot;submit&quot;</span> value=<span class="string">&quot;确定&quot;</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;btn btn-success&quot;</span>/&gt;</span><br><span class="line">        &lt;/form&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="Fastjson生成json时Null属性不显示"><a href="#Fastjson生成json时Null属性不显示" class="headerlink" title="Fastjson生成json时Null属性不显示"></a><strong>Fastjson生成json时Null属性不显示</strong></h2><p><a target="_blank" rel="noopener" href="https://wuzhuti.cn/2175-html">传送门</a></p>
+<p><img src="%E9%A1%B9%E7%9B%AE%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/image-20200522213759978.png" alt="image-20200522213759978"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JSONObject.toJSONString(Object object, SerializerFeature... features)</span><br></pre></td></tr></table></figure>
+<p>Fastjson的SerializerFeature序列化属性</p>
+<ul>
+<li>QuoteFieldNames———-输出key时是否使用双引号,默认为true</li>
+<li>WriteMapNullValue——–是否输出值为null的字段,默认为false</li>
+<li>WriteNullNumberAsZero—-数值字段如果为null,输出为0,而非null</li>
+<li>WriteNullListAsEmpty—–List字段如果为null,输出为[],而非null</li>
+<li>WriteNullStringAsEmpty—字符类型字段如果为null,输出为”“,而非null</li>
+<li>WriteNullBooleanAsFalse–Boolean字段如果为null,输出为false,而非null</li>
+</ul>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/04/15/html/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/04/15/Scanner%E7%9A%84close%E6%96%B9%E6%B3%95/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

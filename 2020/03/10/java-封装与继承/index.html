@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>java-封装与继承 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="封装,继承," />
+  
+
+  <meta name="description" content="封装把客观事物封装成抽象的类，并且类可以把自己的数据和方法只让可信的类或者对象操作，对不可信的进行信息隐藏。在一个对象内部，某些代码或某些数据可以是私有的，不能被外界访问。通过这种方式，现实世界可以被描绘成一系列完全自治、封装的对象，这些对象通过一个受保护的接口访问其他对象">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java-封装与继承">
+<meta property="og:url" content="http://paphae.top/2020/03/10/java-%E5%B0%81%E8%A3%85%E4%B8%8E%E7%BB%A7%E6%89%BF/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="封装把客观事物封装成抽象的类，并且类可以把自己的数据和方法只让可信的类或者对象操作，对不可信的进行信息隐藏。在一个对象内部，某些代码或某些数据可以是私有的，不能被外界访问。通过这种方式，现实世界可以被描绘成一系列完全自治、封装的对象，这些对象通过一个受保护的接口访问其他对象">
+<meta property="og:locale">
+<meta property="og:image" content="http://paphae.top/2020/03/10/java-%E5%B0%81%E8%A3%85%E4%B8%8E%E7%BB%A7%E6%89%BF/java0309/%E5%9B%BE%E7%89%871.png">
+<meta property="og:image" content="http://paphae.top/2020/03/10/java-%E5%B0%81%E8%A3%85%E4%B8%8E%E7%BB%A7%E6%89%BF/java0309/%E5%9B%BE%E7%89%872.png">
+<meta property="og:image" content="http://paphae.top/2020/03/10/java-%E5%B0%81%E8%A3%85%E4%B8%8E%E7%BB%A7%E6%89%BF/java0309/%E5%9B%BE%E7%89%873.png">
+<meta property="og:image" content="http://paphae.top/2020/03/10/java-%E5%B0%81%E8%A3%85%E4%B8%8E%E7%BB%A7%E6%89%BF/java0310/%E5%9B%BE%E7%89%877.png">
+<meta property="og:image" content="http://paphae.top/2020/03/10/java-%E5%B0%81%E8%A3%85%E4%B8%8E%E7%BB%A7%E6%89%BF/java0310/%E5%9B%BE%E7%89%878.png">
+<meta property="og:image" content="http://paphae.top/2020/03/10/java-%E5%B0%81%E8%A3%85%E4%B8%8E%E7%BB%A7%E6%89%BF/java0310/%E5%9B%BE%E7%89%879.png">
+<meta property="og:image" content="http://paphae.top/2020/03/10/java-%E5%B0%81%E8%A3%85%E4%B8%8E%E7%BB%A7%E6%89%BF/java0310/%E5%9B%BE%E7%89%8710.png">
+<meta property="article:published_time" content="2020-03-10T00:02:17.000Z">
+<meta property="article:modified_time" content="2020-05-06T00:51:03.762Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="封装">
+<meta property="article:tag" content="继承">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://paphae.top/2020/03/10/java-%E5%B0%81%E8%A3%85%E4%B8%8E%E7%BB%A7%E6%89%BF/java0309/%E5%9B%BE%E7%89%871.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%81%E8%A3%85"><span class="toc-text">封装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%81%E8%A3%85%E7%9A%84%E5%A5%BD%E5%A4%84"><span class="toc-text">封装的好处</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%A7%E6%89%BF"><span class="toc-text">继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%A7%E6%89%BF%E6%84%8F%E4%B9%89"><span class="toc-text">继承意义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="toc-text">基本用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Extends%E7%BB%A7%E6%89%BF"><span class="toc-text">Extends继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95%E4%B8%8E%E7%BB%A7%E6%89%BF"><span class="toc-text">构造方法与继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#super%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-text">super关键字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%A7%E6%89%BF%E5%B0%8F%E7%BB%93"><span class="toc-text">继承小结</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%81%E8%A3%85%E6%A1%88%E4%BE%8B"><span class="toc-text">封装案例</span></a></li></ol></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-java-封装与继承" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">java-封装与继承</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.03.10</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/javaSE/">javaSE</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><p>把客观事物封装成抽象的类，并且类可以把自己的数据和方法只让可信的类或者对象操作，对不可信的进行信息隐藏。在一个对象内部，某些代码或某些数据可以是私有的，不能被外界访问。通过这种方式，现实世界可以被描绘成一系列完全自治、封装的对象，这些对象通过一个受保护的接口访问其他对象</p>
+<a id="more"></a>
+<p>但并不是很安全<br>需要将属性进行私有化处理 添加访问修饰符  private<br>属性通过私有化之后，没有办法直接进行访问了，如果我还是想修改属性，只能调用方法<br><img src="java0309/%E5%9B%BE%E7%89%871.png"></p>
+<h2 id="封装的好处"><a href="#封装的好处" class="headerlink" title="封装的好处"></a>封装的好处</h2><p>封装把过程和数据包围起来，对数据的访问只能通过已定义的接口。面向对象编程始于这个基本概念，即现实世界可以被描绘成一系列完全自治、封装的对象，这些对象通过一个受保护的接口访问其他对象。封装是一种信息隐藏技术，在java中通过控制成员的访问权限实现封装，即使用方法将类的数据隐藏起来，控制用户对类的修改和访问数据的程度。 适当的封装可以让代码更容易理解和维护，也加强了代码的安全性。</p>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>继承是一种联结类的层次模型，并且允许和鼓励类的重用，它提供了一种明确表述共性的方法<br>一个新类可以从现有的类中派生，这个过程称为类继承，新类继承了原始类的特性，新类称为原始类的派生类（子类），而原始类称为新类的基类（父类）<br>派生类可以从它的基类那里继承方法和实例变量，并且类可以修改或增加新的方法使之更适合特殊的需要</p>
+<h2 id="继承意义"><a href="#继承意义" class="headerlink" title="继承意义"></a>继承意义</h2><p>在现实生活中的继承，可以理解为儿子继承了父亲的财产，即财产重用；<br>面向对象程序设计中的继承，则是代码重用；<br>继承是利用现有的类创建新类的过程，现有的类称作基类（或父类），创建的新类称作派生类（子类）<br>复用代码是Java众多引人注目的功能之一。但要想成为极具革命性的语言，仅仅能够复制代码并对加以改变是不够的，它还必须能够做更多的事情。尽可能的复用代码是程序员一直在追求的，继承就是一种复用代码的方式，也是java三大特性之一<br>继承是java面向对象编程技术的一块基石，因为它允许创建分等级层次的类<br>继承就是子类继承父类的特征和行为，使得子类对象（实例）具有父类的实例域和方法，或子类从父类继承方法，使得子类具有父类相同的行为<br>继承是使用已存在的类的定义作为基础建立新类的技术，新类的定义可以增加新的数据或新的功能，也可以用父类的功能，通过使用继承我们能够非常方便地复用以前的代码，能够大大的提高开发的效率</p>
+<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><p>在Java中，使用extends关键字描述类与类之间的继承关系，其基本用法是：<br><strong>【访问权限修饰符】【修饰符】子类名  extends  父类名{子类体}</strong><br>由于Java是单亲继承体系，因此在描述类与类的继承关系时，extends关键字后面只能是一个名字，而不能是一个列表（后续接口继承的情况，extends后面可以是一个列表）</p>
+<h2 id="Extends继承"><a href="#Extends继承" class="headerlink" title="Extends继承"></a>Extends继承</h2><p>继承定义了类如何相互关联，共享特性。对于若干个相同或者相识的类，我们可以抽象出他们共有的行为或者属相并将其定义成一个父类或者超类，然后用这些类继承该父类，他们不仅可以拥有父类的属性、方法还可以定义自己独有的属性或者方法。<br>子类拥有父类的的属性和方法（private成员由于权限关系因此不能访问）<br>子类可以拥有自己属性和方法，即子类可以对父类进行扩展<br>子类可以用自己的方式实现父类的方法（后续介绍）<br>综上所述，使用继承确实有许多的优点，除了将所有子类的共同属性放入父类，实现代码共享，避免重复外，还可以使得修改扩展继承而来的实现比较简单。</p>
+<h2 id="构造方法与继承"><a href="#构造方法与继承" class="headerlink" title="构造方法与继承"></a>构造方法与继承</h2><p>通过前面我们知道子类可以继承父类的属性和方法<br>但是有一样是子类继承不了的：构造方法<br>对于构造方法而言，它只能够被调用，而不能被继承<br><img src="java0309/%E5%9B%BE%E7%89%872.png"><br>当构建子类对象时会优先隐式自动调用父类的无参构造方法，而且这个构建调用过程是从父类“向外”递归扩散的，也就是从父类开始向子类一级一级地完成构建，即如果C继承自B，而B继承自A，那么构建C的对象时，会先调用A的构造方法，然后调用B的构造方法，最后调用C的构造方法，以此类推</p>
+<h2 id="super关键字"><a href="#super关键字" class="headerlink" title="super关键字"></a>super关键字</h2><p>如果父类不具备无参的构造方法怎么办呢？<br>Java 语言中，要求子类有责任保证它所继承的父类尽快进入到一个稳定、完整的状态中。如果没有这个约束，那么子类的某个继承自父类的方法可能会使用到父类中的一些变量，而这些变量并没有进行初始化，从而产生一些难以预料的后果<br>如果没有无参的父类构造方法，子类必须要显示的调用父类的构造方法，而且必须是在子类构造器中做的第一件事<br>通过super关键字可以在子类构造方法中显式调用父类的构造方法，<strong>该调用必须位于子类构造方法的第一行</strong></p>
+<table>
+<thead>
+<tr>
+<th>super</th>
+<th>this</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>表示父类引用</td>
+<td>表示当前对象引用</td>
+</tr>
+<tr>
+<td>Super可以调用父类构造</td>
+<td>调用当前对象构造方法</td>
+</tr>
+<tr>
+<td>不能当成参数返回值使用 引用不能传递</td>
+<td>当成参数或者返回值使用，可以传递</td>
+</tr>
+<tr>
+<td><img src="java0309/%E5%9B%BE%E7%89%873.png"></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="继承小结"><a href="#继承小结" class="headerlink" title="继承小结"></a>继承小结</h2><p>类的继承由关键字extends确定，Java语言为单亲继承，及一个子类只能有一个父类，而一个父类可以有多个子类<br>子类可以重写父类中某一个方法，称为方法覆盖，也称方法重写，是继承中非常重要的知识点。如果子类需要修改从父类继承到的方法的方法体，就可以使用方法覆盖</p>
+<table>
+<thead>
+<tr>
+<th>方法的重写(orverride)</th>
+<th>方法的重载(overload)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>在子类继承父类</td>
+<td>在同一个类中</td>
+</tr>
+<tr>
+<td>方法名称、参数列表一致</td>
+<td>方法名相同参数列表不同</td>
+</tr>
+<tr>
+<td>返回值也要一致</td>
+<td>与返回值类型无关</td>
+</tr>
+</tbody></table>
+<h4 id="封装案例"><a href="#封装案例" class="headerlink" title="封装案例"></a>封装案例</h4><ul>
+<li><p>封装前：<br><img src="java0310/%E5%9B%BE%E7%89%877.png"><br><img src="java0310/%E5%9B%BE%E7%89%878.png"><br><img src="java0310/%E5%9B%BE%E7%89%879.png"></p>
+</li>
+<li><p>封装后：<br><img src="java0310/%E5%9B%BE%E7%89%8710.png"></p>
+</li>
+</ul>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/03/05/java0305/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/03/11/java-%E5%A4%9A%E6%80%81/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

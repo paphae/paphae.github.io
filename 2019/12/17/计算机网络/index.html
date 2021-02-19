@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>计算机网络 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="计算机网络," />
+  
+
+  <meta name="description" content="主要功能 物理层的基本功能： 利用传输介质为数据链路层提供物理连接，实现比特流的透明传输。数据链路层的基本功能： 通过各种控制协议，将有差错的物理信道变为无差错的、能可靠传输数据帧的数据链路。网络层基本功能： 通过路由选择算法，为报文或分组通过通信子网选择最适当的路径。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络">
+<meta property="og:url" content="http://paphae.top/2019/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="主要功能 物理层的基本功能： 利用传输介质为数据链路层提供物理连接，实现比特流的透明传输。数据链路层的基本功能： 通过各种控制协议，将有差错的物理信道变为无差错的、能可靠传输数据帧的数据链路。网络层基本功能： 通过路由选择算法，为报文或分组通过通信子网选择最适当的路径。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2019-12-17T08:43:10.000Z">
+<meta property="article:modified_time" content="2020-05-06T00:52:36.152Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="计算机网络">
+<meta name="twitter:card" content="summary">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD"><span class="toc-text">主要功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10BASET"><span class="toc-text">10BASET</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A5%E5%A4%AA%E7%BD%91"><span class="toc-text">以太网</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E8%BD%B4%E7%94%B5%E7%BC%86"><span class="toc-text">同轴电缆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E5%B1%80%E5%9F%9F%E7%BD%91"><span class="toc-text">虚拟局域网</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AB%AF%E5%88%B0%E7%AB%AF"><span class="toc-text">端到端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%82%B9%E5%88%B0%E7%82%B9"><span class="toc-text">点到点</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-计算机网络" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">计算机网络</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2019.12.17</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h3 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h3><blockquote>
+<p>物理层的基本功能： 利用传输介质为数据链路层提供物理连接，实现比特流的透明传输。<br>数据链路层的基本功能： 通过各种控制协议，将有差错的物理信道变为无差错的、能可靠传输数据帧的数据链路。<br>网络层基本功能： 通过路由选择算法，为报文或分组通过通信子网选择最适当的路径。</p>
+</blockquote>
+<a id="more"></a>
+
+<p>分享<br><a target="_blank" rel="noopener" href="https://kelier.github.io/2017/08/06/1502002119/">计算机网络</a></p>
+<h3 id="10BASET"><a href="#10BASET" class="headerlink" title="10BASET"></a>10BASET</h3><blockquote>
+<p>以太网的标准拓扑结构为总线型拓扑，但目前的快速以太网（100BASE-T、1000BASE-T标准）为了减少冲突，将能提高的网络速度和使用效率最大化，使用集线器来进行网络连接和组织。如此一来，以太网的拓扑结构就成了星型；但在逻辑上，以太网仍然使用总线型拓扑和CSMA/CD（Carrier Sense Multiple Access/Collision Detection，即载波多重访问/碰撞侦测）的总线技术。</p>
+</blockquote>
+<h3 id="以太网"><a href="#以太网" class="headerlink" title="以太网"></a>以太网</h3><blockquote>
+<p>既可以应用于局域网又可以应用有广域网的以太网技术是万兆以太网</p>
+</blockquote>
+<h3 id="同轴电缆"><a href="#同轴电缆" class="headerlink" title="同轴电缆"></a>同轴电缆</h3><blockquote>
+<p>细缆的直径为0.26厘米，最大传输距离185米。缆线总长不要超过185米，否则信号将严重衰减。细缆的阻抗是50Ω。<br>实际应用中应将总长控制在185米内，但理论上200米之内都是可以传输的，只不过过了185米信号就会严重衰减，所以不推荐这样做</p>
+</blockquote>
+<p>局域网(LAN)是在一个较小的地理范围(如一个学校)内将各种计算机、外部设备和数据库系统等通过双绞线、同轴电缆等连接介质互相连接起来，组成资源和信息共享的计算机互联网络。</p>
+<blockquote>
+<p>主要特点：<br>1）为一个单位所拥有，且地理范围和站点数目均有限<br>2）所有的站共享较高的总带宽(即较高的数据传输速率)<br>3）较低的时延和较低的误码率<br>4）各站为平等关系而不是主从关系<br>5）能进行广播和组播</p>
+</blockquote>
+<p>广域网(WAN)通常是指覆盖范围很广(远远超过一个城市的范围)的长距离网络。广域网是因特网的核心部分，其任务是通过长距离运送主机所发送的数据。连接广域网各结点交换机的链路都是告诉链路，其距离可以是几千公里的光缆线路，也可以是几万公里的点对点卫星线路。因此广域网首要考虑的问题是通信容量必须足够大，以便支持日益增长的通信量。</p>
+<blockquote>
+<p>广域网由一些结点交换机(而不是路由器，结点交换机和路由器都是用来转发分组，它们的工作原理也类似，但注意区别：结点交换机在单个网络中转发分组，而路由器在多个网络构成的互联网中转发分组)以及连接这些交换机的链路组成。结点交换机执行将分组存储转发的功能。结点之间都是点到点连接，但为了提高网络的可靠性，通常一个结点交换机往往与多个结点交换机相连</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>广域网</th>
+<th>局域网</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>覆盖范围</td>
+<td>很广，通常跨区域</td>
+<td>较小，通常在一个区域内</td>
+</tr>
+<tr>
+<td>连接方式</td>
+<td>结点之间都是点到点连接，但为了提高网络的可靠性，一个结点交换机往往与多个结点交换机相连</td>
+<td>普遍采用多点接入方式</td>
+</tr>
+<tr>
+<td>OSI层次</td>
+<td>三层：物理层，数据链路层，网络层</td>
+<td>两层：物理层，数据链路层</td>
+</tr>
+<tr>
+<td>联系与相似点</td>
+<td>1.广域网和局域网都是互联网的重要组成构件，从互联网的角度上看，二者平等(不是包含关系)2.连接在一个广域网或一个局域网上的主机在该网内进行通信时，只需要使用其网络的物理地址即可。</td>
+<td></td>
+</tr>
+<tr>
+<td>着重点</td>
+<td>强调资源共享</td>
+<td>强调数据传输</td>
+</tr>
+</tbody></table>
+<h3 id="虚拟局域网"><a href="#虚拟局域网" class="headerlink" title="虚拟局域网"></a>虚拟局域网</h3><blockquote>
+<p>虚拟局域网（VLAN，Virtual Local Area Network）是一组逻辑上的设备和用户，这些设备和用户并不受物理位置的限制，可以根据功能、部门及应用等因素将它们组织起来，相互之间的通信就好像它们在同一个网段中一样，由此得名虚拟局域网。<br>VLAN是一种比较新的技术，工作在OSI参考模型的第2层和第3层，一个VLAN就是一个广播域，VLAN之间的通信是通过第3层的路由器来完成的。<br>与传统的局域网技术相比较，VLAN技术更加灵活，它具有以下优点： 网络设备的移动、添加和修改的管理开销减少；可以控制广播活动；可提高网络的安全性。</p>
+</blockquote>
+<h3 id="端到端"><a href="#端到端" class="headerlink" title="端到端"></a>端到端</h3><blockquote>
+<p>运输层为运行在不同主机上的进程彼此之间提供了逻辑通信。</p>
+</blockquote>
+<h3 id="点到点"><a href="#点到点" class="headerlink" title="点到点"></a>点到点</h3><blockquote>
+<p>网络层则提供了主机之间的逻辑通信。</p>
+</blockquote>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2019/12/02/Linux%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86-NFS%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/01/05/hexo-%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

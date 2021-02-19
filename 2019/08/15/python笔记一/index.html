@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>python笔记一 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="python," />
+  
+
+  <meta name="description" content="pip安装最新版本pip install -U wheel-U 最新版本">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python笔记一">
+<meta property="og:url" content="http://paphae.top/2019/08/15/python%E7%AC%94%E8%AE%B0%E4%B8%80/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="pip安装最新版本pip install -U wheel-U 最新版本">
+<meta property="og:locale">
+<meta property="og:image" content="http://paphae.top/2019/08/15/python%E7%AC%94%E8%AE%B0%E4%B8%80/python%E7%AC%94%E8%AE%B0%E4%B8%80/1.png">
+<meta property="og:image" content="http://paphae.top/2019/08/15/python%E7%AC%94%E8%AE%B0%E4%B8%80/python%E7%AC%94%E8%AE%B0%E4%B8%80/2.png">
+<meta property="og:image" content="http://paphae.top/2019/08/15/python%E7%AC%94%E8%AE%B0%E4%B8%80/python%E7%AC%94%E8%AE%B0%E4%B8%80/3.png">
+<meta property="og:image" content="http://paphae.top/2019/08/15/python%E7%AC%94%E8%AE%B0%E4%B8%80/python%E7%AC%94%E8%AE%B0%E4%B8%80/4.png">
+<meta property="og:image" content="http://paphae.top/2019/08/15/python%E7%AC%94%E8%AE%B0%E4%B8%80/python%E7%AC%94%E8%AE%B0%E4%B8%80/5.png">
+<meta property="article:published_time" content="2019-08-15T07:28:50.000Z">
+<meta property="article:modified_time" content="2020-05-06T01:42:37.651Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://paphae.top/2019/08/15/python%E7%AC%94%E8%AE%B0%E4%B8%80/python%E7%AC%94%E8%AE%B0%E4%B8%80/1.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#pip%E5%AE%89%E8%A3%85%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC"><span class="toc-text">pip安装最新版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E9%95%9C%E5%83%8F%E6%BA%90"><span class="toc-text">修改镜像源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#print%E8%BE%93%E5%87%BA%E9%97%AE%E9%A2%98"><span class="toc-text">print输出问题</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-python笔记一" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">python笔记一</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2019.08.15</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h3 id="pip安装最新版本"><a href="#pip安装最新版本" class="headerlink" title="pip安装最新版本"></a>pip安装最新版本</h3><p>pip install -U wheel<br>-U 最新版本</p>
+<a id="more"></a>
+<h3 id="修改镜像源"><a href="#修改镜像源" class="headerlink" title="修改镜像源"></a>修改镜像源</h3><p><a target="_blank" rel="noopener" href="https://pypi.tuna.tsinghua.edu.cn/">清华大学镜像</a></p>
+<p>C:\Users\zhangbo\AppData\Roaming\pip\pip.ini</p>
+<h3 id="print输出问题"><a href="#print输出问题" class="headerlink" title="print输出问题"></a>print输出问题</h3><p>实例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">&quot;Let&#x27;s go&quot;</span>)</span><br><span class="line">print(<span class="string">&quot;这个\\n是回车&quot;</span>)</span><br><span class="line">print(<span class="string">&#x27;she sys:&quot;let\&#x27;s go&quot;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>以下输出案例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Let&#39;s go</span><br><span class="line">这个\n是回车</span><br><span class="line">she sys:&quot;let&#39;s go&quot;</span><br></pre></td></tr></table></figure>
+<p>实例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">strs =  <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">        白玉谁家郎，回车渡天津。</span></span><br><span class="line"><span class="string">        看花东陌上，惊动洛阳人。</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line">print(strs)</span><br></pre></td></tr></table></figure>
+<p>以下输出案例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">白玉谁家郎，回车渡天津。</span><br><span class="line">看花东陌上，惊动洛阳人。</span><br></pre></td></tr></table></figure>
+<p>实例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(value，sep=<span class="string">&#x27;&#x27;</span>,end=<span class="string">&#x27;&#x27;</span>,file=,flush=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+<p>实例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">age = <span class="number">12</span></span><br><span class="line">name = <span class="string">&#x27;ab&#x27;</span></span><br><span class="line">print(<span class="string">&#x27;年龄:&#123;1&#125;,身高:&#123;0&#125;&#x27;</span>.<span class="built_in">format</span>(age,name))</span><br></pre></td></tr></table></figure>
+<p>以下输出实例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">年龄:ab,身高:12</span><br></pre></td></tr></table></figure>
+<p><img src="python%E7%AC%94%E8%AE%B0%E4%B8%80/1.png"><br><img src="python%E7%AC%94%E8%AE%B0%E4%B8%80/2.png"><br><img src="python%E7%AC%94%E8%AE%B0%E4%B8%80/3.png"><br><img src="python%E7%AC%94%E8%AE%B0%E4%B8%80/4.png"><br><img src="python%E7%AC%94%E8%AE%B0%E4%B8%80/5.png"><br>遇到的问题</p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/9456d0a4a63d">Python中 is 和 == 的区别</a></p>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="hide pull-left" href="/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2019/08/16/python%E7%AC%94%E8%AE%B0%E4%BA%8C/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

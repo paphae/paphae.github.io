@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Spring0607-周测 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="周测," />
+  
+
+  <meta name="description" content="一、填空题(每空2分，共10分) 简单来说，BeanFactory就是一个管理Bean的工厂，它主要负责初始化各种Bean，并调用它们的 生命周期   方法。  实例工厂方式采用直接创建Bean实例的方式，在配置文件中，需要实例化的Bean是通过  factory-bean   属性指向配置的实例工厂，然后使用factory-method属性确定使用工厂中的哪个方法。   ​    实例工厂：实例">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring0607-周测">
+<meta property="og:url" content="http://paphae.top/2020/06/08/Spring0607/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="一、填空题(每空2分，共10分) 简单来说，BeanFactory就是一个管理Bean的工厂，它主要负责初始化各种Bean，并调用它们的 生命周期   方法。  实例工厂方式采用直接创建Bean实例的方式，在配置文件中，需要实例化的Bean是通过  factory-bean   属性指向配置的实例工厂，然后使用factory-method属性确定使用工厂中的哪个方法。   ​    实例工厂：实例">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-06-08T13:57:16.000Z">
+<meta property="article:modified_time" content="2020-06-09T02:11:49.337Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="周测">
+<meta name="twitter:card" content="summary">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%A1%AB%E7%A9%BA%E9%A2%98-%E6%AF%8F%E7%A9%BA2%E5%88%86%EF%BC%8C%E5%85%B110%E5%88%86"><span class="toc-text">一、填空题(每空2分，共10分)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E9%80%89%E6%8B%A9%E9%A2%98%EF%BC%88%E6%AF%8F%E9%A2%982%E5%88%86%EF%BC%8C%E5%85%B140%E5%88%86%EF%BC%89"><span class="toc-text">二、选择题（每题2分，共40分）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%88%A4%E6%96%AD%E9%A2%98%EF%BC%88%E6%AF%8F%E9%A2%982%E5%88%86%EF%BC%8C%E5%85%B120%E5%88%86%EF%BC%89"><span class="toc-text">三、判断题（每题2分，共20分）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E7%AE%80%E7%AD%94%E9%A2%98%EF%BC%88%E6%AF%8F%E9%A2%986%E5%88%86%EF%BC%8C%E5%85%B130%E5%88%86%EF%BC%89"><span class="toc-text">四、简答题（每题6分，共30分）</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-Spring0607" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Spring0607-周测</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.06.08</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/%E6%A1%86%E6%9E%B6/">框架</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="一、填空题-每空2分，共10分"><a href="#一、填空题-每空2分，共10分" class="headerlink" title="一、填空题(每空2分，共10分)"></a>一、填空题(每空2分，共10分)</h2><ol>
+<li><p>简单来说，BeanFactory就是一个管理Bean的工厂，它主要负责初始化各种Bean，并调用它们的 生命周期   方法。</p>
+</li>
+<li><p>实例工厂方式采用直接创建Bean实例的方式，在配置文件中，需要实例化的Bean是通过  factory-bean   属性指向配置的实例工厂，然后使用factory-method属性确定使用工厂中的哪个方法。</p>
+</li>
+</ol>
+<p>​    实例工厂：实例方法怎么调用？ 1.创建对象 2.对象.方法名称</p>
+<p>​    静态工厂：静态方法怎么调用？ 1.类.方法名  2.方法名（本类当中）</p>
+<ol start="3">
+<li><p>AspectJ框架中注解@Pointcut用于定义切入点表达式，在使用时还需定义一个包含名字和任意参数的方法签名来表示切入点名称。</p>
+</li>
+<li><p>Spring2.0以后，提供了tx命名空间来配置事务，tx命名空间下提供了&lt;tx:advice&gt;元素来配置事务的通知（增强处理）。</p>
+</li>
+<li><p>在进行Spring与MyBatis整合时，Spring框架所需要准备的JAR包共10个，其中包括：4个核心模块JAR，AOP开发使用的JAR，JDBC和事务的JAR。</p>
+</li>
+</ol>
+<h2 id="二、选择题（每题2分，共40分）"><a href="#二、选择题（每题2分，共40分）" class="headerlink" title="二、选择题（每题2分，共40分）"></a>二、选择题（每题2分，共40分）</h2><ol>
+<li><p>下列选项中，不属于Spring框架优点的是。（ A ）</p>
+<p>A: 提供强大的、可以有效减少页面代码（java代码）的标签（jstl thymeleaf 。。。。）</p>
+<p>B: 声明式事务的支持。</p>
+<p>C: 方便解耦、简化开发</p>
+<p>D: 方便集成各种优秀框架</p>
+</li>
+<li><p>Spring中定义了一系列的注解，以下有关其常用的注解说明错误的是。（ A ）</p>
+<p>A: @Autowired用于对Bean的属性变量、属性的setter方法及构造方法进行标注，配合对应的注解处理器完成Bean的自动配置工作，默认按照Bean的名称进行装配。  </p>
+<p>B: @Repository用于将数据访问层（DAO层）的类标识为Spring中的Bean。</p>
+<p>C: @Service通常作用在业务层（Service层），用于将业务层的类标识为Spring中的Bean。</p>
+<p>D: @Controller通常作用在控制层（如Spring MVC的Controller），用于将控制层的类标识为Spring中的Bean。</p>
+</li>
+<li><p>以下不属于ProxyFactoryBean类中的常用可配置属性的是。（C  ）</p>
+<p>A: target</p>
+<p>B: proxyInterfaces</p>
+<p>C: targetClass</p>
+<p>D: interceptorNames</p>
+</li>
+<li><p>以下哪种类型不是Spring中的通知类型。（D ）</p>
+<p>A: 异常通知</p>
+<p>B: 前置通知</p>
+<p>C: 后置通知</p>
+<p>D: 前后通知</p>
+<p>//aop ： 前置  后置  环绕  异常</p>
+<p>//aspectj：多了一个最终通知。</p>
+</li>
+<li><p>下面关于update()方法描述错误的是。（ A ）</p>
+<p>A: update()方法可以完成插入、更新、删除和查询数据的操作</p>
+<p>B: 在JdbcTemplate类中，提供了一系列的update()方法</p>
+<p>C: update()方法执行后，会返回受影响的行数</p>
+<p>D: update()方法返回的参数是int类型</p>
+</li>
+<li><p>下面描述中，关于query()方法说法错误的是。（C ） </p>
+<p>A: List query(String sql, RowMapper rowMapper)会执行String类型参数提供的SQL语句，并通过RowMapper返回一个List类型的结果。 </p>
+<p>B: List query（String sql,  PreparedStatementSetter pss,  RowMapper rowMapper）会根据String类型参数提供的SQL语句创建PreparedStatement对象，通过RowMapper将结果返回到List中。  </p>
+<p>C: List query（String sql, Object[] args, RowMapper rowMapper）会将args参数绑定到SQL语句中，并通过RowMapper返回一个Object类型的单行记录。</p>
+<p>D: queryForList（String sql,Object[] args, class<T> elementType）可以返回多行数据的结果，但必须是返回列表，elementType参数返回的是List元素类型。</p>
+</li>
+<li><p>以下关于@Transactional注解可配置的参数信息及秒正确的是。（ A ）</p>
+<p>A: value用于指定需要使用的事务管理器，默认为””；</p>
+<p>B: read-only用于指定事务是否只读，默认为true；</p>
+<p>C: isolation用于指定事务的隔离级别，默认为Isolation.READ_COMMITTED；</p>
+<p>D: propagation用于指定事务的传播行为，默认为Propagation. SUPPORTS；</p>
+</li>
+<li><p>下列选项中，哪一个不是Spring中事务管理的核心接口。（ D ）</p>
+<p>A: PlatformTransactionManager</p>
+<p>B: TransactionDefinition</p>
+<p>C: TransactionStatus</p>
+<p>D: TransactionManager</p>
+</li>
+<li><p>下面关于<load-on-startup>元素说法错误的是。（ C ）</p>
+<p>A: 如果<load-on-startup>元素的值为1，则在应用程序启动时会立即加载该Servlet</p>
+<p>B: 如果<load-on-startup>元素不存在，则应用程序会在第一个Servlet请求时加载该Servlet</p>
+<p>C: 如果<load-on-startup>元素的值为1，则在应用程序启动时会延迟加载该Servlet</p>
+<p>D: <load-on-startup>元素是可选的</p>
+</li>
+<li><p>下面选项中，哪一个是Spring的编码过滤器类。（ B ）</p>
+<p>A: org.springframework.web.filter.EncodingFilter</p>
+<p>B: org.springframework.web.filter.CharacterEncodingFilter</p>
+<p>C: org.springframework.web.filter.CharacterEncoding</p>
+<p>D: org.springframework.web.filter.CharacterFilter</p>
+</li>
+<li><p>下面不属于@RequestParam注解类型属性的是。（A  ）</p>
+<p>A: id</p>
+<p>B: value</p>
+<p>C: name</p>
+<p>D: required</p>
+</li>
+<li><p>下面不属于AJAX中的属性的是。（D ）</p>
+<p>A: data</p>
+<p>B: contentType</p>
+<p>C: dataType</p>
+<p>D: database</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/wuchenfei/p/9820958.html">https://www.cnblogs.com/wuchenfei/p/9820958.html</a></p>
+</li>
+<li><p>JSON对象结构中，关键字key必须为。（ C ）类型</p>
+<p>A: Object</p>
+<p>B: Array</p>
+<p>C: String</p>
+<p>D: Number</p>
+</li>
+<li><p>关于用户权限验证的执行流程，说法错误的是。（D ）</p>
+<p>A：只有登录后的用户才能访问系统中的主页面。</p>
+<p>B：如果没有登录系统而直接访问主页面，则拦截器会将请求拦截，并转发到登录页面。</p>
+<p>C：如果用户名或密码错误，会在登录页面给出相应的提示信息。</p>
+<p>D：当已登录的用户在系统主页中单击“退出”链接时，系统会回到主页面。</p>
+</li>
+<li><p>下面关于MultipartFile接口中说法错误的是。（ B ）</p>
+<p>A: getOriginalFilename()用于获取上传文件的初始化名。</p>
+<p>B: getSize()用于获取上传文件的大小，单位是KB。</p>
+<p>C: getInputStream()用于读取文件内容，返回一个InputStream流。</p>
+<p>D: transferTo(File file)用于将上传文件保存到目标目录下。</p>
+</li>
+<li><p>下列选项中，属于Spring MVC所必须的JAR包的是。（ A ）</p>
+<p>A: spring-web-4.3.6.RELEASE.jar</p>
+<p>B: spring-webmvc-portlet-4.3.6.RELEASE.jar</p>
+<p>C: spring-webmvc-4.3.6.RELEASE-javadoc.jar</p>
+<p>D: spring-websocket-4.3.6.RELEASE.jar</p>
+</li>
+<li><p>下面不属于拦截器类中的方法的是。（ D ）</p>
+<p>A: preHandler()</p>
+<p>B: postHandle()</p>
+<p>C: afterCompletion()</p>
+<p>D: afterpletion()</p>
+</li>
+<li><p>针对GET方式RESTful风格的请求<a target="_blank" rel="noopener" href="http://localhost:8080/chapter14/user/1%EF%BC%8C%E5%90%8E%E5%8F%B0%E6%96%B9%E6%B3%95%E6%8E%A5%E6%94%B6%E5%8F%82%E6%95%B0%E7%9A%84%E8%B7%AF%E5%BE%84%E6%98%A0%E5%B0%84%E5%86%99%E6%B3%95%E5%8F%AF%E8%A1%8C%E7%9A%84%E6%98%AF%E3%80%82%EF%BC%88">http://localhost:8080/chapter14/user/1，后台方法接收参数的路径映射写法可行的是。（</a> C ）</p>
+<p>A: @RequestMapping(“/user/{id}”，method=RequestMethod.GET)。</p>
+<p>B: @RequestMapping(value=”/user/ids”)。</p>
+<p>C: @GetMapping(value=”/user/{ids}”)。</p>
+<p>D: @GetMapping(value=”/user/{id}”，method=RequestMethod.GET)</p>
+</li>
+<li><p>下面关于Java对象之间的关联关系描述正确的是。（ B ）</p>
+<p>A: 一对一的关系就是在本类和对方类中定义同一个类型的对象。</p>
+<p>B: 一对多的关系就是一个A类类型对应多个B类类型的情况。</p>
+<p>C: 多对多的关系只需要在一方的类中引入另一方类型的集合。</p>
+<p>D: 多对多关联关系需要在本类中引入本类的集合。</p>
+</li>
+<li><p>Spring的核心容器是其他模块建立的基础，以下哪个不是该容器的组成模块。（ D ）</p>
+<p>A: Beans模块</p>
+<p>B: Core模块</p>
+<p>C: Context模块</p>
+<p>D: AOP模块</p>
+</li>
+</ol>
+<h2 id="三、判断题（每题2分，共20分）"><a href="#三、判断题（每题2分，共20分）" class="headerlink" title="三、判断题（每题2分，共20分）"></a>三、判断题（每题2分，共20分）</h2><ol>
+<li><p>Spring中基于构造方法的依赖注入通过调用带参数的构造方法来实现，每个参数代表着一个依赖。（对 ）</p>
+</li>
+<li><p>Spring框架采用的是分层架构，它一系列的功能要素被分成20个模块。（ 对 ）</p>
+</li>
+<li><p>每次客户端请求singleton作用域的Bean时，Spring容器都会创建一个新的实例，并且不会管那些被配置成singleton作用域的Bean的生命周期。（ 错 ）</p>
+</li>
+<li><p>AspectJ框架中的注解@After用于定义最终final通知，不管是否异常，该通知都会执行。（ 对 ）</p>
+</li>
+<li><p>Spring 3.0以后，Spring AOP引入了对AspectJ的支持，并允许直接使用AspectJ进行编程，而Spring自身的AOP API也尽量与AspectJ保持一致。（ 错 ）</p>
+</li>
+<li><p>JdbcTemplate类中还提供了大量的query()方法来处理各种对数据库表的查询操作。（ 对 ）</p>
+</li>
+<li><p>JSON对象数据结构的关键字（key）必须为String类型，值（value）可以是String、Number、Object、Array等数据类型。（ 对 ）</p>
+</li>
+<li><p>AspectJ框架中的注解@After用于定义最终final通知，不管是否异常，该通知都会执行。（对 ）</p>
+</li>
+<li><p>Spring配置文件中的&lt;beans&gt;元素下可以包含多个&lt;aop:config&gt;元素，一个&lt;aop:config&gt;元素中又可以包含属性和子元素，其子元素包括&lt;aop:pointcut&gt;、&lt;aop:advisor&gt;和&lt;aop:aspect&gt;。（对 ）</p>
+</li>
+<li><p>上传文件时，必须要保证所上传的文件不重名，为此可以通过UUID等方式对上传的文件名称进行重命名。（对 ）</p>
+</li>
+</ol>
+<h2 id="四、简答题（每题6分，共30分）"><a href="#四、简答题（每题6分，共30分）" class="headerlink" title="四、简答题（每题6分，共30分）"></a>四、简答题（每题6分，共30分）</h2><ol>
+<li><p>Spring依赖注入通常有哪些实现方式，列举并分别进行说明。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">答案：1. setter方法</span><br><span class="line">2. 构造方法</span><br><span class="line">3. 接口</span><br><span class="line">4. byName</span><br><span class="line">5. byType</span><br></pre></td></tr></table></figure></li>
+<li><p>请简述拦截器HandlerInterceptor接口中的方法并做说明。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">答案：1. preHandler：方法执行前执行，返回true放行，false不放行，用于验证登录</span><br><span class="line">2. postHandler：放行后，在方法执行后执行</span><br><span class="line">3. afterCompletion：放行后，最后执行</span><br></pre></td></tr></table></figure></li>
+<li><p>请简述基于XML的装配方式中设值注入的要求。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">答案：先调用无参构造方法创建实例对象，在调用setter方法设值注入。</span><br><span class="line">要求：必须有无参构造方法和setter方法</span><br></pre></td></tr></table></figure></li>
+<li><p>请对Spring的通知类型进行简要说明。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">答案：前置通知：在切入点之前执行</span><br><span class="line">后置通知：在切入点之后执行</span><br><span class="line">环绕通知：接管方法执行</span><br><span class="line">异常通知：发生异常执行</span><br><span class="line">最终通知：不管有没有异常最终都执行</span><br></pre></td></tr></table></figure></li>
+<li><p>spring的DI有多少种方式？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">答案：脏读</span><br><span class="line">幻读</span><br><span class="line">不可重复读</span><br><span class="line">可序列化</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</li>
+</ol>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/06/04/SpringJDBC-Spring-SpringMVC%E6%95%B4%E5%90%88%E8%BF%87%E7%A8%8B/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/06/08/Spring-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%92%8C%E5%9B%BD%E9%99%85%E5%8C%96/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

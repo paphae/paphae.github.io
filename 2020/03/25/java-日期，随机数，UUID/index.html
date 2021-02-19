@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>java-日期，随机数，UUID | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="api," />
+  
+
+  <meta name="description" content="RandomMath类中的random方法可以产生随机数，上节演示过。然而，该方法只能生成[0.0,1.0)范围的double值；很多时候，可能需要生成不同类型不同范围的随机值；">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java-日期，随机数，UUID">
+<meta property="og:url" content="http://paphae.top/2020/03/25/java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="RandomMath类中的random方法可以产生随机数，上节演示过。然而，该方法只能生成[0.0,1.0)范围的double值；很多时候，可能需要生成不同类型不同范围的随机值；">
+<meta property="og:locale">
+<meta property="og:image" content="http://paphae.top/2020/03/25/java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/%E5%9B%BE%E7%89%871.png">
+<meta property="og:image" content="http://paphae.top/2020/03/25/java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/%E5%9B%BE%E7%89%872.png">
+<meta property="og:image" content="http://paphae.top/2020/03/25/java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/%E5%9B%BE%E7%89%873.png">
+<meta property="og:image" content="http://paphae.top/2020/03/25/java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/%E5%9B%BE%E7%89%874.png">
+<meta property="og:image" content="http://paphae.top/2020/03/25/java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/%E5%9B%BE%E7%89%875.png">
+<meta property="og:image" content="http://paphae.top/2020/03/25/java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/%E5%9B%BE%E7%89%876.png">
+<meta property="og:image" content="http://paphae.top/2020/03/25/java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/%E5%9B%BE%E7%89%877.png">
+<meta property="og:image" content="http://paphae.top/2020/03/25/java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/%E5%9B%BE%E7%89%878.png">
+<meta property="og:image" content="http://paphae.top/2020/03/25/java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/%E5%9B%BE%E7%89%879.png">
+<meta property="og:image" content="http://paphae.top/2020/03/25/java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/%E5%9B%BE%E7%89%8710.png">
+<meta property="og:image" content="http://paphae.top/2020/03/25/java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/%E5%9B%BE%E7%89%8711.png">
+<meta property="og:image" content="http://paphae.top/2020/03/25/java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/%E5%9B%BE%E7%89%8712.png">
+<meta property="article:published_time" content="2020-03-24T23:58:51.000Z">
+<meta property="article:modified_time" content="2020-05-06T00:37:27.129Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="api">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://paphae.top/2020/03/25/java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/%E5%9B%BE%E7%89%871.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Random"><span class="toc-text">Random</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UUID"><span class="toc-text">UUID</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A5%E6%9C%9F"><span class="toc-text">日期</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Date"><span class="toc-text">Date</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Calendar"><span class="toc-text">Calendar</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SimpleDateFormat"><span class="toc-text">SimpleDateFormat</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98"><span class="toc-text">例题</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-java-日期，随机数，UUID" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">java-日期，随机数，UUID</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.03.25</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/javaSE/">javaSE</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="Random"><a href="#Random" class="headerlink" title="Random"></a>Random</h2><p>Math类中的random方法可以产生随机数，上节演示过。然而，该方法只能生成[0.0,1.0)范围的double值；很多时候，可能需要生成不同类型不同范围的随机值；  </p>
+<a id="more"></a>
+<p>java.util包中的Random类可以用来生成不同类型的随机值，功能更为强大；<br>Random类创建对象两种方式：<br><img src="java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/%E5%9B%BE%E7%89%871.png"></p>
+<p>java.util包中的Random类有多个生成随机数的相关方法：<br><img src="java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/%E5%9B%BE%E7%89%872.png"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Random ran = <span class="keyword">new</span> Random();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">    System.out.println(ran.nextInt(<span class="number">10</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="UUID"><a href="#UUID" class="headerlink" title="UUID"></a>UUID</h2><p>UUID是通用唯一识别码 (Universally Unique Identifier)的缩写，是唯一的机器生成的标识符；<br>UUID都不能是人工生成的，这样风险太高；<br>UUID是16字节128位长的数字，通常以36字节的字符串表示，示例如下：3F2504E0-4F89-11D3-9A0C-0305E82C3301<br>通常在分布式系统中用来生成唯一ID</p>
+<p>UUID具有多个版本，每个版本的算法不同；</p>
+<ul>
+<li>UUID Version 1：基于时间的UUID<br>通过计算当前时间戳、随机数和机器MAC地址得到。</li>
+<li>UUID Version 2：DCE安全的UUID<br>和基于时间的UUID算法相同，但会把时间戳的前4位置换为POSIX的UID或GID。这个版本的UUID在实际中较少用到。</li>
+<li>UUID Version 3：基于名字的UUID（MD5）<br>通过计算名字和名字空间的MD5散列值得到。</li>
+<li>UUID Version 4：随机UUID<br>根据随机数，或者伪随机数生成UUID。</li>
+<li>UUID Version 5：基于名字的UUID（SHA1）<br>和版本3的UUID算法类似，只是散列值计算使用SHA1（Secure Hash Algorithm 1）算法。</li>
+</ul>
+<p>Java中对UUID的生成提供了支持，java.util.UUID 类定义了生成UUID的方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;</span><br><span class="line">	UUID uuid=UUID.randomUUID();</span><br><span class="line">	System.out.println(uuid);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="日期"><a href="#日期" class="headerlink" title="日期"></a>日期</h2><p><img src="java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/%E5%9B%BE%E7%89%873.png"></p>
+<h3 id="Date"><a href="#Date" class="headerlink" title="Date"></a>Date</h3><p><img src="java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/%E5%9B%BE%E7%89%874.png"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Date date = <span class="keyword">new</span> Date();</span><br><span class="line">System.out.println(<span class="string">&quot;获取当前时间&quot;</span> + date);</span><br><span class="line">Date d2 = <span class="keyword">new</span> Date(<span class="number">10</span> * <span class="number">24</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">1000</span>);</span><br><span class="line">System.out.println(d2);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="Calendar"><a href="#Calendar" class="headerlink" title="Calendar"></a>Calendar</h3><p>JDK1.1版本开始，增加Calendar类，建议使用Calendar类代替Date类；<br>Calendar是抽象类，不能直接使用new创建对象；<br>Calendar类中定义了获得实例的方法：<br><img src="java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/%E5%9B%BE%E7%89%875.png"><br>//使用默认时区和语言环境获得日历对象<br>Calendar calendar1=Calendar.getInstance();<br>//使用指定时区和语言环境获得日历对象<br>Calendar calendar2=Calendar.getInstance(TimeZone.getTimeZone(“America/Los_Angeles”),Locale.CHINA);<br>获得日历对象后，可以为该对象的年、月、日、时、分、秒等进行赋值：<br><img src="java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/%E5%9B%BE%E7%89%876.png"><br>对Calendar的字段赋值后，可以根据实际需要返回相应字段值；<br><img src="java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/%E5%9B%BE%E7%89%877.png"><br>对Calendar的字段赋值后，可以对其值进行修改；<br><img src="java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/%E5%9B%BE%E7%89%878.png"><br>//修改Calendar的字段值,将年份加1<br>calendar2.add(Calendar.YEAR , 1);</p>
+<h3 id="SimpleDateFormat"><a href="#SimpleDateFormat" class="headerlink" title="SimpleDateFormat"></a>SimpleDateFormat</h3><p>实际编程中，往往需要对时间用不同的格式进行展示；<br>SimpleDateFormat中定义了对时间进行格式化的方法；该类继承了抽象父类DateFormat，某些方法在父类中定义，查阅API文档时注意；<br>可以自定义一个模式字符串来构建SimpleDateFormat对象：<br><img src="java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/%E5%9B%BE%E7%89%879.png"><br>通常使用format方法进行格式化；<br><img src="java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/%E5%9B%BE%E7%89%8710.png"><br>SimpleDateFormat类的API文档中，对pattern中出现的字符含义有详细描述：<br><img src="java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/%E5%9B%BE%E7%89%8711.png"><br>在实际编程中，往往一些时间内容都是通过用户输入获得，得到的是字符串，需要解析成日期时间类型进行处理；<br>SimpleDateFormat类不仅能够格式化时间，还能解析时间字符串；<br><img src="java-%E6%97%A5%E6%9C%9F%EF%BC%8C%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8CUUID/%E5%9B%BE%E7%89%8712.png"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">SimpleDateFormat sdf1=<span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;yyyy年MM月dd日hh时mm分ss秒&quot;</span>);</span><br><span class="line"><span class="comment">//字符串str1表示时间信息</span></span><br><span class="line">String str1=<span class="string">&quot;2002年5月1日8时12分9秒&quot;</span>;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">//使用SimpleDateFormat类的parse方法，把字符串转换成Date类型对象</span></span><br><span class="line">    Date date2=sdf1.parse(str1);</span><br><span class="line">    System.out.println(date2);</span><br><span class="line">&#125; <span class="keyword">catch</span> (ParseException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Date d = <span class="keyword">new</span> Date();</span><br><span class="line">SimpleDateFormat sdf = <span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;YYYY年MM月dd日 HH时mm分ss秒&quot;</span>);</span><br><span class="line">System.out.println(sdf.format(d));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><p>1.获取两个字符串的最大相同子串，例如abegad与acegab，最大相同子串为ega。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest1</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		String str = <span class="string">&quot;abegad&quot;</span>;</span><br><span class="line">		String str2 = <span class="string">&quot;acegab&quot;</span>;</span><br><span class="line">		String res = <span class="string">&quot;&quot;</span>;</span><br><span class="line">		List&lt;String&gt; li = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">		<span class="comment">//找到较短的字符串</span></span><br><span class="line">		<span class="keyword">if</span> (str.length() &lt; str2.length()) &#123;</span><br><span class="line">			<span class="comment">//将子串添加到li集合</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; str.length(); i++) &#123;</span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; str.length(); j++) &#123;</span><br><span class="line">					li.add(str.substring(i, j));</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//遍历找到最长子串</span></span><br><span class="line">			<span class="keyword">for</span> (String s : li) &#123;</span><br><span class="line">				<span class="keyword">if</span> (str2.indexOf(s) != -<span class="number">1</span>) &#123;</span><br><span class="line">					<span class="keyword">if</span> (s.length() &gt; res.length()) &#123;</span><br><span class="line">						res = s;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; str2.length() + <span class="number">1</span>; i++) &#123;</span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; str2.length() + <span class="number">1</span>; j++) &#123;</span><br><span class="line">					li.add(str2.substring(i, j));</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">for</span> (String s : li) &#123;</span><br><span class="line">				<span class="keyword">if</span> (str.indexOf(s) != -<span class="number">1</span>) &#123;</span><br><span class="line">					<span class="keyword">if</span> (s.length() &gt; res.length()) &#123;</span><br><span class="line">						res = s;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(res);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>2.题目：把前面的格式转换成后面的格式。<br>   ttt5yjd-jdd4yh      tttyyyyyjd@jddyyyyh<br>   Hsdkf4sd-fsd3tr    Hsdkfssssd@fsd3tttr<br>   Sf5sd-dsd4wr       Sfsssssd@dsdwwwwr</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest2</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		String s = <span class="string">&quot;ttt5yjd-jdd4yh&quot;</span>;</span><br><span class="line">		String s2 = <span class="string">&quot;Hsdkf4sd-fsd3tr&quot;</span>;</span><br><span class="line">		String s3 = <span class="string">&quot;Sf5sd-dsd4wr&quot;</span>;</span><br><span class="line">		System.out.println(shift(s));</span><br><span class="line">		System.out.println(shift(s2));</span><br><span class="line">		System.out.println(shift(s3));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">shift</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">		StringBuffer sb = <span class="keyword">new</span> StringBuffer(); </span><br><span class="line">		<span class="keyword">char</span>[] ch = s.toCharArray();</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;ch.length;j++) &#123;</span><br><span class="line">			<span class="keyword">if</span>(ch[j]&gt;=<span class="string">&#x27;1&#x27;</span>&amp;&amp;ch[j]&lt;=<span class="string">&#x27;9&#x27;</span>) &#123;</span><br><span class="line">				<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="string">&#x27;0&#x27;</span>;i&lt;ch[j]-<span class="number">1</span>;i++) &#123;</span><br><span class="line">					sb.append(ch[j+<span class="number">1</span>]);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">continue</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(ch[j]==<span class="string">&#x27;-&#x27;</span>) &#123;</span><br><span class="line">				sb.append(<span class="string">&#x27;@&#x27;</span>);</span><br><span class="line">				<span class="keyword">continue</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			sb.append(ch[j]);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> sb.toString();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>3.编写截取字符串的方法，输入为一个字符串和字节数，输出为按字节截取的字符串。具体要求：确保汉字不被截取半个，如“我ABC”,4，应该截为 我AB；输入 我ABC汉语DEF,6  输出 我ABC，而不是汉的半个字；输入 我ABC汉语DEF,7 ，输出 我ABC汉。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest3</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"><span class="comment">//		String s = &quot;我ABC&quot;;</span></span><br><span class="line"><span class="comment">//		String s = &quot;我ABC汉语DEF&quot;;</span></span><br><span class="line">		<span class="comment">//输入 我ABC汉语DEF，6</span></span><br><span class="line">		Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		String s = sc.next();</span><br><span class="line">		String[] str = s.split(<span class="string">&quot;，&quot;</span>);</span><br><span class="line">		System.out.println(CutOut(str[<span class="number">0</span>],Integer.parseInt(str[<span class="number">1</span>])));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">CutOut</span><span class="params">(String s,<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">		String res = <span class="string">&quot;&quot;</span>;</span><br><span class="line">		<span class="keyword">char</span>[] ch = s.toCharArray();</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">char</span> c : ch) &#123;</span><br><span class="line">			String temp = res+c;</span><br><span class="line">			<span class="keyword">if</span>(temp.getBytes().length&gt;n)</span><br><span class="line">				<span class="keyword">return</span> res;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				res=temp;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> res;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>4.猜拳游戏</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.caseDome.moraGame.model;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Computer</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> score;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">showQuan</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		Random random = <span class="keyword">new</span> Random();</span><br><span class="line">        <span class="keyword">int</span> s = random.nextInt(<span class="number">3</span>)+<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Computer</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Computer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> name;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getScore</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> score;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setScore</span><span class="params">(<span class="keyword">int</span> score)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.score = score;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.caseDome.moraGame.model;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> score;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">showQuan</span><span class="params">(String quan)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(quan.equals(<span class="string">&quot;剪刀&quot;</span>))</span><br><span class="line">			<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(quan.equals(<span class="string">&quot;石头&quot;</span>))</span><br><span class="line">			<span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(quan.equals(<span class="string">&quot;布&quot;</span>))</span><br><span class="line">			<span class="keyword">return</span> <span class="number">3</span>;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> name;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getScore</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> score;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setScore</span><span class="params">(<span class="keyword">int</span> score)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.score = score;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.caseDome.moraGame.view;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.text.SimpleDateFormat;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">import</span> java.util.UUID;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.caseDome.moraGame.model.Computer;</span><br><span class="line"><span class="keyword">import</span> com.caseDome.moraGame.model.Person;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Game</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> count;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> countP;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> countW;</span><br><span class="line">	<span class="keyword">private</span> Computer computer;</span><br><span class="line">	<span class="keyword">private</span> Person person;</span><br><span class="line">	<span class="keyword">private</span> String[] q = <span class="keyword">new</span> String[] &#123;<span class="string">&quot;&quot;</span>,<span class="string">&quot;剪刀&quot;</span>,<span class="string">&quot;石头&quot;</span>,<span class="string">&quot;布&quot;</span>&#125;; </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Game</span><span class="params">(Computer computer, Person person)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">		<span class="keyword">this</span>.computer = computer;</span><br><span class="line">		<span class="keyword">this</span>.person = person;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(String comName,String perName)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.computer.setName(comName);</span><br><span class="line">		<span class="keyword">this</span>.person.setName(perName);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">begin</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		&#123;</span><br><span class="line">			SimpleDateFormat sd = <span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;YYYY年MM月DD日 HH时mm分ss秒&quot;</span>);</span><br><span class="line">			<span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</span><br><span class="line">				Scanner s = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">				System.out.print(<span class="string">&quot;输入石头，剪刀，布（任意键退出）：&quot;</span>);</span><br><span class="line">				System.out.println();</span><br><span class="line">				String quan = s.nextLine();</span><br><span class="line">				<span class="keyword">int</span> c = computer.showQuan();</span><br><span class="line">				<span class="keyword">if</span>(person.showQuan(quan)==c) &#123;</span><br><span class="line">					count++;</span><br><span class="line">					countP++;</span><br><span class="line">					System.out.print(sd.format(<span class="keyword">new</span> Date()));</span><br><span class="line">					System.out.print(<span class="string">&quot; 编号&quot;</span>+UUID.randomUUID().toString().replaceAll(<span class="string">&quot;-&quot;</span>, <span class="string">&quot;&quot;</span>).toUpperCase());</span><br><span class="line">					System.out.print(<span class="string">&quot;: &quot;</span>+<span class="keyword">this</span>.person.getName()+<span class="string">&quot;出的是&quot;</span>+quan);</span><br><span class="line">					System.out.print(<span class="string">&quot; &quot;</span>+<span class="keyword">this</span>.computer.getName()+<span class="string">&quot;出的是&quot;</span>+quan);</span><br><span class="line">					System.out.println(<span class="string">&quot;，平局&quot;</span>);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">if</span>((person.showQuan(quan)==<span class="number">1</span> &amp;&amp; c==<span class="number">2</span>)||(person.showQuan(quan)==<span class="number">2</span> &amp;&amp; c==<span class="number">3</span>)||(person.showQuan(quan)==<span class="number">3</span> &amp;&amp; c==<span class="number">1</span>)) &#123;</span><br><span class="line">					count++;</span><br><span class="line">					System.out.print(sd.format(<span class="keyword">new</span> Date()));</span><br><span class="line">					System.out.print(<span class="string">&quot; 编号&quot;</span>+UUID.randomUUID().toString().replaceAll(<span class="string">&quot;-&quot;</span>, <span class="string">&quot;&quot;</span>).toUpperCase());</span><br><span class="line">					System.out.print(<span class="string">&quot;: &quot;</span>+<span class="keyword">this</span>.person.getName()+<span class="string">&quot;出的是&quot;</span>+quan);</span><br><span class="line">					System.out.print(<span class="string">&quot; &quot;</span>+<span class="keyword">this</span>.computer.getName()+<span class="string">&quot;出的是&quot;</span>+q[c]);</span><br><span class="line">					System.out.println(<span class="string">&quot;，&quot;</span>+<span class="keyword">this</span>.computer.getName()+<span class="string">&quot;获胜&quot;</span>);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">if</span>((person.showQuan(quan)==<span class="number">1</span> &amp;&amp; c==<span class="number">3</span>)||(person.showQuan(quan)==<span class="number">2</span> &amp;&amp; c==<span class="number">1</span>)||(person.showQuan(quan)==<span class="number">3</span> &amp;&amp; c==<span class="number">2</span>)) &#123;</span><br><span class="line">					count++;</span><br><span class="line">					countW++;</span><br><span class="line">					System.out.print(sd.format(<span class="keyword">new</span> Date()));</span><br><span class="line">					System.out.print(<span class="string">&quot; 编号&quot;</span>+UUID.randomUUID().toString().replaceAll(<span class="string">&quot;-&quot;</span>, <span class="string">&quot;&quot;</span>).toUpperCase());</span><br><span class="line">					System.out.print(<span class="string">&quot;: &quot;</span>+<span class="keyword">this</span>.person.getName()+<span class="string">&quot;出的是&quot;</span>+quan);</span><br><span class="line">					System.out.print(<span class="string">&quot; &quot;</span>+<span class="keyword">this</span>.computer.getName()+<span class="string">&quot;出的是&quot;</span>+q[c]);</span><br><span class="line">					System.out.println(<span class="string">&quot;，&quot;</span>+<span class="keyword">this</span>.person.getName()+<span class="string">&quot;获胜&quot;</span>);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">if</span>(person.showQuan(quan)==<span class="number">0</span>)</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showMessage</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		person.setScore(countW);</span><br><span class="line">		computer.setScore(count-countW-countP);</span><br><span class="line">		System.out.println(<span class="string">&quot;对战次数:&quot;</span>+count+<span class="string">&quot; 平局次数&quot;</span>+countP);</span><br><span class="line">		System.out.println(<span class="keyword">this</span>.person.getName()+<span class="string">&quot;获胜&quot;</span>+countW+<span class="string">&quot;次&quot;</span>);</span><br><span class="line">		System.out.println(<span class="keyword">this</span>.computer.getName()+<span class="string">&quot;获胜&quot;</span>+(count-countW-countP)+<span class="string">&quot;次&quot;</span>);</span><br><span class="line">		<span class="keyword">if</span>(person.getScore()&gt;computer.getScore()) &#123;</span><br><span class="line">			System.out.println(person.getName()+<span class="string">&quot;赢了&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(person.getScore()==computer.getScore()) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;平局&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			System.out.println(computer.getName()+<span class="string">&quot;赢了&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.caseDome.moraGame.control;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.caseDome.moraGame.model.Computer;</span><br><span class="line"><span class="keyword">import</span> com.caseDome.moraGame.model.Person;</span><br><span class="line"><span class="keyword">import</span> com.caseDome.moraGame.view.Game;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Person p = <span class="keyword">new</span> Person(); </span><br><span class="line">		Computer c = <span class="keyword">new</span> Computer();</span><br><span class="line">		Game g = <span class="keyword">new</span> Game(c,p);</span><br><span class="line">		g.init(<span class="string">&quot;张三&quot;</span>,<span class="string">&quot;李四&quot;</span>);</span><br><span class="line">		g.begin();</span><br><span class="line">		g.showMessage();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/03/24/java-String/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/03/26/java-%E5%AD%97%E8%8A%82%E6%B5%81/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

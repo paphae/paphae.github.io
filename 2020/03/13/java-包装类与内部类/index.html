@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>java-包装类与内部类 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="包装类,内部类," />
+  
+
+  <meta name="description" content="包装类Java语言中有8个基本数据类型，对应有8个类，这8个类统称包装器类型（Wrapper类）；使用这8个包装器类，能够把某一种基本数据类型的变量转换成引用类型，从而使用类中的方法，进行更多的操作；">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java-包装类与内部类">
+<meta property="og:url" content="http://paphae.top/2020/03/13/java-%E5%8C%85%E8%A3%85%E7%B1%BB%E4%B8%8E%E5%86%85%E9%83%A8%E7%B1%BB/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="包装类Java语言中有8个基本数据类型，对应有8个类，这8个类统称包装器类型（Wrapper类）；使用这8个包装器类，能够把某一种基本数据类型的变量转换成引用类型，从而使用类中的方法，进行更多的操作；">
+<meta property="og:locale">
+<meta property="og:image" content="http://paphae.top/2020/03/13/java-%E5%8C%85%E8%A3%85%E7%B1%BB%E4%B8%8E%E5%86%85%E9%83%A8%E7%B1%BB/java-%E5%8C%85%E8%A3%85%E7%B1%BB%E4%B8%8E%E5%86%85%E9%83%A8%E7%B1%BB/%E5%9B%BE%E7%89%871.png">
+<meta property="og:image" content="http://paphae.top/2020/03/13/java-%E5%8C%85%E8%A3%85%E7%B1%BB%E4%B8%8E%E5%86%85%E9%83%A8%E7%B1%BB/java-%E5%8C%85%E8%A3%85%E7%B1%BB%E4%B8%8E%E5%86%85%E9%83%A8%E7%B1%BB/%E5%9B%BE%E7%89%872.png">
+<meta property="og:image" content="http://paphae.top/2020/03/13/java-%E5%8C%85%E8%A3%85%E7%B1%BB%E4%B8%8E%E5%86%85%E9%83%A8%E7%B1%BB/java-%E5%8C%85%E8%A3%85%E7%B1%BB%E4%B8%8E%E5%86%85%E9%83%A8%E7%B1%BB/%E5%9B%BE%E7%89%873.png">
+<meta property="og:image" content="http://paphae.top/2020/03/13/java-%E5%8C%85%E8%A3%85%E7%B1%BB%E4%B8%8E%E5%86%85%E9%83%A8%E7%B1%BB/java-%E5%8C%85%E8%A3%85%E7%B1%BB%E4%B8%8E%E5%86%85%E9%83%A8%E7%B1%BB/%E5%9B%BE%E7%89%874.png">
+<meta property="og:image" content="http://paphae.top/2020/03/13/java-%E5%8C%85%E8%A3%85%E7%B1%BB%E4%B8%8E%E5%86%85%E9%83%A8%E7%B1%BB/java-%E5%8C%85%E8%A3%85%E7%B1%BB%E4%B8%8E%E5%86%85%E9%83%A8%E7%B1%BB/%E5%9B%BE%E7%89%875.png">
+<meta property="og:image" content="http://paphae.top/2020/03/13/java-%E5%8C%85%E8%A3%85%E7%B1%BB%E4%B8%8E%E5%86%85%E9%83%A8%E7%B1%BB/java-%E5%8C%85%E8%A3%85%E7%B1%BB%E4%B8%8E%E5%86%85%E9%83%A8%E7%B1%BB/%E5%9B%BE%E7%89%876.png">
+<meta property="og:image" content="http://paphae.top/2020/03/13/java-%E5%8C%85%E8%A3%85%E7%B1%BB%E4%B8%8E%E5%86%85%E9%83%A8%E7%B1%BB/java-%E5%8C%85%E8%A3%85%E7%B1%BB%E4%B8%8E%E5%86%85%E9%83%A8%E7%B1%BB/%E5%9B%BE%E7%89%878.png">
+<meta property="og:image" content="http://paphae.top/2020/03/13/java-%E5%8C%85%E8%A3%85%E7%B1%BB%E4%B8%8E%E5%86%85%E9%83%A8%E7%B1%BB/java-%E5%8C%85%E8%A3%85%E7%B1%BB%E4%B8%8E%E5%86%85%E9%83%A8%E7%B1%BB/%E5%9B%BE%E7%89%879.png">
+<meta property="og:image" content="http://paphae.top/2020/03/13/java-%E5%8C%85%E8%A3%85%E7%B1%BB%E4%B8%8E%E5%86%85%E9%83%A8%E7%B1%BB/java-%E5%8C%85%E8%A3%85%E7%B1%BB%E4%B8%8E%E5%86%85%E9%83%A8%E7%B1%BB/%E5%9B%BE%E7%89%8710.png">
+<meta property="article:published_time" content="2020-03-13T00:03:54.000Z">
+<meta property="article:modified_time" content="2020-05-06T00:50:16.087Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="包装类">
+<meta property="article:tag" content="内部类">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://paphae.top/2020/03/13/java-%E5%8C%85%E8%A3%85%E7%B1%BB%E4%B8%8E%E5%86%85%E9%83%A8%E7%B1%BB/java-%E5%8C%85%E8%A3%85%E7%B1%BB%E4%B8%8E%E5%86%85%E9%83%A8%E7%B1%BB/%E5%9B%BE%E7%89%871.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%85%E8%A3%85%E7%B1%BB"><span class="toc-text">包装类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%86%E7%AE%B1%E5%92%8C%E8%A3%85%E7%AE%B1"><span class="toc-text">拆箱和装箱</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E9%83%A8%E7%B1%BB%EF%BC%88%E6%88%90%E5%91%98%E5%86%85%E9%83%A8%E7%B1%BB%E3%80%81%E9%9D%99%E6%80%81%E5%86%85%E9%83%A8%E7%B1%BB%E3%80%81%E5%B1%80%E9%83%A8%E5%86%85%E9%83%A8%E7%B1%BB%E3%80%81%E5%8C%BF%E5%90%8D%E5%86%85%E9%83%A8%E7%B1%BB%EF%BC%89"><span class="toc-text">内部类（成员内部类、静态内部类、局部内部类、匿名内部类）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%8C%E5%96%84%E5%A4%9A%E9%87%8D%E7%BB%A7%E6%89%BF"><span class="toc-text">完善多重继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%A2%E6%88%90%E9%97%AD%E5%8C%85"><span class="toc-text">形成闭包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%90%E5%91%98%E5%86%85%E9%83%A8%E7%B1%BB"><span class="toc-text">成员内部类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E5%86%85%E9%83%A8%E7%B1%BB"><span class="toc-text">静态内部类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%80%E9%83%A8%E5%86%85%E9%83%A8%E7%B1%BB%EF%BC%88%E5%92%8C%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E7%B1%BB%E4%BC%BC%EF%BC%8C%E5%AE%9A%E4%B9%89%E5%9C%A8%E6%96%B9%E6%B3%95%E4%B8%AD%EF%BC%89"><span class="toc-text">局部内部类（和局部变量类似，定义在方法中）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%BF%E5%90%8D%E5%86%85%E9%83%A8%E7%B1%BB"><span class="toc-text">匿名内部类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#This%E9%97%AE%E9%A2%98"><span class="toc-text">This问题</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-java-包装类与内部类" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">java-包装类与内部类</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.03.13</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/javaSE/">javaSE</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="包装类"><a href="#包装类" class="headerlink" title="包装类"></a>包装类</h2><p>Java语言中有8个基本数据类型，对应有8个类，这8个类统称包装器类型（Wrapper类）；<br>使用这8个包装器类，能够把某一种基本数据类型的变量转换成引用类型，从而使用类中的方法，进行更多的操作；</p>
+<a id="more"></a>
+<p><img src="java-%E5%8C%85%E8%A3%85%E7%B1%BB%E4%B8%8E%E5%86%85%E9%83%A8%E7%B1%BB/%E5%9B%BE%E7%89%871.png"><br>除了整型及字符型外，其他的包装器类型名字都是将基本数据类型首字母变大写即可；<br>以Integer类为例，可以把int类型转换成Integer引用类型；</p>
+<h2 id="拆箱和装箱"><a href="#拆箱和装箱" class="headerlink" title="拆箱和装箱"></a>拆箱和装箱</h2><p>装箱：基本数据类型转换为包装器类型，称为装箱（boxing）；例如，int型转换为Integer类型；<br>拆箱：包装器类型转换为基本数据类型，称为拆箱（unboxing）；例如Integer类型转换为int类型；</p>
+<p>在自动装箱拆箱过程中，Java使用到了常量池；<br>如前面所学习，常量池就是方法区的一部分，是内存的逻辑分区；<br>如下代码所示,i1、i2使用到了自动装箱，io1和io2则没有使用：<br>i1 i2使用到常量池，io1、io2没有使用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Integer i1=<span class="number">10</span>;</span><br><span class="line">Integer i2=<span class="number">10</span>;</span><br><span class="line">Integer io1=<span class="keyword">new</span> Integer(<span class="number">10</span>);</span><br><span class="line">Integer io2=<span class="keyword">new</span> Integer(<span class="number">10</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;i1==i2&quot;</span>+(i1==i2));</span><br><span class="line">System.out.println(<span class="string">&quot;io1==io2&quot;</span>+(io1==io2));</span><br></pre></td></tr></table></figure>
+<p><img src="java-%E5%8C%85%E8%A3%85%E7%B1%BB%E4%B8%8E%E5%86%85%E9%83%A8%E7%B1%BB/%E5%9B%BE%E7%89%872.png"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Integer i3=<span class="number">1000</span>;</span><br><span class="line">Integer i4=<span class="number">1000</span>;</span><br><span class="line">Integer io3=<span class="keyword">new</span> Integer(<span class="number">1000</span>);</span><br><span class="line">Integer io4=<span class="keyword">new</span> Integer(<span class="number">1000</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;i3==i4&quot;</span>+(i3==i4));</span><br><span class="line">System.out.println(<span class="string">&quot;io3==io4&quot;</span>+(io3==io4));</span><br></pre></td></tr></table></figure>
+<p><strong>居然输出都为false！为什么与值为10的时候不一样？</strong><br>原因：在自动装箱拆箱过程中，只有数值是byte范围内的时候，才使用到常量池，否则都是分配新的内存空间；<br>1000早就超出了byte的范围，所以i3/i4是两个空间；<br><img src="java-%E5%8C%85%E8%A3%85%E7%B1%BB%E4%B8%8E%E5%86%85%E9%83%A8%E7%B1%BB/%E5%9B%BE%E7%89%873.png"></p>
+<h2 id="内部类（成员内部类、静态内部类、局部内部类、匿名内部类）"><a href="#内部类（成员内部类、静态内部类、局部内部类、匿名内部类）" class="headerlink" title="内部类（成员内部类、静态内部类、局部内部类、匿名内部类）"></a>内部类（成员内部类、静态内部类、局部内部类、匿名内部类）</h2><p>内部类是Java独有的一种语法结构，即在一个类的内部定义另一个类，此时，内部类就成为外部类中的成员，访问权限遵循类成员的访问权限机制，可以是public、protected、缺省和private<br>内部类可以很方便地访问外部类中的其它成员<br>根据内部类的定义，我们发现它能帮我实现一些特殊的需要：<br>完善多重继承<br>形成闭包</p>
+<h3 id="完善多重继承"><a href="#完善多重继承" class="headerlink" title="完善多重继承"></a>完善多重继承</h3><p>之前提到过，继承耦合度太高。比如你是一个人，你想会飞，于是就继承了鸟这个类，然后你顺便拥有了一对翅膀和厚厚的羽毛，可这些玩意你并不需要。所以Java发明了接口，以行为契约的方式向你提供功能。想想看，你的程序里成员变量会比方法多吗？况且多重继承会遇到死亡菱形问题，就是两个父类有同样名字的函数，你继承谁的呢？所以Java只支持单重继承，想扩展功能，去实现接口吧<br>很快Java的设计者就发现了他们犯了矫枉过正的错误，多重继承还是有一定用处的。比如每一个人都是同时继承父亲和母亲两个类，要不然你的身体里怎么能留着父母的血呢？Java内部类应运而生，使用内部类最吸引人的原因是：每个内部类都能独立地继承一个（接口的）实现，所以无论外围类是否已经继承了某个（接口的）实现，对于内部类都没有影响</p>
+<h3 id="形成闭包"><a href="#形成闭包" class="headerlink" title="形成闭包"></a>形成闭包</h3><p>内部类是面向对象的闭包，因为它不仅包含创建内部类的作用域的信息，还自动拥有一个指向此外围类对象的引用，在此作用域内，内部类有权操作所有的成员，包括private成员。</p>
+<h3 id="成员内部类"><a href="#成员内部类" class="headerlink" title="成员内部类"></a>成员内部类</h3><p>把以前类中定义成员的位置定义一个类，这个就是成员内部类<br><img src="java-%E5%8C%85%E8%A3%85%E7%B1%BB%E4%B8%8E%E5%86%85%E9%83%A8%E7%B1%BB/%E5%9B%BE%E7%89%874.png"><br>当我们在创建一个内部类的时候，它无形中就与外围类有了一种联系，依赖于这种联系，它可以无限制地访问外围类的元素<br>成员内部类如何创建对象<br>1.首先构建外部类对象<br>2.以外部内.内部类的形式进行声明<br>3.以外部内对象.new 内部类构造方法()的方式构建对象<br><img src="java-%E5%8C%85%E8%A3%85%E7%B1%BB%E4%B8%8E%E5%86%85%E9%83%A8%E7%B1%BB/%E5%9B%BE%E7%89%875.png"><br>内部类是个编译时的概念，一旦编译成功后，它就与外围类属于两个完全不同的类（当然他们之间还是有联系的）<br>对于一个名为OuterClass的外围类和一个名为InnerClass的内部类，在编译成功后，会出现这样两个class文件：OuterClass.class和OuterClass$InnerClass.class<br>在Java中内部类主要分为成员内部类、局部内部类、匿名内部类、静态内部类<br>刚才的示例演示了成员内部类的使用，成员内部类是最普通的内部类，它是外围类的一个成员，所以他是可以无限制的访问外围类的所有成员属性和方法，即便是private的，但是外围类要访问内部类的成员属性和方法则需要通过内部类实例来访问。<br>在成员内部类中要注意两点：<br><strong>第一：成员内部类中不能存在任何static的变量和方法（成员内部类可以访问外部类的静态属性和方法，但是内部类中不能定义静态的变量和方法）</strong><br><strong>第二：成员内部类是依附于外围类的，所以只有先创建了外围类才能够创建内部类。</strong></p>
+<h3 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h3><p>关键字static可以修饰成员变量、方法、代码块，其实它还可以修饰内部类，使用static修饰的内部类我们称之为静态内部类或嵌套内部类。静态内部类与非静态内部类之间存在一个最大的区别，非静态内部类在编译完成之后会隐含地保存着一个引用，该引用是指向创建它的外部类，但是静态内部类却没有。没有这个引用就意味着：<br>它的创建是不需要依赖于外部类的<br>它不能使用任何外部类的非static成员变量和方法<br>和成员内部类不同，static内部类能够声明static的成员<br><img src="java-%E5%8C%85%E8%A3%85%E7%B1%BB%E4%B8%8E%E5%86%85%E9%83%A8%E7%B1%BB/%E5%9B%BE%E7%89%876.png"></p>
+<h3 id="局部内部类（和局部变量类似，定义在方法中）"><a href="#局部内部类（和局部变量类似，定义在方法中）" class="headerlink" title="局部内部类（和局部变量类似，定义在方法中）"></a>局部内部类（和局部变量类似，定义在方法中）</h3><p>还有一种内部类，它嵌套在方法和作用域内的，对于这个类的使用主要是应用与解决比较复杂的问题，想创建一个类来辅助我们的解决方案，又不希望这个类是公共可用的，所以就产生了局部内部类，局部内部类和成员内部类一样被编译，只是它的作用域发生了改变，它只能在该方法和作用域中被使用，出了该方法和作用域就会失效<br><img src="java-%E5%8C%85%E8%A3%85%E7%B1%BB%E4%B8%8E%E5%86%85%E9%83%A8%E7%B1%BB/%E5%9B%BE%E7%89%878.png"></p>
+<h3 id="匿名内部类"><a href="#匿名内部类" class="headerlink" title="匿名内部类"></a>匿名内部类</h3><p>如果一类内部类仅需要构建一个单一的对象，那么这个类其实并不需要额外取一个特有的名字，对于不存在名字的内部类，我们称为匿名内部类<br>匿名内部类必须继承一个父类或实现一个接口<br>匿名内部类的声明使用方法如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[访问权限] [修饰符]父类名/接口名 引用名 = <span class="keyword">new</span> 父类名/接口名（[父类构造方法参数列表]）｛</span><br><span class="line">匿名内部类成员；</span><br><span class="line">｝</span><br></pre></td></tr></table></figure>
+<p><img src="java-%E5%8C%85%E8%A3%85%E7%B1%BB%E4%B8%8E%E5%86%85%E9%83%A8%E7%B1%BB/%E5%9B%BE%E7%89%879.png"><br>匿名内部类没有构造方法（匿名内部类没有显式类名）<br>匿名内部类要想完成一些初始化工作可以交由类初始化或实例初始化代码块来完成<br>匿名内部类对类成员、方法临时变量的访问规则和具备名字的内部类保持一致</p>
+<h3 id="This问题"><a href="#This问题" class="headerlink" title="This问题"></a>This问题</h3><p>之前提到非静态内部类在编译完成之后会隐含地保存着一个引用，该引用是指向创建它的外部类,但是和以前类中直接使用this引用当前对象的情况相比要复杂一些<br>由于内部类本质上是一个独立的类，因此在内部类中直接使用this，其指代的是内部类自身的引用，如果要想引用外部内的对象，则应该使用外部类类名.this的方式<br><img src="java-%E5%8C%85%E8%A3%85%E7%B1%BB%E4%B8%8E%E5%86%85%E9%83%A8%E7%B1%BB/%E5%9B%BE%E7%89%8710.png"></p>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/03/12/java-Object%E7%B1%BB/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/03/13/java-Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

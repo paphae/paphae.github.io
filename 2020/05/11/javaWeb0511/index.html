@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>JSTL标签 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="JSTL," />
+  
+
+  <meta name="description" content="依赖123456789101112&lt;!-- https:&#x2F;&#x2F;mvnrepository.com&#x2F;artifact&#x2F;javax.servlet&#x2F;jstl --&gt;&lt;dependency&gt;    &lt;groupId&gt;javax.servlet&lt;&#x2F;groupId&gt;    &lt;artifactId&gt;jstl&lt;&#x2F;artifactId&gt;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JSTL标签">
+<meta property="og:url" content="http://paphae.top/2020/05/11/javaWeb0511/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="依赖123456789101112&lt;!-- https:&#x2F;&#x2F;mvnrepository.com&#x2F;artifact&#x2F;javax.servlet&#x2F;jstl --&gt;&lt;dependency&gt;    &lt;groupId&gt;javax.servlet&lt;&#x2F;groupId&gt;    &lt;artifactId&gt;jstl&lt;&#x2F;artifactId&gt;">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-05-11T00:53:12.000Z">
+<meta property="article:modified_time" content="2020-05-12T01:51:37.635Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="JSTL">
+<meta name="twitter:card" content="summary">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%9D%E8%B5%96"><span class="toc-text">依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%A0%87%E7%AD%BE"><span class="toc-text">核心标签</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%A0%87%E7%AD%BE"><span class="toc-text">格式化标签</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL%E6%A0%87%E7%AD%BE"><span class="toc-text">SQL标签</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XML%E6%A0%87%E7%AD%BE"><span class="toc-text">XML标签</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSTL%E5%87%BD%E6%95%B0"><span class="toc-text">JSTL函数</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-javaWeb0511" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">JSTL标签</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.05.11</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/javaWeb/">javaWeb</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- https://mvnrepository.com/artifact/javax.servlet/jstl --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.servlet<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jstl<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- https://mvnrepository.com/artifact/taglibs/standard --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>taglibs<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>standard<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="核心标签"><a href="#核心标签" class="headerlink" title="核心标签"></a>核心标签</h2><p>在JSP中包含JSTL Core库的声明(导入)语法</p>
+<p><code>&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot; %&gt;</code></p>
+<table>
+<thead>
+<tr>
+<th>编号</th>
+<th>标签</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_core_out_tag.html" title="<c:out>">&lt;c:out</a></td>
+<td>类似<code>&lt;%= ...&gt;</code>，但仅对于表达式使用。</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_core_set_tag.html" title="<c:set>">&lt;c:set</a></td>
+<td>在“范围”中设置表达式求值的结果</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_core_remove_tag.html" title="<c:remove>">&lt;c:remove</a></td>
+<td>删除范围变量(从指定的特定范围中)。</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_core_catch_tag.html" title="<c:catch>">&lt;c:catch</a></td>
+<td>捕捉发生在其主体中的任何可抛出对象，并可选地暴露它。</td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_core_if_tag.html" title="<c:if>">&lt;c:if</a></td>
+<td>简单的条件标签，如果提供的条件为真，则对其主体进行评估。</td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_core_choose_tag.html" title="<c:choose>">&lt;c:choose</a></td>
+<td>简单的条件标签，用于建立互斥条件操作的上下文，标记为<code>&lt;when&gt;</code>和<code>&lt;otherwise&gt;</code>。</td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_core_choose_tag.html" title="<c:when">&lt;c:when</a></td>
+<td>如果条件评估为<code>true</code>，则包含<code>&lt;choose&gt;</code>的子标签。</td>
+</tr>
+<tr>
+<td>8</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_core_choose_tag.html" title="<c:otherwise>">&lt;c:otherwise</a></td>
+<td><code>&lt;when&gt;</code>标签之后的<code>&lt;choose&gt;</code>子标签，只有当所有先前条件都被评估为<code>false</code>时才运行。</td>
+</tr>
+<tr>
+<td>9</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_core_import_tag.html" title="<c:import>">&lt;c:import</a></td>
+<td>检索绝对或相对URL，并将其内容公开到页面，<code>"var"</code>中的字符串或<code>"varReader"</code>中的<code>"Reader"</code>。</td>
+</tr>
+<tr>
+<td>10</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_core_foreach_tag.html" title="<c:forEach>">&lt;c:forEach</a></td>
+<td>基本的迭代标签，接受许多不同的集合类型，并支持子集和其他功能。</td>
+</tr>
+<tr>
+<td>11</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_core_foreach_tag.html" title="<c:forTokens>">&lt;c:forTokens</a></td>
+<td>迭代令牌，由指定的分隔符来分隔。</td>
+</tr>
+<tr>
+<td>12</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_core_param_tag.html" title="<c:param>">&lt;c:param</a></td>
+<td>将参数添加到包含<code>“import”</code>标签的URL。</td>
+</tr>
+<tr>
+<td>13</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_core_redirect_tag.html" title="<c:redirect>">&lt;c:redirect</a></td>
+<td>重定向到新的URL。</td>
+</tr>
+<tr>
+<td>14</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_core_url_tag.html" title="<c:url>">&lt;c:url</a></td>
+<td>创建可选查询参数的URL</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="格式化标签"><a href="#格式化标签" class="headerlink" title="格式化标签"></a>格式化标签</h2><p>在JSP中包含格式化库的语法</p>
+<p><code>&lt;%@ taglib prefix = &quot;fmt&quot; uri = &quot;http://java.sun.com/jsp/jstl/fmt&quot; %&gt;</code></p>
+<table>
+<thead>
+<tr>
+<th>编号</th>
+<th>标签</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_format_formatnumber_tag.html" title="<fmt:formatNumber>">&lt;fmt:formatNumber</a></td>
+<td>以特定精度或格式呈现数值。</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_format_parsenumber_tag.html" title="<fmt:parseNumber>">&lt;fmt:parseNumber</a></td>
+<td>解析数字，货币或百分比的字符串表示形式。</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_format_formatdate_tag.html" title="<fmt:formatDate">&lt;fmt:formatDate</a></td>
+<td>使用提供的样式和模式格式化日期和/或时间。</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_format_parsedate_tag.html" title="<fmt:parseDate">&lt;fmt:parseDate</a></td>
+<td>解析日期和/或时间的字符串表示形式</td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_format_bundle_tag.html" title="<fmt:bundle>">&lt;fmt:bundle</a></td>
+<td>加载到其标签体中使用资源包。</td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_format_setlocale_tag.html" title="<fmt:setLocale>">&lt;fmt:setLocale</a></td>
+<td>在locale配置变量中存储给定的区域设置。</td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_format_setbundle_tag.html" title="<fmt:setBundle>">&lt;fmt:setBundle</a></td>
+<td>加载资源包并将其存储在命名作用域变量或包配置变量中。</td>
+</tr>
+<tr>
+<td>8</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_format_timezone_tag.html" title="<fmt:timeZone">&lt;fmt:timeZone</a></td>
+<td>指定嵌套在其正文中的任何时间格式化或解析操作的时区。</td>
+</tr>
+<tr>
+<td>9</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_format_settimezone_tag.html" title="<fmt:setTimeZone>">&lt;fmt:setTimeZone</a></td>
+<td>在时区配置变量中存储给定的时区</td>
+</tr>
+<tr>
+<td>10</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_format_message_tag.html" title="<fmt:message>">&lt;fmt:message</a></td>
+<td>显示国际化消息。</td>
+</tr>
+<tr>
+<td>11</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_format_requestencoding_tag.html" title="<fmt:requestEncoding">&lt;fmt:requestEncoding</a></td>
+<td>设置请求字符编码</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="SQL标签"><a href="#SQL标签" class="headerlink" title="SQL标签"></a>SQL标签</h2><p>在JSP中包含JSTL SQL库的语法</p>
+<p><code>&lt;%@ taglib prefix = &quot;sql&quot; uri = &quot;http://java.sun.com/jsp/jstl/sql&quot; %&gt;</code></p>
+<table>
+<thead>
+<tr>
+<th>编号</th>
+<th>标签</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_sql_setdatasource_tag.html" title="<sql:setDataSource>">&lt;sql:setDataSource</a></td>
+<td>创建一个仅适用于原型设计的简单DataSource</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_sql_query_tag.html" title="<sql:query>">&lt;sql:query</a></td>
+<td>执行在其正文中或通过sql属性定义的SQL查询。</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_sql_update_tag.html" title="<sql:update>">&lt;sql:update</a></td>
+<td>执行在其正文中或通过sql属性来定义SQL更新。</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_sql_param_tag.html" title="<sql:param>">&lt;sql:param</a></td>
+<td>将SQL语句中的参数设置为指定的值。</td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_sql_dateparam_tag.html" title="<sql:dateParam>">&lt;sql:dateParam</a></td>
+<td>将SQL语句中的参数设置为指定的<code>java.util.Date</code>值。</td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_sql_transaction_tag.html" title="<sql:transaction>">&lt;sql:transaction</a></td>
+<td>提供了一个共享的连接，设置为执行所有语句作为一个事务嵌套数据库动作要素。</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="XML标签"><a href="#XML标签" class="headerlink" title="XML标签"></a>XML标签</h2><p>JSTL XML标签提供了一种以JSP为中心的创建和操作<a target="_blank" rel="noopener" href="http://www.yiibai.com/xml/">XML</a>文档的方法。 以下是在JSP中包含JSTL XML库的语法。</p>
+<p>JSTL XML标记库具有与XML数据交互的自定义标签。 这包括解析XML，转换XML数据以及基于XPath表达式的流控制。语法如下所示</p>
+<p><code>&lt;%@ taglib prefix = &quot;x&quot; uri = &quot;http://java.sun.com/jsp/jstl/xml&quot; %&gt;</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- https://mvnrepository.com/artifact/xerces/xercesImpl --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>xerces<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>xercesImpl<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- https://mvnrepository.com/artifact/xalan/xalan --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>xalan<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>xalan<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.7.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>编号</th>
+<th>标签</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_xml_out_tag.html" title="<x:out>">&lt;x:out</a></td>
+<td>类似于<code>&lt;%=...&gt;</code>，但对于XPath表达式。</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_xml_parse_tag.html" title="<x:parse>">&lt;x:parse</a></td>
+<td>用于解析通过属性或标签体指定的XML数据。</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_xml_set_tag.html" title="<x:set>">&lt;x:set</a></td>
+<td>将一个变量设置为XPath表达式的值。</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_xml_if_tag.html" title="<x:if>">&lt;x:if</a></td>
+<td>评估一个测试XPath表达式，如果结果为<code>true</code>，它处理其主体。如果测试条件为<code>false</code>，则主体被忽略。</td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_xml_foreach_tag.html" title="<x:forEach>">&lt;x:forEach</a></td>
+<td>循环XML文档中的节点。</td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_xml_choose_tag.html" title="<x:choose>">&lt;x:choose</a></td>
+<td>简单的条件标签，用于为相互排斥的条件操作建立上下文，由<code>&lt;when&gt;</code>和<code>&lt;otherwise&gt;</code>标签标记。</td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_xml_choose_tag.html" title="<x:when>">&lt;x:when</a></td>
+<td>如果<code>&lt;select&gt;</code>的表达式计算为<code>true</code>，则包含其主体的子标签。</td>
+</tr>
+<tr>
+<td>8</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_xml_choose_tag.html" title="<x:otherwise>">&lt;x:otherwise</a></td>
+<td>只有当所有先前的条件评估为<code>true</code>时，<code>&lt;choose&gt;</code>标签才能跟随<code>&lt;when&gt;</code>标签。</td>
+</tr>
+<tr>
+<td>9</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_xml_transform_tag.html" title="<x:transform>">&lt;x:transform</a></td>
+<td>在XML文档上应用XSL转换</td>
+</tr>
+<tr>
+<td>10</td>
+<td><a href="http://www.yiibai.com/jsp/jstl_xml_param_tag.html" title="<x:param>">&lt;x:param</a></td>
+<td>与变形标签一起使用，以在XSLT样式表中设置参数</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="JSTL函数"><a href="#JSTL函数" class="headerlink" title="JSTL函数"></a>JSTL函数</h2><p>JSTL包括许多标准函数，其中大部分是常见的字符串操作功能。 以下是在JSP中包含JSTL函数库的语法</p>
+<p><code>&lt;%@ taglib prefix = &quot;fn&quot; uri = &quot;http://java.sun.com/jsp/jstl/functions&quot; %&gt;</code></p>
+<table>
+<thead>
+<tr>
+<th>编号</th>
+<th>标签</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><a target="_blank" rel="noopener" href="http://www.yiibai.com/jsp/jstl_function_contains.html" title="fn:contains()">fn:contains()</a></td>
+<td>测试输入字符串是否包含指定的子字符串。</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a target="_blank" rel="noopener" href="http://www.yiibai.com/jsp/jstl_function_containsignorecase.html" title="fn:containsIgnoreCase()">fn:containsIgnoreCase()</a></td>
+<td>测试输入字符串是否以不区分大小写的方式包含指定的子字符串。</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a target="_blank" rel="noopener" href="http://www.yiibai.com/jsp/jstl_function_escapexml.html" title="fn:escapeXml()">fn:escapeXml()</a></td>
+<td>转义可解释为XML标记的字符。</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a target="_blank" rel="noopener" href="http://www.yiibai.com/jsp/jstl_function_indexof.html" title="fn:indexOf()">fn:indexOf()</a></td>
+<td>返回指定子字符串第一次出现在字符串中的索引。</td>
+</tr>
+<tr>
+<td>5</td>
+<td><a target="_blank" rel="noopener" href="http://www.yiibai.com/jsp/jstl_function_endswith.html" title="fn:endsWith()">fn:endsWith()</a></td>
+<td>测试输入字符串是否以指定的后缀结尾。</td>
+</tr>
+<tr>
+<td>6</td>
+<td><a target="_blank" rel="noopener" href="http://www.yiibai.com/jsp/jstl_function_join.html" title="fn:join()">fn:join()</a></td>
+<td>将数组的所有元素连接到字符串中。</td>
+</tr>
+<tr>
+<td>7</td>
+<td><a target="_blank" rel="noopener" href="http://www.yiibai.com/jsp/jstl_function_length.html" title="fn:length()">fn:length()</a></td>
+<td>返回集合中的项目数，或字符串中的字符数。</td>
+</tr>
+<tr>
+<td>8</td>
+<td><a target="_blank" rel="noopener" href="http://www.yiibai.com/jsp/jstl_function_replace.html" title="fn:replace()">fn:replace()</a></td>
+<td>返回一个由输入字符串替换所有出现的字符串所引起的字符串。</td>
+</tr>
+<tr>
+<td>9</td>
+<td><a target="_blank" rel="noopener" href="http://www.yiibai.com/jsp/jstl_function_split.html" title="fn:split()">fn:split()</a></td>
+<td>将一个字符串拆分成一个子字符串数组</td>
+</tr>
+<tr>
+<td>10</td>
+<td><a target="_blank" rel="noopener" href="http://www.yiibai.com/jsp/jstl_function_startswith.html" title="fn:startsWith()">fn:startsWith()</a></td>
+<td>测试输入字符串是否以指定的前缀开头。</td>
+</tr>
+<tr>
+<td>11</td>
+<td><a target="_blank" rel="noopener" href="http://www.yiibai.com/jsp/jstl_function_substring.html" title="fn:substring()">fn:substring()</a></td>
+<td>返回字符串的一个子集。</td>
+</tr>
+<tr>
+<td>12</td>
+<td><a target="_blank" rel="noopener" href="http://www.yiibai.com/jsp/jstl_function_substringafter.html" title="fn:substringAfter()">fn:substringAfter()</a></td>
+<td>返回特定子字符串后面的字符串的子集。</td>
+</tr>
+<tr>
+<td>13</td>
+<td><a target="_blank" rel="noopener" href="http://www.yiibai.com/jsp/jstl_function_substringbefore.html" title="fn:substringBefore()">fn:substringBefore()</a></td>
+<td>返回字符串在特定子字符串之前的子集。</td>
+</tr>
+<tr>
+<td>14</td>
+<td><a target="_blank" rel="noopener" href="http://www.yiibai.com/jsp/jstl_function_tolowercase.html" title="fn:toLowerCase()">fn:toLowerCase()</a></td>
+<td>将字符串的所有字符转换为小写。</td>
+</tr>
+<tr>
+<td>15</td>
+<td><a target="_blank" rel="noopener" href="http://www.yiibai.com/jsp/jstl_function_touppercase.html" title="fn:toUpperCase()">fn:toUpperCase()</a></td>
+<td>将字符串的所有字符转换为大写。</td>
+</tr>
+<tr>
+<td>16</td>
+<td><a target="_blank" rel="noopener" href="http://www.yiibai.com/jsp/jstl_function_trim.html" title="fn:trim()">fn:trim()</a></td>
+<td>从字符串的两端删除空格。</td>
+</tr>
+</tbody>
+</table>
+
+<p><a target="_blank" rel="noopener" href="https://www.yiibai.com/jsp/jstl.html">原文链接</a> </p>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/05/09/%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/05/11/JSP%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AF%AD%E8%A8%80(EL)/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

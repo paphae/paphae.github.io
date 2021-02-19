@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>页面跳转 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="重定向,转发," />
+  
+
+  <meta name="description" content="页面跳转总结1、通过response.sendRedirect方法跳转 sendRedirect是重定向操作，在客户机浏览器上将会得到跳转的地址，并重新发送请求链接。进行重定向后，request中的属性全部失效，并开始一个新的request对象。 在JSP页面中使用该方法时，不要再用JSP脚本代码包括return语句，因为重定向之后的代码已经没有意义。 用户在地址栏上面看到是跳转之后的页面地址">
+<meta property="og:type" content="article">
+<meta property="og:title" content="页面跳转">
+<meta property="og:url" content="http://paphae.top/2020/04/29/%E9%A1%B5%E9%9D%A2%E8%B7%B3%E8%BD%AC/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="页面跳转总结1、通过response.sendRedirect方法跳转 sendRedirect是重定向操作，在客户机浏览器上将会得到跳转的地址，并重新发送请求链接。进行重定向后，request中的属性全部失效，并开始一个新的request对象。 在JSP页面中使用该方法时，不要再用JSP脚本代码包括return语句，因为重定向之后的代码已经没有意义。 用户在地址栏上面看到是跳转之后的页面地址">
+<meta property="og:locale">
+<meta property="og:image" content="http://paphae.top/2020/04/29/%E9%A1%B5%E9%9D%A2%E8%B7%B3%E8%BD%AC/%E4%BC%9A%E8%AF%9D%E8%B7%9F%E8%B8%AA/image-20200429193111893.png">
+<meta property="og:image" content="http://paphae.top/2020/04/29/%E9%A1%B5%E9%9D%A2%E8%B7%B3%E8%BD%AC/%E4%BC%9A%E8%AF%9D%E8%B7%9F%E8%B8%AA/image-20200429193223153.png">
+<meta property="og:image" content="http://paphae.top/2020/04/29/%E9%A1%B5%E9%9D%A2%E8%B7%B3%E8%BD%AC/%E4%BC%9A%E8%AF%9D%E8%B7%9F%E8%B8%AA/image-20200429193244540.png">
+<meta property="og:image" content="http://paphae.top/2020/04/29/%E9%A1%B5%E9%9D%A2%E8%B7%B3%E8%BD%AC/%E4%BC%9A%E8%AF%9D%E8%B7%9F%E8%B8%AA/image-20200429212111621.png">
+<meta property="article:published_time" content="2020-04-29T01:11:50.000Z">
+<meta property="article:modified_time" content="2020-05-06T06:32:37.624Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="重定向">
+<meta property="article:tag" content="转发">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://paphae.top/2020/04/29/%E9%A1%B5%E9%9D%A2%E8%B7%B3%E8%BD%AC/%E4%BC%9A%E8%AF%9D%E8%B7%9F%E8%B8%AA/image-20200429193111893.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B5%E9%9D%A2%E8%B7%B3%E8%BD%AC%E6%80%BB%E7%BB%93"><span class="toc-text">页面跳转总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E9%80%9A%E8%BF%87response-sendRedirect%E6%96%B9%E6%B3%95%E8%B7%B3%E8%BD%AC"><span class="toc-text">1、通过response.sendRedirect方法跳转</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%80%9A%E8%BF%87RequestDispatcher-forward%E6%96%B9%E6%B3%95%E8%B7%B3%E8%BD%AC"><span class="toc-text">2.  通过RequestDispatcher.forward方法跳转</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0"><span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%A1%88%E4%BE%8B%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="toc-text">1. 案例流程图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8"><span class="toc-text">2. 数据库表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%B8%BB%E8%A6%81%E9%A1%B5%E9%9D%A2"><span class="toc-text">3. 主要页面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E7%99%BB%E5%BD%95%E5%8A%9F%E8%83%BD"><span class="toc-text">4. 登录功能</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#LoginServlet"><span class="toc-text">LoginServlet</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#FindAllServlet"><span class="toc-text">FindAllServlet</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%B7%BB%E5%8A%A0%E5%8A%9F%E8%83%BD"><span class="toc-text">5. 添加功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%88%A0%E9%99%A4%E5%8A%9F%E8%83%BD"><span class="toc-text">6. 删除功能</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E4%B8%AA%E5%88%A0%E9%99%A4DeleteServlet"><span class="toc-text">单个删除DeleteServlet</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4DeleteArrayServlet"><span class="toc-text">批量删除DeleteArrayServlet</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E4%BF%AE%E6%94%B9%E5%8A%9F%E8%83%BD"><span class="toc-text">7. 修改功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E5%85%B3%E9%94%AE%E5%AD%97%E6%9F%A5%E8%AF%A2"><span class="toc-text">8.关键字查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84"><span class="toc-text">9. 项目结构</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-页面跳转" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">页面跳转</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.04.29</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/javaWeb/">javaWeb</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="页面跳转总结"><a href="#页面跳转总结" class="headerlink" title="页面跳转总结"></a>页面跳转总结</h2><h3 id="1、通过response-sendRedirect方法跳转"><a href="#1、通过response-sendRedirect方法跳转" class="headerlink" title="1、通过response.sendRedirect方法跳转"></a>1、通过response.sendRedirect方法跳转</h3><ol>
+<li>sendRedirect是重定向操作，在客户机浏览器上将会得到跳转的地址，并重新发送请求链接。进行重定向后，request中的属性全部失效，并开始一个新的request对象。</li>
+<li>在JSP页面中使用该方法时，不要再用JSP脚本代码包括return语句，因为重定向之后的代码已经没有意义。</li>
+<li>用户在地址栏上面看到是跳转之后的页面地址</li>
+</ol>
+<a id="more"></a>
+
+<ol>
+<li><p>例子：</p>
+<p>添加功能<br>Addservlet –&gt; findallempservlet –&gt; success.jsp<br>暴露 addservlet      刷新重新添加，导致数据重复<br>暴露 findallempservlet  刷新是重新的查询。<br>Addservlet –&gt; findallempservlet无需通过request对象传递数据，不需要共享对象request，所以添加功能选择客户端跳转。</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/insert&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InsertServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    EmpService es = <span class="keyword">new</span> EmpServiceImpl();</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        String[] emps = req.getParameterValues(<span class="string">&quot;emp&quot;</span>);</span><br><span class="line">        <span class="keyword">boolean</span> flag = es.insert(emps[<span class="number">0</span>], emps[<span class="number">1</span>], emps[<span class="number">2</span>], emps[<span class="number">3</span>], emps[<span class="number">4</span>],</span><br><span class="line">                emps[<span class="number">5</span>], emps[<span class="number">6</span>], emps[<span class="number">7</span>]);</span><br><span class="line">        <span class="keyword">if</span>(flag)&#123;</span><br><span class="line">            req.setAttribute(<span class="string">&quot;msg&quot;</span>,<span class="string">&quot;添加成功&quot;</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            req.setAttribute(<span class="string">&quot;msg&quot;</span>,<span class="string">&quot;添加失败&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        resp.sendRedirect(<span class="string">&quot;findAll&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="2-通过RequestDispatcher-forward方法跳转"><a href="#2-通过RequestDispatcher-forward方法跳转" class="headerlink" title="2.  通过RequestDispatcher.forward方法跳转"></a>2.  通过RequestDispatcher.forward方法跳转</h3><ol>
+<li><p>RequestDispatcher 属于内部跳转，在执行当前文件的过程中转向执行目标文件，两个文件（当前文件和目标文件）属于同一次请求，最本质的特点就是两次请求共享了reques对象和response对象。</p>
+</li>
+<li><p>用户在浏览器上面看到的是当前文件的地址，不是跳转后的那个文件的地址。</p>
+</li>
+<li><p>例子：</p>
+<p>查询所有<br>findallempservlet –&gt; success.jsp<br>暴露给用户地址是findallempservlet ，刷新不受影响<br>暴露给用户地址是success.jsp ,刷新就没有值。<br>success.jsp 没有查询功能，只能显示，success.jsp显示的内容由request对象传递，所以该类情况使用服务器跳转，两次请求共享了reques对象和response对象。</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/findAll&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FindAllServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    EmpService es = <span class="keyword">new</span> EmpServiceImpl();</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        List&lt;Emp&gt; all = es.findAll();</span><br><span class="line">        request.setAttribute(<span class="string">&quot;emps&quot;</span>,all);</span><br><span class="line">        request.getRequestDispatcher(<span class="string">&quot;success.jsp&quot;</span>).forward(request,response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><h3 id="1-案例流程图"><a href="#1-案例流程图" class="headerlink" title="1. 案例流程图"></a>1. 案例流程图</h3><p><img src="%E4%BC%9A%E8%AF%9D%E8%B7%9F%E8%B8%AA/image-20200429193111893.png" alt="image-20200429193111893"></p>
+<h3 id="2-数据库表"><a href="#2-数据库表" class="headerlink" title="2. 数据库表"></a>2. 数据库表</h3><p><img src="%E4%BC%9A%E8%AF%9D%E8%B7%9F%E8%B8%AA/image-20200429193223153.png" alt="image-20200429193223153"></p>
+<p><img src="%E4%BC%9A%E8%AF%9D%E8%B7%9F%E8%B8%AA/image-20200429193244540.png" alt="image-20200429193244540"></p>
+<h3 id="3-主要页面"><a href="#3-主要页面" class="headerlink" title="3. 主要页面"></a>3. 主要页面</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page <span class="keyword">import</span>=<span class="string">&quot;com.tjetc.domain.Emp&quot;</span> %&gt;</span><br><span class="line">&lt;%@ page <span class="keyword">import</span>=<span class="string">&quot;java.util.List&quot;</span> %&gt;&lt;%--</span><br><span class="line">    Created by IntelliJ IDEA.</span><br><span class="line">    User: sun</span><br><span class="line">        Date: <span class="number">2020</span>/<span class="number">4</span>/<span class="number">28</span></span><br><span class="line">            Time: <span class="number">13</span>:<span class="number">53</span></span><br><span class="line">                To change <span class="keyword">this</span> template use File | Settings | File Templates.</span><br><span class="line">                --%&gt;</span><br><span class="line">&lt;%@ page contentType=<span class="string">&quot;text/html;charset=UTF-8&quot;</span> language=<span class="string">&quot;java&quot;</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;title&gt;Title&lt;/title&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;%</span><br><span class="line">        String empno = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">if</span>(request.getParameter(<span class="string">&quot;key&quot;</span>)!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            empno = request.getParameter(<span class="string">&quot;key&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        %&gt;</span><br><span class="line">        &lt;h1&gt;欢迎：&lt;%=session.getAttribute(&quot;username&quot;)%&gt;&lt;/h1&gt;</span><br><span class="line">        &lt;a href=&quot;logout.jsp&quot;&gt;注销&lt;/a&gt;</span><br><span class="line">        &lt;form action=<span class="string">&quot;findAll&quot;</span> method=<span class="string">&quot;post&quot;</span>&gt;</span><br><span class="line">            &lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;key&quot;</span> value=<span class="string">&quot;&lt;%=empno%&gt;&quot;</span>&gt;</span><br><span class="line">            &lt;input type=<span class="string">&quot;submit&quot;</span> value=<span class="string">&quot;搜索&quot;</span>&gt;</span><br><span class="line">        &lt;/form&gt;</span><br><span class="line">        &lt;%</span><br><span class="line">        Object msg = request.getAttribute(<span class="string">&quot;msg&quot;</span>);</span><br><span class="line">        Object msg1 = session.getAttribute(<span class="string">&quot;msg&quot;</span>);</span><br><span class="line">        List&lt;Emp&gt; emps = (List&lt;Emp&gt;) request.getAttribute(<span class="string">&quot;emps&quot;</span>);</span><br><span class="line">        %&gt;</span><br><span class="line">        &lt;%</span><br><span class="line">        <span class="keyword">if</span>(msg!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            %&gt;</span><br><span class="line">        &lt;p&gt;&lt;%=msg%&gt;&lt;/p&gt;</span><br><span class="line">        &lt;%</span><br><span class="line">        session.removeAttribute(<span class="string">&quot;msg&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        %&gt;</span><br><span class="line">        &lt;%</span><br><span class="line">        <span class="keyword">if</span>(msg1!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            %&gt;</span><br><span class="line">        &lt;p&gt;&lt;%=msg1%&gt;&lt;/p&gt;</span><br><span class="line">        &lt;%</span><br><span class="line">        session.removeAttribute(<span class="string">&quot;msg&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        %&gt;</span><br><span class="line">        &lt;form action=<span class="string">&quot;insert&quot;</span> method=<span class="string">&quot;post&quot;</span>&gt;</span><br><span class="line">            &lt;table border=<span class="string">&quot;1&quot;</span> align=<span class="string">&quot;center&quot;</span>&gt;</span><br><span class="line">                &lt;tr&gt;</span><br><span class="line">                    &lt;td&gt;全选&lt;/td&gt;</span><br><span class="line">                    &lt;td&gt;EMPNO&lt;/td&gt;</span><br><span class="line">                    &lt;td&gt;ENAME&lt;/td&gt;</span><br><span class="line">                    &lt;td&gt;JOB&lt;/td&gt;</span><br><span class="line">                    &lt;td&gt;MGR&lt;/td&gt;</span><br><span class="line">                    &lt;td&gt;HIREDATE&lt;/td&gt;</span><br><span class="line">                    &lt;td&gt;SAL&lt;/td&gt;</span><br><span class="line">                    &lt;td&gt;COMM&lt;/td&gt;</span><br><span class="line">                    &lt;td&gt;DEPTNO&lt;/td&gt;</span><br><span class="line">                &lt;/tr&gt;</span><br><span class="line"></span><br><span class="line">                &lt;%</span><br><span class="line">                <span class="keyword">for</span> (Emp emp : emps) &#123;</span><br><span class="line">                    %&gt;</span><br><span class="line"></span><br><span class="line">                &lt;tr&gt;</span><br><span class="line">                    &lt;td&gt;&lt;input type=&quot;checkbox&quot;name=&quot;empnoArray&quot; value=&quot;&lt;%=emp.getEMPNO()%&gt;&quot;&gt;&lt;/td&gt;</span><br><span class="line">                    &lt;td&gt;&lt;%=emp.getEMPNO()%&gt;&lt;/td&gt;</span><br><span class="line">                    &lt;td&gt;&lt;%=emp.getENAME()%&gt;&lt;/td&gt;</span><br><span class="line">                    &lt;td&gt;&lt;%=emp.getJOB()%&gt;&lt;/td&gt;</span><br><span class="line">                    &lt;td&gt;&lt;%=emp.getMGR()%&gt;&lt;/td&gt;</span><br><span class="line">                    &lt;td&gt;&lt;%=emp.getHIREDATE()%&gt;&lt;/td&gt;</span><br><span class="line">                    &lt;td&gt;&lt;%=emp.getSAL()%&gt;&lt;/td&gt;</span><br><span class="line">                    &lt;td&gt;&lt;%=emp.getCOMM()%&gt;&lt;/td&gt;</span><br><span class="line">                    &lt;td&gt;&lt;%=emp.getDEPTNO()%&gt;&lt;/td&gt;</span><br><span class="line">                    &lt;%--        &lt;td&gt;&lt;a href=&quot;delete?empno=&lt;%=emp.getEMPNO()%&gt;&quot;&gt;删除&lt;/a&gt;&lt;/td&gt;--%&gt;</span><br><span class="line">        &lt;td&gt;&lt;a href=&quot;findById?empno=&lt;%=emp.getEMPNO()%&gt;&quot;&gt;修改&lt;/a&gt;&lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line"></span><br><span class="line">    &lt;%</span><br><span class="line">    &#125;</span><br><span class="line">    %&gt;</span><br><span class="line"></span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;td&gt;&lt;/td&gt;</span><br><span class="line">        &lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;emp&quot; readonly=&quot;readonly&quot; placeholder=&quot;由系统分配&quot;&gt;&lt;/td&gt;</span><br><span class="line">        &lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;emp&quot;&gt;&lt;/td&gt;</span><br><span class="line">        &lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;emp&quot;&gt;&lt;/td&gt;</span><br><span class="line">        &lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;emp&quot;&gt;&lt;/td&gt;</span><br><span class="line">        &lt;td&gt;&lt;input type=&quot;date&quot; name=&quot;emp&quot;&gt;&lt;/td&gt;</span><br><span class="line">        &lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;emp&quot;&gt;&lt;/td&gt;</span><br><span class="line">        &lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;emp&quot;&gt;&lt;/td&gt;</span><br><span class="line">        &lt;%--            &lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;emp&quot; list=&quot;deptno&quot;&gt;&lt;/td&gt;--%&gt;</span><br><span class="line">        &lt;%--            &lt;datalist id=<span class="string">&quot;deptno&quot;</span>&gt;--%&gt;</span><br><span class="line">        &lt;%--                &lt;option value=&quot;10&quot;&gt;10&lt;/option&gt;--%&gt;</span><br><span class="line">        &lt;%--                &lt;option value=&quot;20&quot;&gt;20&lt;/option&gt;--%&gt;</span><br><span class="line">        &lt;%--                &lt;option value=&quot;30&quot;&gt;30&lt;/option&gt;--%&gt;</span><br><span class="line">        &lt;%--            &lt;/datalist&gt;--%&gt;</span><br><span class="line">        &lt;td&gt;</span><br><span class="line">            &lt;select name=<span class="string">&quot;emp&quot;</span>&gt;</span><br><span class="line">                &lt;option value=&quot;10&quot;&gt;10&lt;/option&gt;</span><br><span class="line">                &lt;option value=&quot;20&quot;&gt;20&lt;/option&gt;</span><br><span class="line">                &lt;option value=&quot;30&quot;&gt;30&lt;/option&gt;</span><br><span class="line">            &lt;/select&gt;</span><br><span class="line">        &lt;/td&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/tr&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/table&gt;</span><br><span class="line">&lt;input type=<span class="string">&quot;submit&quot;</span> value=<span class="string">&quot;批量删除&quot;</span> formaction=<span class="string">&quot;deleteArray&quot;</span>&gt;</span><br><span class="line">&lt;input type=<span class="string">&quot;submit&quot;</span> value=<span class="string">&quot;添加&quot;</span>&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="4-登录功能"><a href="#4-登录功能" class="headerlink" title="4. 登录功能"></a>4. 登录功能</h3><p>首页，输入用户名密码，与数据库匹配后，登陆成功，进入显示所有员工界面</p>
+<p>login.html –&gt; 提交表单 –&gt; LoginServlet –&gt;重定向到FindAllServlet –&gt;转发到success.jsp显示页面</p>
+<h4 id="LoginServlet"><a href="#LoginServlet" class="headerlink" title="LoginServlet"></a>LoginServlet</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/login.do&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> UserService service =<span class="keyword">new</span> UserServiceImpl();</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        request.setCharacterEncoding(<span class="string">&quot;utf-8&quot;</span>);</span><br><span class="line">        String  username = request.getParameter(<span class="string">&quot;username&quot;</span>);</span><br><span class="line">        String  password = request.getParameter(<span class="string">&quot;password&quot;</span>);</span><br><span class="line">        <span class="keyword">boolean</span> flag = service.login(username, password);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(flag)&#123;</span><br><span class="line">        <span class="comment">// 跳转有俩种 一种转发 （服务器跳转）request   一种重定向（客户端跳转）response</span></span><br><span class="line">            <span class="comment">//转发服务器跳转</span></span><br><span class="line">            request.getSession().setAttribute(<span class="string">&quot;username&quot;</span>,username);</span><br><span class="line">            response.sendRedirect(<span class="string">&quot;findAll&quot;</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            response.sendRedirect(<span class="string">&quot;login.html&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="FindAllServlet"><a href="#FindAllServlet" class="headerlink" title="FindAllServlet"></a>FindAllServlet</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/findAll&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FindAllServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    EmpService es = <span class="keyword">new</span> EmpServiceImpl();</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        String key = request.getParameter(<span class="string">&quot;key&quot;</span>);</span><br><span class="line">        List&lt;Emp&gt; all = es.findAll(key);</span><br><span class="line">        request.setAttribute(<span class="string">&quot;emps&quot;</span>,all);</span><br><span class="line">        request.setAttribute(<span class="string">&quot;key&quot;</span>,key);</span><br><span class="line">        request.getRequestDispatcher(<span class="string">&quot;success.jsp&quot;</span>).forward(request,response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-添加功能"><a href="#5-添加功能" class="headerlink" title="5. 添加功能"></a>5. 添加功能</h3><p>在显示所有员工的表格下添加一行，empno在数据库中自动递增，用户不可输入input标签属性为readonly，hiredate是java.sql.Date类型input标签类型为date，deptno在数据库中存在外键约束，所以使用select下拉列表内容为dept的主键。</p>
+<p>添加 –&gt; 提交表单 –&gt; InsertServlet –&gt; 重定向到FindAllServlet –&gt; 转发到success.jsp</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/insert&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InsertServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    EmpService es = <span class="keyword">new</span> EmpServiceImpl();</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        String[] emps = req.getParameterValues(<span class="string">&quot;emp&quot;</span>);</span><br><span class="line">        <span class="keyword">boolean</span> flag = es.insert(emps[<span class="number">0</span>], emps[<span class="number">1</span>], emps[<span class="number">2</span>], emps[<span class="number">3</span>], emps[<span class="number">4</span>],</span><br><span class="line">                emps[<span class="number">5</span>], emps[<span class="number">6</span>], emps[<span class="number">7</span>]);</span><br><span class="line">        <span class="keyword">if</span>(flag)&#123;</span><br><span class="line">            req.getSession().setAttribute(<span class="string">&quot;msg&quot;</span>,<span class="string">&quot;添加成功&quot;</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            req.getSession().setAttribute(<span class="string">&quot;msg&quot;</span>,<span class="string">&quot;添加失败&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        resp.sendRedirect(<span class="string">&quot;findAll&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="6-删除功能"><a href="#6-删除功能" class="headerlink" title="6. 删除功能"></a>6. 删除功能</h3><h4 id="单个删除DeleteServlet"><a href="#单个删除DeleteServlet" class="headerlink" title="单个删除DeleteServlet"></a>单个删除DeleteServlet</h4><p>在每行员工后添加一个删除a标签，利用字符串拼接的方式提交get请求，通过主键删除<code>&lt;a href=&quot;delete?empno=&lt;%=emp.getEMPNO()%&gt;&quot;&gt;删除&lt;/a&gt;</code></p>
+<p>删除–&gt; get请求 –&gt; DeleteServlet –&gt; 重定向到FindAllServlet –&gt; 转发到success.jsp</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/delete&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeleteServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    EmpService es = <span class="keyword">new</span> EmpServiceImpl();</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        String empno = req.getParameter(<span class="string">&quot;empno&quot;</span>);</span><br><span class="line">        <span class="keyword">boolean</span> flag = es.delete(empno);</span><br><span class="line">        resp.sendRedirect(<span class="string">&quot;findAll&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="批量删除DeleteArrayServlet"><a href="#批量删除DeleteArrayServlet" class="headerlink" title="批量删除DeleteArrayServlet"></a>批量删除DeleteArrayServlet</h4><p>在每行员工前添加checkbox复选框<code>&lt;input type=&quot;checkbox&quot;name=&quot;empnoArray&quot; value=&quot;&lt;%=emp.getEMPNO()%&gt;&quot;&gt;</code>提交表单,批量删除勾选的一行信息。</p>
+<p>批量删除–&gt; 提交表单 –&gt; DeleteArrayServlet–&gt; 重定向到FindAllServlet –&gt; 转发到success.jsp</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/deleteArray&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeleteArrayServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    EmpService es = <span class="keyword">new</span> EmpServiceImpl();</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        String[] empnoArrays = req.getParameterValues(<span class="string">&quot;empnoArray&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//        boolean flag = true;</span></span><br><span class="line"><span class="comment">//        for (String empnoArray : empnoArrays) &#123;</span></span><br><span class="line"><span class="comment">//            flag = es.delete(empnoArray);</span></span><br><span class="line"><span class="comment">//            if(!flag)&#123;</span></span><br><span class="line"><span class="comment">//                req.setAttribute(&quot;msg&quot;,&quot;删除失败&quot;+empnoArray);</span></span><br><span class="line"><span class="comment">//                break;</span></span><br><span class="line"><span class="comment">//            &#125;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line">        <span class="keyword">boolean</span> flag = es.deleteArray(empnoArrays);</span><br><span class="line">        <span class="keyword">if</span> (!flag) &#123;</span><br><span class="line">            req.getSession().setAttribute(<span class="string">&quot;msg&quot;</span>, <span class="string">&quot;删除失败&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        resp.sendRedirect(<span class="string">&quot;findAll&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="7-修改功能"><a href="#7-修改功能" class="headerlink" title="7. 修改功能"></a>7. 修改功能</h3><p>在每一行后添加修改a标签，点击修改，跳转到员工详情页面进行修改，empno不可修改可通过<code>&lt;input type=&quot;hidden&quot; name=&quot;empno&quot; value=&quot;&lt;%=emp.getEMPNO()%&gt;&quot;&gt;</code>或<code>&lt;input name=&quot;empno&quot; type=&quot;text&quot; readonly=&quot;readonly&quot; value=&quot;&lt;%=emp.getEMPNO()%&gt;&quot;&gt;</code>其他和添加类似，value设置默认值为当前员工信息。</p>
+<p>修改 –&gt; get请求 –&gt; FindByIdServlet–&gt; update.jsp –&gt;提交表单 –&gt; UpdateServlet –&gt;重定向到FindAllServlet –&gt; 转发到success.jsp</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/findById&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FindByIdServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    EmpService es = <span class="keyword">new</span> EmpServiceImpl();</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        String empno = request.getParameter(<span class="string">&quot;empno&quot;</span>);</span><br><span class="line">        Emp emp = es.findById(Integer.valueOf(empno));</span><br><span class="line">        request.setAttribute(<span class="string">&quot;emp&quot;</span>,emp);</span><br><span class="line">        request.getRequestDispatcher(<span class="string">&quot;update.jsp&quot;</span>).forward(request,response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/findDeptno&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FindDeptnoServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        DeptService ds = <span class="keyword">new</span> DeptServiceImpl();</span><br><span class="line">        List&lt;Dept&gt; depts = ds.findAll();</span><br><span class="line">        String strjson = JSON.toJSONString(depts);</span><br><span class="line">        resp.getWriter().write(strjson);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/findMgr&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FindMgrServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        EmpService es = <span class="keyword">new</span> EmpServiceImpl();</span><br><span class="line">        List&lt;Emp&gt; all = es.findAll(<span class="string">&quot;&quot;</span>);</span><br><span class="line">        String strJson = JSON.toJSONString(all);</span><br><span class="line">        System.out.println(strJson);</span><br><span class="line">        response.getWriter().write(strJson);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/update&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UpdateServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    EmpService es = <span class="keyword">new</span> EmpServiceImpl();</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        String empno = req.getParameter(<span class="string">&quot;empno&quot;</span>);</span><br><span class="line">        String ename = req.getParameter(<span class="string">&quot;ename&quot;</span>);</span><br><span class="line">        String job = req.getParameter(<span class="string">&quot;job&quot;</span>);</span><br><span class="line">        String mgr = req.getParameter(<span class="string">&quot;mgr&quot;</span>);</span><br><span class="line">        String hiredate = req.getParameter(<span class="string">&quot;hiredate&quot;</span>);</span><br><span class="line">        String sal = req.getParameter(<span class="string">&quot;sal&quot;</span>);</span><br><span class="line">        String comm = req.getParameter(<span class="string">&quot;comm&quot;</span>);</span><br><span class="line">        String deptno = req.getParameter(<span class="string">&quot;deptno&quot;</span>);</span><br><span class="line">        <span class="keyword">boolean</span> flag = es.updateByEmpno(empno, ename, job, mgr, hiredate, sal, comm, deptno);</span><br><span class="line">        <span class="keyword">if</span>(flag)&#123;</span><br><span class="line">            req.getSession().setAttribute(<span class="string">&quot;msg&quot;</span>,<span class="string">&quot;修改成功&quot;</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            req.getSession().setAttribute(<span class="string">&quot;msg&quot;</span>,<span class="string">&quot;修改失败&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        resp.sendRedirect(<span class="string">&quot;findAll&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>员工上司和部门编号用select下拉框，利用ajax异步请求，返回数据利用字符串拼接，输出到select标签下。</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page <span class="keyword">import</span>=<span class="string">&quot;com.tjetc.domain.Emp&quot;</span> %&gt;&lt;%--</span><br><span class="line">  Created by IntelliJ IDEA.</span><br><span class="line">  User: zhangbo</span><br><span class="line">  Date: <span class="number">2020</span>/<span class="number">4</span>/<span class="number">29</span></span><br><span class="line">  Time: <span class="number">14</span>:<span class="number">55</span></span><br><span class="line">  To change <span class="keyword">this</span> template use File | Settings | File Templates.</span><br><span class="line">--%&gt;</span><br><span class="line">&lt;%@ page contentType=<span class="string">&quot;text/html;charset=UTF-8&quot;</span> language=<span class="string">&quot;java&quot;</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;%</span><br><span class="line">        Emp emp = (Emp)request.getAttribute(<span class="string">&quot;emp&quot;</span>);</span><br><span class="line">    %&gt;</span><br><span class="line">    &lt;title&gt;Title&lt;/title&gt;</span><br><span class="line">    &lt;script src=&quot;js/jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        $(function () &#123;</span><br><span class="line">            $.get(<span class="string">&quot;findDeptno&quot;</span>,function (data) &#123;</span><br><span class="line">                <span class="keyword">var</span> str = <span class="string">&quot;&quot;</span>;</span><br><span class="line">                <span class="keyword">var</span> selected = &lt;%=emp.getDEPTNO()%&gt;;</span><br><span class="line">                <span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;data.length;i++)&#123;</span><br><span class="line">                    <span class="keyword">if</span> (selected==data[i].dEPTNO)&#123;</span><br><span class="line">                        str += <span class="string">&quot;&lt;option selected=\&quot;selected\&quot; value=&#x27;&quot;</span>+data[i].dEPTNO+<span class="string">&quot;&#x27;&gt;&quot;</span>+data[i].dNAME+<span class="string">&quot;&lt;/option&gt;&quot;</span>;</span><br><span class="line">                    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                        str += <span class="string">&quot;&lt;option value=&#x27;&quot;</span>+data[i].dEPTNO+<span class="string">&quot;&#x27;&gt;&quot;</span>+data[i].dNAME+<span class="string">&quot;&lt;/option&gt;&quot;</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                $(<span class="string">&quot;#deptno&quot;</span>).html(str);</span><br><span class="line">            &#125;,<span class="string">&quot;json&quot;</span>);</span><br><span class="line">            $.get(<span class="string">&quot;findMgr&quot;</span>,function (data) &#123;</span><br><span class="line">                <span class="keyword">var</span> str = <span class="string">&quot;&quot;</span>;</span><br><span class="line">                <span class="keyword">var</span> mgr = &lt;%=emp.getMGR()%&gt;;</span><br><span class="line">                <span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;data.length;i++)&#123;</span><br><span class="line">                    <span class="keyword">if</span> (mgr==data[i].eMPNO)&#123;</span><br><span class="line">                        str += <span class="string">&quot;&lt;option selected=&#x27;selected&#x27; value=&#x27;&quot;</span>+data[i].eMPNO+<span class="string">&quot;&#x27;&gt;&quot;</span>+data[i].eNAME+<span class="string">&quot;&lt;/option&gt;&quot;</span>;</span><br><span class="line">                    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                        str += <span class="string">&quot;&lt;option value=&#x27;&quot;</span>+data[i].eMPNO+<span class="string">&quot;&#x27;&gt;&quot;</span>+data[i].eNAME+<span class="string">&quot;&lt;/option&gt;&quot;</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                str += <span class="string">&quot;&lt;option value=&#x27;&#x27;&gt;null&lt;/option&gt;&quot;</span>;</span><br><span class="line">                $(<span class="string">&quot;#mgr&quot;</span>).html(str);</span><br><span class="line">            &#125;,<span class="string">&quot;json&quot;</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;form action=<span class="string">&quot;update&quot;</span> method=<span class="string">&quot;post&quot;</span>&gt;</span><br><span class="line">&lt;%--        &lt;input type=<span class="string">&quot;hidden&quot;</span> name=<span class="string">&quot;empno&quot;</span> value=<span class="string">&quot;&lt;%=emp.getEMPNO()%&gt;&quot;</span>&gt;--%&gt;</span><br><span class="line">            员工编号&lt;input name=<span class="string">&quot;empno&quot;</span> type=<span class="string">&quot;text&quot;</span> readonly=<span class="string">&quot;readonly&quot;</span> value=<span class="string">&quot;&lt;%=emp.getEMPNO()%&gt;&quot;</span>&gt;&lt;br&gt;</span><br><span class="line">        姓名&lt;input name=<span class="string">&quot;ename&quot;</span> type=<span class="string">&quot;text&quot;</span> value=<span class="string">&quot;&lt;%=emp.getENAME()%&gt;&quot;</span>&gt;&lt;br&gt;</span><br><span class="line">        职位&lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;job&quot;</span> value=<span class="string">&quot;&lt;%=emp.getJOB()%&gt;&quot;</span>&gt;&lt;br&gt;</span><br><span class="line">        领导编号&lt;select name=&quot;mgr&quot; id=&quot;mgr&quot;&gt;&lt;/select&gt;&lt;br&gt;</span><br><span class="line">        入职时间&lt;input type=<span class="string">&quot;date&quot;</span> name=<span class="string">&quot;hiredate&quot;</span> value=<span class="string">&quot;&lt;%=emp.getHIREDATE()%&gt;&quot;</span>&gt;&lt;br&gt;</span><br><span class="line">        薪水&lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;sal&quot;</span> value=<span class="string">&quot;&lt;%=emp.getSAL()%&gt;&quot;</span>&gt;&lt;br&gt;</span><br><span class="line">        奖金&lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;comm&quot;</span> value=<span class="string">&quot;&lt;%=emp.getCOMM()%&gt;&quot;</span>&gt;&lt;br&gt;</span><br><span class="line">        部门编号&lt;select name=<span class="string">&quot;deptno&quot;</span> id=<span class="string">&quot;deptno&quot;</span> value=<span class="string">&quot;&lt;%=emp.getDEPTNO()%&gt;&quot;</span>&gt;</span><br><span class="line"></span><br><span class="line">        &lt;/select&gt;</span><br><span class="line">        &lt;br&gt;&lt;input type=<span class="string">&quot;submit&quot;</span> value=<span class="string">&quot;提交修改&quot;</span>&gt;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="8-关键字查询"><a href="#8-关键字查询" class="headerlink" title="8.关键字查询"></a>8.关键字查询</h3><p>在表格上方添加一个表单，输入ename模糊查询，显示在下方表格，如果为空，显示所有，查询后文本框内容依然存在。</p>
+<p>查询 –&gt; 提交表单 –&gt;FindAllServlet –&gt;所有查询到的数据和关键字通过request对象转发到 –&gt;success.jsp</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/findAll&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FindAllServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    EmpService es = <span class="keyword">new</span> EmpServiceImpl();</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        String key = request.getParameter(<span class="string">&quot;key&quot;</span>);</span><br><span class="line">        List&lt;Emp&gt; all = es.findAll(key);</span><br><span class="line">        request.setAttribute(<span class="string">&quot;emps&quot;</span>,all);</span><br><span class="line">        request.setAttribute(<span class="string">&quot;key&quot;</span>,key);</span><br><span class="line">        request.getRequestDispatcher(<span class="string">&quot;success.jsp&quot;</span>).forward(request,response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="9-项目结构"><a href="#9-项目结构" class="headerlink" title="9. 项目结构"></a>9. 项目结构</h3><p><img src="%E4%BC%9A%E8%AF%9D%E8%B7%9F%E8%B8%AA/image-20200429212111621.png" alt="image-20200429212111621"></p>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/04/28/jsp%E5%85%A5%E9%97%A8/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/04/30/java%E8%AF%AD%E6%B3%95/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

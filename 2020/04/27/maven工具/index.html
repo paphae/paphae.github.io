@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>maven工具 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="maven," />
+  
+
+  <meta name="description" content="Maven项目结构一个使用Maven管理的普通的Java项目，它的目录结构默认如下： maven-project├── pom.xml├── src│&amp;nbsp;&amp;nbsp; ├── main│&amp;nbsp;&amp;nbsp; │&amp;nbsp;&amp;nbsp; ├── java│&amp;nbsp;&amp;nbsp; │&amp;nbsp;&amp;nbsp; └── resources│&amp;nbsp;&amp;nbsp; └── test│&amp;nbs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="maven工具">
+<meta property="og:url" content="http://paphae.top/2020/04/27/maven%E5%B7%A5%E5%85%B7/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="Maven项目结构一个使用Maven管理的普通的Java项目，它的目录结构默认如下： maven-project├── pom.xml├── src│&amp;nbsp;&amp;nbsp; ├── main│&amp;nbsp;&amp;nbsp; │&amp;nbsp;&amp;nbsp; ├── java│&amp;nbsp;&amp;nbsp; │&amp;nbsp;&amp;nbsp; └── resources│&amp;nbsp;&amp;nbsp; └── test│&amp;nbs">
+<meta property="og:locale">
+<meta property="og:image" content="http://paphae.top/2020/04/27/maven%E5%B7%A5%E5%85%B7/maven%E5%B7%A5%E5%85%B7/image-20200427220847116.png">
+<meta property="og:image" content="http://paphae.top/2020/04/27/maven%E5%B7%A5%E5%85%B7/maven%E5%B7%A5%E5%85%B7/image-20200427221549686.png">
+<meta property="og:image" content="http://paphae.top/2020/04/27/maven%E5%B7%A5%E5%85%B7/maven%E5%B7%A5%E5%85%B7/image-20200427221638634.png">
+<meta property="og:image" content="http://paphae.top/2020/04/27/maven%E5%B7%A5%E5%85%B7/maven%E5%B7%A5%E5%85%B7/image-20200427222023153.png">
+<meta property="article:published_time" content="2020-04-27T13:51:36.000Z">
+<meta property="article:modified_time" content="2020-05-06T00:27:06.723Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="maven">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://paphae.top/2020/04/27/maven%E5%B7%A5%E5%85%B7/maven%E5%B7%A5%E5%85%B7/image-20200427220847116.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Maven%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84"><span class="toc-text">Maven项目结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEMaven%E6%9C%AC%E8%BA%AB%E7%9A%84%E7%8E%AF%E5%A2%83-maven-%E4%B8%BB%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84-conf-settings-xml"><span class="toc-text">配置Maven本身的环境 - maven 主目录下的 conf\settings.xml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#idea%E6%96%B0%E5%BB%BA%E6%99%AE%E9%80%9Amaven%E9%A1%B9%E7%9B%AE%EF%BC%8C%E6%B7%BB%E5%8A%A0web%E7%BB%93%E6%9E%84"><span class="toc-text">idea新建普通maven项目，添加web结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6%E7%9A%84%E5%BC%95%E7%94%A8"><span class="toc-text">资源文件的引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A9%E7%94%A8maven%E5%BC%95%E5%85%A5%E4%BE%9D%E8%B5%96%E5%90%8E%EF%BC%8C%E5%B0%86%E4%BE%9D%E8%B5%96%E5%AF%BC%E5%85%A5tomcat%E8%B5%84%E6%BA%90%E7%9B%AE%E5%BD%95%E4%B8%8B"><span class="toc-text">利用maven引入依赖后，将依赖导入tomcat资源目录下</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-maven工具" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">maven工具</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.04.27</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h3 id="Maven项目结构"><a href="#Maven项目结构" class="headerlink" title="Maven项目结构"></a>Maven项目结构</h3><p>一个使用Maven管理的普通的Java项目，它的目录结构默认如下：</p>
+<p>maven-project<br>├── pom.xml<br>├── src<br>│&nbsp;&nbsp; ├── main<br>│&nbsp;&nbsp; │&nbsp;&nbsp; ├── java<br>│&nbsp;&nbsp; │&nbsp;&nbsp; └── resources<br>│&nbsp;&nbsp; └── test<br>│&nbsp;&nbsp;     ├── java<br>│&nbsp;&nbsp;     └── resources<br>└── target</p>
+<a id="more"></a>
+
+<p>项目的根目录<code>maven-project</code>是项目名</p>
+<p>它有一个项目描述文件<code>pom.xml</code></p>
+<p>存放Java源码的目录是<code>src/main/java</code></p>
+<p>存放资源文件的目录是<code>src/main/resources</code></p>
+<p>存放测试源码的目录是<code>src/test/java</code></p>
+<p>存放测试资源的目录是<code>src/test/resources</code></p>
+<p>最后，所有编译、打包生成的文件都放在<code>target</code>目录里。</p>
+<h3 id="配置Maven本身的环境-maven-主目录下的-conf-settings-xml"><a href="#配置Maven本身的环境-maven-主目录下的-conf-settings-xml" class="headerlink" title="配置Maven本身的环境 - maven 主目录下的 conf\settings.xml"></a>配置Maven本身的环境 - maven 主目录下的 conf\settings.xml</h3> <!-- 设置自定义的Maven本地仓库 -->
+
+<p><localRepository>D:\apache-maven-3.6.1.m2\repository</localRepository></p>
+ <!-- 指定使用国内的阿里maven中央仓库的镜像站点 -->
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>aliyunmaven<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>*<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>阿里云公共仓库<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url</span>&gt;</span>https://maven.aliyun.com/repository/public<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>aliyunmaven<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>*<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>阿里云谷歌仓库<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url</span>&gt;</span>https://maven.aliyun.com/repository/google<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>aliyunmaven<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>*<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>阿里云阿帕奇仓库<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url</span>&gt;</span>https://maven.aliyun.com/repository/apache-snapshots<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>aliyunmaven<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>*<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>阿里云spring仓库<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url</span>&gt;</span>https://maven.aliyun.com/repository/spring<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>aliyunmaven<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>*<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>阿里云spring插件仓库<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url</span>&gt;</span>https://maven.aliyun.com/repository/spring-plugin<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<!-- 指定jdk的版本 -->
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">profile</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>jdk‐1.8<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">activation</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">activeByDefault</span>&gt;</span>true<span class="tag">&lt;/<span class="name">activeByDefault</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">jdk</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">jdk</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">activation</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maven.compiler.source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.source</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maven.compiler.target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.target</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maven.compiler.compilerVersion</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.compilerVersion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">profile</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="idea新建普通maven项目，添加web结构"><a href="#idea新建普通maven项目，添加web结构" class="headerlink" title="idea新建普通maven项目，添加web结构"></a>idea新建普通maven项目，添加web结构</h3><p><img src="maven%E5%B7%A5%E5%85%B7/image-20200427220847116.png" alt="image-20200427220847116"></p>
+<p><img src="maven%E5%B7%A5%E5%85%B7/image-20200427221549686.png" alt="image-20200427221549686"></p>
+<p><img src="maven%E5%B7%A5%E5%85%B7/image-20200427221638634.png" alt="image-20200427221638634"></p>
+<h3 id="资源文件的引用"><a href="#资源文件的引用" class="headerlink" title="资源文件的引用"></a>资源文件的引用</h3><p>因为之前写代码都是main，main引用就时开发的项目中的资源。但是tomcat不是，tomcat调用资源是在目标文件。</p>
+<p>解决方案：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//第一种</span></span><br><span class="line">prop.load(DBUtil.class.getResourceAsStream(<span class="string">&quot;/db.properties&quot;</span>));</span><br><span class="line"><span class="comment">//第二种</span></span><br><span class="line">prop.load(<span class="keyword">new</span> FileInputStream(DBUtil.class.getResource(<span class="string">&quot;/&quot;</span>).getPath()+<span class="string">&quot;db.properties&quot;</span>));</span><br></pre></td></tr></table></figure>
+<h3 id="利用maven引入依赖后，将依赖导入tomcat资源目录下"><a href="#利用maven引入依赖后，将依赖导入tomcat资源目录下" class="headerlink" title="利用maven引入依赖后，将依赖导入tomcat资源目录下"></a>利用maven引入依赖后，将依赖导入tomcat资源目录下</h3><p><img src="maven%E5%B7%A5%E5%85%B7/image-20200427222023153.png" alt="image-20200427222023153"></p>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/04/25/servlet%E5%85%A5%E9%97%A8/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/04/28/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3clone%E5%AF%B9%E8%B1%A1/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

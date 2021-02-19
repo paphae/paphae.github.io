@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Mybatis-缓存 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="mybatis," />
+  
+
+  <meta name="description" content="缓存配置MyBatis 内置了一个强大的事务性查询缓存机制，它可以非常方便地配置和定制。 为了使它更加强大而且易于配置，我们对 MyBatis 3 中的缓存实现进行了许多改进。 默认情况下，只启用了本地的会话缓存，它仅仅对一个会话中的数据进行缓存。 要启用全局的二级缓存，只需要在你的 SQL 映射文件中添加一行： 1&lt;cache&#x2F;&gt; 基本上就是这样。这个简单语句的效果如下:  映射语句">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mybatis-缓存">
+<meta property="og:url" content="http://paphae.top/2020/06/10/Mybatis-%E7%BC%93%E5%AD%98/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="缓存配置MyBatis 内置了一个强大的事务性查询缓存机制，它可以非常方便地配置和定制。 为了使它更加强大而且易于配置，我们对 MyBatis 3 中的缓存实现进行了许多改进。 默认情况下，只启用了本地的会话缓存，它仅仅对一个会话中的数据进行缓存。 要启用全局的二级缓存，只需要在你的 SQL 映射文件中添加一行： 1&lt;cache&#x2F;&gt; 基本上就是这样。这个简单语句的效果如下:  映射语句">
+<meta property="og:locale">
+<meta property="og:image" content="http://paphae.top/2020/06/10/Mybatis-%E7%BC%93%E5%AD%98/Mybatis-%E7%BC%93%E5%AD%98/20141122222537708">
+<meta property="og:image" content="http://paphae.top/2020/06/10/Mybatis-%E7%BC%93%E5%AD%98/Mybatis-%E7%BC%93%E5%AD%98/640">
+<meta property="og:image" content="http://paphae.top/2020/06/10/Mybatis-%E7%BC%93%E5%AD%98/Mybatis-%E7%BC%93%E5%AD%98/640">
+<meta property="article:published_time" content="2020-06-10T00:58:55.000Z">
+<meta property="article:modified_time" content="2020-06-17T12:56:13.558Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="mybatis">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://paphae.top/2020/06/10/Mybatis-%E7%BC%93%E5%AD%98/Mybatis-%E7%BC%93%E5%AD%98/20141122222537708">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E9%85%8D%E7%BD%AE"><span class="toc-text">缓存配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mybatis%E4%B8%80%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98%E7%AE%80%E5%8D%95%E8%AF%A6%E8%A7%A3"><span class="toc-text">Mybatis一二级缓存简单详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98"><span class="toc-text">一级缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-text">一级缓存的生命周期</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Spring%E6%95%B4%E5%90%88Mabatis%E5%BA%94%E7%94%A8"><span class="toc-text">Spring整合Mabatis应用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98"><span class="toc-text">二级缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MyBatis%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98%E7%9A%84%E5%88%92%E5%88%86"><span class="toc-text">MyBatis二级缓存的划分</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%8C%E5%BF%85%E9%A1%BB%E8%A6%81%E5%85%B7%E5%A4%87%E7%9A%84%E6%9D%A1%E4%BB%B6"><span class="toc-text">使用二级缓存，必须要具备的条件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98%E5%92%8C%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98%E7%9A%84%E4%BD%BF%E7%94%A8%E9%A1%BA%E5%BA%8F"><span class="toc-text">一级缓存和二级缓存的使用顺序</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="toc-text">参考文章</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-Mybatis-缓存" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Mybatis-缓存</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.06.10</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/%E6%A1%86%E6%9E%B6/">框架</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="缓存配置"><a href="#缓存配置" class="headerlink" title="缓存配置"></a>缓存配置</h2><p>MyBatis 内置了一个强大的事务性查询缓存机制，它可以非常方便地配置和定制。 为了使它更加强大而且易于配置，我们对 MyBatis 3 中的缓存实现进行了许多改进。</p>
+<p>默认情况下，只启用了本地的会话缓存，它仅仅对一个会话中的数据进行缓存。 要启用全局的二级缓存，只需要在你的 SQL 映射文件中添加一行：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">cache</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>基本上就是这样。这个简单语句的效果如下:</p>
+<ul>
+<li>映射语句文件中的所有 select 语句的结果将会被缓存。</li>
+<li>映射语句文件中的所有 insert、update 和 delete 语句会刷新缓存。</li>
+<li>缓存会使用最近最少使用算法（LRU, Least Recently Used）算法来清除不需要的缓存。</li>
+<li>缓存不会定时进行刷新（也就是说，没有刷新间隔）。</li>
+<li>缓存会保存列表或对象（无论查询方法返回哪种）的 1024 个引用。</li>
+<li>缓存会被视为读/写缓存，这意味着获取到的对象并不是共享的，可以安全地被调用者修改，而不干扰其他调用者或线程所做的潜在修改。</li>
+</ul>
+<p><strong>提示</strong> 缓存只作用于 cache 标签所在的映射文件中的语句。如果你混合使用 Java API 和 XML 映射文件，在共用接口中的语句将不会被默认缓存。你需要使用 @CacheNamespaceRef 注解指定缓存作用域。</p>
+<p>这些属性可以通过 cache 元素的属性来修改。比如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;cache</span><br><span class="line">  eviction=&quot;FIFO&quot;</span><br><span class="line">  flushInterval=&quot;60000&quot;</span><br><span class="line">  size=&quot;512&quot;</span><br><span class="line">  readOnly=&quot;true&quot;/&gt;</span><br></pre></td></tr></table></figure>
+<p>这个更高级的配置创建了一个 FIFO 缓存，每隔 60 秒刷新，最多可以存储结果对象或列表的 512 个引用，而且返回的对象被认为是只读的，因此对它们进行修改可能会在不同线程中的调用者产生冲突。</p>
+<p>可用的清除策略有：</p>
+<ul>
+<li><code>LRU</code> – 最近最少使用：移除最长时间不被使用的对象。</li>
+<li><code>FIFO</code> – 先进先出：按对象进入缓存的顺序来移除它们。</li>
+<li><code>SOFT</code> – 软引用：基于垃圾回收器状态和软引用规则移除对象。</li>
+<li><code>WEAK</code> – 弱引用：更积极地基于垃圾收集器状态和弱引用规则移除对象。</li>
+</ul>
+<p>默认的清除策略是 LRU。</p>
+<p>flushInterval（刷新间隔）属性可以被设置为任意的正整数，设置的值应该是一个以毫秒为单位的合理时间量。 默认情况是不设置，也就是没有刷新间隔，缓存仅仅会在调用语句时刷新。</p>
+<p>size（引用数目）属性可以被设置为任意正整数，要注意欲缓存对象的大小和运行环境中可用的内存资源。默认值是 1024。</p>
+<p>readOnly（只读）属性可以被设置为 true 或 false。只读的缓存会给所有调用者返回缓存对象的相同实例。 因此这些对象不能被修改。这就提供了可观的性能提升。而可读写的缓存会（通过序列化）返回缓存对象的拷贝。 速度上会慢一些，但是更安全，因此默认值是 false。</p>
+<p><strong>提示</strong> 二级缓存是事务性的。这意味着，当 SqlSession 完成并提交时，或是完成并回滚，但没有执行 flushCache=true 的 insert/delete/update 语句时，缓存会获得更新。</p>
+<h2 id="Mybatis一二级缓存简单详解"><a href="#Mybatis一二级缓存简单详解" class="headerlink" title="Mybatis一二级缓存简单详解"></a>Mybatis一二级缓存简单详解</h2><p>将从数据库中查询出来的数据放入缓存（内存）中，每次查询数据时，先判断缓存区中是否存在数据，如果存在，就从缓存区中获取数据，如果不存在，就从数据库中获取数据，将数据存放到缓存区中。这样的话，下次访问该数据的时候使就不必从数据库查询，而是直接从缓存中读取，避免频繁操作数据库，提高数据访问效率，减轻数据库的压力，同时提高系统性能。</p>
+<p><img src="Mybatis-%E7%BC%93%E5%AD%98/20141122222537708" alt="img"></p>
+<h3 id="一级缓存"><a href="#一级缓存" class="headerlink" title="一级缓存"></a>一级缓存</h3><p>一级缓存是SqlSession级别的缓存，Mybatis默认开启一级缓存。在操作数据库时需要构造sqlSession对象，在该对象中有一个数据结构用于存储缓存数据。不同的sqlSession之间的缓存数据区域（HashMap）是互相不影响的。换句话说，不同的sqlSession中的缓存是互相不能读取的，即不共享。</p>
+<p><img src="Mybatis-%E7%BC%93%E5%AD%98/640" alt="img"></p>
+<h4 id="一级缓存的生命周期"><a href="#一级缓存的生命周期" class="headerlink" title="一级缓存的生命周期"></a>一级缓存的生命周期</h4><blockquote>
+<p>a. MyBatis在开启一个数据库会话时，会 创建一个新的SqlSession对象，SqlSession对象中会有一个新的Executor对象，Executor对象中持有一个新的PerpetualCache对象；当会话结束时，SqlSession对象及其内部的Executor对象还有PerpetualCache对象也一并释放掉。</p>
+</blockquote>
+<blockquote>
+<p>b. 如果SqlSession调用了close()方法，会释放掉一级缓存PerpetualCache对象，一级缓存将不可用；</p>
+</blockquote>
+<blockquote>
+<p>c. 如果SqlSession调用了clearCache()，会清空PerpetualCache对象中的数据，但是该对象仍可使用；</p>
+</blockquote>
+<blockquote>
+<p>d.SqlSession中执行了任何一个update操作(update()、delete()、insert()) ，都会清空PerpetualCache对象的数据，但是该对象可以继续使用；</p>
+</blockquote>
+<h4 id="Spring整合Mabatis应用"><a href="#Spring整合Mabatis应用" class="headerlink" title="Spring整合Mabatis应用"></a>Spring整合Mabatis应用</h4><p>首先，因为它不能共享缓存区；其次，实际开发中，MyBatis通常和Spring进行整合开发。Spring将事务放到Service中管理，对于每一个service中的sqlsession是不同的，这是通过mybatis-spring中的org.mybatis.spring.mapper.MapperScannerConfigurer创建sqlsession自动注入到service中的。 每次查询之后都要进行关闭sqlSession，关闭之后数据被清空。所以spring整合之后，如果没有事务，一级缓存是没有意义的。</p>
+<p><strong>为什么会出现不开启事务时，一级缓存不生效；开启了事务，一级缓存生效？</strong></p>
+<p>很显然，那是因为它每条语句执行结束以后，都会执行提交方法，而提交方法在每次都会清空本地缓存。而开启了事务的话，方法是在所有操作结束以后才会提交，因此就会支持一级缓存啦</p>
+<h3 id="二级缓存"><a href="#二级缓存" class="headerlink" title="二级缓存"></a>二级缓存</h3><p>二级缓存是mapper级别的缓存，多个SqlSession去操作同一个Mapper的sql语句，多个SqlSession可以共用二级缓存，也就是说，二级缓存是跨SqlSession的，因此二级缓存的作用范围更大。上文说到，二级缓存是mapper级别的缓存，多个SqlSession去操作同一个Mapper的sql语句，多个SqlSession可以共用二级缓存，二级缓存是跨SqlSession的。</p>
+<p><img src="Mybatis-%E7%BC%93%E5%AD%98/640" alt="img"></p>
+<h4 id="MyBatis二级缓存的划分"><a href="#MyBatis二级缓存的划分" class="headerlink" title="MyBatis二级缓存的划分"></a>MyBatis二级缓存的划分</h4><blockquote>
+<p>MyBatis并不是简单地对整个Application就只有一个Cache缓存对象，它将缓存划分的更细，即是Mapper级别的，即每一个Mapper都可以拥有一个Cache对象，具体如下：</p>
+</blockquote>
+<blockquote>
+<p>a.为每一个Mapper分配一个Cache缓存对象（使用<cache>节点配置）；</p>
+</blockquote>
+<blockquote>
+<p>b.多个Mapper共用一个Cache缓存对象（使用<cache-ref>节点配置）；</p>
+</blockquote>
+<p>要想实现两个命名空间共享缓存，那么可以<strong>cache-ref标签</strong>的<strong>namespace</strong>属性引入另一个命名空间，如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">cache-ref</span> <span class="attr">namespace</span>=<span class="string">&quot;mapper.OrderMapper&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="使用二级缓存，必须要具备的条件"><a href="#使用二级缓存，必须要具备的条件" class="headerlink" title="使用二级缓存，必须要具备的条件"></a><strong>使用二级缓存，必须要具备的条件</strong></h4><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MyBatis对二级缓存的支持粒度很细，它会指定某一条查询语句是否使用二级缓存。</span><br><span class="line"></span><br><span class="line">虽然在Mapper中配置了&lt;cache&gt;,并且为此Mapper分配了Cache对象，这并不表示我们使用Mapper中定义的查询语句查到的结果都会放置到Cache对象之中，我们必须指定Mapper中的某条选择语句是否支持缓存，即如下所示，在&lt;select&gt; 节点中配置useCache=&quot;true&quot;，Mapper才会对此Select的查询支持缓存特性，否则，不会对此Select查询，不会经过Cache缓存。如下所示，Select语句配置了useCache=&quot;true&quot;，则表明这条Select语句的查询会使用二级缓存。</span><br></pre></td></tr></table></figure>
+<h4 id="一级缓存和二级缓存的使用顺序"><a href="#一级缓存和二级缓存的使用顺序" class="headerlink" title="一级缓存和二级缓存的使用顺序"></a>一级缓存和二级缓存的使用顺序</h4><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">请注意，如果你的MyBatis使用了二级缓存，并且你的Mapper和select语句也配置使用了二级缓存，那么在执行select查询的时候，MyBatis会先从二级缓存中取输入，其次才是一级缓存，即MyBatis查询数据的顺序是：</span><br><span class="line"></span><br><span class="line">           二级缓存    ———&gt; 一级缓存——&gt; 数据库</span><br></pre></td></tr></table></figure>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/142794376">Spring Boot（七）：你不能不知道的Mybatis缓存机制！</a></p>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/news/375800">杂谈——Mybatis一二级缓存简单详解</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4Njg5MDA5NA==&mid=2247483937&idx=5&sn=4a049d7461b67c4135183db09ec97bcb&chksm=ebd74320dca0ca3691081597ac9db2447d51250d7aa819009231760977dd932b43a116fe44ba&scene=21###wechat_redirect">Mybatis【缓存、代理、逆向工程】</a></p>
+<p><a target="_blank" rel="noopener" href="https://mybatis.org/mybatis-3/zh/sqlmap-xml.html#cache">XML 映射器</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/luanlouis/article/details/41390801">《深入理解mybatis原理》 MyBatis缓存机制的设计与实现</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/luanlouis/article/details/41280959">《深入理解mybatis原理》 MyBatis的一级缓存实现详解 及使用注意事项</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/luanlouis/article/details/41408341">《深入理解mybatis原理》 MyBatis的二级缓存的设计原理</a></p>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/06/09/Java%E4%BB%A3%E7%A0%81%E7%BC%96%E7%A8%8B%E6%A0%BC%E5%BC%8F%E8%A7%84%E8%8C%83/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/06/12/Mybatis-%E9%85%8D%E7%BD%AE/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

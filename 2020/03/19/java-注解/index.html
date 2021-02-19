@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>java-注解 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="annotation," />
+  
+
+  <meta name="description" content="注解定义：注解（Annotation），也叫元数据，是一种代码级别的说明。是Java 的JDK1.5版本开始引入的一个特性，与类、接口、枚举是在同一个层次。它可以声明在包、类、属性、方法、局部变量、方法参数等的前面，用来对这些元素进行说明，注释。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java-注解">
+<meta property="og:url" content="http://paphae.top/2020/03/19/java-%E6%B3%A8%E8%A7%A3/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="注解定义：注解（Annotation），也叫元数据，是一种代码级别的说明。是Java 的JDK1.5版本开始引入的一个特性，与类、接口、枚举是在同一个层次。它可以声明在包、类、属性、方法、局部变量、方法参数等的前面，用来对这些元素进行说明，注释。">
+<meta property="og:locale">
+<meta property="og:image" content="http://paphae.top/2020/03/19/java-%E6%B3%A8%E8%A7%A3/java-%E6%B3%A8%E8%A7%A3/%E5%9B%BE%E7%89%879.png">
+<meta property="og:image" content="http://paphae.top/2020/03/19/java-%E6%B3%A8%E8%A7%A3/java-%E6%B3%A8%E8%A7%A3/%E5%9B%BE%E7%89%8710.png">
+<meta property="og:image" content="http://paphae.top/2020/03/19/java-%E6%B3%A8%E8%A7%A3/java-%E6%B3%A8%E8%A7%A3/%E5%9B%BE%E7%89%8711.png">
+<meta property="og:image" content="http://paphae.top/2020/03/19/java-%E6%B3%A8%E8%A7%A3/java-%E6%B3%A8%E8%A7%A3/%E5%9B%BE%E7%89%8712.png">
+<meta property="og:image" content="http://paphae.top/2020/03/19/java-%E6%B3%A8%E8%A7%A3/java-%E6%B3%A8%E8%A7%A3/%E5%9B%BE%E7%89%8713.png">
+<meta property="article:published_time" content="2020-03-19T01:40:51.000Z">
+<meta property="article:modified_time" content="2020-05-06T00:42:14.295Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="annotation">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://paphae.top/2020/03/19/java-%E6%B3%A8%E8%A7%A3/java-%E6%B3%A8%E8%A7%A3/%E5%9B%BE%E7%89%879.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E8%A7%A3"><span class="toc-text">注解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E8%A7%A3%E7%9A%84%E5%A3%B0%E6%98%8E%E5%BD%A2%E5%BC%8F%E5%A6%82%E4%B8%8B%EF%BC%9A"><span class="toc-text">注解的声明形式如下：</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-java-注解" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">java-注解</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.03.19</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/javaSE/">javaSE</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h2><p>定义：注解（Annotation），也叫元数据，是一种代码级别的说明。是Java 的JDK1.5版本开始引入的一个特性，与类、接口、枚举是在同一个层次。它可以声明在包、类、属性、方法、局部变量、方法参数等的前面，用来对这些元素进行说明，注释。 </p>
+<a id="more"></a>
+<p>作用分类：<br>①编写文档：通过代码里标识的元数据生成文档【生成文档doc文档】<br>② 代码分析：通过代码里标识的元数据对代码进行分析【使用反射】<br>③编译检查：通过代码里标识的元数据让编译器能够实现基本的编译检查【Override】<br>很多框架技术的新版本中，都可以使用注解替代XML配置文件；</p>
+<h3 id="注解的声明形式如下："><a href="#注解的声明形式如下：" class="headerlink" title="注解的声明形式如下："></a>注解的声明形式如下：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span>  注解名字 &#123;</span><br><span class="line">  注解属性 </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<p>注解可以用于不同的目标，例如接口、类、构造方法、方法、属性、类型等；<br>声明注解时，可以使用JDK中已经定义的注解@Target声明注解修饰的目标；<br>@Target中使用枚举ElementType表示修饰目标，有如下几种修饰目标:<br><img src="java-%E6%B3%A8%E8%A7%A3/%E5%9B%BE%E7%89%879.png"><br>注解属性看起来像个方法，其实是属性，属性类型包括所有基本类型、String、Class、enum、Annotation、以上类型的数组形式，注解元素声明形式如下：<br><code>public  String  urlpattern();</code><br><code>public  boolean    onload(); </code></p>
+<p><img src="java-%E6%B3%A8%E8%A7%A3/%E5%9B%BE%E7%89%8710.png"><br>使用注解非常简单，不管是JDK中内置的已经定义好的注解还是自定义的注解，只要使用  @注解名称（属性值列表）的形式，均可以使用；<br><img src="java-%E6%B3%A8%E8%A7%A3/%E5%9B%BE%E7%89%8711.png"><br>Class类中定义了获取注解的方法：<br><img src="java-%E6%B3%A8%E8%A7%A3/%E5%9B%BE%E7%89%8712.png"><br><img src="java-%E6%B3%A8%E8%A7%A3/%E5%9B%BE%E7%89%8713.png"></p>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/03/19/java-%E5%8F%8D%E5%B0%84/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/03/19/java-%E5%86%85%E7%9C%81/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

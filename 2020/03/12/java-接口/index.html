@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>java-接口 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="interface," />
+  
+
+  <meta name="description" content="接口接口是设计层面的概念，往往由设计师设计，将定义与实现分离程序员实现接口，实现具体方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java-接口">
+<meta property="og:url" content="http://paphae.top/2020/03/12/java-%E6%8E%A5%E5%8F%A3/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="接口接口是设计层面的概念，往往由设计师设计，将定义与实现分离程序员实现接口，实现具体方法">
+<meta property="og:locale">
+<meta property="og:image" content="http://paphae.top/2020/03/12/java-%E6%8E%A5%E5%8F%A3/java-%E6%8E%A5%E5%8F%A3/%E5%9B%BE%E7%89%874.png">
+<meta property="og:image" content="http://paphae.top/2020/03/12/java-%E6%8E%A5%E5%8F%A3/java-%E6%8E%A5%E5%8F%A3/%E5%9B%BE%E7%89%875.png">
+<meta property="og:image" content="http://paphae.top/2020/03/12/java-%E6%8E%A5%E5%8F%A3/java-%E6%8E%A5%E5%8F%A3/%E5%9B%BE%E7%89%876.png">
+<meta property="og:image" content="http://paphae.top/2020/03/12/java-%E6%8E%A5%E5%8F%A3/java-%E6%8E%A5%E5%8F%A3/%E5%9B%BE%E7%89%877.png">
+<meta property="og:image" content="http://paphae.top/2020/03/12/java-%E6%8E%A5%E5%8F%A3/java-%E6%8E%A5%E5%8F%A3/%E5%9B%BE%E7%89%878.png">
+<meta property="og:image" content="http://paphae.top/2020/03/12/java-%E6%8E%A5%E5%8F%A3/java-%E6%8E%A5%E5%8F%A3/%E5%9B%BE%E7%89%871.png">
+<meta property="og:image" content="http://paphae.top/2020/03/12/java-%E6%8E%A5%E5%8F%A3/java-%E6%8E%A5%E5%8F%A3/%E5%9B%BE%E7%89%872.png">
+<meta property="og:image" content="http://paphae.top/2020/03/12/java-%E6%8E%A5%E5%8F%A3/java-%E6%8E%A5%E5%8F%A3/%E5%9B%BE%E7%89%873.png">
+<meta property="og:image" content="http://paphae.top/2020/03/12/java-%E6%8E%A5%E5%8F%A3/java-%E6%8E%A5%E5%8F%A3/%E5%9B%BE%E7%89%8710.png">
+<meta property="og:image" content="http://paphae.top/2020/03/12/java-%E6%8E%A5%E5%8F%A3/java-%E6%8E%A5%E5%8F%A3/%E5%9B%BE%E7%89%8711.png">
+<meta property="og:image" content="http://paphae.top/2020/03/12/java-%E6%8E%A5%E5%8F%A3/java-%E6%8E%A5%E5%8F%A3/%E5%9B%BE%E7%89%8712.png">
+<meta property="article:published_time" content="2020-03-12T12:32:51.000Z">
+<meta property="article:modified_time" content="2020-05-06T00:45:27.116Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="interface">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://paphae.top/2020/03/12/java-%E6%8E%A5%E5%8F%A3/java-%E6%8E%A5%E5%8F%A3/%E5%9B%BE%E7%89%874.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3"><span class="toc-text">接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%8E%A5%E5%8F%A3"><span class="toc-text">实现接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E4%BD%9C%E7%94%A8"><span class="toc-text">接口作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E9%BB%98%E8%AE%A4%E6%96%B9%E6%B3%95"><span class="toc-text">接口默认方法</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-java-接口" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">java-接口</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.03.12</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/javaSE/">javaSE</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><p>接口是设计层面的概念，往往由设计师设计，将定义与实现分离<br>程序员实现接口，实现具体方法</p>
+<a id="more"></a>
+<p>面向接口编程和面向对象编程并不是平级的，它并不是比面向对象编程更先进的一种独立的编程思想，而是附属于面向对象思想体系，属于其一部分。或者说，它是面向对象编程体系中的思想精髓之一</p>
+<p>面向接口编程的意思是指在面向对象的系统中所有的类或者模块之间的交互是由接口完成的<br>1、特殊的抽象<br>2、所有的属性都是公开静态常量<br>3、所有的方法都是公开抽象的方法<br>Java中接口的一般定义形式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[访问权限] interface 接口名 &#123;</span><br><span class="line">		公开静态常量列表；</span><br><span class="line">		公开抽象方法列表；</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="java-%E6%8E%A5%E5%8F%A3/%E5%9B%BE%E7%89%874.png"><br>声明成员变量列表，即便没有修饰符，它们也是public static final的，成员变量也只能被这几个修饰符修饰<br>声明成员方法列表，即便没有修饰符，它们也是public abstract的，成员方法也只能被这两个修饰符修饰<br>接口与抽象类对比<br>在Java中接口是一个比抽象类更加抽象的概念，由于只声明行为，因此在接口中的方法均是抽象的,下表中罗列了接口和抽象类的差异<br><img src="java-%E6%8E%A5%E5%8F%A3/%E5%9B%BE%E7%89%875.png"><br>从上面的表格可以看出：<br>成员变量方面，在接口中只存在公开静态常量（即便没有使用static final修饰，Java也会默认确定其性质）<br>成员方法方面，在接口中只存在公开抽象方法（即便没有abstract修饰，Java也会默认其抽象性质）</p>
+<h2 id="实现接口"><a href="#实现接口" class="headerlink" title="实现接口"></a>实现接口</h2><p>extends用于继承，implements用于实现接口<br>新的接口可以继承自原有的接口，新接口将拥有原有接口的所有抽象方法<br>Java接口继承接口的原则：<br>Java接口可以继承多个接口<br>接口继承接口依然使用关键字extends，不要错用成implements<br>因此，在声明接口之间的继承关系时，extends关键字后面可以是一个列表<br>Java接口继承接口的形式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Interface3 extends Interface0, Interface1, interface……｛</span><br><span class="line">｝</span><br></pre></td></tr></table></figure>
+<p>刚才已经提到，接口是比抽象类抽象层次更高的一个概念，因此和抽象类一样，它不能用于实例化对象，只能作为继承树的高层结构被子类实现（子类实现接口被称为implements（实现），其体现形式和继承类似）<br>类实现接口，本质上与类继承类相似，区别在于“类最多只能继承一个类，即单继承，而一个类却可以同时实现多个接口”，多个接口用逗号隔开即可。实现类需要覆盖所有接口中的所有抽象方法，否则该类也必须声明为抽象类<br>接口定义的是多个类都要实现的操作，即“what to do”。类可以实现接口，从而覆盖接口中的方法，实现“how to do”<br><strong>Java是单继承多实现</strong><br>类实现接口的一般语法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[修饰符] class &lt;类名&gt; [extends 父类名] [implements 接口列表]&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>一个类可以同时继承自一个父类并实现若干接口<br>implements用于指定该类实现的是哪些接口。当使用implements关键字接口列表中存在多个接口名时，各个接口名之间使用逗号分隔<br><strong>接口其实就是一个规范</strong><br><img src="java-%E6%8E%A5%E5%8F%A3/%E5%9B%BE%E7%89%876.png"><br><img src="java-%E6%8E%A5%E5%8F%A3/%E5%9B%BE%E7%89%877.png"><br><img src="java-%E6%8E%A5%E5%8F%A3/%E5%9B%BE%E7%89%878.png"></p>
+<h2 id="接口作用"><a href="#接口作用" class="headerlink" title="接口作用"></a>接口作用</h2><p>1、接口定义规范<br>2、弱耦合(设计层面，提高开发效率)A类与B之间的关系  弱化—解耦合<br><img src="java-%E6%8E%A5%E5%8F%A3/%E5%9B%BE%E7%89%871.png"><br>3、接口的回调<br>以前是我们调用系统中已经定义好的类中的方法进行结果实现<br>有了接口之后，让系统中已经存在的类，调用我们写的功能进行实现<br> java.lang.ClassCastException: com.chinasofti.javase.demo.Student cannot be cast to java.lang.Comparable：<br>类型转换异常，student这个类型 不能够强制类型转换成 Comparable</p>
+<blockquote>
+<p>Java中已经定义好的类型Arrays.调用了sort方法，这个方法是用来进行排序，那么现在我们用它进行对象student排序，但是，现在我们没有说明如何进行排序，所以报错，如果你要进行排序规则的设定，那么必须要实现Comparable比较器这个接口，遵循接口中的比较方法继续说明<br><img src="java-%E6%8E%A5%E5%8F%A3/%E5%9B%BE%E7%89%872.png"><br><img src="java-%E6%8E%A5%E5%8F%A3/%E5%9B%BE%E7%89%873.png"></p>
+</blockquote>
+<h2 id="接口默认方法"><a href="#接口默认方法" class="headerlink" title="接口默认方法"></a>接口默认方法</h2><p>Java8之前，Java接口纯粹是契约的集合，是一种程序设计的表达方式。从数据抽象的角度看，能够在不定义class的同时又可以定义type，是程序设计中强大而有用的机制。Java接口就是这些纯粹的接口组成的数据抽象<br>Java8之前，接口不能升级。因为在接口中添加一个方法，会导致老版本接口的所有实现类的中断<br>Java8之后，lambda表达式作为核心出现，为了配合lambda表达式，JDK中Collection库需要添加新的方法，如forEach()，stream()等，于是引入了默认方法(defender methods,Virtual extension methods)。<br>默认方法是库/框架设计者的后悔药。对于以前的遗留代码，大家都不知道有这个新方法，既不会调用，也不会去实现，如同不存在；编写新代码的程序员可以将它视为保底的方法体。类型层次中任何符合override规则的方法，优先于默认方法，因为遗留代码可能正好有同样的方法存在<br>默认方法的声明很简单，直接在接口中把方法声明为default，之后再写方法的实现即可。这样所有的实现类都会继承这个方法：<br><img src="java-%E6%8E%A5%E5%8F%A3/%E5%9B%BE%E7%89%8710.png"><br>默认方法的声明很简单，问题是他带来的多继承问题如何解决?以下代码不能编译，<br><img src="java-%E6%8E%A5%E5%8F%A3/%E5%9B%BE%E7%89%8711.png"><br><img src="java-%E6%8E%A5%E5%8F%A3/%E5%9B%BE%E7%89%8712.png"><br>为了修复上例的问题，在Clazz里我们必须手动通过重写冲突的方法解决，或者显式调用某个接口中的方法：<br>在子类中要么调用animal 的talk方法 要么去调用pet中的talk方法，要么直接重写<br>默认方法理论上抹杀了Java接口与抽象类的本质区别-前者是行为契约的集合，后者是接口与实现的结合体。当然，语法上两者的差别和以前一样。这就需要我们来自觉维护两者的本质区别，把默认方法作为库、框架向前兼容的手段</p>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/03/12/java-final%E5%92%8Cstatic%E5%85%B3%E9%94%AE%E5%AD%97/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/03/12/java-%E7%B1%BB%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

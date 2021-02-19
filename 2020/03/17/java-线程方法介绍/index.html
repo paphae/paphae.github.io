@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>java-线程方法介绍 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="线程," />
+  
+
+  <meta name="description" content="线程方法介绍每个线程可以存在一个给定的名字，线程名字除了Thread类的构造方法可以提供以外，也可以通过setName(String name)方法给定">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java-线程方法介绍">
+<meta property="og:url" content="http://paphae.top/2020/03/17/java-%E7%BA%BF%E7%A8%8B%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="线程方法介绍每个线程可以存在一个给定的名字，线程名字除了Thread类的构造方法可以提供以外，也可以通过setName(String name)方法给定">
+<meta property="og:locale">
+<meta property="og:image" content="http://paphae.top/2020/03/17/java-%E7%BA%BF%E7%A8%8B%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9B%E5%BB%BA/%E5%9B%BE%E7%89%8711.png">
+<meta property="og:image" content="http://paphae.top/2020/03/17/java-%E7%BA%BF%E7%A8%8B%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9B%E5%BB%BA/%E5%9B%BE%E7%89%8712.png">
+<meta property="og:image" content="http://paphae.top/2020/03/17/java-%E7%BA%BF%E7%A8%8B%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D/java-%E7%BA%BF%E7%A8%8B%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D/%E5%9B%BE%E7%89%8713.png">
+<meta property="og:image" content="http://paphae.top/2020/03/17/java-%E7%BA%BF%E7%A8%8B%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D/java-%E7%BA%BF%E7%A8%8B%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D/%E5%9B%BE%E7%89%8714.png">
+<meta property="og:image" content="http://paphae.top/2020/03/17/java-%E7%BA%BF%E7%A8%8B%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D/java-%E7%BA%BF%E7%A8%8B%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D/%E5%9B%BE%E7%89%8715.png">
+<meta property="og:image" content="http://paphae.top/2020/03/17/java-%E7%BA%BF%E7%A8%8B%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D/java-%E7%BA%BF%E7%A8%8B%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D/%E5%9B%BE%E7%89%8716.png">
+<meta property="og:image" content="http://paphae.top/2020/03/17/java-%E7%BA%BF%E7%A8%8B%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D/java-%E7%BA%BF%E7%A8%8B%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D/%E5%9B%BE%E7%89%8717.png">
+<meta property="article:published_time" content="2020-03-17T00:30:24.000Z">
+<meta property="article:modified_time" content="2020-05-06T00:43:30.668Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="线程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://paphae.top/2020/03/17/java-%E7%BA%BF%E7%A8%8B%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9B%E5%BB%BA/%E5%9B%BE%E7%89%8711.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D"><span class="toc-text">线程方法介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#sleep"><span class="toc-text">sleep()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yield"><span class="toc-text">yield()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#join"><span class="toc-text">join()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-java-线程方法介绍" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">java-线程方法介绍</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.03.17</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/javaSE/">javaSE</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="线程方法介绍"><a href="#线程方法介绍" class="headerlink" title="线程方法介绍"></a>线程方法介绍</h2><p>每个线程可以存在一个给定的名字，线程名字除了Thread类的构造方法可以提供以外，也可以通过setName(String name)方法给定 </p>
+<a id="more"></a>
+<ul>
+<li><p>getName()方法可以获取特定线程的名字<br>如果没有为线程显式提供名字，Java将按照thread-0，thread-1…thread-n的方式为线程提供默认的名字（由main方法启动的主线程名字为：main）<br><img src="java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9B%E5%BB%BA/%E5%9B%BE%E7%89%8711.png"></p>
+</li>
+<li><p>Java线程可以有优先级的设定，高优先级的线程比低优先级的线程有更高的几率得到执行（注意是更高的几率，而不是优先级高的一定有优势，但是优先级在某一些线程调度方法中有特定的作用） </p>
+</li>
+<li><p>Java线程的优先级是一个整数，其取值范围是1 （Thread.MIN_PRIORITY ） - 10 （Thread.MAX_PRIORITY ） </p>
+</li>
+<li><p>除了Thread.MIN_PRIORITY和Thread.MAX_PRIORITY外，Thread还提供了另一个常量Thread.NORM_PRIORITY（5），但是需要注意的是，通过对Thread类源码的解析，会发现事实上Java线程在没有明确指定的情况下，其优先级并不一定是NORM_PRIORITY，而是和父线程（创建本线程的线程）的优先级保持一致，main线程的优先级是NORM_PRIORITY<br><img src="java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9B%E5%BB%BA/%E5%9B%BE%E7%89%8712.png"></p>
+</li>
+<li><p>可以通过Thread类的setPriority()方法（该方法被final修饰，不能被子类重载）更改优先级。 </p>
+</li>
+<li><p>优先级不能超出1-10的取值范围，否则抛出IllegalArgumentException，建议使用Thread提供的三个优先级常量来确定线程优先级的高、常规和低取值 </p>
+</li>
+<li><p>另外如果该线程已经属于一个线程组（ThreadGroup），该线程的优先级不能超过该线程组的优先级 </p>
+</li>
+<li><p>线程组是Java提供的一个线程统一管理工具，构建一个线程组对象后可以通过Thread类的对应版本构造方法将线程加入线程组，线程组提供了一些比较有用的方法，例如interrupt()方法可以中断线程组中的所有线程</p>
+</li>
+<li><p>我们可以设定线程组的最大优先级，当创建属于该线程组的线程时该线程的优先级不能超过这个数，线程组最大优先级设定的注意事项：</p>
+</li>
+<li><p>系统线程组的最大优先级默认为Thread.MAX_PRIORITY</p>
+</li>
+<li><p>创建线程组的时候其最大优先级默认为父线程组（如果未指定父线程组，则其父线程组默认为当前线程所属线程组）的最大优先级</p>
+</li>
+<li><p>可以通过setMaxPriority更改最大优先级，但无法超过父线程组的最大优先级</p>
+</li>
+<li><p>setMaxPriority的问题：</p>
+</li>
+<li><p>该方法只能更改本线程组及其子线程组（递归）的最大优先级</p>
+</li>
+<li><p>但不能影响已经创建的直接或间接属于该线程组的线程的优先级，也就是说，即使目前有一个子线程的优先级比新设定的线程组优先级大，也不会更改该子线程的优先级。只有当试图改变子线程的优先级或者创建新的子线程的时候，线程组的最大优先级才起作用</p>
+</li>
+<li><p>对于线程优先级，需要注意： </p>
+</li>
+<li><p>Thread.setPriority()可能根本不做任何事情，操作系统和虚拟机版本有关 </p>
+</li>
+<li><p>线程优先级对于不同的线程调度器可能有不同的含义，例如优先级并不一定是指CPU的分享。在UNIX系统，优先级或多或少可以认为是CPU的分配，但Windows不是这样 </p>
+</li>
+<li><p>线程的优先级通常是全局的和局部的优先级设定的组合。Java的setPriority()方法只应用于局部的优先级。这通常是一种保护的方式，任何用户都不希望鼠标指针的线程或者处理音频数据的线程被其它随机的用户线程所抢占<br>不同的系统有不同的线程优先级的取值范围，但是Java定义了10个级别（1-10）。这样就有可能出现几个线程在一个操作系统里有不同的优先级，在另外一个操作系统里却有相同的优先级，并因此可能有意想不到的不同行为<br><img src="java-%E7%BA%BF%E7%A8%8B%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D/%E5%9B%BE%E7%89%8713.png"></p>
+</li>
+<li><p>线程可以通过调用特殊方法来放弃自己占据的部分资源，Thread类中的两个静态方法提供了这个功能：</p>
+<ul>
+<li>sleep()</li>
+<li>yield()<br><img src="java-%E7%BA%BF%E7%A8%8B%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D/%E5%9B%BE%E7%89%8714.png"><h3 id="sleep"><a href="#sleep" class="headerlink" title="sleep()"></a>sleep()</h3></li>
+</ul>
+</li>
+<li><p>使当前线程进入阻塞状态，所以执行sleep()的线程在指定的时间内肯定不会执行, 同时sleep方法不会释放锁资源（即如果正在运行的线程占有某个资源的同步锁，它不会释放掉这个同步锁，其他线程仍然不能访问该资源，详情参加下一节的线程同步） </p>
+</li>
+<li><p>sleep()可使优先级低的线程得到执行的机会，当然也可以让同优先级和高优先级的线程有执行的机会 </p>
+</li>
+<li><p>sleep(）方法有两个版本：sleep(long millis)和sleep(long millis,int nanos)，第一个版本需要提供以毫秒为单位的阻塞时间，第二个版本在毫秒的基础上可以附加0-999999的纳秒值 </p>
+</li>
+<li><p>Java并不保证线程在阻塞给定的时间后能够马上执行（事实上这几乎是不可能的事情），在阻塞时间到了之后，线程进入就绪状态，继续执行的时机取决于Java虚拟机的线程调度机制，唯一能够确定的是，线程中断执行的时间是大于等于给定的阻塞时长的，因此不要将sleep用作精确度要求非常高的定时任务调度</p>
+</li>
+</ul>
+<p><img src="java-%E7%BA%BF%E7%A8%8B%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D/%E5%9B%BE%E7%89%8715.png"></p>
+<h3 id="yield"><a href="#yield" class="headerlink" title="yield()"></a>yield()</h3><ul>
+<li>yield() 方法只是使当前线程重新回到就绪可执行状态，所以执行yield()线程有可能在进入到就绪状态后马上又被执行，只能使相同或更高优先级的线程有执行的机会 </li>
+<li>同样, yield()也不会释放锁资源 </li>
+<li>sleep和yield的区别在于, sleep需要提供阻塞时长，可以使优先级低的线程得到执行的机会,  而yield由于使线程直接进入就绪状态，没有阻塞时长，而且只能使相同或更高优先级的线程有执行的机会，甚至于某些时候JVM认为不符合最优资源调度的情况下会忽略该方法的调用（类似于System.gc()）<br><img src="java-%E7%BA%BF%E7%A8%8B%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D/%E5%9B%BE%E7%89%8716.png"><h3 id="join"><a href="#join" class="headerlink" title="join()"></a>join()</h3></li>
+<li>Thread类的join()方法用于等待其它线程结束，当前运行的线程可以调用另一线程的join方法，当前运行线程将转到阻塞状态，直至另一线程执行结束，它才会恢复运行，也就是说，t.join()方法阻塞调用此方法的线程(calling thread)，直到线程t完成，此线程再继续 </li>
+<li>通常用于在main()主线程内，等待其它线程完成再结束main()主线程 </li>
+<li>通过对源代码的解析发现join方法实现是通过wait。 当main线程调用t.join时候，main线程会获得线程对象t的锁,调用该对象的wait()，直到该对象唤醒main线程 ，比如退出后。这就意味着main 线程调用t.join时，必须能够拿到线程t对象的锁（下一节详细介绍同步锁）<br><img src="java-%E7%BA%BF%E7%A8%8B%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D/%E5%9B%BE%E7%89%8717.png"><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3></li>
+<li>Java中希望创建线程可以使用两种方法：直接继承Thread类、实现Runnable接口，这两种方式都需要实现run()方法以提供线程中的指令代码。构建线程对象后使用start(）方法即可启动一个线程 </li>
+<li>不能在同一个线程对象上多次调用start()方法 </li>
+<li>run()方法执行结束后，线程会自然消亡，不建议使用线程类的stop等方法终止线程的执行，可以使用设置共享变量和调用interrupt()方法引发异常的方式终止线程 </li>
+<li>sleep和yield的区别在于, sleep需要提供阻塞时长，可以使优先级低的线程得到执行的机会,  而yield由于使线程直接进入就绪状态，没有阻塞时长，而且只能使相同或更高优先级的线程有执行的机会，甚至于某些时候JVM认为不符合最优资源调度的情况下会忽略该方法的调用（类似于System.gc()）， Thread类的join()方法用于等待其它线程结束，当前运行的线程可以调用另一线程的join方法，当前运行线程将转到阻塞状态，直至另一线程执行结束，它才会恢复运行</li>
+</ul>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/03/17/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%9B%E5%BB%BA/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/03/18/java-%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

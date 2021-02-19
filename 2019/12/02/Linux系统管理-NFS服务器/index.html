@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Linux系统管理-NFS服务器 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="NFS服务器," />
+  
+
+  <meta name="description" content="NFS服务简介 NFS 是Network File System的缩写，即网络文件系统。一种使用于分散式文件系统的协定，由Sun公司开发，于1984年向外公布。功能是通过网络让不同的机器、不同的操作系统能够彼此分享个别的数据，让应用程序在客户端通过网络访问位于服务器磁盘中的数据，是在类Unix系统间实现磁盘文件共享的一种方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux系统管理-NFS服务器">
+<meta property="og:url" content="http://paphae.top/2019/12/02/Linux%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86-NFS%E6%9C%8D%E5%8A%A1%E5%99%A8/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="NFS服务简介 NFS 是Network File System的缩写，即网络文件系统。一种使用于分散式文件系统的协定，由Sun公司开发，于1984年向外公布。功能是通过网络让不同的机器、不同的操作系统能够彼此分享个别的数据，让应用程序在客户端通过网络访问位于服务器磁盘中的数据，是在类Unix系统间实现磁盘文件共享的一种方法。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2019-12-02T03:57:06.000Z">
+<meta property="article:modified_time" content="2020-05-06T01:41:47.234Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="NFS服务器">
+<meta name="twitter:card" content="summary">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#NFS%E6%9C%8D%E5%8A%A1%E7%AE%80%E4%BB%8B"><span class="toc-text">NFS服务简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NFS%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE"><span class="toc-text">NFS服务器配置</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#etc-exports%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9%E6%A0%BC%E5%BC%8F%EF%BC%9A"><span class="toc-text">&#x2F;etc&#x2F;exports文件内容格式：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1"><span class="toc-text">启动服务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8"><span class="toc-text">设置开机启动</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E4%BD%BF%E7%94%A8showmount%E5%91%BD%E4%BB%A4%E6%9F%A5%E8%AF%A2NFS%E7%9A%84%E5%85%B1%E4%BA%AB%E7%8A%B6%E6%80%81"><span class="toc-text">服务器端使用showmount命令查询NFS的共享状态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE"><span class="toc-text">客户端配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1"><span class="toc-text">开机启动服务</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-Linux系统管理-NFS服务器" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Linux系统管理-NFS服务器</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2019.12.02</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h3 id="NFS服务简介"><a href="#NFS服务简介" class="headerlink" title="NFS服务简介"></a>NFS服务简介</h3><blockquote>
+<p>NFS 是Network File System的缩写，即网络文件系统。一种使用于分散式文件系统的协定，由Sun公司开发，于1984年向外公布。功能是通过网络让不同的机器、不同的操作系统能够彼此分享个别的数据，让应用程序在客户端通过网络访问位于服务器磁盘中的数据，是在类Unix系统间实现磁盘文件共享的一种方法。</p>
+</blockquote>
+<a id="more"></a>
+
+<blockquote>
+<p>NFS 的基本原则是“容许不同的客户端及服务端通过一组RPC分享相同的文件系统”，它是独立于操作系统，容许不同硬件及操作系统的系统共同进行文件的分享。</p>
+</blockquote>
+<blockquote>
+<p>NFS在文件传送或信息传送过程中依赖于RPC协议。RPC，远程过程调用 (Remote Procedure Call) 是能使客户端执行其他系统中程序的一种机制。NFS本身是没有提供信息传输的协议和功能的，但NFS却能让我们通过网络进行资料的分享，这是因为NFS使用了一些其它的传输协议。而这些传输协议用到这个RPC功能的。可以说NFS本身就是使用RPC的一个程序。或者说NFS也是一个RPC SERVER。所以只要用到NFS的地方都要启动RPC服务，不论是NFS SERVER或者NFS CLIENT。这样SERVER和CLIENT才能通过RPC来实现PROGRAM PORT的对应。可以这么理解RPC和NFS的关系：NFS是一个文件系统，而RPC是负责负责信息的传输。</p>
+</blockquote>
+<h3 id="NFS服务器配置"><a href="#NFS服务器配置" class="headerlink" title="NFS服务器配置"></a>NFS服务器配置</h3><p>NFS的常用目录</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/etc/exports                           <span class="comment">#NFS服务的主要配置文件</span></span><br><span class="line">/usr/sbin/exportfs                   <span class="comment">#NFS服务的管理命令</span></span><br><span class="line">/usr/sbin/showmount              <span class="comment">#客户端的查看命令</span></span><br><span class="line">/var/lib/nfs/etab                      <span class="comment">#记录NFS分享出来的目录的完整权限设定值</span></span><br><span class="line">/var/lib/nfs/xtab                      <span class="comment">#记录曾经登录过的客户端信息</span></span><br></pre></td></tr></table></figure>
+<h5 id="etc-exports文件内容格式："><a href="#etc-exports文件内容格式：" class="headerlink" title="/etc/exports文件内容格式："></a>/etc/exports文件内容格式：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;输出目录&gt; [客户端1 选项（访问权限,用户映射,其他）] [客户端2 选项（访问权限,用户映射,其他）]</span><br></pre></td></tr></table></figure>
+<p>a. 输出目录<br>输出目录是指NFS系统中需要共享给客户机使用的目录；</p>
+<p>b. 客户端<br>客户端是指网络中可以访问这个NFS输出目录的计算机<br>客户端常用的指定方式</p>
+<ul>
+<li>指定ip地址的主机：192.168.0.200</li>
+<li>指定子网中的所有主机：192.168.0.0/24或 192.168.0.0/255.255.255.0</li>
+<li>指定域名的主机：david.bsmart.cn</li>
+<li>指定域中的所有主机：*.bsmart.cn</li>
+<li>所有主机：*</li>
+</ul>
+<p>c. 选项<br>选项用来设置输出目录的访问权限、用户映射等。<br>NFS主要有3类选项：</p>
+<p>访问权限选项</p>
+<ul>
+<li><p>设置输出目录只读：ro</p>
+</li>
+<li><p>设置输出目录读写：rw<br>用户映射选项</p>
+</li>
+<li><p>all_squash：将远程访问的所有普通用户及所属组都映射为匿名用户或用户组（nfsnobody）；</p>
+</li>
+<li><p>no_all_squash：与all_squash取反（默认设置）；</p>
+</li>
+<li><p>root_squash：将root用户及所属组都映射为匿名用户或用户组（默认设置）；</p>
+</li>
+<li><p>no_root_squash：与rootsquash取反；</p>
+</li>
+<li><p>anonuid=xxx：将远程访问的所有用户都映射为匿名用户，并指定该用户为本地用户（UID=xxx）；</p>
+</li>
+<li><p>anongid=xxx：将远程访问的所有用户组都映射为匿名用户组账户，并指定该匿名用户组账户为本地用户组账户（GID=xxx）；</p>
+</li>
+</ul>
+<p>其它选项</p>
+<ul>
+<li>secure：限制客户端只能从小于1024的tcp/ip端口连接nfs服务器（默认设置）；</li>
+<li>insecure：允许客户端从大于1024的tcp/ip端口连接服务器；</li>
+<li>sync：将数据同步写入内存缓冲区与磁盘中，效率低，但可以保证数据的一致性；</li>
+<li>async：将数据先保存在内存缓冲区中，必要时才写入磁盘；</li>
+<li>wdelay：检查是否有相关的写操作，如果有则将这些写操作一起执行，这样可以提高效率（默认设置）；</li>
+<li>no_wdelay：若有写操作则立即执行，应与sync配合使用；</li>
+<li>subtree：若输出目录是一个子目录，则nfs服务器将检查其父目录的权限(默认设置)；</li>
+<li>no_subtree：即使输出目录是一个子目录，nfs服务器也不检查其父目录的权限，这样可以提高效率；</li>
+</ul>
+<h4 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart nfs.server.service</span><br><span class="line"><span class="comment">#关闭防火墙</span></span><br><span class="line">setenforce <span class="number">0</span></span><br><span class="line">systemctl stop firewalld.service</span><br></pre></td></tr></table></figure>
+<h4 id="设置开机启动"><a href="#设置开机启动" class="headerlink" title="设置开机启动"></a>设置开机启动</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chkconfig  --level <span class="number">25</span> nfs on</span><br></pre></td></tr></table></figure>
+<h4 id="服务器端使用showmount命令查询NFS的共享状态"><a href="#服务器端使用showmount命令查询NFS的共享状态" class="headerlink" title="服务器端使用showmount命令查询NFS的共享状态"></a>服务器端使用showmount命令查询NFS的共享状态</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">showmount -e　　　　//默认查看自己共享的服务，前提是要DNS能解析自己，不然容易报错</span><br></pre></td></tr></table></figure>
+<h4 id="客户端配置"><a href="#客户端配置" class="headerlink" title="客户端配置"></a>客户端配置</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">   yum install autofs</span><br><span class="line">   mkdir -p /special/oshu	<span class="comment">#创建挂载点目录</span></span><br><span class="line">   vim /etc/auto.master		<span class="comment">#编辑autofs的配置文件</span></span><br><span class="line">/special        /etc/auto.server</span><br><span class="line">   vim /etc/auto.server		<span class="comment">#编辑自定义配置文件</span></span><br><span class="line">oshu    -ro     <span class="number">192.168</span><span class="number">.43</span><span class="number">.208</span>:/var/nfs/oshu</span><br><span class="line">   systemctl start autofs.service	<span class="comment">#启动autofs服务</span></span><br><span class="line">   ls /special/oshu			<span class="comment">#查看挂载点目录的内容</span></span><br></pre></td></tr></table></figure>
+<h4 id="开机启动服务"><a href="#开机启动服务" class="headerlink" title="开机启动服务"></a>开机启动服务</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chkconfig --level <span class="number">5</span> autofs on</span><br></pre></td></tr></table></figure>
+<p>参考：<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/mchina/archive/2013/01/03/2840040.htmlhttp://">Linux NFS服务器的安装与配置</a></p>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2019/12/01/SQL-server/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2019/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

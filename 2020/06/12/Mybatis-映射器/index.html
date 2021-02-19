@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Mybatis-映射器 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="mybatis," />
+  
+
+  <meta name="description" content="官方文档 官方文档已经写的很清楚了，下面只是我比较常用的。 XML 映射器MyBatis 的真正强大在于它的语句映射，这是它的魔力所在。由于它的异常强大，映射器的 XML 文件就显得相对简单。如果拿它跟具有相同功能的 JDBC 代码进行对比，你会立即发现省掉了将近 95% 的代码。MyBatis 致力于减少使用成本，让用户能更专注于 SQL 代码。 SQL 映射文件只有很少的几个顶级元素（按照应被">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mybatis-映射器">
+<meta property="og:url" content="http://paphae.top/2020/06/12/Mybatis-%E6%98%A0%E5%B0%84%E5%99%A8/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="官方文档 官方文档已经写的很清楚了，下面只是我比较常用的。 XML 映射器MyBatis 的真正强大在于它的语句映射，这是它的魔力所在。由于它的异常强大，映射器的 XML 文件就显得相对简单。如果拿它跟具有相同功能的 JDBC 代码进行对比，你会立即发现省掉了将近 95% 的代码。MyBatis 致力于减少使用成本，让用户能更专注于 SQL 代码。 SQL 映射文件只有很少的几个顶级元素（按照应被">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-06-12T10:33:19.000Z">
+<meta property="article:modified_time" content="2020-06-16T01:55:59.245Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="mybatis">
+<meta name="twitter:card" content="summary">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#XML-%E6%98%A0%E5%B0%84%E5%99%A8"><span class="toc-text">XML 映射器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%A0%E4%BD%8D%E7%AC%A6"><span class="toc-text">占位符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E9%94%AE%E8%BF%94%E5%9B%9E"><span class="toc-text">主键返回</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E6%9E%9C%E6%98%A0%E5%B0%84%EF%BC%88resultMap%EF%BC%89"><span class="toc-text">结果映射（resultMap）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E4%BD%93%E7%B1%BB%E5%B1%9E%E6%80%A7%E5%92%8C%E8%A1%A8%E5%AD%97%E6%AE%B5%E4%B8%8D%E5%8C%B9%E9%85%8D"><span class="toc-text">实体类属性和表字段不匹配</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E8%81%94%E6%98%A0%E5%B0%84"><span class="toc-text">关联映射</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E5%AF%B9%E4%B8%80"><span class="toc-text">一对一</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E5%AF%B9%E5%A4%9A"><span class="toc-text">一对多</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8E-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">#{}与${}的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E6%9D%A5%E8%AF%B4%E5%8C%BA%E5%88%AB%E5%B0%B1%E6%98%AF"><span class="toc-text">简单来说区别就是</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E"><span class="toc-text">关于#{}</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-1"><span class="toc-text">关于${}</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="toc-text">参考文章</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-Mybatis-映射器" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Mybatis-映射器</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.06.12</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/%E6%A1%86%E6%9E%B6/">框架</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p><a target="_blank" rel="noopener" href="https://mybatis.org/mybatis-3/zh/configuration.html">官方文档</a></p>
+<p>官方文档已经写的很清楚了，下面只是我比较常用的。</p>
+<h2 id="XML-映射器"><a href="#XML-映射器" class="headerlink" title="XML 映射器"></a>XML 映射器</h2><p>MyBatis 的真正强大在于它的语句映射，这是它的魔力所在。由于它的异常强大，映射器的 XML 文件就显得相对简单。如果拿它跟具有相同功能的 JDBC 代码进行对比，你会立即发现省掉了将近 95% 的代码。MyBatis 致力于减少使用成本，让用户能更专注于 SQL 代码。</p>
+<p>SQL 映射文件只有很少的几个顶级元素（按照应被定义的顺序列出）：</p>
+<ul>
+<li><code>cache</code> – 该命名空间的缓存配置。</li>
+<li><code>cache-ref</code> – 引用其它命名空间的缓存配置。</li>
+<li><code>resultMap</code> – 描述如何从数据库结果集中加载对象，是最复杂也是最强大的元素。</li>
+<li><code>parameterMap</code> – 老式风格的参数映射。此元素已被废弃，并可能在将来被移除！请使用行内参数映射。文档中不会介绍此元素。</li>
+<li><code>sql</code> – 可被其它语句引用的可重用语句块。</li>
+<li><code>insert</code> – 映射插入语句。</li>
+<li><code>update</code> – 映射更新语句。</li>
+<li><code>delete</code> – 映射删除语句。</li>
+<li><code>select</code> – 映射查询语句。</li>
+</ul>
+<h3 id="占位符"><a href="#占位符" class="headerlink" title="占位符"></a>占位符</h3><p>在Mybatis中，有两种占位符</p>
+<ul>
+<li>#{}解析传递进来的参数数据</li>
+<li>${}对传递进来的参数<strong>原样</strong>拼接在SQL中</li>
+</ul>
+<h3 id="主键返回"><a href="#主键返回" class="headerlink" title="主键返回"></a>主键返回</h3><p>需求：</p>
+<ul>
+<li>user对象插入到数据库后，新记录的主键要通过user对象返回，通过user获取主键值。</li>
+</ul>
+<p>解决思路：</p>
+<ul>
+<li>通过LAST_INSERT_ID()获取刚插入记录的自增主键值，<strong>在insert语句执行后，执行select LAST_INSERT_ID()就可以获取自增主键。</strong></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">&quot;insertUser&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;cn.itcast.mybatis.po.User&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">selectKey</span> <span class="attr">keyProperty</span>=<span class="string">&quot;id&quot;</span> <span class="attr">order</span>=<span class="string">&quot;AFTER&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;int&quot;</span>&gt;</span></span><br><span class="line">        select LAST_INSERT_ID()</span><br><span class="line">    <span class="tag">&lt;/<span class="name">selectKey</span>&gt;</span></span><br><span class="line">    INSERT INTO USER(username,birthday,sex,address) VALUES(#&#123;username&#125;,#&#123;birthday&#125;,#&#123;sex&#125;,#&#123;address&#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="结果映射（resultMap）"><a href="#结果映射（resultMap）" class="headerlink" title="结果映射（resultMap）"></a>结果映射（resultMap）</h3><ul>
+<li><p>constructor</p>
+<ul>
+<li><p>用于在实例化类时，注入结果到构造方法中</p>
+</li>
+<li><p><code>idArg</code> - ID 参数；标记出作为 ID 的结果可以帮助提高整体性能</p>
+</li>
+<li><p><code>arg</code> - 将被注入到构造方法的一个普通结果</p>
+</li>
+</ul>
+</li>
+<li><p><code>id</code> – 一个 ID 结果；标记出作为 ID 的结果可以帮助提高整体性能</p>
+</li>
+<li><p><code>result</code> – 注入到字段或 JavaBean 属性的普通结果</p>
+</li>
+<li><p>association</p>
+<ul>
+<li><p>一个复杂类型的关联；许多结果将包装成这种类型</p>
+</li>
+<li><p>嵌套结果映射 – 关联可以是 <code>resultMap</code> 元素，或是对其它结果映射的引用</p>
+</li>
+</ul>
+</li>
+<li><p>collection</p>
+<ul>
+<li><p>一个复杂类型的集合</p>
+</li>
+<li><p>嵌套结果映射 – 集合可以是 <code>resultMap</code> 元素，或是对其它结果映射的引用</p>
+</li>
+</ul>
+</li>
+<li><p>discriminator</p>
+<ul>
+<li><p>使用结果值来决定使用哪个resultMap</p>
+</li>
+<li><p>case</p>
+<ul>
+<li>基于某些值的结果映射</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>嵌套结果映射 – <code>case</code> 也是一个结果映射，因此具有相同的结构和元素；或者引用其它的结果映射</p>
+</li>
+</ul>
+<h4 id="实体类属性和表字段不匹配"><a href="#实体类属性和表字段不匹配" class="headerlink" title="实体类属性和表字段不匹配"></a>实体类属性和表字段不匹配</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">&quot;empMap&quot;</span> <span class="attr">type</span>=<span class="string">&quot;Emp&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">&quot;empno&quot;</span> <span class="attr">column</span>=<span class="string">&quot;empno&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">&quot;ename&quot;</span> <span class="attr">column</span>=<span class="string">&quot;ename&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">&quot;job&quot;</span> <span class="attr">column</span>=<span class="string">&quot;job&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">&quot;mgr&quot;</span> <span class="attr">column</span>=<span class="string">&quot;mgr&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">&quot;hiredate&quot;</span> <span class="attr">column</span>=<span class="string">&quot;hiredate&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">&quot;sal&quot;</span> <span class="attr">column</span>=<span class="string">&quot;sal&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">&quot;comm&quot;</span> <span class="attr">column</span>=<span class="string">&quot;comm&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">&quot;deptno&quot;</span> <span class="attr">column</span>=<span class="string">&quot;deptno&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="关联映射"><a href="#关联映射" class="headerlink" title="关联映射"></a>关联映射</h3><h4 id="一对一"><a href="#一对一" class="headerlink" title="一对一"></a>一对一</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EmpAndDept</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Emp emp;</span><br><span class="line">    <span class="keyword">private</span> Dept dept;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">&quot;empAndDept&quot;</span> <span class="attr">type</span>=<span class="string">&quot;EmpAndDept&quot;</span> <span class="attr">autoMapping</span>=<span class="string">&quot;true&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span>=<span class="string">&quot;emp&quot;</span> <span class="attr">javaType</span>=<span class="string">&quot;Emp&quot;</span> <span class="attr">autoMapping</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span>=<span class="string">&quot;dept&quot;</span> <span class="attr">javaType</span>=<span class="string">&quot;Dept&quot;</span> <span class="attr">autoMapping</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;findEmpAndDept&quot;</span> <span class="attr">resultMap</span>=<span class="string">&quot;empAndDept&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;String&quot;</span>&gt;</span></span><br><span class="line">    select *</span><br><span class="line">    from emp left join dept on emp.deptno=dept.deptno</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="一对多"><a href="#一对多" class="headerlink" title="一对多"></a>一对多</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="meta">@EqualsAndHashCode</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeptAndEmp</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Dept dept;</span><br><span class="line">    <span class="keyword">private</span> Set&lt;Emp&gt; emps;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">&quot;deptAndEmp&quot;</span> <span class="attr">type</span>=<span class="string">&quot;DeptAndEmp&quot;</span> <span class="attr">autoMapping</span>=<span class="string">&quot;true&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span>=<span class="string">&quot;dept&quot;</span> <span class="attr">javaType</span>=<span class="string">&quot;Dept&quot;</span> <span class="attr">autoMapping</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">&quot;emps&quot;</span> <span class="attr">ofType</span>=<span class="string">&quot;Emp&quot;</span> <span class="attr">select</span>=<span class="string">&quot;findEmp&quot;</span> <span class="attr">column</span>=<span class="string">&quot;deptno&quot;</span> <span class="attr">autoMapping</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;findDeptAndEmp&quot;</span> <span class="attr">resultMap</span>=<span class="string">&quot;deptAndEmp&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;String&quot;</span>&gt;</span></span><br><span class="line">    select *</span><br><span class="line">    from dept</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;findEmp&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;emp&quot;</span>&gt;</span></span><br><span class="line">    select * from emp where deptno=#&#123;deptno&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="与-的区别"><a href="#与-的区别" class="headerlink" title="#{}与${}的区别"></a>#{}与${}的区别</h3><h4 id="简单来说区别就是"><a href="#简单来说区别就是" class="headerlink" title="简单来说区别就是"></a>简单来说区别就是</h4><blockquote>
+<p><strong>#{}方式能够很大程度防止sql注入(安全)，${}方式无法防止Sql注入</strong></p>
+</blockquote>
+<blockquote>
+<p>在<code>JDBC</code>能使用占位符的地方,最好优先使用<code>#&#123;&#125;</code></p>
+</blockquote>
+<blockquote>
+<p>在<code>JDBC</code>不支持使用占位符的地方,就只能使用<code>$&#123;&#125;</code>，典型情况就是 <strong>动态参数</strong>，比如MyBatis <strong>排序时使用<code>order by</code> 动态参数</strong>时,此时也只能使用${}</p>
+</blockquote>
+<h4 id="关于"><a href="#关于" class="headerlink" title="关于#{}"></a>关于#{}</h4><blockquote>
+<p>1、#{}表示一个占位符号 相当于 <code>jdbc</code>中的 <strong>?</strong> 符号 #{}实现的是向prepareStatement中的预处理语句中设置参数值，sql语句中#{}表示一个占位符即?</p>
+</blockquote>
+<blockquote>
+<p>2、#{}将传入的数据都当成一个字符串，会对自动传入的数据加一个双引号。如：<code>select * from user where id= #&#123;user_id&#125;</code>，如果传入的值是11,那么解析成sql时的值为<code>where id=&quot;11&quot;</code> ，</p>
+</blockquote>
+<blockquote>
+<p>3、如果sql语句中只有<code>一个参数</code>,此时参数名称可以<code>随意定义</code> 如果sql语句有<strong>多</strong>个参数,此时参数名称应该是与当前表关联[实体类的属性名]或[Map集合关键字]，<strong>不能随便写，必须对应</strong></p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">List&lt;Emp&gt; <span class="title">findLikeEname</span><span class="params">(String key)</span></span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;findLikeEname&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;String&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;com.paphae.domain.Emp&quot;</span>&gt;</span></span><br><span class="line">    select *</span><br><span class="line">    from emp</span><br><span class="line">    where ename like &quot;%&quot;#&#123;key&#125;&quot;%&quot;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="关于-1"><a href="#关于-1" class="headerlink" title="关于${}"></a>关于${}</h4><blockquote>
+<p>1、在sql中。如：<code>select * from user where id=&#123;user_id&#125;</code>，如果传入的值是11,那么解析成sql时的值为<code>where id=11</code></p>
+</blockquote>
+<blockquote>
+<p>2、<code>$&#123;value&#125;</code>中<code>value</code>值有限制只能写对应的value值不能随便写，因为<code>$&#123;&#125;</code>不会自动进行jdbc类型转换</p>
+</blockquote>
+<blockquote>
+<p>3、简单来说,在<code>JDBC</code>不支持使用占位符的地方,都可以使用<code>$&#123;&#125;</code></p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">List&lt;Emp&gt; <span class="title">findLikeEname</span><span class="params">(<span class="meta">@Param(&quot;key&quot;)</span> String key)</span></span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;findLikeEname&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;String&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;com.paphae.domain.Emp&quot;</span>&gt;</span></span><br><span class="line">    select *</span><br><span class="line">    from emp</span><br><span class="line">    where ename like &quot;%$&#123;key&#125;%&quot;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a target="_blank" rel="noopener" href="https://juejin.im/post/5de8dad0f265da33d451e9f9">Mybatis中#{}与${}的区别</a></p>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/06/12/Mybatis-%E9%85%8D%E7%BD%AE/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/06/13/%E4%BD%BF%E7%94%A8idea%E8%87%AA%E5%AE%9A%E4%B9%89maven%E9%AA%A8%E6%9E%B6/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

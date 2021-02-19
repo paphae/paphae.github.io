@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Redis入门 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="redis," />
+  
+
+  <meta name="description" content="reids的安装 ​    1.window安装 ​        注意实现再修改redis核心配置配置添加密码的时候，前面不要留有空格。 ​        密码修改在386行 ​    2.linux安装 ​        1.把redis上传到 &#x2F;usr&#x2F;redis&#x2F; ​        2.跳转到&#x2F;usr&#x2F;redis&#x2F;里解压redis文件。 ​            1.su root 保证用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis入门">
+<meta property="og:url" content="http://paphae.top/2020/07/14/Redis%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="reids的安装 ​    1.window安装 ​        注意实现再修改redis核心配置配置添加密码的时候，前面不要留有空格。 ​        密码修改在386行 ​    2.linux安装 ​        1.把redis上传到 &#x2F;usr&#x2F;redis&#x2F; ​        2.跳转到&#x2F;usr&#x2F;redis&#x2F;里解压redis文件。 ​            1.su root 保证用">
+<meta property="og:locale">
+<meta property="og:image" content="http://paphae.top/2020/07/14/Redis%E5%85%A5%E9%97%A8/Redis%E5%85%A5%E9%97%A8/image001.png">
+<meta property="og:image" content="http://paphae.top/2020/07/14/Redis%E5%85%A5%E9%97%A8/Redis%E5%85%A5%E9%97%A8/image002.png">
+<meta property="article:published_time" content="2020-07-14T13:11:13.000Z">
+<meta property="article:modified_time" content="2020-07-15T10:14:25.614Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="redis">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://paphae.top/2020/07/14/Redis%E5%85%A5%E9%97%A8/Redis%E5%85%A5%E9%97%A8/image001.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#reids%E7%9A%84%E5%AE%89%E8%A3%85"><span class="toc-text">reids的安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">Redis 数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%88string%EF%BC%89"><span class="toc-text">字符串（string）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%EF%BC%88list%EF%BC%89"><span class="toc-text">列表（list）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%93%88%E5%B8%8C%E8%A1%A8%EF%BC%88hash%EF%BC%89"><span class="toc-text">哈希表（hash）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9B%86%E5%90%88%EF%BC%88set%EF%BC%89"><span class="toc-text">集合（set）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%89%E5%BA%8F%E9%9B%86%E5%90%88%EF%BC%88sorted-set%EF%BC%89"><span class="toc-text">有序集合（sorted set）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0"><span class="toc-text">学习</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-Redis入门" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Redis入门</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.07.14</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="reids的安装"><a href="#reids的安装" class="headerlink" title="reids的安装"></a>reids的安装</h2><blockquote>
+<p>​    1.window安装</p>
+<p>​        注意实现再修改redis核心配置配置添加密码的时候，前面不要留有空格。</p>
+<p>​        密码修改在386行</p>
+<p>​    2.linux安装</p>
+<p>​        1.把redis上传到 /usr/redis/</p>
+<p>​        2.跳转到/usr/redis/里解压redis文件。</p>
+<p>​            1.su root 保证用户身份是管理员。</p>
+<p>​            2.cd /usr/redis/</p>
+<p>​            3.tar -xvzf redis-3.0.0.tar.gz</p>
+<p>​        3.跳转到redis解压后的文件夹中。</p>
+<p>​        4.将解压后的文件进行编译。</p>
+<p>​            1.需要gcc编译器。</p>
+<p>​                yum -y install gcc</p>
+<p>​            2.编译</p>
+<p>​                1.你要在redis解压后的文件夹中。</p>
+<p>​                make MALLOC=libc</p>
+<p>​        5.跳转到src中 cd  src/ 在redis解压后的文件中。</p>
+<p>​            1.make install</p>
+<p>​        6.为了好使用redis，把一些核心文件提取到指定文件夹中。</p>
+<p>​            1.创建/usr/local/redis/bin，/usr/local/redis/etc</p>
+<p>​            2.跳转到安装的redis文件夹中复制redis的核心配置文件到/usr/local/redis/etc</p>
+<p>​            cp /usr/redis/redis-3.0.0/redis.conf /usr/local/redis/etc/</p>
+<p>​            3.跳转到src中cd /usr/redis/redis-3.0.0/src/</p>
+<p>​             cp mkreleasehdr.sh redis-benchmark redis-check-aof</p>
+<p>​             redis-check-dump redis-cli redis-server redis-sentinel /usr/local/redis/bin</p>
+<p>​        7.跳转到/usr/local/redis/bin执行</p>
+<p>​            ./redis-server</p>
+<p>​            补充如果想在window连接linux的redis。保证防火墙关闭。</p>
+<p>​        8.后台执行</p>
+<p>​            1.编辑核心配置文件。redis.conf、</p>
+<p>​                1.daemonize yes — 修改为yes  后台启动</p>
+<p>​                2.requirepass 123456  —-注释取消掉设置账号密码</p>
+<p>​            2.redis命令连接方式</p>
+<p>​                ./redis-cli -h 127.0.0.1 -p 6379 -a “123456” </p>
+<p>​            3.停止redis</p>
+<p>​                redis-cli shutdown  或者 kill redis进程的pid</p>
+</blockquote>
+<h2 id="Redis-数据类型"><a href="#Redis-数据类型" class="headerlink" title="Redis 数据类型"></a>Redis 数据类型</h2><blockquote>
+<p>前面也提到过，Redis 支持字符串、哈希表、列表、集合、有序集合五种数据类型的存储。了解这五种数据结构非常重要，可以说如果吃透了这五种数据结构，你就掌握了 Redis 应用知识的三分之一，下面我们就来逐一解析。</p>
+<h4 id="字符串（string）"><a href="#字符串（string）" class="headerlink" title="字符串（string）"></a>字符串（string）</h4><p>string 这种数据结构应该是我们最为常用的。在 Redis 中 string 表示的是一个可变的字节数组，我们初始化字符串的内容、可以拿到字符串的长度，可以获取 string 的子串，可以覆盖 string 的子串内容，可以追加子串。</p>
+<p><strong>图 1. Redis 的 string 类型数据结构</strong></p>
+<p><img src="Redis%E5%85%A5%E9%97%A8/image001.png" alt="图 1. Redis 的 string 类型数据结构"></p>
+<p>如上图所示，在 Redis 中我们初始化一个字符串时，会采用预分配冗余空间的方式来减少内存的频繁分配，如图 1 所示，实际分配的空间 capacity 一般要高于实际字符串长度 len。如果您看过 Java 的 ArrayList 的源码相信会对此种模式很熟悉。</p>
+<h4 id="列表（list）"><a href="#列表（list）" class="headerlink" title="列表（list）"></a>列表（list）</h4><p>在 Redis 中列表 list 采用的存储结构是双向链表，由此可见其随机定位性能较差，比较适合首位插入删除。像 Java 中的数组一样，Redis 中的列表支持通过下标访问，不同的是 Redis 还为列表提供了一种负下标，<code>-1</code> 表示倒数一个元素，<code>-2</code> 表示倒数第二个数，依此类推。综合列表首尾增删性能优异的特点，通常我们使用 <code>rpush/rpop/lpush/lpop</code> 四条指令将列表作为队列来使用。</p>
+<p><strong>图 2. List 类型数据结构</strong></p>
+<p><img src="Redis%E5%85%A5%E9%97%A8/image002.png" alt="图 2. List 类型数据结构"></p>
+<p>如上图所示，在列表元素较少的情况下会使用一块连续的内存存储，这个结构是 ziplist，也即是压缩列表。它将所有的元素紧挨着一起存储，分配的是一块连续的内存。当数据量比较多的时候才会改成 quicklist。因为普通的链表需要的附加指针空间太大，会比较浪费空间。比如这个列表里存的只是 int 类型的数据，结构上还需要两个额外的指针 prev 和 next。所以 Redis 将链表和 ziplist 结合起来组成了 quicklist。也就是将多个 ziplist 使用双向指针串起来使用。这样既满足了快速的插入删除性能，又不会出现太大的空间冗余。</p>
+<h4 id="哈希表（hash）"><a href="#哈希表（hash）" class="headerlink" title="哈希表（hash）"></a>哈希表（hash）</h4><p>hash 与 Java 中的 HashMap 差不多，实现上采用二维结构，第一维是数组，第二维是链表。hash 的 key 与 value 都存储在链表中，而数组中存储的则是各个链表的表头。在检索时，首先计算 key 的 hashcode，然后通过 hashcode 定位到链表的表头，再遍历链表得到 value 值。可能您比较好奇为啥要用链表来存储 key 和 value，直接用 key 和 value 一对一存储不就可以了吗？其实是因为有些时候我们无法保证 hashcode 值的唯一，若两个不同的 key 产生了相同的 hashcode，我们需要一个链表在存储两对键值对，这就是所谓的 hash 碰撞。</p>
+<h4 id="集合（set）"><a href="#集合（set）" class="headerlink" title="集合（set）"></a>集合（set）</h4><p>熟悉 Java 的同学应该知道 HashSet 的内部实现使用的是 HashMap，只不过所有的 value 都指向同一个对象。Redis 的 Set 结构也是一样，它的内部也使用 Hash 结构，所有的 value 都指向同一个内部值。</p>
+<h4 id="有序集合（sorted-set）"><a href="#有序集合（sorted-set）" class="headerlink" title="有序集合（sorted set）"></a>有序集合（sorted set）</h4><p>有时也被称作 ZSet，是 Redis 中一个比较特别的数据结构，在有序集合中我们会给每个元素赋予一个权重，其内部元素会按照权重进行排序，我们可以通过命令查询某个范围权重内的元素，这个特性在我们做一个排行榜的功能时可以说非常实用了。其底层的实现使用了两个数据结构， hash 和跳跃列表，hash 的作用就是关联元素 value 和权重 score，保障元素 value 的唯一性，可以通过元素 value 找到相应的 score 值。跳跃列表的目的在于给元素 value 排序，根据 score 的范围获取元素列表。</p>
+</blockquote>
+<h2 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/68059953">Spring Boot 操作 Redis，三种方案全解析！</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.ibm.com/zh/articles/know-redis-and-use-it-in-springboot-projects/">了解 Redis 并在 Spring Boot 项目中使用 Redis</a></p>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/07/13/%E9%9D%A2%E8%AF%95%E9%A2%98-java%E5%9F%BA%E7%A1%80/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/07/14/ZooKeeper%E5%85%A5%E9%97%A8/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

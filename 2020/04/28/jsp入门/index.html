@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>jsp入门 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="jsp内置对象,request,response,application,session,page,pagecontext," />
+  
+
+  <meta name="description" content="JspJSP是Java Server Pages的缩写，它的文件必须放到&#x2F;src&#x2F;main&#x2F;webapp下，文件名必须以.jsp结尾  包含在&lt;%--和--%&gt;之间的是JSP的注释，它们会被完全忽略； 包含在&lt;%和%&gt;之间的是Java代码，可以编写任意Java代码； 如果使用&lt;%&#x3D; xxx %&gt;则可以快捷输出一个变量的值。 如果使用&lt;%!a&#x3D;0%&gt;则">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jsp入门">
+<meta property="og:url" content="http://paphae.top/2020/04/28/jsp%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="JspJSP是Java Server Pages的缩写，它的文件必须放到&#x2F;src&#x2F;main&#x2F;webapp下，文件名必须以.jsp结尾  包含在&lt;%--和--%&gt;之间的是JSP的注释，它们会被完全忽略； 包含在&lt;%和%&gt;之间的是Java代码，可以编写任意Java代码； 如果使用&lt;%&#x3D; xxx %&gt;则可以快捷输出一个变量的值。 如果使用&lt;%!a&#x3D;0%&gt;则">
+<meta property="og:locale">
+<meta property="og:image" content="http://paphae.top/2020/04/28/jsp%E5%85%A5%E9%97%A8/jsp%E5%85%A5%E9%97%A8/image-20200428210533568.png">
+<meta property="og:image" content="http://paphae.top/2020/04/28/jsp%E5%85%A5%E9%97%A8/jsp%E5%85%A5%E9%97%A8/image-20200428210624296.png">
+<meta property="og:image" content="http://paphae.top/2020/04/28/jsp%E5%85%A5%E9%97%A8/jsp%E5%85%A5%E9%97%A8/image-20200428210730759.png">
+<meta property="og:image" content="http://paphae.top/2020/04/28/jsp%E5%85%A5%E9%97%A8/jsp%E5%85%A5%E9%97%A8/image-20200428210844910.png">
+<meta property="og:image" content="http://paphae.top/2020/04/28/jsp%E5%85%A5%E9%97%A8/jsp%E5%85%A5%E9%97%A8/image-20200428211048281.png">
+<meta property="og:image" content="http://paphae.top/2020/04/28/jsp%E5%85%A5%E9%97%A8/jsp%E5%85%A5%E9%97%A8/image-20200428211517828.png">
+<meta property="og:image" content="http://paphae.top/2020/04/28/jsp%E5%85%A5%E9%97%A8/jsp%E5%85%A5%E9%97%A8/image-20200428211217149.png">
+<meta property="og:image" content="http://paphae.top/2020/04/28/jsp%E5%85%A5%E9%97%A8/jsp%E5%85%A5%E9%97%A8/image-20200428211657515.png">
+<meta property="og:image" content="http://paphae.top/2020/04/28/jsp%E5%85%A5%E9%97%A8/jsp%E5%85%A5%E9%97%A8/image-20200428212650759.png">
+<meta property="article:published_time" content="2020-04-28T00:31:31.000Z">
+<meta property="article:modified_time" content="2020-05-06T05:50:07.990Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="jsp内置对象">
+<meta property="article:tag" content="request">
+<meta property="article:tag" content="response">
+<meta property="article:tag" content="application">
+<meta property="article:tag" content="session">
+<meta property="article:tag" content="page">
+<meta property="article:tag" content="pagecontext">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://paphae.top/2020/04/28/jsp%E5%85%A5%E9%97%A8/jsp%E5%85%A5%E9%97%A8/image-20200428210533568.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Jsp"><span class="toc-text">Jsp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%80%BB%E7%BB%93"><span class="toc-text">生命周期总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JSP%E5%92%8CServlet%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-text">JSP和Servlet有什么区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JSP-request%E5%AF%B9%E8%B1%A1%E8%AF%A6%E8%A7%A3"><span class="toc-text">JSP request对象详解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-text">方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JSP-response%E5%AF%B9%E8%B1%A1%E8%AF%A6%E8%A7%A3"><span class="toc-text">JSP response对象详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95-1"><span class="toc-text">方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90"><span class="toc-text">例子</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%B7%BB%E5%8A%A0Cookie"><span class="toc-text">1. 添加Cookie</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%A1%B5%E9%9D%A2%E9%87%8D%E5%AE%9A%E5%90%91"><span class="toc-text">2. 页面重定向</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E7%A6%81%E7%94%A8%E7%BC%93%E5%AD%98"><span class="toc-text">3. 禁用缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E8%87%AA%E5%8A%A8%E5%88%B7%E6%96%B0"><span class="toc-text">4. 自动刷新</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%AE%9A%E6%97%B6%E8%B7%B3%E8%BD%AC%E5%88%B0%E7%BD%91%E9%A1%B5"><span class="toc-text">4. 定时跳转到网页</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JSP-application%E5%AF%B9%E8%B1%A1%E8%AF%A6%E8%A7%A3"><span class="toc-text">JSP application对象详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-text">生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8%E8%8C%83%E5%9B%B4"><span class="toc-text">作用范围</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95-2"><span class="toc-text">方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-1"><span class="toc-text">总结</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JSP-session%E5%AF%B9%E8%B1%A1%E8%AF%A6%E8%A7%A3"><span class="toc-text">JSP session对象详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%BA%E5%88%B6"><span class="toc-text">机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-text">作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95-3"><span class="toc-text">方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A0%E9%99%A4Session%E6%95%B0%E6%8D%AE"><span class="toc-text">删除Session数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-2"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JSP-page%E5%AF%B9%E8%B1%A1%E8%AF%A6%E8%A7%A3"><span class="toc-text">JSP page对象详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95"><span class="toc-text">语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7"><span class="toc-text">属性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-import"><span class="toc-text">1. import</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-language"><span class="toc-text">2. language</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-contentType%E5%92%8CpageEncoding"><span class="toc-text">3. contentType和pageEncoding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-session"><span class="toc-text">4. session</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-isELlgnored"><span class="toc-text">5. isELlgnored</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-buffer%E5%92%8CautoFlush"><span class="toc-text">6. buffer和autoFlush</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-info"><span class="toc-text">7. info</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-errorPage%E5%92%8CisErrorPage"><span class="toc-text">8. errorPage和isErrorPage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-isThreadSafe"><span class="toc-text">9. isThreadSafe</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-extends"><span class="toc-text">10. extends</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-text">常用方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JSP-pagecontext%E5%AF%B9%E8%B1%A1%E8%AF%A6%E8%A7%A3"><span class="toc-text">JSP pagecontext对象详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%AE%9E%E4%BE%8B"><span class="toc-text">获取实例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95-1"><span class="toc-text">常用方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8"><span class="toc-text">作用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1"><span class="toc-text">1. 获取所有内置对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%BC%95%E5%85%A5%E5%92%8C%E8%B7%B3%E8%BD%AC%E5%88%B0%E5%85%B6%E4%BB%96%E8%B5%84%E6%BA%90-%E6%8F%90%E4%BE%9B%E4%BA%86%E8%BD%AC%E5%8F%91%E5%92%8C%E5%8C%85%E5%90%AB%E7%9A%84%E7%AE%80%E4%BE%BF%E6%96%B9%E6%B3%95"><span class="toc-text">2. 引入和跳转到其他资源,提供了转发和包含的简便方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%9C%AC%E8%BA%AB%E6%98%AF%E5%9F%9F%E5%AF%B9%E8%B1%A1%EF%BC%8C%E5%90%8C%E6%97%B6%E5%8F%AF%E4%BB%A5%E6%93%8D%E4%BD%9C%E5%85%B6%E4%BB%96%E5%9F%9F%E5%AF%B9%E8%B1%A1"><span class="toc-text">3. 本身是域对象，同时可以操作其他域对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-3"><span class="toc-text">总结</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-jsp入门" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">jsp入门</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.04.28</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/javaWeb/">javaWeb</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="Jsp"><a href="#Jsp" class="headerlink" title="Jsp"></a>Jsp</h2><p>JSP是Java Server Pages的缩写，它的文件必须放到<code>/src/main/webapp</code>下，文件名必须以<code>.jsp</code>结尾</p>
+<ul>
+<li>包含在<code>&lt;%--</code>和<code>--%&gt;</code>之间的是JSP的注释，它们会被完全忽略；</li>
+<li>包含在<code>&lt;%</code>和<code>%&gt;</code>之间的是Java代码，可以编写任意Java代码；</li>
+<li>如果使用<code>&lt;%= xxx %&gt;</code>则可以快捷输出一个变量的值。</li>
+<li>如果使用<code>&lt;%!a=0%&gt;</code>则 第一次访问的时候声明，再次访问不会重新声明。</li>
+</ul>
+<a id="more"></a>
+
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++)&#123;</span><br><span class="line">        out.print(i);</span><br><span class="line">    &#125;</span><br><span class="line">%&gt;</span><br><span class="line">&lt;%</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">%&gt;</span><br><span class="line">&lt;%=a%&gt;</span><br><span class="line">&lt;%!</span><br><span class="line">   <span class="keyword">int</span> b = <span class="number">0</span>;</span><br><span class="line">%&gt;</span><br><span class="line">&lt;%=b++%&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="生命周期总结"><a href="#生命周期总结" class="headerlink" title="生命周期总结"></a>生命周期总结</h2><p>Servlet是运行在Servlet容器（有时候也叫Servlet引擎，是web服务器和应用程序服务器的一部分，用于在发送的请求和响应之上提供网络服务，解码基于MIME的请求，格式化基于MIME的响应。常用的tomcat、jboss、weblogic都是Servlet容器）中的，其生命周期是由容器来管理。Servlet的生命周期通过java.servlet.Servlet接口中的init（）、service（）、和destroy（）方法表示。</p>
+<p>Servlet的生命周期有四个阶段：加载并实例化、初始化、请求处理、销毁。</p>
+<p>JSP生命周期就是从创建到销毁的整个过程，类似于servlet生命周期，区别在于JSP生命周期还包括将JSP文件编译成servlet。</p>
+<p>JSP生命周期包括以下阶段</p>
+<ul>
+<li><p>解析阶段<br>Servlet容器解析JSP文件代码，如果有语法错误，就会向客户端返回错误信息</p>
+</li>
+<li><p>翻译阶段<br>Servelet容器把JSP文件翻译成Servelet源文件</p>
+</li>
+<li><p>编译阶段<br>Servelet容器编译Servelet源文件，生成servelet</p>
+</li>
+<li><p>初始化阶段<br>加载与JSP对应的Servelet类，创建其实例，并调用它的初始化方法</p>
+</li>
+<li><p>运行时阶段<br>调用与JSP对应的Servelet实例的服务方法</p>
+</li>
+<li><p>销毁阶段<br>调用与JSP对应的Servelet实例的销毁方法，然后销毁Servelet实</p>
+</li>
+</ul>
+<h3 id="JSP和Servlet有什么区别？"><a href="#JSP和Servlet有什么区别？" class="headerlink" title="JSP和Servlet有什么区别？"></a>JSP和Servlet有什么区别？</h3><p>实验：在eclipse新建web项目</p>
+<ol>
+<li><p>创建web项目 file –&gt; new –&gt; Dynamic web project</p>
+<p>a) 填写web项目名称</p>
+<p>b) Next to next 勾选上创建web,xml的选项。</p>
+<p><img src="jsp%E5%85%A5%E9%97%A8/image-20200428210533568.png" alt="image-20200428210533568"></p>
+<p><img src="jsp%E5%85%A5%E9%97%A8/image-20200428210624296.png" alt="image-20200428210624296"></p>
+<p>在webcontent下创建jsp</p>
+<p><img src="jsp%E5%85%A5%E9%97%A8/image-20200428210730759.png" alt="image-20200428210730759"></p>
+<p><img src="jsp%E5%85%A5%E9%97%A8/image-20200428210844910.png" alt="image-20200428210844910"></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page language=<span class="string">&quot;java&quot;</span> contentType=<span class="string">&quot;text/html; charset=ISO-8859-1&quot;</span></span><br><span class="line">    pageEncoding=<span class="string">&quot;ISO-8859-1&quot;</span>%&gt;</span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=<span class="string">&quot;ISO-8859-1&quot;</span>&gt;</span><br><span class="line">&lt;title&gt;Insert title here&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;%= application.getRealPath(<span class="string">&quot;/&quot;</span>) %&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+
+<p>Jsp本质就是servlet，所以它需要httpservlet。</p>
+<p>解决方案：选中项目右键–&gt;properties</p>
+<p><img src="jsp%E5%85%A5%E9%97%A8/image-20200428211048281.png" alt="image-20200428211048281"></p>
+<p><img src="jsp%E5%85%A5%E9%97%A8/image-20200428211517828.png" alt="image-20200428211517828"></p>
+<p><img src="jsp%E5%85%A5%E9%97%A8/image-20200428211217149.png" alt="image-20200428211217149"></p>
+<p><img src="jsp%E5%85%A5%E9%97%A8/image-20200428211657515.png" alt="image-20200428211657515"></p>
+<p><img src="jsp%E5%85%A5%E9%97%A8/image-20200428212650759.png" alt="image-20200428212650759"></p>
+</li>
+</ol>
+<p>JSP是Servlet技术的扩展，本质上就是Servlet的简易方式。在Tomcat的临时目录下，可以找到一个<code>index_jsp.java</code>的源文件，这个文件就是Tomcat把JSP自动转换成的Servlet源码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.apache.jsp;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.*;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.*;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.jsp.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">index_jsp</span> <span class="keyword">extends</span> <span class="title">org</span>.<span class="title">apache</span>.<span class="title">jasper</span>.<span class="title">runtime</span>.<span class="title">HttpJspBase</span></span></span><br><span class="line"><span class="class">    <span class="keyword">implements</span> <span class="title">org</span>.<span class="title">apache</span>.<span class="title">jasper</span>.<span class="title">runtime</span>.<span class="title">JspSourceDependent</span>,</span></span><br><span class="line"><span class="class">                 <span class="title">org</span>.<span class="title">apache</span>.<span class="title">jasper</span>.<span class="title">runtime</span>.<span class="title">JspSourceImports</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> javax.servlet.jsp.JspFactory _jspxFactory =</span><br><span class="line">          javax.servlet.jsp.JspFactory.getDefaultFactory();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> java.util.Map&lt;java.lang.String,java.lang.Long&gt; _jspx_dependants;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> java.util.Set&lt;java.lang.String&gt; _jspx_imports_packages;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> java.util.Set&lt;java.lang.String&gt; _jspx_imports_classes;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> &#123;</span><br><span class="line">    _jspx_imports_packages = <span class="keyword">new</span> java.util.HashSet&lt;&gt;();</span><br><span class="line">    _jspx_imports_packages.add(<span class="string">&quot;javax.servlet&quot;</span>);</span><br><span class="line">    _jspx_imports_packages.add(<span class="string">&quot;javax.servlet.http&quot;</span>);</span><br><span class="line">    _jspx_imports_packages.add(<span class="string">&quot;javax.servlet.jsp&quot;</span>);</span><br><span class="line">    _jspx_imports_classes = <span class="keyword">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">volatile</span> javax.el.ExpressionFactory _el_expressionfactory;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">volatile</span> org.apache.tomcat.InstanceManager _jsp_instancemanager;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">_jspService</span><span class="params">(<span class="keyword">final</span> javax.servlet.http.HttpServletRequest request, <span class="keyword">final</span> javax.servlet.http.HttpServletResponse response)</span></span></span><br><span class="line"><span class="function">  <span class="keyword">throws</span> java.io.IOException, javax.servlet.ServletException </span>&#123;</span><br><span class="line"></span><br><span class="line">    ···</span><br><span class="line"></span><br><span class="line">    response.setContentType(<span class="string">&quot;text/html; charset=ISO-8859-1&quot;</span>);</span><br><span class="line">    pageContext = _jspxFactory.getPageContext(<span class="keyword">this</span>, request, response,</span><br><span class="line">    <span class="keyword">null</span>, <span class="keyword">true</span>, <span class="number">8192</span>, <span class="keyword">true</span>);</span><br><span class="line">    _jspx_page_context = pageContext;</span><br><span class="line">    application = pageContext.getServletContext();</span><br><span class="line">    config = pageContext.getServletConfig();</span><br><span class="line">    session = pageContext.getSession();</span><br><span class="line">    out = pageContext.getOut();</span><br><span class="line">    _jspx_out = out;</span><br><span class="line"></span><br><span class="line">    out.write(<span class="string">&quot;\r\n&quot;</span>);</span><br><span class="line">    out.write(<span class="string">&quot;&lt;!DOCTYPE html&gt;\r\n&quot;</span>);</span><br><span class="line">    out.write(<span class="string">&quot;&lt;html&gt;\r\n&quot;</span>);</span><br><span class="line">    out.write(<span class="string">&quot;&lt;head&gt;\r\n&quot;</span>);</span><br><span class="line">    out.write(<span class="string">&quot;&lt;meta charset=\&quot;ISO-8859-1\&quot;&gt;\r\n&quot;</span>);</span><br><span class="line">    out.write(<span class="string">&quot;&lt;title&gt;Insert title here&lt;/title&gt;\r\n&quot;</span>);</span><br><span class="line">    out.write(<span class="string">&quot;&lt;/head&gt;\r\n&quot;</span>);</span><br><span class="line">    out.write(<span class="string">&quot;&lt;body&gt;\r\n&quot;</span>);</span><br><span class="line">    out.write(<span class="string">&quot;\t&quot;</span>);</span><br><span class="line">    out.print( application.getRealPath(<span class="string">&quot;/&quot;</span>) );</span><br><span class="line">    out.write(<span class="string">&quot;\r\n&quot;</span>);</span><br><span class="line">    out.write(<span class="string">&quot;&lt;/body&gt;\r\n&quot;</span>);</span><br><span class="line">    out.write(<span class="string">&quot;&lt;/html&gt;&quot;</span>);</span><br><span class="line"></span><br><span class="line">    ···</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>JSP比Servlet更方便更简单的一个重要原因就是：内置了9个对象！</strong>内置对象有：out、session、response、request、config、page、application、pageContext、exception。</p>
+<h3 id="JSP-request对象详解"><a href="#JSP-request对象详解" class="headerlink" title="JSP request对象详解"></a>JSP request对象详解</h3><p>request是HttpServletRequest类的实例。客户端的请求信息被封装在request对象中，通过它才能了解到客户的需求，然后做出响应。</p>
+<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><p><strong>1. string getProtocol()  //返回请求用的协议类型及版本号</strong></p>
+<p>request.getProtocol() 输出：HTTP/1.1</p>
+<p><strong>2. getServletConfig().getServletContext().getServerInfo()  //服务器信息</strong></p>
+<p>输出：JavaServer Web Dev Kit/1.0 EA (JSP 1.0; Servlet 2.1; Java 1.2; Windows NT 5.0 x86; java.vendor=Sun Microsystems Inc.)</p>
+<p><strong>3. String getRemoteAddr() 返回发送此请求的客户端IP地址</strong> </p>
+<p>request.getRemoteAddr()  输出：192.168.0.106</p>
+<p><strong>4. String getRemoteHost() 返回发送此请求的客户端主机名</strong> </p>
+<p><strong>5. String getCharacterEncoding() 返回字符编码方式</strong></p>
+<p>request.getCharacterEncoding()  输出：GB2312</p>
+<p><strong>6. int getContentLength() 返回请求体的长度（以字节数）<br>**</strong>7. String getContentType() 得到请求体的MIME类型** <strong>8. string getAuthType()  获取Authorization头</strong></p>
+<p>request.getContentType()  输出：basic或者digest</p>
+<p><strong>9. string getMethod()  获取请求类型</strong></p>
+<p>输出：通常是GET或者POST。但偶尔也会出现HEAD，PUT， Delete，OPTIONS，或者 TRACE.</p>
+<p><strong>10. string getPathInfo() 获取URL中的附加路径信息</strong></p>
+<p>输出:URL中Servlet路径之后、查询字符串之前的那部分。</p>
+<p><strong>11. string getPathTranslated()  映射到服务器实际路径之后的路径信息</strong> </p>
+<p><strong>12. string getQueryString()  这是字符串形式的附加到URL后面的查询字符串，数据仍旧是URL编码的。</strong> </p>
+<p><strong>13. string getRemoteUser()  如果提供了Authorization头，则代表其用户部分。它代表发出请求的用户的名字。</strong> </p>
+<p><strong>14. string getRequestedSessionId()  输出SessionId</strong> </p>
+<p><strong>15. string getRequestURI()  请求URL</strong> </p>
+<p><strong>16. string getServletPath()  URL中调用Servlet的那一部分，不包含附加路径信息和查询字符串</strong> </p>
+<p><strong>17. string getHeader()  获取请求头部信息</strong></p>
+<p>getHeader(“Accept”) //访问Accept的HTTP头。<br>getHeader(“Host”)  //输出：192.168.0.1：8080</p>
+<p><strong>18. String getServerName() 返回接受请求的服务器主机名</strong></p>
+<p>request.getServerName()  输出：192.168.0.1</p>
+<p><strong>19. int getServerPort() 返回服务器接受此请求所用的端口号</strong> </p>
+<p>request.getServerPort()  输出：8080</p>
+<p><strong>20. ServletInputStream getInputStream() 得到请求体中一行的二进制流</strong></p>
+<p><strong>21. String getScheme() 返回请求用的计划名,如:http.https及ftp等</strong> </p>
+<p><strong>22. BufferedReader getReader() 返回解码过了的请求体</strong></p>
+<p><strong>23. void setAttribute(String key,Object obj) 设置属性的属性值</strong></p>
+<p><strong>24. String getRealPath(String path) 返回一虚拟路径的真实路径</strong></p>
+<p><strong>25. String getParameter(String name) 返回name指定参数的参数值</strong></p>
+<p><strong>26. Enumeration getParameterNames() 返回可用参数名的枚举</strong></p>
+<p><strong>27. String[] getParameterValues(String name) 返回包含参数name的所有值的数组</strong></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
+<li><p>request为脚本提供了当客户端请求一个页面或者传递一个窗体时，客户端提供的全部信息。这包括能指明浏览器和用户的HTTP变量，在这个域名下存放在浏览器中的cookie，任何作为查询字符串而附于URL后面的字符串或页面的＜FORM＞段中的HTML控件的值。也提供使用Secure Socket Layer（SSL）或其他加密通信协议的授权访问，及有助于对连接进行管理的属性。</p>
+</li>
+<li><p>request可以理解为客户端向服务器请求的信息，就是客户端向服务器请求时，把自己的浏览器信息、HTTP变量和保存在客户端的Cookie告诉服务器，这样服务器就可以根据这些信息判断是谁请求的，之前有没有请求过，对应客户端的Session是什么等等。</p>
+</li>
+</ol>
+<h1 id="JSP-response对象详解"><a href="#JSP-response对象详解" class="headerlink" title="JSP response对象详解"></a>JSP response对象详解</h1><p>response是HttpServletResponse的对象，HttpServletResponse对象本身也是ServletResponse对象的子接口，它表示服务器端对客户端的回应。</p>
+<h2 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h2><ol>
+<li><p>String getCharacterEncoding() 返回响应用的是何种字符编码</p>
+</li>
+<li><p>ServletOutputStream getOutputStream() 返回响应的一个二进制输出流</p>
+</li>
+<li><p>addCookie( Cookie cook )  添加一个Cookie对象，用来保存客户端用户信息．</p>
+</li>
+<li><p>addHeader( String name , String value )  添加HTTP文件头信息，该Header将传到客户端去，如果已经同的Header存在，则覆盖已有的Header.</p>
+</li>
+<li><p>PrintWriter getWriter() 返回可以向客户端输出字符的一个对象</p>
+</li>
+<li><p>void setContentLength(int len) 设置响应头长度</p>
+</li>
+<li><p>sendError( int )  向客户端发送错误的信息．</p>
+</li>
+<li><p>void setContentType(String type) 设置响应的MIME类型</p>
+</li>
+<li><p>sendRedirect(Java.lang.String location) 重新定向客户端的请求</p>
+</li>
+<li><p>containsHeader( String name )  判断指定名字的HTTP文件头是否已经存在，然后返回真假布尔值．</p>
+</li>
+<li><p>setHeader( String name , String value )  设置指定的HTTP文件的值，如果该值已经存在，则新值会覆盖原有的旧值．</p>
+</li>
+</ol>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><h3 id="1-添加Cookie"><a href="#1-添加Cookie" class="headerlink" title="1. 添加Cookie"></a>1. 添加Cookie</h3><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Cookie c = <span class="keyword">new</span> Cookie(<span class="string">&quot;username&quot;</span> , <span class="string">&quot;wang&quot;</span>);  </span><br><span class="line">c.setMaxAge(<span class="number">24</span>*<span class="number">3600</span>);  </span><br><span class="line">response.addCookie(c);  </span><br></pre></td></tr></table></figure>
+<h3 id="2-页面重定向"><a href="#2-页面重定向" class="headerlink" title="2. 页面重定向"></a>2. 页面重定向</h3><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page language=<span class="string">&quot;java&quot;</span> <span class="keyword">import</span>=<span class="string">&quot;java.util.*&quot;</span>  contentType=<span class="string">&quot;text/html; charset=UTF-8&quot;</span> pageEncoding=<span class="string">&quot;UTF-8&quot;</span>%&gt;  </span><br><span class="line">&lt;%response.sendRedirect(<span class="string">&quot;deal.jsp&quot;</span>); %&gt; </span><br></pre></td></tr></table></figure>
+<p>重定向后，request中的属性全部失效，并开始一个新的request对象。</p>
+<h3 id="3-禁用缓存"><a href="#3-禁用缓存" class="headerlink" title="3. 禁用缓存"></a>3. 禁用缓存</h3><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;% response.setHeader(<span class="string">&quot;Cache-Control&quot;</span>, <span class="string">&quot;no-store&quot;</span>);  </span><br><span class="line">   response.setDateHeader(<span class="string">&quot;Expires&quot;</span>, <span class="number">0</span>);%&gt;  </span><br></pre></td></tr></table></figure>
+<h3 id="4-自动刷新"><a href="#4-自动刷新" class="headerlink" title="4. 自动刷新"></a>4. 自动刷新</h3><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 每隔<span class="number">10</span>秒自动刷新一次 --&gt;  </span><br><span class="line">&lt;% response.setHeader(<span class="string">&quot;refresh&quot;</span>, <span class="string">&quot;10&quot;</span>);%&gt;  </span><br></pre></td></tr></table></figure>
+<h3 id="4-定时跳转到网页"><a href="#4-定时跳转到网页" class="headerlink" title="4. 定时跳转到网页"></a>4. 定时跳转到网页</h3><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;% response.setHeader(<span class="string">&quot;refresh&quot;</span>, <span class="string">&quot;5;URL=deal.jsp&quot;</span>);%&gt;   </span><br></pre></td></tr></table></figure>
+<h1 id="JSP-application对象详解"><a href="#JSP-application对象详解" class="headerlink" title="JSP application对象详解"></a>JSP application对象详解</h1><p>application是应用程序对象，当Web服务器启动时，Web服务器会自动创建一个application对象。application对象一旦创建，它将一直存在，直到Web服务器关闭。</p>
+<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><p>一个Web应用程序启动后，将会自动创建一个application对象，而且在整个应用程序的运行过程中只有一个application对象，也即所有访问该网站的客户都共享一个application对象。</p>
+<p>它的生命周期从Web服务器启动，直到Web服务器关闭。</p>
+<p>application的存活范围比request和session都要大。只要服务器没有关闭，application对象中的数据就会一直存在，在整个服务器的运行过程当中，application对象只有一个，它会被所有的用户共享。</p>
+<h3 id="作用范围"><a href="#作用范围" class="headerlink" title="作用范围"></a>作用范围</h3><p>application对象是一个应用程序级的对象，它作用于当前Web应用程序，也即作用于当前网站，所有访问当前网站的客户都共享一个application对象。不管哪个客户来访问网站A，也不管客户访问网站A下哪个页面文件，都可以对网站A的application对象进行操作，因为，所有访问网站A的客户都共用一个application对象。当在application对象中存储数据后，所有访问网站A的客户都能够对其进行访问，实现了多客户之间的数据共享。</p>
+<h3 id="方法-2"><a href="#方法-2" class="headerlink" title="方法"></a>方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">String getAttribute(String name) 根据属性名称获取属性值。</span><br><span class="line">Enumeration getAttributeNames() 获取所有的属性名称。</span><br><span class="line">void setAttribute(String name, Object object) 设置属性，指定属性名称和属性值。</span><br><span class="line">void removeAttribute(String name) 根据属性名称删除对应的属性。</span><br><span class="line">ServletContext getContext(String uripath) 获取指定URL的ServletContext对象。</span><br><span class="line">String getContextPath() 获取当前Web应用程序的根目录。</span><br><span class="line">String getInitParameter(String name) 根据初始化参数名称，获取初始化参数值。</span><br><span class="line">int getMajorVersion() 获取Servlet API的主版本号。</span><br><span class="line">int getMinorVersion() 获取Servlet API的次版本号。</span><br><span class="line">String getMimeType(String file) 获取指定文件的MIME 类型。</span><br><span class="line">String getServletInfo() 获取当前Web服务器的版本信息。</span><br><span class="line">String getServletContextName() 获取当前Web应用程序的名称。</span><br><span class="line">void log(String message) 将信息写入日志文件中。</span><br></pre></td></tr></table></figure>
+<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><p>application对象是应用程序级的对象，一个Web应用程序一个application对象，每个Web应用程序的application对象不同，但一个Web应用程序的多个用户之间共享同一个application对象。</p>
+<h1 id="JSP-session对象详解"><a href="#JSP-session对象详解" class="headerlink" title="JSP session对象详解"></a>JSP session对象详解</h1><p>Session对象是用来分别保存每一个用户信息的对象，以便于跟踪用户的操作状态．它保存在服务端，Session的ID保存在客户机的Cookie中．</p>
+<h2 id="机制"><a href="#机制" class="headerlink" title="机制"></a>机制</h2><p>session机制是一种服务器端的机制，服务器使用一种类似于散列表的结构（也可能就是使用散列表）来保存信息。</p>
+<p>当程序需要为某个客户端的请求创建一个session的时候，服务器首先检查这个客户端的请求里是否已包含了一个session标识 - 称为 session id，如果已包含一个session id则说明以前已经为此客户端创建过session，服务器就按照session id把这个 session检索出来使用（如果检索不到，可能会新建一个），如果客户端请求不包含session id，则为此客户端创建一个session并且生成一个与此session相关联的session id，session id的值应该是一个既不会重复，又不容易被找到规律以仿造的字符串，这个 session id将被在本次响应中返回给客户端保存。</p>
+<h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><p>session作用于HTTP会话开始到结束这段时间。</p>
+<p>session的开始容易判断(浏览器发出第一个HTTP请求即可认为会话开始)， 但结束就不好判断了(因为浏览器关闭时不会通知服务器“我关了，会话可以结束了”)， 所以只能通过这种方法判断：如果一定的时间内客户端没有反应，则认为会话结束。 Tomcat的默认值为120分钟，但这个值也可以通过 HttpSession 的 setMaxInactiveInterval() 方法来设置。</p>
+<h2 id="方法-3"><a href="#方法-3" class="headerlink" title="方法"></a>方法</h2><p><strong>public boolean isNew()</strong><br>返回是否为一个新的客户端，或者客户端是否拒绝加入session</p>
+<p><strong>public void invalidate()</strong><br>将session无效化，解绑任何与该session绑定的对象</p>
+<p><strong>public Enumeration getAttributeNames()</strong><br>返回Session对象中存储的每一个属性对象，其结果为一个类举的实例．</p>
+<p><strong>public long getCreationTime()</strong><br>返回session对象被创建的时间， 以毫秒为单位，最小单位为千分之一秒，从1970年1月1号凌晨开始算起</p>
+<p><strong>public String getId()</strong><br>此方法返回惟一的标识，这些标识为每个Session而产生．当只有一个单一的值与一个Session联合时，或当日志信息与先前的Session有关时，它被当做键名用．</p>
+<p><strong>public long getLastAccessedTime()</strong><br>返回客户端最后访问的时间，以毫秒为单位，最小单位为千分之一秒，从1970年1月1号凌晨开始算起</p>
+<p><strong>public void setMaxInactiveInterval(int interval)</strong><br>用来指定时间，以秒为单位，servlet容器将会在这段时间内保持会话有效</p>
+<p><strong>public int getMaxInactiveInterval()</strong><br>返回最大时间间隔，以秒为单位，servlet 容器将会在这段时间内保持会话打开，负值表示Session永远不会超时</p>
+<p><strong>public void setAttribute(String name, Object value)</strong><br>使用指定的名称和值来产生一个对象并绑定到session中</p>
+<p><strong>public Object getAttribute(String name)</strong><br>返回session对象中与指定名称绑定的对象，如果不存在则返回null</p>
+<p><strong>public void removeAttribute(String name)</strong><br>移除session中指定名称的对象</p>
+<h2 id="删除Session数据"><a href="#删除Session数据" class="headerlink" title="删除Session数据"></a>删除Session数据</h2><ol>
+<li>移除一个特定session属性</li>
+</ol>
+<p>调用public void removeAttribute(String name)  方法来移除指定的属性。</p>
+<ol start="2">
+<li>删除整个会话</li>
+</ol>
+<p>调用public void invalidate() 方法来使整个session无效。</p>
+<ol start="3">
+<li>设置会话有效期</li>
+</ol>
+<p>调用 public void setMaxInactiveInterval(int interval)  方法来设置session超时。</p>
+<ol start="4">
+<li>退出登录</li>
+</ol>
+<p>支持servlet2.4版本的服务器，可以调用 logout()方法来登出用户，并且使所有相关的session无效。</p>
+<ol start="5">
+<li>设置服务器的超时时间，自动删除session</li>
+</ol>
+<p>如果使用的是Tomcat，可以向下面这样配置web.xml文件：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">session-config</span>&gt;</span>  </span><br><span class="line"></span><br><span class="line"> <span class="tag">&lt;<span class="name">session-timeout</span>&gt;</span>15<span class="tag">&lt;/<span class="name">session-timeout</span>&gt;</span> </span><br><span class="line"></span><br><span class="line"> <span class="tag">&lt;/<span class="name">session-config</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>超时以分钟为单位，Tomcat中的默认的超时时间是30分钟。</p>
+<h2 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h2><ol>
+<li><p>由于session会消耗内存资源，因此，如果不打算使用session，应该在所有的JSP中关闭它。 </p>
+</li>
+<li><p>session机制本身并不复杂，然而其实现和配置上的灵活性却使得具体情况复杂多变。这也要求我们不能把仅仅某一次的经验或者某一个浏览器，服务器的经验当作普遍适用的经验，而是始终需要具体情况具体分析.</p>
+</li>
+</ol>
+<h1 id="JSP-page对象详解"><a href="#JSP-page对象详解" class="headerlink" title="JSP page对象详解"></a>JSP page对象详解</h1><p>page对象是java.long.Object类的实例。它指向当前JSP页面本身，有点像类中的this指针,用于设置JSP页面的属性，这些属性将用于和JSP容器通信，控制所生成的servlet结构。</p>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page attr&#x3D;&quot;value1&quot; attr&#x3D;&quot;value2&quot; ... %&gt;</span><br><span class="line">&#x2F;&#x2F; xml语法格式</span><br><span class="line">&lt;jsp:directive.page attr&#x3D;&quot;value1&quot; attr&#x3D;&quot;value2&quot; ... &#x2F;&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><h3 id="1-import"><a href="#1-import" class="headerlink" title="1. import"></a>1. import</h3><p>page指令中唯一容许在同一文档出现多次的属性。属性的值可以以逗号隔开。它指定jsp页面转换成servlet应该输入的包。对于没有明确指定包的类，将根据jsp页面所在的包(生成的servlet的目录)决定类的包的位置。这意味着，将在jsp页面所在的包来寻找该类。注意一定要将实用工具类和bean包放在指定的包中，不要依赖于自动导入。</p>
+<h3 id="2-language"><a href="#2-language" class="headerlink" title="2. language"></a>2. language</h3><p>用于指定在脚本元素中使用的脚本语言，默认java。在jsp2.0规范中，只能是java。</p>
+<h3 id="3-contentType和pageEncoding"><a href="#3-contentType和pageEncoding" class="headerlink" title="3. contentType和pageEncoding"></a>3. contentType和pageEncoding</h3><p>contentType属性设置发送到客户端文档的响应报头的MIME类型和字符编码。多个使用;号分开。pageEncodeing属性只用于更改字符编码。servlet默认MIME是text/plain，jsp默认MIME是text/html。</p>
+<h3 id="4-session"><a href="#4-session" class="headerlink" title="4. session"></a>4. session</h3><p>session控制页面是否参与会话,默认true。如果存在已有会话，则预定义session变量，绑定到已有会话中。否则创建新会话将其绑定到session。设置false表示不自动创建新会话，在jsp页面转换为servlet时，这时对变量session的访问导致错误。设置为false并不是禁用会话跟踪，它只是阻止jsp页面为不拥有会话的用户创建新会话。注意对于不需要会话跟踪的页面那就设置为false；当设置为false时session对象是不可访问的。</p>
+<h3 id="5-isELlgnored"><a href="#5-isELlgnored" class="headerlink" title="5. isELlgnored"></a>5. isELlgnored</h3><p>定义在jsp页面中是否执行或忽略EL表达式。true表示忽略，false表示执行。默认值依赖于web.xml的版本。servlet2.3之前默认true，servlet2.4默认false。用于JSP版本不一致造成使用EL表达式出现的问题。使用:isELlgnored=”true”;</p>
+<h3 id="6-buffer和autoFlush"><a href="#6-buffer和autoFlush" class="headerlink" title="6. buffer和autoFlush"></a>6. buffer和autoFlush</h3><p>buffer属性指定out对象(JspWriter)使用的缓冲区大小，以kb为单位，默认8kb，none表示不使用缓冲区。这样要求设置报头或状态代码的jsp元素要出现在文件的顶部，任何HTML内容之前。</p>
+<p>autoFlush属性控制当缓冲区满了后，是自动清空输出缓冲区(默认true)，还是在缓冲区溢出后抛出异常(false)。在buffer=none的时候，autoFlush=false是错误的。</p>
+<h3 id="7-info"><a href="#7-info" class="headerlink" title="7. info"></a>7. info</h3><p>定义一个可以在servlet中通过getServletInfo方法获取的字符串。jsp容器做的是在servlet中生成getServletInfo方法返回info属性指定的String。</p>
+<h3 id="8-errorPage和isErrorPage"><a href="#8-errorPage和isErrorPage" class="headerlink" title="8. errorPage和isErrorPage"></a>8. errorPage和isErrorPage</h3><p>errorPage属性用来指定一个jsp页面，由该页面来处理当前页面中抛出但没有捕获的任何异常。指定的页面可以通过exception变量访问异常信息。<br>isErrorPage属性表示当前页是否可以作为其他jsp页面的错误页面。true或false。错误页面应该放在WEB-INF目录下面，只让服务器访问，也不会生成转发的调用，客户端只能看到最初的请求页面URL,看不到错误页面的URL。<br>如果为整个web应用程序指定错误页面，或为应用中不同类型的错误指定错误处理页面，使用web.xml中的error-page元素。如果一个页面通过该属性定义了专有的错误页面，那么在web.XML文件中定义的任何错误页面不会被使用。只能够在错误处理页面中使用错误对象exception。</p>
+<h3 id="9-isThreadSafe"><a href="#9-isThreadSafe" class="headerlink" title="9. isThreadSafe"></a>9. isThreadSafe</h3><p>控制由jsp页面生成的servlet是否允许并发访问(默认true允许)。这种阻止并发访问的实现是基于SingleThreadModel接口。所以，避免使用isThreadSafe属性。</p>
+<h3 id="10-extends"><a href="#10-extends" class="headerlink" title="10. extends"></a>10. extends</h3><p>尽量避免使用。这是服务器提供商该做的事情。父类必须是对HttJspPage接口的实现类。而HttJspPage是应用于HTTP协议的请求和响应的JspPage扩展接口。 </p>
+<h2 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h2><p>class getClass() 返回此Object的类</p>
+<p>int hashCode() 返回此Object的hash码</p>
+<p>boolean equals(Object obj) 判断Object是否与指导的Object对象相等</p>
+<p>void copy(Object obj)把此Object拷贝到指定的Object对象中</p>
+<p>Object clone()克隆此Object对象</p>
+<p>String toString()把此Object对象转换成String类的对象</p>
+<p>void notify()唤醒一个等待的线程</p>
+<p>void notifyAll()唤醒所有等待的线程</p>
+<p>void wait(int timeout)使一个线程处于等待直到timeout结束或唤醒</p>
+<p>void wait()使仪的线程处于等待直到被唤醒</p>
+<h1 id="JSP-pagecontext对象详解"><a href="#JSP-pagecontext对象详解" class="headerlink" title="JSP pagecontext对象详解"></a>JSP pagecontext对象详解</h1><p>pageContext对象是javax.servlet.jsp.PageContext类的实例对象，用来代表整个JSP页面。它代表页面上下文，该对象主要用于访问 JSP 之间的共享数据，使用pageContext可以访问page、request、session、application范围的变量。</p>
+<h2 id="获取实例"><a href="#获取实例" class="headerlink" title="获取实例"></a>获取实例</h2><p>pageContext对象是通过调用JspFactory.getPageContext方法返回的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public PageContext getPageContext(</span><br><span class="line">javax.servlet.Servlet servlet,</span><br><span class="line">javax.servlet.ServletRequest request,</span><br><span class="line">javax.servlet.ServletResponse response,</span><br><span class="line">java.lang.String errorPageURL, boolean needsSession,</span><br><span class="line">int buffer, boolean autoflush)</span><br></pre></td></tr></table></figure>
+<p>JSP页面中只需将pageContext对象传递给某个Java类的实例对象，在该Java对象中就可以访问和调用其他隐式对象的功能了。</p>
+<h2 id="常用方法-1"><a href="#常用方法-1" class="headerlink" title="常用方法"></a>常用方法</h2><p>JspWriter getOut(); //返回当前客户端响应被使用的JspWriter流(out)</p>
+<p>HttpSession getSession(); //返回当前页面中HttpSession对象(session)</p>
+<p>Object getPage(); //返回当前页面的Object对象(Object)</p>
+<p>ServeletRequest getRequest(); //返回当前页面的ServletRequest对象(request)</p>
+<p>ServeletResponse getResponse(); //返回当前页面的ServletResponse对象(response)</p>
+<p>void setAttribute(String name,Object attribute); //设置属性及属性值</p>
+<p>void getAttribute(String name,int scope); //在指定范围内取属性的值</p>
+<p>int getAttributeScope(String name); //返回某属性的作用范围</p>
+<p>void forward(String relativeUrlPath); //使当前页面重导到另一页面</p>
+<p>void include(String relativeUrlPath); //在当前位置包含另一文件</p>
+<h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><h3 id="1-获取所有内置对象"><a href="#1-获取所有内置对象" class="headerlink" title="1. 获取所有内置对象"></a>1. 获取所有内置对象</h3><p>getException()返回exception隐式对象</p>
+<p>getPage()返回page隐式对象</p>
+<p>getRequest()返回request隐式对象</p>
+<p>getResponse()返回response隐式对象</p>
+<p>getServletConfig()返回config隐式对象</p>
+<p>getServletContext()返回application隐式对象</p>
+<p>getSession()返回session隐式对象</p>
+<p>getOut()返回out隐式对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import javax.servlet.ServletContext;  </span><br><span class="line">import javax.servlet.jsp.PageContext;  </span><br><span class="line">public class pagecontext &#123;  </span><br><span class="line">    public void m(PageContext pag)&#123;  </span><br><span class="line">        &#x2F;&#x2F;如果你要传参9大隐式对象，不可能写9个参量吧！  </span><br><span class="line">        &#x2F;&#x2F;这个时候我们的Context的作用就可以了,它可以调用其他8个隐式对象，直接可定义这一个  </span><br><span class="line">        &#x2F;&#x2F;这样就方便很多了。  </span><br><span class="line">        ServletContext ser&#x3D;pag.getServletContext();  </span><br><span class="line">        pag.getServletConfig();  </span><br><span class="line">        pag.getOut();  </span><br><span class="line">        pag.getPage();  </span><br><span class="line">        pag.getRequest();  </span><br><span class="line">        pag.getResponse();  </span><br><span class="line">        pag.getSession();  </span><br><span class="line">        pag.getException();  </span><br><span class="line">        &#x2F;&#x2F;这就是其他8个隐式对象了，都可以通过PageContext得到，非常的方便  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-引入和跳转到其他资源-提供了转发和包含的简便方法"><a href="#2-引入和跳转到其他资源-提供了转发和包含的简便方法" class="headerlink" title="2. 引入和跳转到其他资源,提供了转发和包含的简便方法"></a>2. 引入和跳转到其他资源,提供了转发和包含的简便方法</h3><p>PageContext类中定义了一个forward方法和两个include方法来分别简化和替代RequestDispatcher.forward方法和RequestDispatcher.include方法的调用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public void forward(java.lang.String relativeUrlPath) throws javax.servlet.ServletException,java.io.IOException</span><br><span class="line">public void include(java.lang.String relativeUrlPath) throws javax.servlet.ServletException,java.io.IOException</span><br><span class="line">public void include(java.lang.String relativeUrlPath,boolean flush) throws javax.servlet.ServletException,java.io.IOException</span><br></pre></td></tr></table></figure>
+<p>传递给这些方法的资源路径都只能是相对路径，如果路径以“/”开头，表示相对于当前WEB应用程序的根目录，否则，表示相对于当前JSP所映射到的访问路径。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">RequestDispatcher rd &#x3D; request.getRequestDispatcher(&quot;&#x2F;url&quot;);&#x2F;&#x2F;“&#x2F;”绝对路径</span><br><span class="line">rd.forward(request,response);</span><br><span class="line">pageContext.forward(&quot;url&quot;);&#x2F;&#x2F;重定向</span><br><span class="line">pageContext.include(&quot;url&quot;);&#x2F;&#x2F;包含</span><br></pre></td></tr></table></figure>
+<h3 id="3-本身是域对象，同时可以操作其他域对象"><a href="#3-本身是域对象，同时可以操作其他域对象" class="headerlink" title="3. 本身是域对象，同时可以操作其他域对象"></a>3. 本身是域对象，同时可以操作其他域对象</h3><p>JSP中的四大作用域对象：page，request，session，application，作为域对象，很容易得出，里面必定有三个方法，setAttribute，getAttribute和removeAttribute。pagecontext这3个方法中带一个scope参数，可以通过这个参数来操作其他的域对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">void setAttribute(String name,Object value,int scope)&#x2F;&#x2F;scope操作于其他三大域对象</span><br><span class="line">void removeAttribute(String name,int scope)</span><br><span class="line">Object getAttribute(String name,int scope) </span><br></pre></td></tr></table></figure>
+<p>scope取值如下</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">PageContext.PAGE_SCOPE（对应page范围）</span><br><span class="line">PageContext.REQUEST_SCOPE（对应request范围）</span><br><span class="line">PageContext.SESSION_SCOPE（对应session范围）</span><br><span class="line">PageContext.APPLICATION_SCOPE（对应application范围）</span><br></pre></td></tr></table></figure>
+<h2 id="总结-3"><a href="#总结-3" class="headerlink" title="总结"></a>总结</h2><ol>
+<li><p>pageContext对象存储了request对象和response对象的引用。application对象，config对象，session对象，out对象可以通过访问这个对象的属性来导出。</p>
+</li>
+<li><p>pageContext对象封装了当前JSP页面的运行信息，它提供了返回JSP页面的其他隐式对象的方法。</p>
+</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="http://www.51gjie.com/javaweb/112">参考资源</a></p>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/04/28/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3clone%E5%AF%B9%E8%B1%A1/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/04/29/%E9%A1%B5%E9%9D%A2%E8%B7%B3%E8%BD%AC/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

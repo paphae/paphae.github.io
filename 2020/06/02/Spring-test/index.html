@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Spring-test | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="spring,test," />
+  
+
+  <meta name="description" content="通过Junit和Spring-Test测试SpringMVC的web应用1、通过Spring-Test测试web应用可以避免多次启动web 容器带来的烦恼，每次执行特定的测试方法。 再也不用通过web容器（如tomcat，jetty等）启动整个web应用，尤其是当项目复杂，比较庞大时，能够节省很多时间。 2、maven依赖123456789101112&lt;dependency&gt;    &amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring-test">
+<meta property="og:url" content="http://paphae.top/2020/06/02/Spring-test/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="通过Junit和Spring-Test测试SpringMVC的web应用1、通过Spring-Test测试web应用可以避免多次启动web 容器带来的烦恼，每次执行特定的测试方法。 再也不用通过web容器（如tomcat，jetty等）启动整个web应用，尤其是当项目复杂，比较庞大时，能够节省很多时间。 2、maven依赖123456789101112&lt;dependency&gt;    &amp;">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-06-02T00:46:12.000Z">
+<meta property="article:modified_time" content="2020-06-08T13:53:59.987Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="spring">
+<meta property="article:tag" content="test">
+<meta name="twitter:card" content="summary">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E8%BF%87Junit%E5%92%8CSpring-Test%E6%B5%8B%E8%AF%95SpringMVC%E7%9A%84web%E5%BA%94%E7%94%A8"><span class="toc-text">通过Junit和Spring-Test测试SpringMVC的web应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E9%80%9A%E8%BF%87Spring-Test%E6%B5%8B%E8%AF%95web%E5%BA%94%E7%94%A8"><span class="toc-text">1、通过Spring-Test测试web应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81maven%E4%BE%9D%E8%B5%96"><span class="toc-text">2、maven依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E5%88%9B%E5%BB%BABaseTest%E5%9F%BA%E7%B1%BB"><span class="toc-text">3、创建BaseTest基类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81%E6%B5%8B%E8%AF%95%E7%B1%BB"><span class="toc-text">4、测试类</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-Spring-test" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Spring-test</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.06.02</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/%E6%A1%86%E6%9E%B6/">框架</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="通过Junit和Spring-Test测试SpringMVC的web应用"><a href="#通过Junit和Spring-Test测试SpringMVC的web应用" class="headerlink" title="通过Junit和Spring-Test测试SpringMVC的web应用"></a>通过Junit和Spring-Test测试SpringMVC的web应用</h2><h3 id="1、通过Spring-Test测试web应用"><a href="#1、通过Spring-Test测试web应用" class="headerlink" title="1、通过Spring-Test测试web应用"></a>1、通过Spring-Test测试web应用</h3><p>可以避免多次启动web 容器带来的烦恼，每次执行特定的测试方法。</p>
+<p>再也不用通过web容器（如tomcat，jetty等）启动整个web应用，尤其是当项目复杂，比较庞大时，能够节省很多时间。</p>
+<h3 id="2、maven依赖"><a href="#2、maven依赖" class="headerlink" title="2、maven依赖"></a>2、maven依赖</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.12<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.2.5.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="3、创建BaseTest基类"><a href="#3、创建BaseTest基类" class="headerlink" title="3、创建BaseTest基类"></a>3、创建BaseTest基类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith(SpringJUnit4ClassRunner.class)</span></span><br><span class="line"><span class="meta">@ContextHierarchy(&#123;</span></span><br><span class="line"><span class="meta">        @ContextConfiguration(name = &quot;parent&quot;, locations = &quot;classpath:spring/ApplicationContext.xml&quot;),</span></span><br><span class="line"><span class="meta">        @ContextConfiguration(name = &quot;child&quot;, locations = &quot;classpath:spring/Spring-MVC.xml&quot;)</span></span><br><span class="line"><span class="meta">&#125;)</span></span><br><span class="line"><span class="meta">@WebAppConfiguration</span></span><br><span class="line"><span class="meta">@Transactional(transactionManager = &quot;txManager&quot;)</span></span><br><span class="line"><span class="meta">@Rollback(value = true)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseTest</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> WebApplicationContext applicationContext;</span><br><span class="line">    <span class="keyword">protected</span> MockMvc mockMvc;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Before</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        mockMvc = MockMvcBuilders.webAppContextSetup(applicationContext)</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>@RunWith(SpringJUnit4ClassRunner.class) 使用junit4进行测试</p>
+<p>@ContextConfiguration() 加载spring相关的配置文件</p>
+<p>@WebAppConfiguration() 设置web项目的环境，如果是Web项目，必须配置该属性，否则无法获取 web 容器相关的信息（request、context 等信息）</p>
+<p>注：@TransactionConfiguration过时</p>
+<p>@Rollback（新增注解）代替，其中只有一个属性就是boolean型的value，作用没变，值为true表示测试时如果涉及了数据库的操作，那么测试完成后，该操作会回滚，也就是不会改变数据库内容；值为false则与此相反，表示你测试的内容中对数据库的操作会真实的执行到数据库中，不会回滚。</p>
+<p>@TransactionConfiguration注解中的transactionManager属性现在放在了@Transactionl注解中。</p>
+<p>补充：JUnit4中@Before、@After、@Test等注解的作用</p>
+<p>@Before：初始化方法  对于每一个测试方法都要执行一次（注意与BeforeClass区别，后者是对于所有方法执行一次）<br>@After：释放资源  对于每一个测试方法都要执行一次（注意与AfterClass区别，后者是对于所有方法执行一次）<br>@Test：测试方法，在这里可以测试期望异常和超时时间<br>@Test(expected=ArithmeticException.class)检查被测方法是否抛出ArithmeticException异常<br>@Ignore：忽略的测试方法<br>@BeforeClass：针对所有测试，只执行一次，且必须为static void<br>@AfterClass：针对所有测试，只执行一次，且必须为static void<br>一个JUnit4的单元测试用例执行顺序为：<br>@BeforeClass -&gt; @Before -&gt; @Test -&gt; @After -&gt; @AfterClass;<br>每一个测试方法的调用顺序为： </p>
+<p>@Before -&gt; @Test -&gt; @After; </p>
+<h3 id="4、测试类"><a href="#4、测试类" class="headerlink" title="4、测试类"></a>4、测试类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestEmp</span> <span class="keyword">extends</span> <span class="title">BaseTest</span></span>&#123;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testJob</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        mockMvc.perform(MockMvcRequestBuilders.get(<span class="string">&quot;/findDown.do&quot;</span>)</span><br><span class="line">                .param(<span class="string">&quot;up&quot;</span>,<span class="string">&quot;1&quot;</span>).characterEncoding(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">                .andDo(MockMvcResultHandlers.print());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testTop</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        mockMvc.perform(MockMvcRequestBuilders.get(<span class="string">&quot;/findTop.do&quot;</span>))</span><br><span class="line">                .andDo(MockMvcResultHandlers.print());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/05/30/Spring-Aop%E6%A8%A1%E5%9D%97/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/06/02/Spring-MVC/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

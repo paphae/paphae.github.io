@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>面试题-java基础 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="java基础," />
+  
+
+  <meta name="description" content="1. 谈谈 JVM 的内存结构和内存分配 JVM 内存区域主要分为线程私有区域【程序计数器、虚拟机栈、本地方法区】、线程共享区 域【JAVA 堆、方法区】  程序计数器(线程私有) 一块较小的内存空间, 是当前线程所执行的字节码的行号指示器，每条线程都要有一个独立的程序计数器，这类内存也称为“线程私有”的内存。 正在执行 java 方法的话，计数器记录的是虚拟机字节码指令的地址（当前指令的地址）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试题-java基础">
+<meta property="og:url" content="http://paphae.top/2020/07/13/%E9%9D%A2%E8%AF%95%E9%A2%98-java%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="1. 谈谈 JVM 的内存结构和内存分配 JVM 内存区域主要分为线程私有区域【程序计数器、虚拟机栈、本地方法区】、线程共享区 域【JAVA 堆、方法区】  程序计数器(线程私有) 一块较小的内存空间, 是当前线程所执行的字节码的行号指示器，每条线程都要有一个独立的程序计数器，这类内存也称为“线程私有”的内存。 正在执行 java 方法的话，计数器记录的是虚拟机字节码指令的地址（当前指令的地址）。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-07-13T14:02:50.000Z">
+<meta property="article:modified_time" content="2020-07-17T14:40:46.053Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="java基础">
+<meta name="twitter:card" content="summary">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%B0%88%E8%B0%88-JVM-%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84%E5%92%8C%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D"><span class="toc-text">1. 谈谈 JVM 的内存结构和内存分配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Java-%E4%B8%AD%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-text">2. Java 中引用类型都有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-heap-%E5%92%8C-stack-%EF%BC%8C%E6%96%B9%E6%B3%95%E5%8C%BA-%EF%BC%9F"><span class="toc-text">3. heap 和 stack ，方法区 ？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Java-%E7%9A%84%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%9A%84%E7%A7%8D%E7%B1%BB%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-text">4. Java 的类加载器的种类都有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%97%A2%E7%84%B6%E6%9C%89-GC-%E6%9C%BA%E5%88%B6%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E4%BC%9A%E6%9C%89%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%E7%9A%84%E6%83%85%E5%86%B5%EF%BC%8C-GC-%E6%9C%BA%E5%88%B6%E7%9A%84%E4%BD%9C%E7%94%A8%EF%BC%8C%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E5%93%AA%E9%87%8C%E9%9C%80%E8%A6%81%E7%94%A8%EF%BC%9F"><span class="toc-text">5. 既然有 GC 机制，为什么还会有内存泄露的情况， GC 机制的作用，什么时候哪里需要用？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-java8%E7%9A%84%E6%96%B0%E7%89%B9%E6%80%A7%E3%80%82"><span class="toc-text">6. java8的新特性。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E5%AE%9E%E7%8E%B0%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%96%B9%E5%BC%8F%EF%BC%8C%E5%8C%BA%E5%88%AB"><span class="toc-text">7. 实现多线程的方式，区别?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E9%9D%99%E6%80%81%E7%9A%84%E6%96%B9%E6%B3%95%E5%92%8C%E9%9D%9E%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%E4%BD%BF%E7%94%A8%E5%90%8C%E6%AD%A5%E4%BB%A3%E7%A0%81%E5%9D%97%E7%9A%84%E5%8C%BA%E5%88%AB%E3%80%82"><span class="toc-text">8. 静态的方法和非静态方法使用同步代码块的区别。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%B3%95%E3%80%82"><span class="toc-text">9. 线程池实现方法。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-sleep%E5%92%8Cwait%E7%9A%84%E5%8C%BA%E5%88%AB%E3%80%82"><span class="toc-text">10. sleep和wait的区别。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-%E5%BC%82%E5%B8%B8%E5%88%86%E7%B1%BB"><span class="toc-text">11.  异常分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-Java%E5%8F%8D%E5%B0%84"><span class="toc-text">12. Java反射</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-Java-%E5%8F%8D%E5%B0%84-API"><span class="toc-text">13. Java 反射 API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-JAVA%E5%86%85%E9%83%A8%E7%B1%BB"><span class="toc-text">14. JAVA内部类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-new-%E4%B8%80%E4%B8%AA%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%BF%87%E7%A8%8B%E5%92%8C-clone-%E4%B8%80%E4%B8%AA%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%BF%87%E7%A8%8B%E5%8C%BA%E5%88%AB"><span class="toc-text">15. new 一个对象的过程和 clone 一个对象的过程区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#16-%E6%98%AF%E5%90%A6%E5%8F%AF%E4%BB%A5%E7%BB%A7%E6%89%BFString"><span class="toc-text">16. 是否可以继承String</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17-%E5%BD%93%E4%B8%80%E4%B8%AA%E5%AF%B9%E8%B1%A1%E8%A2%AB%E5%BD%93%E4%BD%9C%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92%E5%88%B0%E4%B8%80%E4%B8%AA%E6%96%B9%E6%B3%95%E5%90%8E%EF%BC%8C%E6%AD%A4%E6%96%B9%E6%B3%95%E5%8F%AF%E6%94%B9%E5%8F%98%E8%BF%99%E4%B8%AA%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B1%9E%E6%80%A7%EF%BC%8C%E5%B9%B6-%E5%8F%AF%E8%BF%94%E5%9B%9E%E5%8F%98%E5%8C%96%E5%90%8E%E7%9A%84%E7%BB%93%E6%9E%9C%EF%BC%8C%E9%82%A3%E4%B9%88%E8%BF%99%E9%87%8C%E5%88%B0%E5%BA%95%E6%98%AF%E5%80%BC%E4%BC%A0%E9%80%92%E8%BF%98%E6%98%AF%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92"><span class="toc-text">17. 当一个对象被当作参数传递到一个方法后，此方法可改变这个对象的属性，并 可返回变化后的结果，那么这里到底是值传递还是引用传递?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#18-%E9%87%8D%E8%BD%BD%EF%BC%88overload%EF%BC%89%E5%92%8C%E9%87%8D%E5%86%99%EF%BC%88override%EF%BC%89%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F%E9%87%8D%E8%BD%BD%E7%9A%84%E6%96%B9%E6%B3%95%E8%83%BD%E5%90%A6%E6%A0%B9%E6%8D%AE%E8%BF%94%E5%9B%9E%E7%B1%BB%E5%9E%8B%E8%BF%9B%E8%A1%8C%E5%8C%BA%E5%88%86%EF%BC%9F"><span class="toc-text">18. 重载（overload）和重写（override）的区别？重载的方法能否根据返回类型进行区分？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-char-%E5%9E%8B%E5%8F%98%E9%87%8F%E4%B8%AD%E8%83%BD%E4%B8%8D%E8%83%BD%E5%AD%98%E5%82%A8%E4%B8%80%E4%B8%AA%E4%B8%AD%E6%96%87%E6%B1%89%E5%AD%97%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">19.  char 型变量中能不能存储一个中文汉字，为什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#20-%E6%8A%BD%E8%B1%A1%E7%B1%BB-abstract-class-%E5%92%8C%E6%8E%A5%E5%8F%A3-interface-%E6%9C%89%E4%BB%80%E4%B9%88%E5%BC%82%E5%90%8C%EF%BC%9F"><span class="toc-text">20. 抽象类(abstract class)和接口(interface)有什么异同？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#21-%E6%8A%BD%E8%B1%A1%E7%9A%84-abstract-%E6%96%B9%E6%B3%95%E6%98%AF%E5%90%A6%E5%8F%AF%E5%90%8C%E6%97%B6%E6%98%AF%E9%9D%99%E6%80%81%E7%9A%84-static-%E6%98%AF%E5%90%A6%E5%8F%AF%E5%90%8C%E6%97%B6%E6%98%AF%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95-native-%EF%BC%8C%E6%98%AF%E5%90%A6%E5%8F%AF%E5%90%8C%E6%97%B6%E8%A2%ABsynchronized"><span class="toc-text">21. 抽象的(abstract)方法是否可同时是静态的(static), 是否可同时是本地方法 (native)，是否可同时被synchronized</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#22-%E9%98%90%E8%BF%B0%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F%E5%92%8C%E5%AE%9E%E4%BE%8B%E5%8F%98%E9%87%8F%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-text">22. 阐述静态变量和实例变量的区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#23-Java%E4%B8%AD%E5%AE%9E%E7%8E%B0%E5%A4%9A%E6%80%81%E7%9A%84%E6%9C%BA%E5%88%B6%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">23. Java中实现多态的机制是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#24-Java%E4%B8%AD%E5%BC%82%E5%B8%B8%E5%88%86%E4%B8%BA%E5%93%AA%E4%BA%9B%E7%A7%8D%E7%B1%BB%EF%BC%8Cerror%E5%92%8Cexception%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-text">24. Java中异常分为哪些种类，error和exception的区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#25-%E5%8A%A8%E9%9D%99%E6%80%81%E4%BB%A3%E7%90%86%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%8C%E4%BB%80%E4%B9%88%E5%9C%BA%E6%99%AF%E4%BD%BF%E7%94%A8%EF%BC%9F"><span class="toc-text">25. 动静态代理的区别，什么场景使用？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#26-JVM-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6%E5%92%8C%E5%B8%B8%E8%A7%81%E7%AE%97%E6%B3%95"><span class="toc-text">26. JVM 垃圾回收机制和常见算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#27-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%87%8D%E5%86%99-equals-%E8%BF%98%E8%A6%81%E9%87%8D%E5%86%99-hashcode%EF%BC%9F"><span class="toc-text">27. 为什么重写 equals 还要重写 hashcode？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#28-Object-%E8%8B%A5%E4%B8%8D%E9%87%8D%E5%86%99-hashCode-%E7%9A%84%E8%AF%9D%EF%BC%8ChashCode-%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97%E5%87%BA%E6%9D%A5%E7%9A%84%EF%BC%9F"><span class="toc-text">28. Object 若不重写 hashCode()的话，hashCode()如何计算出来的？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#29-%E6%AF%94%E8%BE%83%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">29. &#x3D;&#x3D;比较的是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#30-%E8%AF%B4%E8%AF%B4-Lamda-%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9%E3%80%82"><span class="toc-text">30. 说说 Lamda 表达式的优缺点。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#31-Java-%E4%B8%AD%E6%98%AF%E5%A6%82%E4%BD%95%E6%94%AF%E6%8C%81%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%93%8D%E4%BD%9C%E7%9A%84%EF%BC%9F"><span class="toc-text">31. Java 中是如何支持正则表达式操作的？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#32-%E9%94%81%E6%9C%89%E4%BA%86%E8%A7%A3%E5%98%9B%EF%BC%8C%E8%AF%B4%E4%B8%80%E4%B8%8B-Synchronized-%E5%92%8C-lock"><span class="toc-text">32. 锁有了解嘛，说一下 Synchronized 和 lock</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#33-%E8%AF%B7%E5%88%97%E4%B8%BE%E4%BD%A0%E6%89%80%E7%9F%A5%E9%81%93%E7%9A%84-Object-%E7%B1%BB%E7%9A%84%E6%96%B9%E6%B3%95%E3%80%82"><span class="toc-text">33. 请列举你所知道的 Object 类的方法。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#34-%E2%80%9Dstatic%E2%80%9D%E5%85%B3%E9%94%AE%E5%AD%97%E6%98%AF%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D%EF%BC%9FJava-%E4%B8%AD%E6%98%AF%E5%90%A6%E5%8F%AF%E4%BB%A5%E8%A6%86%E7%9B%96-override-%E4%B8%80%E4%B8%AA-private%E6%88%96%E8%80%85%E6%98%AF-static-%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%9F"><span class="toc-text">34. ”static”关键字是什么意思？Java 中是否可以覆盖(override)一个 private或者是 static 的方法？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#35-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6%EF%BC%8C%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%A8%A1%E5%9E%8B%EF%BC%8C%E5%A5%BD%E5%A4%84%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">35. 类加载机制，双亲委派模型，好处是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#36-%E6%98%AF%E5%90%A6%E5%8F%AF%E4%BB%A5%E5%9C%A8-static-%E7%8E%AF%E5%A2%83%E4%B8%AD%E8%AE%BF%E9%97%AE%E9%9D%9E-static-%E5%8F%98%E9%87%8F%EF%BC%9F"><span class="toc-text">36. 是否可以在 static 环境中访问非 static 变量？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#37-%E8%B0%88%E8%B0%88%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E5%8F%8D%E5%B0%84%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%EF%BC%9F"><span class="toc-text">37. 谈谈如何通过反射创建对象？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#38-Java-%E6%94%AF%E6%8C%81%E5%A4%9A%E7%BB%A7%E6%89%BF%E4%B9%88%EF%BC%9F"><span class="toc-text">38. Java 支持多继承么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#39-Comparable-%E5%92%8C-Comparator-%E6%8E%A5%E5%8F%A3%E6%98%AF%E5%B9%B2%E4%BB%80%E4%B9%88%E7%9A%84%EF%BC%9F%E5%88%97%E5%87%BA%E5%AE%83%E4%BB%AC%E7%9A%84%E5%8C%BA%E5%88%AB%E3%80%82"><span class="toc-text">39. Comparable 和 Comparator 接口是干什么的？列出它们的区别。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#40-%E4%B8%A4%E4%B8%AA%E5%AF%B9%E8%B1%A1%E5%80%BC%E7%9B%B8%E5%90%8C-x-equals-y-true-%EF%BC%8C%E4%BD%86%E5%8D%B4%E5%8F%AF%E6%9C%89%E4%B8%8D%E5%90%8C%E7%9A%84-hash-code-%E8%AF%B4%E6%B3%95%E6%98%AF%E5%90%A6%E6%AD%A3%E7%A1%AE%EF%BC%9F"><span class="toc-text">40. 两个对象值相同(x.equals(y) &#x3D;&#x3D; true)，但却可有不同的 hash code 说法是否正确？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#41-%E8%B0%88%E4%B8%80%E4%B8%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E2%80%9D%E5%85%AD%E5%8E%9F%E5%88%99%E4%B8%80%E6%B3%95%E5%88%99%E2%80%9D%E3%80%82"><span class="toc-text">41. 谈一下面向对象的”六原则一法则”。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#42-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%AD%E7%9A%84-i-%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E5%90%97%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">42. 多线程中的 i++线程安全吗？为什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#43-%E7%BA%BF%E7%A8%8B%E6%B1%A0%E8%BF%90%E8%A1%8C%E6%B5%81%E7%A8%8B%EF%BC%8C%E5%8F%82%E6%95%B0%EF%BC%8C%E7%AD%96%E7%95%A5"><span class="toc-text">43. 线程池运行流程，参数，策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#44-%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%8C%E5%93%AA%E4%B8%AA%E6%9B%B4%E5%A5%BD%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">44. 创建线程的方法，哪个更好，为什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#45-%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%9C%89%E4%BB%80%E4%B9%88%E5%A5%BD%E5%A4%84%EF%BC%9F"><span class="toc-text">45. 线程池有什么好处？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#46-%E5%90%8C%E6%AD%A5%E6%96%B9%E6%B3%95%E5%92%8C%E5%90%8C%E6%AD%A5%E4%BB%A3%E7%A0%81%E5%9D%97%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">46. 同步方法和同步代码块的区别是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#47-java-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6-throw-%E5%92%8C-throws-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">47. java 异常处理机制,throw 和 throws 的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#48-final%E3%80%81finally%E3%80%81finalize%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-text">48. final、finally、finalize的区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#49-String-%E3%80%81StringBuilder-%E3%80%81StringBuffer-%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F%E4%BB%80%E4%B9%88%E6%83%85%E5%86%B5%E4%B8%8B%E7%94%A8%E2%80%9C-%E2%80%9D%E8%BF%90%E7%AE%97%E7%AC%A6%E8%BF%9B%E8%A1%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BF%9E%E6%8E%A5%E6%AF%94%E8%B0%83%E7%94%A8-StringBuffer-StringBuilder%E5%AF%B9%E8%B1%A1%E7%9A%84-append-%E6%96%B9%E6%B3%95%E8%BF%9E%E6%8E%A5%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%80%A7%E8%83%BD%E6%9B%B4%E5%A5%BD%EF%BC%9F"><span class="toc-text">49. String 、StringBuilder 、StringBuffer 的区别？什么情况下用“+”运算符进行字符串连接比调用 StringBuffer&#x2F;StringBuilder对象的 append 方法连接字符串性能更好？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#50-%E6%97%A5%E6%9C%9F%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E3%80%82"><span class="toc-text">50. 日期类型转换。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#51-Java-%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%E5%90%84%E5%8D%A0%E5%87%A0%E4%B8%AA%E5%AD%97%E8%8A%82%EF%BC%8CString-%E6%98%AF%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%90%97%EF%BC%9F"><span class="toc-text">51. Java 的基本数据类型都有哪些各占几个字节，String 是基本数据类型吗？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#52-int-%E5%92%8C-Integer-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-text">52. int 和 Integer 有什么区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#53-Java-%E4%B8%AD%E6%9C%89%E5%87%A0%E7%A7%8D%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%B5%81%EF%BC%8C%E5%AD%97%E8%8A%82%E6%B5%81%E5%A6%82%E4%BD%95%E8%BD%AC%E4%B8%BA%E5%AD%97%E7%AC%A6%E6%B5%81%EF%BC%8C%E5%AD%97%E8%8A%82%E6%B5%81%E5%92%8C%E5%AD%97%E7%AC%A6%E6%B5%81%E7%9A%84%E5%8C%BA%E5%88%AB%E3%80%82"><span class="toc-text">53. Java 中有几种类型的流，字节流如何转为字符流，字节流和字符流的区别。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#54-%E5%A6%82%E4%BD%95%E5%B0%86%E4%B8%80%E4%B8%AA-java-%E5%AF%B9%E8%B1%A1%E5%BA%8F%E5%88%97%E5%8C%96%E5%88%B0%E6%96%87%E4%BB%B6%E9%87%8C"><span class="toc-text">54. 如何将一个 java 对象序列化到文件里</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-面试题-java基础" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">面试题-java基础</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.07.13</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h3 id="1-谈谈-JVM-的内存结构和内存分配"><a href="#1-谈谈-JVM-的内存结构和内存分配" class="headerlink" title="1. 谈谈 JVM 的内存结构和内存分配"></a>1. 谈谈 JVM 的内存结构和内存分配</h3><ul>
+<li><p>JVM 内存区域主要分为线程私有区域【程序计数器、虚拟机栈、本地方法区】、线程共享区</p>
+<p>域【JAVA 堆、方法区】</p>
+<ul>
+<li>程序计数器(线程私有)<ul>
+<li>一块较小的内存空间, 是当前线程所执行的字节码的行号指示器，每条线程都要有一个独立的<br>程序计数器，这类内存也称为“线程私有”的内存。</li>
+<li>正在执行 java 方法的话，计数器记录的是虚拟机字节码指令的地址（当前指令的地址）。如<br>果还是 Native 方法，则为空。</li>
+<li>这个内存区域是唯一一个在虚拟机中没有规定任何 OutOfMemoryError 情况的区域。</li>
+</ul>
+</li>
+<li>虚拟机栈(线程私有)<ul>
+<li>是描述java方法执行的内存模型，每个方法在执行的同时都会创建一个栈帧（Stack Frame）用于存储局部变量表、操作数栈、动态链接、方法出口等信息。每一个方法从调用直至执行完成<br>的过程，就对应着一个栈帧在虚拟机栈中入栈到出栈的过程。</li>
+</ul>
+</li>
+<li>堆（Heap-线程共享）-运行时数据区<ul>
+<li>是被线程共享的一块内存区域，创建的对象和数组都保存在 Java 堆内存中，也是垃圾收集器进行<br>垃圾收集的最重要的内存区域。由于现代 VM 采用分代收集算法, 因此 Java 堆从 GC 的角度还可以细分为: 新生代和老年代。</li>
+</ul>
+</li>
+<li>方法区/永久代（线程共享）<ul>
+<li>即我们常说的永久代(Permanent Generation), 用于存储被 JVM 加载的类信息、常量、静态变量、即时编译器编译后的代码等数据. HotSpot VM把GC分代收集扩展至方法区, 即使用Java<br>堆的永久代来实现方法区, 这样 HotSpot 的垃圾收集器就可以像管理 Java 堆一样管理这部分内存,<br>而不必为方法区开发专门的内存管理器(永久代的内存回收的主要目标是针对常量池的回收和类型<br>的卸载, 因此收益一般很小)</li>
+<li>运行时常量池（Runtime Constant Pool）是方法区的一部分。Class 文件中除了有类的版本、字段、方法、接口等描述等信息外，还有一项信息是常量池用于存放编译期生成的各种字面量和符号引用，这部分内容将在类加载后存放到方法区的运行时常量池中。 Java 虚拟机对 Class 文件的每一部分（自然也包括常量池）的格式都有严格的规定，每一个字节用于存储哪种数据都必须符合规范上的要求，这样才会被虚拟机认可、装载和执行。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-Java-中引用类型都有哪些？"><a href="#2-Java-中引用类型都有哪些？" class="headerlink" title="2. Java 中引用类型都有哪些？"></a>2. Java 中引用类型都有哪些？</h3><ul>
+<li>强引用<br>在 Java 中最常见的就是强引用，把一个对象赋给一个引用变量，这个引用变量就是一个强引用。当一个对象被强引用变量引用时，它处于可达状态，它是不可能被垃圾回收机制回收的，即使该对象以后永远都不会被用到 JVM 也不会回收。因此强引用是造成 Java 内存泄漏的主要原因之一。</li>
+<li>软引用<br>软引用需要用 SoftReference 类来实现，对于只有软引用的对象来说，当系统内存足够时它不会被回收，当系统内存空间不足时它会被回收。软引用通常用在对内存敏感的程序中。</li>
+<li>弱引用<br>弱引用需要用 WeakReference 类来实现，它比软引用的生存期更短，对于只有弱引用的对象来说，只要垃圾回收机制一运行，不管 JVM 的内存空间是否足够，总会回收该对象占用的内存。</li>
+<li>虚引用<br>虚引用需要 PhantomReference 类来实现，它不能单独使用，必须和引用队列联合使用。虚引用的主要作用是跟踪对象被垃圾回收的状态。 </li>
+</ul>
+<h3 id="3-heap-和-stack-，方法区-？"><a href="#3-heap-和-stack-，方法区-？" class="headerlink" title="3. heap 和 stack ，方法区 ？"></a>3. heap 和 stack ，方法区 ？</h3><ul>
+<li>虚拟机栈(线程私有)<ul>
+<li>是描述java方法执行的内存模型，每个方法在执行的同时都会创建一个栈帧（Stack Frame）<br>用于存储局部变量表、操作数栈、动态链接、方法出口等信息。每一个方法从调用直至执行完成<br>的过程，就对应着一个栈帧在虚拟机栈中入栈到出栈的过程。</li>
+</ul>
+</li>
+<li>堆（Heap-线程共享）-运行时数据区<ul>
+<li>是被线程共享的一块内存区域，创建的对象和数组都保存在 Java 堆内存中，也是垃圾收集器进行<br>垃圾收集的最重要的内存区域。由于现代 VM 采用分代收集算法, 因此 Java 堆从 GC 的角度还可以细分为: 新生代和老年代。</li>
+</ul>
+</li>
+<li>方法区/永久代（线程共享）<ul>
+<li>即我们常说的永久代(Permanent Generation), 用于存储被 JVM 加载的类信息、常量、静态变量、即时编译器编译后的代码等数据. HotSpot VM把GC分代收集扩展至方法区, 即使用Java堆的永久代来实现方法区, 这样 HotSpot 的垃圾收集器就可以像管理 Java 堆一样管理这部分内存, 而不必为方法区开发专门的内存管理器(永久代的内存回收的主要目标是针对常量池的回收和类型的卸载, 因此收益一般很小)</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-Java-的类加载器的种类都有哪些？"><a href="#4-Java-的类加载器的种类都有哪些？" class="headerlink" title="4. Java 的类加载器的种类都有哪些？"></a>4. Java 的类加载器的种类都有哪些？</h3><ul>
+<li><p>启动类加载器(Bootstrap ClassLoader)</p>
+<ul>
+<li>负责加载 JAVA_HOME\lib 目录中的，或通过-Xbootclasspath 参数指定路径中的，且被<br>虚拟机认可（按文件名识别，如 rt.jar）的类。</li>
+</ul>
+</li>
+<li><p>扩展类加载器(Extension ClassLoader)</p>
+<ul>
+<li>负责加载 JAVA_HOME\lib\ext 目录中的，或通过 java.ext.dirs 系统变量指定路径中的类<br>库。</li>
+</ul>
+</li>
+<li><p>应用程序类加载器(Application ClassLoader)：</p>
+<ul>
+<li>负责加载用户路径（classpath）上的类库。<br>JVM 通过双亲委派模型进行类的加载，当然我们也可以通过继承 java.lang.ClassLoader<br>实现自定义的类加载器。</li>
+</ul>
+</li>
+<li><p>双亲委派</p>
+<ul>
+<li>当一个类收到了类加载请求，他首先不会尝试自己去加载这个类，而是把这个请求委派给父类去完成，每一个层次类加载器都是如此，因此所有的加载请求都应该传送到启动类加载其中，只有当父类加载器反馈自己无法完成这个请求的时候（在它的加载路径下没有找到所需加载的Class），子类加载器才会尝试自己去加载。</li>
+<li>采用双亲委派的一个好处是比如加载位于 rt.jar 包中的类 java.lang.Object，不管是哪个加载器加载这个类，最终都是委托给顶层的启动类加载器进行加载，这样就保证了使用不同的类加载器最终得到的都是同样一个 Object 对象。</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-既然有-GC-机制，为什么还会有内存泄露的情况，-GC-机制的作用，什么时候哪里需要用？"><a href="#5-既然有-GC-机制，为什么还会有内存泄露的情况，-GC-机制的作用，什么时候哪里需要用？" class="headerlink" title="5. 既然有 GC 机制，为什么还会有内存泄露的情况， GC 机制的作用，什么时候哪里需要用？"></a>5. 既然有 GC 机制，为什么还会有内存泄露的情况， GC 机制的作用，什么时候哪里需要用？</h3><ul>
+<li><p>Java中对内存对象的访问，使用的是引用的方式。在 Java 代码中我们维护一个内存对象的引用变量，通过这个引用变量的值，我们可以访问到对应的内存地址中的内存对象空间。在 Java 程序中，这个引用变量本身既可以存放堆内存中，又可以放在代码栈的内存中（与基本数据类型相同）。 GC 线程会从代码栈中的引用变量开始跟踪，从而判定哪些内存是正在使用的。如果 GC 线程通过这种方式，无法跟踪到某一块堆内存，那么 GC 就认为这块内存将不再使用了（因为代码中已经无法访问这块内存了）。</p>
+</li>
+<li><p>通过这种有向图的内存管理方式，当一个内存对象失去了所有的引用之后，GC 就可以将其回收。反过来说，如果这个对象还存在引用，那么它将不会被 GC 回收，哪怕是 Java 虚拟机抛出 OutOfMemoryError </p>
+</li>
+</ul>
+<h3 id="6-java8的新特性。"><a href="#6-java8的新特性。" class="headerlink" title="6. java8的新特性。"></a>6. <a target="_blank" rel="noopener" href="https://juejin.im/post/5ae6bfb66fb9a07a9b35bac1#heading-2">java8的新特性。</a></h3><ol>
+<li>接口的默认方法和静态方法</li>
+<li>函数式接口FunctionInterface与lambda表达式<ul>
+<li>Java8最大的变化是引入了函数式思想，也就是说函数可以作为另一个函数的参数。函数式接口，要求接口中有且仅有一个抽象方法,可以使用@FunctionalInterface注解，声明一个接口是函数式接口</li>
+</ul>
+</li>
+<li>方法引用是为了进一步简化lambda表达式，通过类名或者实例名与方法名的组合来直接访问到类或者实例已经存在的方法或者构造方法<ul>
+<li>静态方法引用：ClassName::methodName;</li>
+<li>实例上的实例方法引用：instanceName::methodName;</li>
+<li>超类上的实例方法引用：supper::methodName;</li>
+<li>类的实例方法引用：ClassName:methodName;</li>
+<li>构造方法引用Class:new;</li>
+<li>数组构造方法引用::TypeName[]::new</li>
+</ul>
+</li>
+</ol>
+<h3 id="7-实现多线程的方式，区别"><a href="#7-实现多线程的方式，区别" class="headerlink" title="7. 实现多线程的方式，区别?"></a>7. 实现多线程的方式，区别?</h3><ul>
+<li><p>继承 Thread 类<br>Thread 类本质上是实现了 Runnable 接口的一个实例，代表一个线程的实例。启动线程的唯一方法就是通过 Thread 类的 start()实例方法。start()方法是一个 native 方法，它将启动一个新线程，并执行 run()方法。</p>
+</li>
+<li><p>如果自己的类已经 extends 另一个类，就无法直接 extends Thread，此时，可以实现一个Runnable 接口。</p>
+</li>
+</ul>
+<h3 id="8-静态的方法和非静态方法使用同步代码块的区别。"><a href="#8-静态的方法和非静态方法使用同步代码块的区别。" class="headerlink" title="8. 静态的方法和非静态方法使用同步代码块的区别。"></a>8. 静态的方法和非静态方法使用同步代码块的区别。</h3><ul>
+<li><p>所有的非静态同步方法用的都是同一把锁——实例对象本身，也就是说如果一个实例对象的非静态同步方法获取锁后，该实例对象的其他非静态同步方法必须等待获取锁的方法释放锁后才能获取锁，可是别的实例对象的非静态同步方法因为跟该实例对象的非静态同步方法用的是不同的锁，所以毋须等待该实例对象已获取锁的非静态同步方法释放锁就可以获取他们自己的锁。</p>
+</li>
+<li><p>而所有的静态同步方法用的也是同一把锁——类对象本身，这两把锁是两个不同的对象，所以静态同步方法与非静态同步方法之间是不会有竞态条件的。但是一旦一个静态同步方法获取锁后，其他的静态同步方法都必须等待该方法释放锁后才能获取锁，而不管是同一个实例对象的静态同步方法之间，还是不同的实例对象的静态同步方法之间，只要它们是同一个类的实例对象！</p>
+</li>
+</ul>
+<h3 id="9-线程池实现方法。"><a href="#9-线程池实现方法。" class="headerlink" title="9. 线程池实现方法。"></a>9. <a target="_blank" rel="noopener" href="https://blog.csdn.net/sx1119183530/article/details/79734953">线程池实现方法。</a></h3><ul>
+<li>newCachedThreadPool：<ul>
+<li>底层：返回ThreadPoolExecutor实例，corePoolSize为0；maximumPoolSize为Integer.MAX_VALUE；keepAliveTime为60L；unit为TimeUnit.SECONDS；workQueue为SynchronousQueue(同步队列)</li>
+<li>通俗：当有新任务到来，则插入到SynchronousQueue中，由于SynchronousQueue是同步队列，因此会在池中寻找可用线程来执行，若有可以线程则执行，若没有可用线程则创建一个线程来执行该任务；若池中线程空闲时间超过指定大小，则该线程会被销毁。</li>
+<li>适用：执行很多短期异步的小程序或者负载较轻的服务器</li>
+</ul>
+</li>
+<li>newFixedThreadPool：<ul>
+<li>底层：返回ThreadPoolExecutor实例，接收参数为所设定线程数量nThread，corePoolSize为nThread，maximumPoolSize为nThread；keepAliveTime为0L(不限时)；unit为：TimeUnit.MILLISECONDS；WorkQueue为：new LinkedBlockingQueue<Runnable>() 无界阻塞队列</li>
+<li>通俗：创建可容纳固定数量线程的池子，每隔线程的存活时间是无限的，当池子满了就不在添加线程了；如果池中的所有线程均在繁忙状态，对于新任务会进入阻塞队列中(无界的阻塞队列)，但是，在线程池空闲时，即线程池中没有可运行任务时，它不会释放工作线程，还会占用一定的系统资源。</li>
+<li>适用：执行长期的任务，性能好很多</li>
+</ul>
+</li>
+<li>newSingleThreadExecutor:<ul>
+<li>底层：FinalizableDelegatedExecutorService包装的ThreadPoolExecutor实例，corePoolSize为1；maximumPoolSize为1；keepAliveTime为0L；unit为：TimeUnit.MILLISECONDS；workQueue为：new LinkedBlockingQueue<Runnable>() 无界阻塞队列</li>
+<li>通俗：创建只有一个线程的线程池，且线程的存活时间是无限的；当该线程正繁忙时，对于新任务会进入阻塞队列中(无界的阻塞队列)</li>
+<li>适用：一个任务一个任务执行的场景</li>
+</ul>
+</li>
+<li>newScheduledThreadPool:<ul>
+<li>底层：创建ScheduledThreadPoolExecutor实例，corePoolSize为传递来的参数，maximumPoolSize为Integer.MAX_VALUE；keepAliveTime为0；unit为：TimeUnit.NANOSECONDS；workQueue为：new DelayedWorkQueue() 一个按超时时间升序排序的队列</li>
+<li>通俗：创建一个固定大小的线程池，线程池内线程存活时间无限制，线程池可以支持定时及周期性任务执行，如果所有线程均处于繁忙状态，对于新任务会进入DelayedWorkQueue队列中，这是一种按照超时时间排序的队列结构</li>
+<li>适用：周期性执行任务的场景</li>
+</ul>
+</li>
+</ul>
+<h3 id="10-sleep和wait的区别。"><a href="#10-sleep和wait的区别。" class="headerlink" title="10. sleep和wait的区别。"></a>10. sleep和wait的区别。</h3><ul>
+<li><p>wait只能在同步（synchronize）环境中被调用，而sleep不需要。</p>
+</li>
+<li><p>进入wait状态的线程能够被notify和notifyAll线程唤醒，但是进入sleeping状态的线程不能被notify方法唤醒。</p>
+</li>
+<li><p>wait通常有条件地执行，线程会一直处于wait状态，直到某个条件变为真。但是sleep仅仅让你的线程进入睡眠状态。</p>
+</li>
+<li><blockquote>
+<p>sleep <strong>，释放cpu资源，不释放锁资源，</strong>如果线程进入sleep的话，释放cpu资源，如果外层包有Synchronize，那么此锁并没有释放掉。</p>
+</blockquote>
+<blockquote>
+<p>wait，<strong>释放cpu资源，也释放锁资源，</strong>一般用于锁机制中 肯定是要释放掉锁的，因为notify并不会立即调起此线程，因此cpu是不会为其分配时间片的，也就是说wait 线程进入等待池，cpu不分时间片给它，锁释放掉。</p>
+</blockquote>
+<blockquote>
+<p><strong>(wait用于锁机制，sleep不是，这就是为啥sleep不释放锁，wait释放锁的原因，sleep是线程的方法，跟锁没半毛钱关系，wait，notify,notifyall 都是Object对象的方法，是一起使用的，用于锁机制)</strong></p>
+</blockquote>
+</li>
+<li><p>wait方法在进入wait状态的时候会释放对象的锁，但是sleep方法不会。</p>
+</li>
+<li><p>wait方法是针对一个被同步代码块加锁的对象，而sleep是针对一个线程</p>
+</li>
+</ul>
+<h3 id="11-异常分类"><a href="#11-异常分类" class="headerlink" title="11.  异常分类"></a>11.  异常分类</h3><p>Throwable 是 Java 语言中所有错误或异常的超类。下一层分为 Error 和 Exception </p>
+<p><strong>Error</strong></p>
+<ol>
+<li>Error 类是指 java 运行时系统的内部错误和资源耗尽错误。应用程序不会抛出该类对象。如果出现了这样的错误，除了告知用户，剩下的就是尽力使程序安全的终止。</li>
+</ol>
+<p><strong>Exception**</strong>（**<em>RuntimeException、CheckedException**</em>）**</p>
+<ol start="2">
+<li>Exception 又有两个分支，一个是运行时异常 RuntimeException ，一个是CheckedException。</li>
+</ol>
+<p><strong>RuntimeException</strong> 如 ： NullPointerException 、 ClassCastException ；一个是检查异常</p>
+<p>CheckedException，如 I/O 错误导致的 IOException、SQLException。 RuntimeException 是</p>
+<p>那些可能在 Java 虚拟机正常运行期间抛出的异常的超类。 如果出现 RuntimeException，那么一定是程序员的错误.</p>
+<p><strong>检查异常 CheckedException</strong>：一般是外部错误，这种异常都发生在编译阶段，Java 编译器会强</p>
+<p>制程序去捕获此类异常，即会出现要求你把这段可能出现异常的程序进行 try catch，该类异常一般包括几个方面：</p>
+<ol>
+<li><p>试图在文件尾部读取数据</p>
+</li>
+<li><p>试图打开一个错误格式的 URL </p>
+</li>
+<li><p>试图根据给定的字符串查找 class 对象，而这个字符串表示的类并不存在</p>
+</li>
+</ol>
+<h3 id="12-Java反射"><a href="#12-Java反射" class="headerlink" title="12. Java反射"></a>12. Java反射</h3><p>在 Java 中的反射机制是指在运行状态中，对于任意一个类都能够知道这个类所有的属性和方法；</p>
+<p>并且对于任意一个对象，都能够调用它的任意一个方法；这种动态获取信息以及动态调用对象方法的功能成为 Java 语言的反射机制。</p>
+<h3 id="13-Java-反射-API"><a href="#13-Java-反射-API" class="headerlink" title="13. Java 反射 API"></a>13. Java 反射 API</h3><p><strong>反射</strong> <strong>API</strong> <strong>用来生成</strong> <strong>JVM</strong> <strong>中的类、接口或则对象的信息。</strong></p>
+<ol>
+<li><p>Class 类：反射的核心类，可以获取类的属性，方法等信息。</p>
+</li>
+<li><p>Field 类：Java.lang.reflec 包中的类，表示类的成员变量，可以用来获取和设置类之中的属性值。</p>
+</li>
+<li><p>Method 类： Java.lang.reflec 包中的类，表示类的方法，它可以用来获取类中的方法信息或者执行方法。</p>
+</li>
+<li><p>Constructor 类： Java.lang.reflec 包中的类，表示类的构造方法。</p>
+</li>
+</ol>
+<h3 id="14-JAVA内部类"><a href="#14-JAVA内部类" class="headerlink" title="14. JAVA内部类"></a>14. JAVA内部类</h3><p>Java 类中不仅可以定义变量和方法，还可以定义类，这样定义在类内部的类就被称为内部类。根</p>
+<p>据定义的方式不同，内部类分为静态内部类，成员内部类，局部内部类，匿名内部类四种。</p>
+<p><strong>静态内部类</strong></p>
+<p>定义在类内部的静态类，就是静态内部类。</p>
+<ol>
+<li><p>静态内部类可以访问外部类所有的静态变量和方法，即使是 private 的也一样。</p>
+</li>
+<li><p>静态内部类和一般类一致，可以定义静态变量、方法，构造方法等。</p>
+</li>
+<li><p>其它类使用静态内部类需要使用“外部类.静态内部类”方式，如下所示：Out.Inner inner = new Out.Inner();inner.print();</p>
+</li>
+<li><p>Java集合类HashMap内部就有一个静态内部类Entry。Entry是HashMap存放元素的抽象，HashMap 内部维护 Entry 数组用了存放元素，但是 Entry 对使用者是透明的。像这种和外部类关系密切的，且不依赖外部类实例的，都可以使用静态内部类。</p>
+</li>
+</ol>
+<p><strong>成员内部类</strong></p>
+<p>定义在类内部的非静态类，就是成员内部类。成员内部类不能定义静态方法和变量（final 修饰的除外）。这是因为成员内部类是非静态的，类初始化的时候先初始化静态成员，如果允许成员内部类定义静态变量，那么成员内部类的静态变量初始化顺序是有歧义的。</p>
+<p><strong>局部内部类（定义在方法中的类）</strong></p>
+<p>定义在方法中的类，就是局部类。如果一个类只在某个方法中使用，则可以考虑使用局部类。</p>
+<p><strong>匿名内部类（要继承一个父类或者实现一个接口、直接使用</strong></p>
+<p><strong>new</strong> <strong>来生成一个对象的引用）</strong></p>
+<p>匿名内部类我们必须要继承一个父类或者实现一个接口，当然也仅能只继承一个父类或者实现一个接口。同时它也是没有 class 关键字，这是因为匿名内部类是直接使用 new 来生成一个对象的引用。</p>
+<h3 id="15-new-一个对象的过程和-clone-一个对象的过程区别"><a href="#15-new-一个对象的过程和-clone-一个对象的过程区别" class="headerlink" title="15. new 一个对象的过程和 clone 一个对象的过程区别"></a>15. new 一个对象的过程和 clone 一个对象的过程区别</h3><ul>
+<li>new对象<br>new操作符的本意是分配内存，程序执行 到new操作时，首先去看new操作符后面的类型，因为知道了类型才能知道要分配多大的内存空间。分配完内存之后，再调用构造函数，填充对象的各个域，这一步叫做对象的初始化，构造方法返回后，一个对象创建完毕，可以把它引用（地址）发布到外部，在外部就可以使用这个引用操作这个对象。</li>
+<li>clone<br>clone在第一步和new相似，都是分配内存，调用clone方法时，分配的内存和原对象（即调用clone方法的对象）相同，然后再使用原对象中对应的各个域，填充新对象的域，填充完成后，clone方法返回，一个新的对象被创建，同样可以把这个新对象的引用发布到外部。</li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/BxxCSDN/article/details/95220772">原文链接</a></li>
+</ul>
+<h3 id="16-是否可以继承String"><a href="#16-是否可以继承String" class="headerlink" title="16. 是否可以继承String"></a>16. 是否可以继承String</h3><ul>
+<li>不可以，因为String类有final修饰符，而final修饰的类是不能被继承的<ul>
+<li>final类不能被继承，没有子类，final类中的方法默认是final的。</li>
+<li>final方法不能被子类的方法覆盖，但可以被继承。</li>
+<li>final成员变量表示常量，只能被赋值一次，赋值后值不再改变。</li>
+<li>final不能用于修饰构造方法。</li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/shenxiaoquan/p/5941033.html">原文链接</a></li>
+</ul>
+<h3 id="17-当一个对象被当作参数传递到一个方法后，此方法可改变这个对象的属性，并-可返回变化后的结果，那么这里到底是值传递还是引用传递"><a href="#17-当一个对象被当作参数传递到一个方法后，此方法可改变这个对象的属性，并-可返回变化后的结果，那么这里到底是值传递还是引用传递" class="headerlink" title="17. 当一个对象被当作参数传递到一个方法后，此方法可改变这个对象的属性，并 可返回变化后的结果，那么这里到底是值传递还是引用传递?"></a>17. 当一个对象被当作参数传递到一个方法后，此方法可改变这个对象的属性，并 可返回变化后的结果，那么这里到底是值传递还是引用传递?</h3><ul>
+<li>在引用类型作为参数进行传递时，也属于值传递，此时传递的是地址值副本，但是这两个地址指向同一个地方。在副本地址没有进行更改指向时，对副本地址指向的数据进行操作会影响到原始数据的值。</li>
+<li><a href="%5Bhttps://paphae.top/2020/04/15/java%E4%B8%AD%E5%8F%82%E6%95%B0%E7%9A%84%E4%BC%A0%E9%80%92%EF%BC%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%81%9A%E5%8F%82%E6%95%B0%E7%9A%84%E4%BC%A0%E9%80%92%E6%83%85%E5%86%B5/%5D(https://paphae.top/2020/04/15/java%E4%B8%AD%E5%8F%82%E6%95%B0%E7%9A%84%E4%BC%A0%E9%80%92%EF%BC%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%81%9A%E5%8F%82%E6%95%B0%E7%9A%84%E4%BC%A0%E9%80%92%E6%83%85%E5%86%B5/)">原文链接</a></li>
+</ul>
+<h3 id="18-重载（overload）和重写（override）的区别？重载的方法能否根据返回类型进行区分？"><a href="#18-重载（overload）和重写（override）的区别？重载的方法能否根据返回类型进行区分？" class="headerlink" title="18. 重载（overload）和重写（override）的区别？重载的方法能否根据返回类型进行区分？"></a>18. 重载（overload）和重写（override）的区别？重载的方法能否根据返回类型进行区分？</h3><p>1.多态的表现的形式<br>2.语法规格<br>3.发生位置</p>
+<ul>
+<li>方法的重载和重写都是实现多态的方式，区别在于前者实现的是编译时的多态性，而后者实现的是运行时的多态性。重载发生在一个类中，同名的方法如果有不同的参数列表（参数类型不同、参数个数不同或者二者都不同）则视为重载；重写发生在子类与父类之间，重写要求子类被重写方法与父类被重写方法有相同的返回类型，比父类被重写方法更好访问，不能比父类被重写方法声明更多的异常（里氏代换原则）。重载对返回类型没有特殊的要求。</li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/fanguangjun123/article/details/78665483">原文链接</a></li>
+</ul>
+<h3 id="19-char-型变量中能不能存储一个中文汉字，为什么？"><a href="#19-char-型变量中能不能存储一个中文汉字，为什么？" class="headerlink" title="19.  char 型变量中能不能存储一个中文汉字，为什么？"></a>19.  char 型变量中能不能存储一个中文汉字，为什么？</h3><ul>
+<li>char型变量是用来存储Unicode编码的字符的，unicode编码字符集中包含了汉字，</li>
+</ul>
+<ul>
+<li>所以，char型变量中当然可以存储汉字啦。不过，如果某个特殊的汉字没有被包含在</li>
+<li>unicode编码字符集中，那么，这个char型变量中就不能存储这个特殊汉字。补充</li>
+</ul>
+<ul>
+<li>说明：unicode编码占用两个字节，所以，char类型的变量也是占用两个字节。</li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012110719/article/details/46317029">原文链接</a></li>
+</ul>
+<h3 id="20-抽象类-abstract-class-和接口-interface-有什么异同？"><a href="#20-抽象类-abstract-class-和接口-interface-有什么异同？" class="headerlink" title="20. 抽象类(abstract class)和接口(interface)有什么异同？"></a>20. 抽象类(abstract class)和接口(interface)有什么异同？</h3><ul>
+<li><p>二者的相同点</p>
+<p>都不能被实例化</p>
+</li>
+<li><p>二者的区别</p>
+<table>
+<thead>
+<tr>
+<th align="left">类型</th>
+<th align="left">abstract class</th>
+<th align="left">Interface</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">定义</td>
+<td align="left">abstract class关键字</td>
+<td align="left">Interface关键字</td>
+</tr>
+<tr>
+<td align="left">继承</td>
+<td align="left">抽象类可以继承一个类和实现多个接口；子类只可以继承一个抽象类</td>
+<td align="left">接口只可以继承接口（一个或多个）；子类可以实现多个接口</td>
+</tr>
+<tr>
+<td align="left">访问修饰符</td>
+<td align="left">抽象方法可以有<strong>public</strong>、<strong>protected</strong>和<strong>default</strong>这些修饰符</td>
+<td align="left">接口方法默认修饰符是<strong>public</strong>,也可以使用<strong>default</strong></td>
+</tr>
+<tr>
+<td align="left">方法实现</td>
+<td align="left">可定义构造方法，可以有抽象方法和具体方法</td>
+<td align="left">接口完全是抽象的，没构造方法，且方法都是抽象的，不存在方法的实现</td>
+</tr>
+<tr>
+<td align="left">实现方式</td>
+<td align="left">子类使用<strong>extends</strong>关键字来继承抽象类。如果子类不是抽象类的话，它需要提供抽象类中所有声明的方法的实现</td>
+<td align="left">子类使用关键字<strong>implements</strong>来实现接口。它需要提供接口中所有声明的方法的实现</td>
+</tr>
+<tr>
+<td align="left">作用</td>
+<td align="left">为了把相同的东西提取出来,<strong>即重用</strong></td>
+<td align="left">为了把程序模块进行固化的契约,是<strong>为了降低偶合</strong></td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h3 id="21-抽象的-abstract-方法是否可同时是静态的-static-是否可同时是本地方法-native-，是否可同时被synchronized"><a href="#21-抽象的-abstract-方法是否可同时是静态的-static-是否可同时是本地方法-native-，是否可同时被synchronized" class="headerlink" title="21. 抽象的(abstract)方法是否可同时是静态的(static), 是否可同时是本地方法 (native)，是否可同时被synchronized"></a>21. 抽象的(abstract)方法是否可同时是静态的(static), 是否可同时是本地方法 (native)，是否可同时被synchronized</h3><ul>
+<li> abstract：用来声明抽象方法，抽象方法没有方法体，不能被直接调用，必须在子类overriding后才能使用</li>
+<li>static<ul>
+<li>static：用来声明静态方法，静态方法可以被类及其对象调用</li>
+<li>用static声明方法表明这个方法在不生成类的实例时可直接被类调用，而abstract方法不能被调用，两者矛盾。</li>
+</ul>
+</li>
+<li>native<ul>
+<li> native：用来声明本地方法，该方法的实现由非java 语言实现，比如C。一般用于java与外环境交互，或与操作系统交互</li>
+<li> 因为native 暗示这些方法是有实现体的，只不过这些实现体是非java 的，但是abstract却显然的指明这些方法无实现体。</li>
+</ul>
+</li>
+<li>synchronized<ul>
+<li> synchronized：用于防止多个线程同时调用一个对象的该方法，与static连用可防止多个线程同时调用一个类的该方法</li>
+<li> 从synchronized的功能也可以看出，用synchronized的前提是该方法可以被直接调用，显然和abstract连用</li>
+</ul>
+</li>
+<li> <a target="_blank" rel="noopener" href="https://blog.csdn.net/fhm727/article/details/5222965">原文链接</a></li>
+</ul>
+<h3 id="22-阐述静态变量和实例变量的区别？"><a href="#22-阐述静态变量和实例变量的区别？" class="headerlink" title="22. 阐述静态变量和实例变量的区别？"></a>22. 阐述静态变量和实例变量的区别？</h3><ul>
+<li>在语法定义上的区别：静态变量前要加static关键字，而实例变量前则不加。</li>
+<li>在程序运行时的区别：实例变量属于某个对象的属性，必须创建了实例对象，其中的实例变量才会被分配空间，才能使用这个实例变量。静态变量不属于某个实例对象，而是属于类，所以也称为类变量，只要程序加载了类的字节码，不用创建任何实例对象，静态变量就会被分配空间，静态变量就可以被使用了。总之，实例变量必须创建对象后才可以通过这个对象来使用，静态变量则可以直接使用类名来引用。</li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012110719/article/details/46334419">原文链接</a></li>
+</ul>
+<h3 id="23-Java中实现多态的机制是什么？"><a href="#23-Java中实现多态的机制是什么？" class="headerlink" title="23. Java中实现多态的机制是什么？"></a>23. Java中实现多态的机制是什么？</h3><ul>
+<li>Java多态的实现机制是父类或接口定义的引用变量可以指向子类或实现类的实例对象，而程序调用的方法在运行期才动态绑定，就是引用变量所指向的具体实现对象的方法，也就是内存里正在运行的那个对象的方法，而不是引用变量的类型中定义的方法。</li>
+<li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1447574">原文链接</a></li>
+</ul>
+<h3 id="24-Java中异常分为哪些种类，error和exception的区别？"><a href="#24-Java中异常分为哪些种类，error和exception的区别？" class="headerlink" title="24. Java中异常分为哪些种类，error和exception的区别？"></a>24. Java中异常分为哪些种类，error和exception的区别？</h3><ul>
+<li><p>三种类型的异常：</p>
+<ul>
+<li>检查性异常：最具代表的检查性异常是用户错误或问题引起的异常，这是程序员无法预见的。例如要打开一个不存在文件时，一个异常就发生了，这些异常在编译时不能被简单地忽略。</li>
+<li>运行时异常： 运行时异常是可能被程序员避免的异常。与检查性异常相反，运行时异常可以在编译时被忽略。</li>
+<li>错误： 错误不是异常，而是脱离程序员控制的问题。错误在代码中通常被忽略。例如，当栈溢出时，一个错误就发生了，它们在编译也检查不到的。</li>
+</ul>
+</li>
+<li><p>Error</p>
+</li>
+<li><blockquote>
+<p>Error类对象由 Java虚拟机生成并抛出，大多数错误与代码编写者所执行的操作无关。</p>
+<p>例如，Java虚拟机运行错误（VirtualMachineError），当JVM不再有继续执行操作所需的内存资源时，将出现OutOfMemoryError。这些异常发生时，Java虚拟机（JVM）一般会选择线程终止；</p>
+<p>还有发生在虚拟机试图执行应用时，如类定义错误（NoClassDefFoundError）、链接错误（LinkageError）。这些错误是不可查的，因为它们在应用程序的控制和处理能力之外，而且绝大多数是程序运行时不允许出现的状况。</p>
+<p>对于设计合理的应用程序来说，即使确实发生了错误，本质上也不应该试图去处理它所引起的异常状况。在Java中，错误通常是使用Error的子类描述。</p>
+</blockquote>
+</li>
+<li><p>Exception</p>
+</li>
+<li><blockquote>
+<p>在Exception分支中有一个重要的子类RuntimeException（运行时异常），该类型的异常自动为你所编写的程序定义ArrayIndexOutOfBoundsException（数组下标越界）、NullPointerException（空指针异常）、ArithmeticException（算术异常）、MissingResourceException（丢失资源）、ClassNotFoundException（找不到类）等异常，这些异常是不检查异常，程序中可以选择捕获处理，也可以不处理。这些异常一般是由程序逻辑错误引起的，程序应该从逻辑角度尽可能避免这类异常的发生；</p>
+<p>而RuntimeException之外的异常我们统称为非运行时异常，类型上属于Exception类及其子类，从程序语法角度讲是必须进行处理的异常，如果不处理，程序就不能编译通过。如IOException、SQLException等</p>
+</blockquote>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/iblade/article/details/78196016">原文链接</a></p>
+</li>
+</ul>
+<h3 id="25-动静态代理的区别，什么场景使用？"><a href="#25-动静态代理的区别，什么场景使用？" class="headerlink" title="25. 动静态代理的区别，什么场景使用？"></a>25. 动静态代理的区别，什么场景使用？</h3><p>静态代理类：由程序员创建或由特定工具自动生成源代码，再对其编译。在程序运行前，代理类的.class文件就已经存在了。<br>动态代理类：在程序运行时，运用反射机制动态创建而成。<br>静态代理通常只代理一个类，动态代理是代理一个接口下的多个实现类。<br> 静态代理事先知道要代理的是什么，而动态代理不知道要代理什么东西，只有在运行时才知道。<br>动态代理是实现JDK里的InvocationHandler接口的invoke方法，但注意的是代理的是接口，也就是你的业务类必须要实现接口，通过Proxy里的newProxyInstance得到代理对象。<br>还有一种动态代理CGLIB，代理的是类，不需要业务类继承接口，通过派生的子类来实现代理。通过在运行时，动态修改字节码达到修改类的目的。</p>
+<h3 id="26-JVM-垃圾回收机制和常见算法"><a href="#26-JVM-垃圾回收机制和常见算法" class="headerlink" title="26. JVM 垃圾回收机制和常见算法"></a>26. JVM 垃圾回收机制和常见算法</h3><p> 垃圾回收(Garbage Collection)是Java虚拟机(JVM)垃圾回收器提供的一种用于在空闲时间不定时回收无任何对象引用的对象占据的内存空间的一种机制。</p>
+<p><strong>搜索算法</strong>:</p>
+<p>1）引用计数器算法（废弃）</p>
+<p>引用计数器算法是给每个对象设置一个计数器，当有地方引用这个对象的时候，计数器+1，当引用失效的时候，</p>
+<p>计数器-1，当计数器为 0 的时候，JVM 就认为对象不再被使用，是“垃圾”了。</p>
+<p>引用计数器实现简单，效率高；但是不能解决循环引用问问题（A 对象引用 B 对象，B 对象又引用 A 对象，但是</p>
+<p>A,B 对象已不被任何其他对象引用），同时每次计数器的增加和减少都带来了很多额外的开销，所以在 JDK1.1 之后，</p>
+<p>这个算法已经不再使用了。</p>
+<p>2）根搜索算法（使用）</p>
+<p>根搜索算法是通过一些“GC Roots”对象作为起点，从这些节点开始往下搜索，搜索通过的路径成为引用链</p>
+<p>（Reference Chain），当一个对象没有被 GC Roots 的引用链连接的时候，说明这个对象是不可用的。</p>
+<p><strong>回收算法</strong>:</p>
+<ol>
+<li>标记—清除算法（Mark-Sweep）（DVM 使用的算法）</li>
+</ol>
+<p>标记—清除算法包括两个阶段：“标记”和“清除”。在标记阶段，确定所有要回收的对象，并做标记。清除阶段</p>
+<p>紧随标记阶段，将标记阶段确定不可用的对象清除。标记—清除算法是基础的收集算法，标记和清除阶段的效率不高，而且清除后回产生大量的不连续空间，这样当程序需要分配大内存对象时，可能无法找到足够的连续空间。</p>
+<ol start="2">
+<li>复制算法（Copying）</li>
+</ol>
+<p>复制算法是把内存分成大小相等的两块，每次使用其中一块，当垃圾回收的时候，把存活的对象复制到另一块上，</p>
+<p>然后把这块内存整个清理掉。复制算法实现简单，运行效率高，但是由于每次只能使用其中的一半，造成内存的利用率不高。现在的 JVM 用复制方法收集新生代，由于新生代中大部分对象（98%）都是朝生夕死的，所以两块内存的比例</p>
+<p>不是 1:1(大概是 8:1)。</p>
+<p>3）标记—整理算法（Mark-Compact）</p>
+<p>标记—整理算法和标记—清除算法一样，但是标记—整理算法不是把存活对象复制到另一块内存，而是把存活对象往内存的一端移动，然后直接回收边界以外的内存。标记—整理算法提高了内存的利用率，并且它适合在收集对象存活时间较长的老年代。</p>
+<p>4）分代收集（Generational Collection）</p>
+<p>分代收集是根据对象的存活时间把内存分为新生代和老年代，根据各个代对象的存活特点，每个代采用不同的垃圾回收算法。新生代采用复制算法，老年代采用标记—整理算法。垃圾算法的实现涉及大量的程序细节，而且不同的虚拟机平台实现的方法也各不相同。</p>
+<h3 id="27-为什么重写-equals-还要重写-hashcode？"><a href="#27-为什么重写-equals-还要重写-hashcode？" class="headerlink" title="27. 为什么重写 equals 还要重写 hashcode？"></a>27. 为什么重写 equals 还要重写 hashcode？</h3><ul>
+<li>HashMap中，如果要比较key是否相等，要同时使用这两个函数！</li>
+<li>因为自定义的类的hashcode() 方法继承于 Object 类，其 hashcode 码为默认的内存地址，这样即便有相同含义的两个对象，比 较也是不相等的。</li>
+<li>HashMap 中的比较 key 是这样的，先求出 key 的 hashcode(),比较其值是否相 等，若相等再比较 equals(),若相等则认为他们是相等的。若 equals()不相等则认为他们不相等。 如果只重写 hashcode()不重写 equals()方法，当比较 equals()时只是看他们是否为同一对象（即 进行内存地址的比较）,所以必定要两个方法一起重写。</li>
+<li>HashMap 用来判断 key 是否相等的方法， 其实是调用了 HashSet 判断加入元素 是否相等。重载hashCode()是为了对同一个 key，能得到 相同的 Hash Code，这样 HashMap 就可以定位到我们指定的 key 上。重载 equals()是为了向 HashMap 表明当前对象和 key 上所保存的对象是相等的，这样我们才真正地获得了这个 key 所对 应的这个键值对。</li>
+</ul>
+<h3 id="28-Object-若不重写-hashCode-的话，hashCode-如何计算出来的？"><a href="#28-Object-若不重写-hashCode-的话，hashCode-如何计算出来的？" class="headerlink" title="28. Object 若不重写 hashCode()的话，hashCode()如何计算出来的？"></a>28. Object 若不重写 hashCode()的话，hashCode()如何计算出来的？</h3><ul>
+<li>Object 的 hashcode 方法是本地方法，也就是用 c 语言或 c++ 实现的，该方法直接返回对象的 内存地址。</li>
+</ul>
+<h3 id="29-比较的是什么？"><a href="#29-比较的是什么？" class="headerlink" title="29. ==比较的是什么？"></a>29. ==比较的是什么？</h3><ul>
+<li>“==”对比两个对象基于内存引用，如果两个对象的引用完全相同（指向同一个对象）时， “==”操作将返回 true，否则返回 false。“==”如果两边是基本类型，就是比较数值是否相等。</li>
+</ul>
+<h3 id="30-说说-Lamda-表达式的优缺点。"><a href="#30-说说-Lamda-表达式的优缺点。" class="headerlink" title="30. 说说 Lamda 表达式的优缺点。"></a>30. 说说 Lamda 表达式的优缺点。</h3><ul>
+<li>优点：1. 简洁。2. 非常容易并行计算。3. 可能代表未来的编程趋势。 </li>
+<li>缺点：1. 若不用并行计算，很多时候计算速度没有比传统的 for 循环快。（并行计算有时 需要预热才显示出效率优势）2. 不容易调试。3. 若其他程序员没有学过 lambda 表达式，代码 不容易让其他语言的程序员看懂。</li>
+</ul>
+<h3 id="31-Java-中是如何支持正则表达式操作的？"><a href="#31-Java-中是如何支持正则表达式操作的？" class="headerlink" title="31. Java 中是如何支持正则表达式操作的？"></a>31. Java 中是如何支持正则表达式操作的？</h3><ul>
+<li><p>Java 中的 String 类提供了支持正则表达式操作的方法，包括：matches()、replaceAll()、 </p>
+<p>replaceFirst()、split()。此外，Java 中可以用 Pattern 类表示正则表达式对象，它提供了丰 </p>
+<p>富的 API 进行各种正则表达式操作</p>
+</li>
+</ul>
+<h3 id="32-锁有了解嘛，说一下-Synchronized-和-lock"><a href="#32-锁有了解嘛，说一下-Synchronized-和-lock" class="headerlink" title="32. 锁有了解嘛，说一下 Synchronized 和 lock"></a>32. 锁有了解嘛，说一下 Synchronized 和 lock</h3><ul>
+<li><p>synchronized 是 Java 的关键字，当它用来修饰一个方法或者一个代码块的时候，能够保证 </p>
+<p>在同一时刻最多只有一个线程执行该段代码。JDK1.5 以后引入了自旋锁、锁粗化、轻量级锁， </p>
+<p>偏向锁来有优化关键字的性能。 </p>
+</li>
+<li><p>Lock 是一个接口，而 synchronized 是 Java 中的关键字，synchronized 是内置的语言实现； </p>
+<p>synchronized 在发生异常时，会自动释放线程占有的锁，因此不会导致死锁现象发生；而 Lock </p>
+<p>在发生异常时，如果没有主动通过 unLock()去释放锁，则很可能造成死锁现象，因此使用 Lock </p>
+<p>时需要在 finally 块中释放锁；Lock 可以让等待锁的线程响应中断，而 synchronized 却不行， </p>
+<p>使用 synchronized 时，等待的线程会一直等待下去，不能够响应中断；通过 Lock 可以知道有没 </p>
+<p>有成功获取锁，而 synchronized 却无法办到。 </p>
+</li>
+</ul>
+<h3 id="33-请列举你所知道的-Object-类的方法。"><a href="#33-请列举你所知道的-Object-类的方法。" class="headerlink" title="33. 请列举你所知道的 Object 类的方法。"></a>33. 请列举你所知道的 Object 类的方法。</h3><ul>
+<li><p>Object()默认构造方法。clone() 创建并返回此对象的一个副本。equals(Object obj) 指 </p>
+<p>示某个其他对象是否与此对象“相等”。finalize()当垃圾回收器确定不存在对该对象的更多引 </p>
+<p>用时，由对象的垃圾回收器调用此方法。getClass()返回一个对象的运行时类。hashCode()返回 </p>
+<p>该对象的哈希码值。 notify()唤醒在此对象监视器上等待的单个线程。 notifyAll()唤醒在此 </p>
+<p>对象监视器上等待的所有线程。toString()返回该对象的字符串表示。wait()导致当前的线程等 </p>
+<p>待，直到其他线程调用此对象的 notify() 方法或 notifyAll() 方法。wait(long timeout)导 </p>
+<p>致当前的线程等待，直到其他线程调用此对象的 notify() 方法或 notifyAll() 方法，或者超 </p>
+<p>过指定的时间量。wait(long timeout, int nanos) 导致当前的线程等待，直到其他线程调用此 </p>
+<p>对象的 notify() 方法或 notifyAll() 方法，或者其他某个线程中断当前线程，或者已超过某 </p>
+<p>个实际时间量。</p>
+</li>
+</ul>
+<h3 id="34-”static”关键字是什么意思？Java-中是否可以覆盖-override-一个-private或者是-static-的方法？"><a href="#34-”static”关键字是什么意思？Java-中是否可以覆盖-override-一个-private或者是-static-的方法？" class="headerlink" title="34. ”static”关键字是什么意思？Java 中是否可以覆盖(override)一个 private或者是 static 的方法？"></a>34. ”static”关键字是什么意思？Java 中是否可以覆盖(override)一个 private或者是 static 的方法？</h3><ul>
+<li><p>“static”关键字表明一个成员变量或者是成员方法可以在没有所属的类的实例变量的情 </p>
+<p>况下被访问。 Java 中 static 方法不能被覆盖，因为方法覆盖是基于运行时动态绑定的，而 static 方法是编 </p>
+<p>译时静态绑定的。static 方法跟类的任何实例都不相关，所以概念上不适用。</p>
+</li>
+</ul>
+<h3 id="35-类加载机制，双亲委派模型，好处是什么？"><a href="#35-类加载机制，双亲委派模型，好处是什么？" class="headerlink" title="35. 类加载机制，双亲委派模型，好处是什么？"></a>35. 类加载机制，双亲委派模型，好处是什么？</h3><ul>
+<li><p>某个特定的类加载器在接到加载类的请求时，首先将加载任务委托给父类加载器，依次递归， </p>
+<p>如果父类加载器可以完成类加载任务，就成功返回；只有父类加载器无法完成此加载任务时，才 </p>
+<p>自己去加载。 </p>
+</li>
+<li><p>使用双亲委派模型的好处在于 Java 类随着它的类加载器一起具备了一种带有优先级的层次 </p>
+<p>关系。例如类 java.lang.Object，它存在在 rt.jar 中，无论哪一个类加载器要加载这个类，最 </p>
+<p>终都是委派给处于模型最顶端的 Bootstrap ClassLoader 进行加载，因此 Object 类在程序的各 </p>
+<p>种类加载器环境中都是同一个类。相反，如果没有双亲委派模型而是由各个类加载器自行加载的 </p>
+<p>话，如果用户编写了一个 java.lang.Object 的同名类并放在 ClassPath 中，那系统中将会出现</p>
+<p>多个不同的 Object 类，程序将混乱。因此，如果开发者尝试编写一个与 rt.jar 类库中重名的 </p>
+<p>Java 类，可以正常编译，但是永远无法被加载运行。 </p>
+</li>
+</ul>
+<h3 id="36-是否可以在-static-环境中访问非-static-变量？"><a href="#36-是否可以在-static-环境中访问非-static-变量？" class="headerlink" title="36. 是否可以在 static 环境中访问非 static 变量？"></a>36. 是否可以在 static 环境中访问非 static 变量？</h3><ul>
+<li><p>static 变量在 Java 中是属于类的，它在所有的实例中的值是一样的。当类被 Java 虚拟机 </p>
+<p>载入的时候，会对 static 变量进行初始化。如果你的代码尝试不用实例来访问非 static 的变量， </p>
+<p>编译器会报错，因为这些变量还没有被创建出来，还没有跟任何实例关联上。</p>
+</li>
+</ul>
+<h3 id="37-谈谈如何通过反射创建对象？"><a href="#37-谈谈如何通过反射创建对象？" class="headerlink" title="37. 谈谈如何通过反射创建对象？"></a>37. 谈谈如何通过反射创建对象？</h3><ul>
+<li><p>方法 1：通过类对象调用 newInstance()方法，例如：String.class.newInstance() </p>
+</li>
+<li><p>方法 2：通过类对象的 getConstructor()或 getDeclaredConstructor()方法获得构造器 （Constructor）对象并调用其 newInstance()方法创建对象，如String.class.getConstructor(String.class).newInstance(“Hello”);</p>
+</li>
+</ul>
+<h3 id="38-Java-支持多继承么？"><a href="#38-Java-支持多继承么？" class="headerlink" title="38. Java 支持多继承么？"></a>38. Java 支持多继承么？</h3><ul>
+<li><p>Java 中类不支持多继承，只支持单继承（即一个类只有一个父类）。 但是 java 中的接口 </p>
+<p>支持多继承，，即一个子接口可以有多个父接口。（接口的作用是用来扩展对象的功能，一个子 </p>
+<p>接口继承多个父接口，说明子接口扩展了多个功能，当类实现接口时，类就扩展了相应的功能）。</p>
+</li>
+</ul>
+<h3 id="39-Comparable-和-Comparator-接口是干什么的？列出它们的区别。"><a href="#39-Comparable-和-Comparator-接口是干什么的？列出它们的区别。" class="headerlink" title="39. Comparable 和 Comparator 接口是干什么的？列出它们的区别。"></a>39. Comparable 和 Comparator 接口是干什么的？列出它们的区别。</h3><ul>
+<li><p>Java 提供了只包含一个 compareTo()方法的 Comparable 接口。这个方法可以个给两个对象 </p>
+<p>排序。具体来说，它返回负数，0，正数来表明输入对象小于，等于，大于已经存在的对象。 </p>
+<p>Java 提供了包含 compare()和 equals()两个方法的 Comparator 接口。compare()方法用来给两 </p>
+<p>个输入参数排序，返回负数，0，正数表明第一个参数是小于，等于，大于第二个参数。equals() </p>
+<p>方法需要一个对象作为参数，它用来决定输入参数是否和 comparator 相等。只有当输入参数也 </p>
+<p>是一个 comparator 并且输入参数和当前 comparator 的排序结果是相同的时候，这个方法才返回 </p>
+<p>true。 </p>
+</li>
+</ul>
+<h3 id="40-两个对象值相同-x-equals-y-true-，但却可有不同的-hash-code-说法是否正确？"><a href="#40-两个对象值相同-x-equals-y-true-，但却可有不同的-hash-code-说法是否正确？" class="headerlink" title="40. 两个对象值相同(x.equals(y) == true)，但却可有不同的 hash code 说法是否正确？"></a>40. 两个对象值相同(x.equals(y) == true)，但却可有不同的 hash code 说法是否正确？</h3><ul>
+<li><p>不对，如果两个对象 x 和 y 满足 x.equals(y) == true，它们的哈希码（hash code）应当 </p>
+<p>相同。Java 对于 eqauls 方法和 hashCode 方法是这样规定的：(1)如果两个对象相同（equals </p>
+<p>方法返回 true），那么它们的 hashCode 值一定要相同；(2)如果两个对象的 hashCode 相同，它</p>
+<p>们并不一定相同。当然，你未必要按照要求去做，但是如果你违背了上述原则就会发现在使用容 </p>
+<p>器时，相同的对象可以出现在 Set 集合中，同时增加新元素的效率会大大下降（对于使用哈希存 </p>
+<p>储的系统，如果哈希码频繁的冲突将会造成存取性能急剧下降）。</p>
+</li>
+</ul>
+<h3 id="41-谈一下面向对象的”六原则一法则”。"><a href="#41-谈一下面向对象的”六原则一法则”。" class="headerlink" title="41. 谈一下面向对象的”六原则一法则”。"></a>41. 谈一下面向对象的”六原则一法则”。</h3><ul>
+<li><p>单一职责原则：一个类只做它该做的事情。（单一职责原则想表达的就是”高内聚”，写 </p>
+<p>代码最终极的原则只有六个字”高内聚、低耦合”，所谓的高内聚就是一个代码模块只完成一项功 </p>
+<p>能，在面向对象中，如果只让一个类完成它该做的事，而不涉及与它无关的领域就是践行了高内 </p>
+<p>聚的原则，这个类就只有单一职责。另一个是模块化，好的自行车是组装车，从减震叉、刹车到 </p>
+<p>变速器，所有的部件都是可以拆卸和重新组装的，好的乒乓球拍也不是成品拍，一定是底板和胶 </p>
+<p>皮可以拆分和自行组装的，一个好的软件系统，它里面的每个功能模块也应该是可以轻易的拿到 </p>
+<p>其他系统中使用的，这样才能实现软件复用的目标。）</p>
+</li>
+<li><p>开闭原则：软件实体应当对扩展开放， 对修改关闭。（在理想的状态下，当我们需要为一个软件系统</p>
+<p>增加新功能时，只需要从原来的系统派生出一些新类就可以，不需要修改原来的任何一行代码。</p>
+<p>要做到开闭有两个要点：</p>
+<p>①抽象是关键，一个系统中如果没有抽象类或接口系统就没有扩展点；</p>
+<p>②封装可变性，将系统中的各种可变因素封装到一个继承结构中，如果多个可变因素混杂在一起，系统将变得复杂而换乱，如果不清楚如何封装可变性，可以参考《设计模式精解》一书中对桥梁模式的讲解的章节。）</p>
+</li>
+<li><p>依赖倒转原则：面向接口编程。（该原则说得直白和具体一些就是声明方法的参数类型、方法的返回类 </p>
+<p>型、变量的引用类型时，尽可能使用抽象类型而不用具体类型，因为抽象类型可以被它的任何一 </p>
+<p>个子类型所替代，请参考下面的里氏替换原则。）</p>
+</li>
+<li><p>里氏替换原则：任何时候都可以用子类型替换 掉父类型。</p>
+<p>（关于里氏替换原则的描述，Barbara Liskov 女士的描述比这个要复杂得多，但简 </p>
+<p>单的说就是能用父类型的地方就一定能使用子类型。里氏替换原则可以检查继承关系是否合理， </p>
+<p>如果一个继承关系违背了里氏替换原则，那么这个继承关系一定是错误的，需要对代码进行重构。 </p>
+<p>例如让猫继承狗，或者狗继承猫，又或者让正方形继承长方形都是错误的继承关系，因为你很容 </p>
+<p>易找到违反里氏替换原则的场景。需要注意的是：子类一定是增加父类的能力而不是减少父类的 </p>
+<p>能力，因为子类比父类的能力更多，把能力多的对象当成能力少的对象来用当然没有任何问题。） </p>
+</li>
+<li><p>接口隔离原则：接口要小而专，绝不能大而全。（臃肿的接口是对接口的污染，既然接口表示 </p>
+<p>能力，那么一个接口只应该描述一种能力，接口也应该是高度内聚的。例如，琴棋书画就应该分 </p>
+<p>别设计为四个接口，而不应设计成一个接口中的四个方法，因为如果设计成一个接口中的四个方 </p>
+<p>法，那么这个接口很难用，毕竟琴棋书画四样都精通的人还是少数，而如果设计成四个接口，会 </p>
+<p>几项就实现几个接口，这样的话每个接口被复用的可能性是很高的。Java 中的接口代表能力、 </p>
+<p>代表约定、代表角色，能否正确的使用接口一定是编程水平高低的重要标识。）</p>
+</li>
+<li><p>合成聚合复用原则：优先使用聚合或合成关系复用代码。（通过继承来复用代码是面向对象程序设计中被滥用 </p>
+<p>得最多的东西，因为所有的教科书都无一例外的对继承进行了鼓吹从而误导了初学者，类与类之 </p>
+<p>间简单的说有三种关系，Is-A 关系、Has-A 关系、Use-A 关系，分别代表继承、关联和依赖。其 </p>
+<p>中，关联关系根据其关联的强度又可以进一步划分为关联、聚合和合成，但说白了都是 Has-A </p>
+<p>关系，合成聚合复用原则想表达的是优先考虑 Has-A 关系而不是 Is-A 关系复用代码，原因嘛可 </p>
+<p>以自己从百度上找到一万个理由，需要说明的是，即使在 Java 的 API 中也有不少滥用继承的例 </p>
+<p>子，例如 Properties 类继承了 Hashtable 类，Stack 类继承了 Vector 类，这些继承明显就是错 </p>
+<p>误的，更好的做法是在 Properties 类中放置一个 Hashtable 类型的成员并且将其键和值都设置 </p>
+<p>为字符串来存储数据，而 Stack 类的设计也应该是在 Stack 类中放一个 Vector 对象来存储数据。 </p>
+<p>记住：任何时候都不要继承工具类，工具是可以拥有并可以使用的，而不是拿来继承的。）</p>
+</li>
+<li><p>迪米特法则：迪米特法则又叫最少知识原则，一个对象应当对其他对象有尽可能少的了解。再复杂 </p>
+<p>的系统都可以为用户提供一个简单的门面，Java Web 开发中作为前端控制器的 Servlet 或 Filter </p>
+<p>不就是一个门面吗，浏览器对服务器的运作方式一无所知，但是通过前端控制器就能够根据你的 </p>
+<p>请求得到相应的服务。调停者模式也可以举一个简单的例子来说明，例如一台计算机，CPU、内 </p>
+<p>存、硬盘、显卡、声卡各种设备需要相互配合才能很好的工作，但是如果这些东西都直接连接到 </p>
+<p>一起，计算机的布线将异常复杂，在这种情况下，主板作为一个调停者的身份出现，它将各个设 </p>
+<p>备连接在一起而不需要每个设备之间直接交换数据，这样就减小了系统的耦合度和复杂度。</p>
+</li>
+</ul>
+<h3 id="42-多线程中的-i-线程安全吗？为什么？"><a href="#42-多线程中的-i-线程安全吗？为什么？" class="headerlink" title="42. 多线程中的 i++线程安全吗？为什么？"></a>42. 多线程中的 i++线程安全吗？为什么？</h3><ul>
+<li><p>不安全。i++不是原子性操作。i++分为读取 i 值，对 i 值加一，再赋值给 i++，执行期中任 </p>
+<p>何一步都是有可能被其他线程抢占的。</p>
+</li>
+</ul>
+<h3 id="43-线程池运行流程，参数，策略"><a href="#43-线程池运行流程，参数，策略" class="headerlink" title="43. 线程池运行流程，参数，策略"></a>43. 线程池运行流程，参数，策略</h3><ul>
+<li><p>线程池主要就是指定线程池核心线程数大小，最大线程数，存储的队列，拒绝策略，空闲线 </p>
+<p>程存活时长。当需要任务大于核心线程数时候，就开始把任务往存储任务的队列里，当存储队列 </p>
+<p>满了的话，就开始增加线程池创建的线程数量，如果当线程数量也达到了最大，就开始执行拒绝 </p>
+<p>策略，比如说记录日志，直接丢弃，或者丢弃最老的任务。</p>
+</li>
+</ul>
+<h3 id="44-创建线程的方法，哪个更好，为什么？"><a href="#44-创建线程的方法，哪个更好，为什么？" class="headerlink" title="44. 创建线程的方法，哪个更好，为什么？"></a>44. 创建线程的方法，哪个更好，为什么？</h3><ul>
+<li>需要从 Java.lang.Thread 类派生一个新的线程类，重写它的 run()方法； </li>
+<li>实现 Runnalbe 接口，重写 Runnalbe 接口中的 run()方法。 </li>
+<li>实现 Runnalbe 接口更好<ul>
+<li>实现Runnable接口是首选方法。在这里，您并不需要修改Thread类的行为。你只是给线程一些东西运行。这意味着组合是最好的方式。</li>
+<li>Java只支持单一继承，所以你只能继承一个类。</li>
+<li>用接口的方式将你的代码和线程实现分离，更加清晰。</li>
+<li>实现Runnable使你的类更灵活。如果您继承Thread类，那么您所做的操作总是处于一个线程中。然而如果你采用实现Runnable接口，您可以在一个线程中运行它，或者将它传递给某种执行器（executor），或者只是将它作为一个单线程应用程序中的任务传递给它。</li>
+<li>通过继承Thread类，每个线程都有一个相关联的唯一对象，而实现Runnable接口，多线程可以共享同一个Runnable实例。</li>
+</ul>
+</li>
+</ul>
+<h3 id="45-线程池有什么好处？"><a href="#45-线程池有什么好处？" class="headerlink" title="45. 线程池有什么好处？"></a>45. 线程池有什么好处？</h3><ul>
+<li><p>第一：降低资源消耗。通过重复利用已创建的线程降低线程创建和销毁造成的消耗。 </p>
+</li>
+<li><p>第二：提高响应速度。当任务到达时，任务可以不需要等到线程创建就能执行。 </p>
+</li>
+<li><p>第三：提高线程的可管理性，线程是稀缺资源，如果无限制地创建，不仅会消耗系统资源， </p>
+<p>还会降低系统的稳定性，使用线程池可以进行统一分配、调优和监控。</p>
+</li>
+</ul>
+<h3 id="46-同步方法和同步代码块的区别是什么？"><a href="#46-同步方法和同步代码块的区别是什么？" class="headerlink" title="46. 同步方法和同步代码块的区别是什么？"></a>46. 同步方法和同步代码块的区别是什么？</h3><ul>
+<li><p>同步方法默认用 this 或者当前类 class 对象作为锁；</p>
+</li>
+<li><p>同步代码块可以选择以什么来加锁，比同步方法要更细颗粒度，我们可以选择只同步会发生同步 </p>
+<p>问题的部分代码而不是整个方法； </p>
+</li>
+</ul>
+<h3 id="47-java-异常处理机制-throw-和-throws-的区别"><a href="#47-java-异常处理机制-throw-和-throws-的区别" class="headerlink" title="47. java 异常处理机制,throw 和 throws 的区别"></a>47. java 异常处理机制,throw 和 throws 的区别</h3><p>相同点：都是Java的异常处理的关键字</p>
+<p>区别：1. throw用在方法体，用来抛出一个异常。</p>
+<p>​            2. throws用在方法声明后面，用来标明该成员函数可能抛出的各种异常，表示此方法不处理异常，而在调用此方法处处理异常。</p>
+<h3 id="48-final、finally、finalize的区别？"><a href="#48-final、finally、finalize的区别？" class="headerlink" title="48. final、finally、finalize的区别？"></a>48. final、finally、finalize的区别？</h3><ul>
+<li>final 用于声明属性,方法和类, 分别表示属性不可变, 方法不可覆盖, 类不可继承.</li>
+<li>finally 是异常处理语句结构的一部分，表示总是执行.</li>
+<li>finalize 是Object类的一个方法，在垃圾收集器执行的时候会调用被回收对象的此方法，可以覆盖此方法提供垃圾收集时的其他资源回收，例如关闭文件等. JVM不保证此方法总被调用.</li>
+</ul>
+<h3 id="49-String-、StringBuilder-、StringBuffer-的区别？什么情况下用“-”运算符进行字符串连接比调用-StringBuffer-StringBuilder对象的-append-方法连接字符串性能更好？"><a href="#49-String-、StringBuilder-、StringBuffer-的区别？什么情况下用“-”运算符进行字符串连接比调用-StringBuffer-StringBuilder对象的-append-方法连接字符串性能更好？" class="headerlink" title="49. String 、StringBuilder 、StringBuffer 的区别？什么情况下用“+”运算符进行字符串连接比调用 StringBuffer/StringBuilder对象的 append 方法连接字符串性能更好？"></a>49. String 、StringBuilder 、StringBuffer 的区别？什么情况下用“+”运算符进行字符串连接比调用 StringBuffer/StringBuilder对象的 append 方法连接字符串性能更好？</h3><ul>
+<li>相同点：<br>它们都可以储存和操作字符串，同时三者都使用final修饰，都属于最终类不能派生子类，操作的相关方法也类似例如获取字符串长度等；</li>
+<li>不同点：<br>其中String是只读字符串，也就意味着String引用的字符串内容是不能被改变的，而StringBuffer和StringBuilder类表示的字符串对象可以直接进行修改，在修改的同时地址值不会发生改变。StringBuilder是JDK 1.5中引入的，它和StringBuffer的方法完全相同，区别在于它是在单线程环境下使用的，因为它的所有方法都没有被synchronized修饰，因此它的效率也比StringBuffer略高。在此重点说明一下，String、StringBuffer、StringBuilder三者类型不一样，无法使用equals()方法比较其字符串内容是否一样！</li>
+<li>如果连接后得到的字符串在静态存储区中是早已存在的，那么用+做字符串连接是优于StringBuffer / StringBuilder的append方法的。</li>
+</ul>
+<h3 id="50-日期类型转换。"><a href="#50-日期类型转换。" class="headerlink" title="50. 日期类型转换。"></a>50. 日期类型转换。</h3><ul>
+<li><p>java.util.Date类型转换成long类型：date.getTime()</p>
+</li>
+<li><p>long类型转换成java.util.Date类型：new Date(毫秒数) 毫秒数13位</p>
+</li>
+<li><p>string类型转换成java.util.Date类型：SimpleDateFormat的parse方法转成Date</p>
+</li>
+<li><p>Date转换成String类型,可以调用SimpleDateFormat的format方法格式化输出Date</p>
+</li>
+</ul>
+<h3 id="51-Java-的基本数据类型都有哪些各占几个字节，String-是基本数据类型吗？"><a href="#51-Java-的基本数据类型都有哪些各占几个字节，String-是基本数据类型吗？" class="headerlink" title="51. Java 的基本数据类型都有哪些各占几个字节，String 是基本数据类型吗？"></a>51. Java 的基本数据类型都有哪些各占几个字节，String 是基本数据类型吗？</h3><p>整型：byte、short、int、long 分别占用1、2、4、8个字节的空间;</p>
+<p>浮点型：float，double 分别占用4、8个字节;</p>
+<p>char型：char 占用2个字节;</p>
+<p>boolean型：boolean 占用1字节.</p>
+<p>Java 中规定了 String 不属于基本数据类型，只是代表一个类，属于引用类型。</p>
+<p>String 也可不用 new 的形式来创建对象，因为 Java 有字符串常量池机制，所以不用 new 关键字创建对象时，会在常量池中创建对象。</p>
+<h3 id="52-int-和-Integer-有什么区别？"><a href="#52-int-和-Integer-有什么区别？" class="headerlink" title="52. int 和 Integer 有什么区别？"></a>52. int 和 Integer 有什么区别？</h3><ul>
+<li>Integer是int的包装类；int是基本数据类型；</li>
+<li>Integer变量必须实例化后才能使用；int变量不需要；</li>
+<li>Integer实际是对象的引用，指向此new的Integer对象；int是直接存储数据值 ；</li>
+<li>Integer的默认值是null；int的默认值是0。</li>
+</ul>
+<h3 id="53-Java-中有几种类型的流，字节流如何转为字符流，字节流和字符流的区别。"><a href="#53-Java-中有几种类型的流，字节流如何转为字符流，字节流和字符流的区别。" class="headerlink" title="53. Java 中有几种类型的流，字节流如何转为字符流，字节流和字符流的区别。"></a>53. Java 中有几种类型的流，字节流如何转为字符流，字节流和字符流的区别。</h3><p>在java.io包中操作文件内容的主要有两大类：字节流、字符流，两类都分为输入和输出操作。在字节流中输出数据主要是使用OutputStream完成，输入使的是InputStream，在字符流中输出主要是使用Writer类完成，输入流主要使用Reader类完成。</p>
+<p>转换：InputSreamReader用于将一个字节流中的字节解码成字符。</p>
+<p>​           OutputStream用于将写入的字符编码成字节后写入一个字节流。</p>
+<p>区别：字节流在操作的时候本身是不会用到缓冲区（内存）的，是与文件本身直接操作的，而字符流在操作的时候是使用到缓冲区的</p>
+<h3 id="54-如何将一个-java-对象序列化到文件里"><a href="#54-如何将一个-java-对象序列化到文件里" class="headerlink" title="54. 如何将一个 java 对象序列化到文件里"></a>54. 如何将一个 java 对象序列化到文件里</h3><ol>
+<li>对象需要实现Seralizable接口</li>
+<li>通过ObjectOutputStream的writeObject()方法写入和ObjectInputStream的readObject()方法来进行读取</li>
+</ol>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/07/11/SpringBoot%E6%95%B4%E5%90%88/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/07/14/Redis%E5%85%A5%E9%97%A8/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

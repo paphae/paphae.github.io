@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>JSP表达式语言(EL) | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="el," />
+  
+
+  <meta name="description" content="JSP表达式语言(EL)使得可以轻松访问存储在JavaBeans组件中的应用程序数据。JSP EL允许用来创建算术和逻辑表达式。 在JSP EL表达式中，可以使用整数，浮点数，字符串，布尔值的内置常量为true和false，以及null值。 JSP EL隐式对象   编号 隐式对象 描述     1 pageScope 来自页面范围的范围变量   2 requestScope 来自请求范围的范围变">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JSP表达式语言(EL)">
+<meta property="og:url" content="http://paphae.top/2020/05/11/JSP%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AF%AD%E8%A8%80(EL)/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="JSP表达式语言(EL)使得可以轻松访问存储在JavaBeans组件中的应用程序数据。JSP EL允许用来创建算术和逻辑表达式。 在JSP EL表达式中，可以使用整数，浮点数，字符串，布尔值的内置常量为true和false，以及null值。 JSP EL隐式对象   编号 隐式对象 描述     1 pageScope 来自页面范围的范围变量   2 requestScope 来自请求范围的范围变">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-05-11T00:53:12.000Z">
+<meta property="article:modified_time" content="2020-05-12T14:47:40.623Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="el">
+<meta name="twitter:card" content="summary">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JSP-EL%E9%9A%90%E5%BC%8F%E5%AF%B9%E8%B1%A1"><span class="toc-text">JSP EL隐式对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#EL%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E8%AF%AD%E6%B3%95"><span class="toc-text">EL表达式的语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%9F%9F%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="toc-text">获取域对象的数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96JavaBean%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="toc-text">获取JavaBean的属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E9%9B%86%E5%90%88%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="toc-text">获取集合的数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#EL%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">EL运算符</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-JSP表达式语言(EL)" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">JSP表达式语言(EL)</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.05.11</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/javaWeb/">javaWeb</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p>JSP表达式语言(EL)使得可以轻松访问存储在JavaBeans组件中的应用程序数据。JSP EL允许用来创建<em>算术</em>和<em>逻辑表达式</em>。 在JSP EL表达式中，可以使用整数，浮点数，字符串，布尔值的内置常量为<code>true</code>和<code>false</code>，以及<code>null</code>值。</p>
+<h2 id="JSP-EL隐式对象"><a href="#JSP-EL隐式对象" class="headerlink" title="JSP EL隐式对象"></a>JSP EL隐式对象</h2><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>隐式对象</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>pageScope</code></td>
+<td>来自页面范围的范围变量</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>requestScope</code></td>
+<td>来自请求范围的范围变量</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>sessionScope</code></td>
+<td>会话范围的范围变量</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>applicationScope</code></td>
+<td>应用范围的范围变量</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>param</code></td>
+<td>请求参数作为字符串</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>paramValues</code></td>
+<td>请求参数作为字符串集合</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>header</code></td>
+<td>HTTP请求标头作为字符串</td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>headerValues</code></td>
+<td>HTTP请求标头作为字符串集合</td>
+</tr>
+<tr>
+<td>9</td>
+<td><code>initParam</code></td>
+<td>上下文初始化参数</td>
+</tr>
+<tr>
+<td>10</td>
+<td><code>cookie</code></td>
+<td>Cookie值</td>
+</tr>
+<tr>
+<td>11</td>
+<td><code>pageContext</code></td>
+<td>当前页面的JSP PageContext对象</td>
+</tr>
+</tbody>
+</table>
+**注意事项：**
+
+<ul>
+<li><strong>测试headerValues时，如果头里面有“-” ，例Accept-Encoding，则要headerValues[“Accept-Encoding”]</strong></li>
+<li><strong>测试cookie时，例<code>$&#123;cookie.key&#125;</code>取的是cookie对象，如访问cookie的名称和值，须<code>$&#123;cookie.key.name&#125;</code>或<code>$&#123;cookie.key.value&#125;</code></strong></li>
+<li><strong>测试initParam时，初始化参数要的web.xml中的配置Context的，仅仅是servlet的参数是获取不到的</strong></li>
+</ul>
+<h2 id="EL表达式的语法"><a href="#EL表达式的语法" class="headerlink" title="EL表达式的语法"></a>EL表达式的语法</h2><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;标识符&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>EL表达式如果找不到相应的对象属性，返回的的空白字符串“”，而不是null，这是EL表达式最大的特点！</strong></p>
+<h3 id="获取域对象的数据"><a href="#获取域对象的数据" class="headerlink" title="获取域对象的数据"></a>获取域对象的数据</h3><ul>
+<li>ServletContext对象有一个方法findAttribute(String name),<strong>EL表达式语句在执行的时候会调用该方法，用标识符作为关键字分别从page、request、session、application四个域中查找相应的对象。</strong>这也解释了为什么EL表达式可以仅仅通过标识符就能够获取到存进域对象的数据！</li>
+<li><strong>findAttribute()的查找顺序：从小到大，也就是page-&gt;request-&gt;session-&gt;application</strong></li>
+</ul>
+<h3 id="获取JavaBean的属性"><a href="#获取JavaBean的属性" class="headerlink" title="获取JavaBean的属性"></a>获取JavaBean的属性</h3><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//等同于person.getAge()</span></span><br><span class="line">$&#123;person.age&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>等同于调用对象的getter方法，内部是通过反射机制完成的</strong>！</p>
+<h3 id="获取集合的数据"><a href="#获取集合的数据" class="headerlink" title="获取集合的数据"></a>获取集合的数据</h3><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;%--取出list集合的第<span class="number">1</span>个元素（下标从<span class="number">0</span>开始），获取username属性--%&gt;</span><br><span class="line">$&#123;list[<span class="number">0</span>].username&#125;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;%--取出list集合的第<span class="number">2</span>个元素，获取username属性--%&gt;</span><br><span class="line">$&#123;list[<span class="number">1</span>].username&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>jsp中session属性存储了Map集合，Map集合的关键字是字符串，值是Person对象</strong></p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line"></span><br><span class="line">    Map&lt;String, Person&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    Person person1 = <span class="keyword">new</span> Person();</span><br><span class="line">    person1.setUsername(<span class="string">&quot;zhongfucheng1&quot;</span>);</span><br><span class="line"></span><br><span class="line">    Person person2 = <span class="keyword">new</span> Person();</span><br><span class="line">    person2.setUsername(<span class="string">&quot;ouzicheng1&quot;</span>);</span><br><span class="line"></span><br><span class="line">    map.put(<span class="string">&quot;aa&quot;</span>,person1);</span><br><span class="line">    map.put(<span class="string">&quot;bb&quot;</span>,person2);</span><br><span class="line"></span><br><span class="line">    session.setAttribute(<span class="string">&quot;map&quot;</span>,map);</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$&#123;map.aa.username&#125;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">$&#123;map.bb.username&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Map集合存储的关键字是一个数字，就不能使用”.”号运算符了</strong></p>
+<p>对于这种情况，我们可以<strong>使用”[]”的形式读取Map集合的数据</strong></p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$&#123;map[<span class="string">&quot;1&quot;</span>].username&#125;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">$&#123;map[<span class="string">&quot;2&quot;</span>].username&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="EL运算符"><a href="#EL运算符" class="headerlink" title="EL运算符"></a>EL运算符</h2><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>运算符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>.</code></td>
+<td>访问一个bean属性或Map的项</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>[]</code></td>
+<td>访问数组或List元素</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>()</code></td>
+<td>组合子表达式以更改评估顺序</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>+</code></td>
+<td>相加</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>-</code></td>
+<td>减去或取反一个值</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>*</code></td>
+<td>乘法</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>/</code> 或 <code>div</code></td>
+<td>除法</td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>%</code> 或 <code>mod</code></td>
+<td>求模</td>
+</tr>
+<tr>
+<td>9</td>
+<td><code>==</code> 或 <code>eq</code></td>
+<td>测试等于</td>
+</tr>
+<tr>
+<td>10</td>
+<td><code>!=</code> 或 <code>ne</code></td>
+<td>测试不等于</td>
+</tr>
+<tr>
+<td>11</td>
+<td><code>&lt;</code> 或 <code>lt</code></td>
+<td>测试小于</td>
+</tr>
+<tr>
+<td>12</td>
+<td><code>&gt;</code> 或 <code>gt</code></td>
+<td>测试大于</td>
+</tr>
+<tr>
+<td>13</td>
+<td><code>&lt;=</code> 或 <code>le</code></td>
+<td>测试小于或等于</td>
+</tr>
+<tr>
+<td>14</td>
+<td><code>&gt;=</code> 或 <code>ge</code></td>
+<td>测试大于或等于</td>
+</tr>
+<tr>
+<td>15</td>
+<td><code>&amp;&amp;</code> 或 <code>and</code></td>
+<td>测试逻辑与</td>
+</tr>
+<tr>
+<td>16</td>
+<td><code>or</code></td>
+<td>测试逻辑或</td>
+</tr>
+<tr>
+<td>17</td>
+<td><code>!</code> 或 <code>not</code></td>
+<td>一元布尔互补</td>
+</tr>
+<tr>
+<td>18</td>
+<td><code>empty</code></td>
+<td>测试空变量值</td>
+</tr>
+</tbody>
+</table>
+
+<p>参考文章：</p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4Njg5MDA5NA==&mid=2247484825&idx=5&sn=f040dd4bc1c47e28607fb8e8f61f09df&chksm=ebd74498dca0cd8e80b9986b687535f25f0be0bcd6b219e0f39bf011ae0b0c58529b15afe006###rd">JSP第四篇【EL表达式介绍、获取各类数据、11个内置对象、执行运算、回显数据、自定义函数、fn方法库】(修订版)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.yiibai.com/jsp/jsp_expression_language.html#">JSP表达式语言(EL)</a></p>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/05/11/javaWeb0511/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/05/12/%E5%B0%86%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E4%B8%8A%E4%BC%A0%E8%87%B3%E7%A0%81%E4%BA%91/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

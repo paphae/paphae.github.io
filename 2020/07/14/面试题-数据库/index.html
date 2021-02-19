@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>面试题-数据库 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="数据库," />
+  
+
+  <meta name="description" content="1. PreparedStatement和Statement的区别。 PreparedStatement 接口继承 Statement，PreparedStatement 实例包含已编译的 SQL 语句，所以其执行速度要快于 Statement 对象。因此，多次执行的 SQL 语句经常创建为 PreparedStatement 对象，以提高效率。 作 为 Statement 的 子 类 ， Pre">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试题-数据库">
+<meta property="og:url" content="http://paphae.top/2020/07/14/%E9%9D%A2%E8%AF%95%E9%A2%98-%E6%95%B0%E6%8D%AE%E5%BA%93/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="1. PreparedStatement和Statement的区别。 PreparedStatement 接口继承 Statement，PreparedStatement 实例包含已编译的 SQL 语句，所以其执行速度要快于 Statement 对象。因此，多次执行的 SQL 语句经常创建为 PreparedStatement 对象，以提高效率。 作 为 Statement 的 子 类 ， Pre">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-07-14T13:37:43.000Z">
+<meta property="article:modified_time" content="2020-07-14T13:47:09.009Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="数据库">
+<meta name="twitter:card" content="summary">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-PreparedStatement%E5%92%8CStatement%E7%9A%84%E5%8C%BA%E5%88%AB%E3%80%82"><span class="toc-text">1. PreparedStatement和Statement的区别。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-SQL-%E7%9A%84-select-%E8%AF%AD%E5%8F%A5%E5%AE%8C%E6%95%B4%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="toc-text">2. SQL 的 select 语句完整的执行顺序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-SQL-%E4%B9%8B%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2%EF%BC%88%E5%B7%A6%E8%BF%9E%E6%8E%A5%E5%92%8C%E5%8F%B3%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%89"><span class="toc-text">3. SQL 之连接查询（左连接和右连接的区别）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Mysql-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="toc-text">4. Mysql 性能优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Mysql-%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-text">5. Mysql 存储引擎有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9A%94%E7%A6%BB%E6%80%A7%EF%BC%9F"><span class="toc-text">6. 事务的隔离性？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%9B%9B%E5%A4%A7%E7%89%B9%E5%BE%81%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">7. 事务的四大特征是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E4%BB%80%E4%B9%88%E6%98%AF%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%EF%BC%8C%E4%BD%BF%E7%94%A8%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E7%9A%84%E5%A5%BD%E5%A4%84%EF%BC%9F"><span class="toc-text">8. 什么是存储过程，使用存储过程的好处？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-Oracle-%E7%9A%84%E6%B8%B8%E6%A0%87%EF%BC%9F"><span class="toc-text">9. 如何使用 Oracle 的游标？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E5%92%8C%E5%AD%98%E5%82%A8%E5%87%BD%E6%95%B0%E7%9A%84%E7%89%B9%E7%82%B9%E5%92%8C%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-text">10. 存储过程和存储函数的特点和区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-%E8%A7%A6%E5%8F%91%E5%99%A8%E7%9A%84%E4%BD%9C%E7%94%A8%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-text">11. 触发器的作用有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-%E5%9C%A8%E5%8D%83%E4%B8%87%E7%BA%A7%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9F%A5%E8%AF%A2%E4%B8%AD%EF%BC%8C%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98%E6%95%88%E7%8E%87%EF%BC%9F"><span class="toc-text">12. 在千万级的数据库查询中，如何提高效率？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-%E4%B8%89%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%EF%BC%8Cpagebean%E7%9A%84%E5%B0%81%E8%A3%85%E3%80%82"><span class="toc-text">13. 三大数据库的分页查询实现原理，pagebean的封装。</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-面试题-数据库" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">面试题-数据库</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.07.14</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h3 id="1-PreparedStatement和Statement的区别。"><a href="#1-PreparedStatement和Statement的区别。" class="headerlink" title="1. PreparedStatement和Statement的区别。"></a>1. PreparedStatement和Statement的区别。</h3><ul>
+<li>PreparedStatement 接口继承 Statement，PreparedStatement 实例包含已编译的 SQL 语句，所以其执行速度要快于 Statement 对象。因此，多次执行的 SQL 语句经常创建为 PreparedStatement 对象，以提高效率。</li>
+<li>作 为 Statement 的 子 类 ， PreparedStatement 继承了 Statement 的 所 有 功 能，三种方法 execute、 executeQuery 和 executeUpdate 已被更改以使之不再需要参数</li>
+<li>由于Statement 需要不断地拼接，代码的可读性和可维护性差，而 PreparedStatement 使用占位符，可可读性较好。</li>
+<li>PreparedStatement 极大地提高了安全性.而Statement 容易被 SQL 注入</li>
+</ul>
+<h3 id="2-SQL-的-select-语句完整的执行顺序"><a href="#2-SQL-的-select-语句完整的执行顺序" class="headerlink" title="2. SQL 的 select 语句完整的执行顺序"></a>2. SQL 的 select 语句完整的执行顺序</h3><p>1、from子句组装来自不同数据源的数据； </p>
+<p>2、where子句基于指定的条件对记录行进行筛选； </p>
+<p>3、group by子句将数据划分为多个分组； </p>
+<p>4、使用聚集函数进行计算； </p>
+<p>5、使用having子句筛选分组； </p>
+<p>6、计算所有的表达式； </p>
+<p>7、select 的字段；</p>
+<p>8、使用order by对结果集进行排序。</p>
+<h3 id="3-SQL-之连接查询（左连接和右连接的区别）"><a href="#3-SQL-之连接查询（左连接和右连接的区别）" class="headerlink" title="3. SQL 之连接查询（左连接和右连接的区别）"></a>3. SQL 之连接查询（左连接和右连接的区别）</h3><ul>
+<li><p>左连接（左外连接）：以左表作为基准进行查询，左表数据会全部显示出来，右表如果和左表匹配的数据则显示相应字段的数据，如果不匹配则显示为 null。</p>
+</li>
+<li><p>右连接（右外连接）：以右表作为基准进行查询，右表数据会全部显示出来，左表如果和右表匹配的数据则显示相应字段的数据，如果不匹配则显示为 null。</p>
+</li>
+<li><p>全连接：先以左表进行左外连接，再以右表进行右外连接。</p>
+</li>
+<li><p>内连接：显示表之间有连接匹配的所有行。</p>
+</li>
+</ul>
+<h3 id="4-Mysql-性能优化"><a href="#4-Mysql-性能优化" class="headerlink" title="4. Mysql 性能优化"></a>4. Mysql 性能优化</h3><ol>
+<li><p>当只要一行数据时使用 limit 1</p>
+<ul>
+<li>查询时如果已知会得到一条数据，这种情况下加上 limit 1 会增加性能。因为 mysql 数据库引</li>
+</ul>
+<p>擎会在找到一条结果停止搜索，而不是继续查询下一条是否符合标准直到所有记录查询完毕。</p>
+</li>
+<li><p>选择正确的数据库引擎</p>
+<ul>
+<li><p>Mysql 中有两个引擎 MyISAM 和 InnoDB，每个引擎有利有弊。</p>
+</li>
+<li><p>MyISAM 适用于一些大量查询的应用，但对于有大量写功能的应用不是很好。甚至你只需要update 一个字段整个表都会被锁起来。而别的进程就算是读操作也不行,要等到当前 update 操作完成之后才能继续进行。另外，MyISAM 对于 select count(*)这类操作是超级快的。</p>
+</li>
+<li><p>InnoDB 的趋势会是一个非常复杂的存储引擎，对于一些小的应用会比 MyISAM 还慢，但是支持“行锁”，所以在写操作比较多的时候会比较优秀。并且，它支持很多的高级应用，例如：事务。</p>
+</li>
+</ul>
+</li>
+<li><p>用 not exists 代替 not in</p>
+</li>
+</ol>
+<ul>
+<li>Not exists 用到了连接能够发挥已经建立好的索引的作用，not in 不能使用索引。Not in 是最慢的方式要同每条记录比较，在数据量比较大的操作红不建议使用这种方式。</li>
+</ul>
+<ol start="4">
+<li>对操作符的优化，尽量不采用不利于索引的操作符</li>
+</ol>
+<ul>
+<li>如：in not in is null is not null &lt;&gt; 等<br>某个字段总要拿来搜索，为其建立索引：<br>Mysql 中可以利用 alter table 语句来为表中的字段添加索引，语法为：alter table 表名 add index (字段名)；</li>
+</ul>
+<h3 id="5-Mysql-存储引擎有哪些？"><a href="#5-Mysql-存储引擎有哪些？" class="headerlink" title="5. Mysql 存储引擎有哪些？"></a>5. Mysql 存储引擎有哪些？</h3><ul>
+<li><p>InnoDB 存储引擎</p>
+<p>InnoDB 是事务型数据库的首选引擎，支持事务安全表（ACID），支持行锁定和外键，InnoDB 是默认的 MySQL引擎。</p>
+</li>
+<li><p>MyISAM 存储引擎</p>
+<p>MyISAM 基于 ISAM 存储引擎，并对其进行扩展。它是在 Web、数据仓储和其他应用环境下最常使用的存储引擎之一。MyISAM 拥有较高的插入、查询速度，但不支持事物。</p>
+</li>
+<li><p>MEMORY 存储引擎</p>
+<p>MEMORY 存储引擎将表中的数据存储到内存中，未查询和引用其他表数据提供快速访问。</p>
+</li>
+<li><p>Archive 存储引擎</p>
+<p>正如其名称所示，Archive 非常适合存储归档数据，如日志信息。它只支持 INSERT 和 SELECT 操作，其设计的主要目的是提供高速的插入和压缩功能。</p>
+</li>
+</ul>
+<h3 id="6-事务的隔离性？"><a href="#6-事务的隔离性？" class="headerlink" title="6. 事务的隔离性？"></a>6. 事务的隔离性？</h3><ul>
+<li>隔离状态执行事务，使它们好像是系统在给定时间内执行的唯一操作。如果有两个事务，运行在相同的时间内，执行 相同的功能，事务的隔离性将确保每一事务在系统中认为只有该事务在使用系统。这种属性有时称为串行化，为了防止事务操作间的混淆， 必须串行化或序列化请 求，使得在同一时间仅有一个请求用于同一数据。</li>
+</ul>
+<h3 id="7-事务的四大特征是什么？"><a href="#7-事务的四大特征是什么？" class="headerlink" title="7. 事务的四大特征是什么？"></a>7. 事务的四大特征是什么？</h3><ul>
+<li>数据库事务 transanction 正确执行的四个基本要素。ACID,原子性(Atomicity)、一致性(Correspondence)、隔离性(Isolation)、持久性(Durability)。 <ul>
+<li>原子性：整个事务中的所有操作，要么全部完成，要么全部不完成，不可能停滞在中间某个环节。事务在执行过程中发生错误，会被回滚（Rollback）到事务开始前的状态，就像这个事务从来没有执行过一样。</li>
+<li>一致性：在事务开始之前和事务结束以后，数据库的完整性约束没有被破坏。</li>
+<li>隔离性：隔离状态执行事务，使它们好像是系统在给定时间内执行的唯一操作。如果有两个事务，运行在相同的时间内，执行 相同的功能，事务的隔离性将确保每一事务在系统中认为只有该事务在使用系统。这种属性有时称为串行化，为了防止事务操作间的混淆， 必须串行化或序列化请 求，使得在同一时间仅有一个请求用于同一数据。</li>
+<li>持久性：在事务完成以后，该事务所对数据库所作的更改便持久的保存在数据库之中，并不会被回滚</li>
+</ul>
+</li>
+</ul>
+<h3 id="8-什么是存储过程，使用存储过程的好处？"><a href="#8-什么是存储过程，使用存储过程的好处？" class="headerlink" title="8. 什么是存储过程，使用存储过程的好处？"></a>8. 什么是存储过程，使用存储过程的好处？</h3><ul>
+<li><p>存储过程（Stored Procedure ）是一组为了完成特定功能的 SQL 语句集，经编译后存储在数据库中。用户通过指定存储过程的名字并给出参数（如果该存储过程带有参数）来执行它。存储过程是数据库中的一个重要对象，任何一个设计良好的数据库应用程序都应该用到存储过程。</p>
+</li>
+<li><p>优点：</p>
+<ul>
+<li><p>允许模块化程序设计，就是说只需要创建一次过程，以后在程序中就可以调用该过程任意次。</p>
+</li>
+<li><p>允许更快执行，如果某操作需要执行大量 SQL 语句或重复执行，存储过程比 SQL 语句执行的要快。</p>
+</li>
+<li><p>减少网络流量，例如一个需要数百行的 SQL 代码的操作有一条执行语句完成，不需要在网络中发送数百行代码。</p>
+</li>
+<li><p>更好的安全机制，对于没有权限执行存储过程的用户，也可授权他们执行存储过程。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="9-如何使用-Oracle-的游标？"><a href="#9-如何使用-Oracle-的游标？" class="headerlink" title="9. 如何使用 Oracle 的游标？"></a>9. 如何使用 Oracle 的游标？</h3><ul>
+<li><p>Oracle 中的游标分为显示游标和隐式游标</p>
+</li>
+<li><p>显示游标是用 cursor…is 命令定义的游标，它可以对查询语句(select)返回的多条记录进行处理；</p>
+</li>
+<li><p>隐式游标是在执行插入 (insert)、删除(delete)、修改(update) 和返回单条记录的查询(select)语句时由 PL/SQL 自动定义的。</p>
+</li>
+<li><p>显式游标的操作：打开游标、操作游标、关闭游标；PL/SQL 隐式地打开 SQL 游标，并在它内部处理 SQL语句，然后关闭它。</p>
+</li>
+</ul>
+<h3 id="10-存储过程和存储函数的特点和区别？"><a href="#10-存储过程和存储函数的特点和区别？" class="headerlink" title="10. 存储过程和存储函数的特点和区别？"></a>10. 存储过程和存储函数的特点和区别？</h3><ul>
+<li><p>特点：</p>
+<ul>
+<li>一般来说，存储过程实现的功能要复杂一点，而函数的实现的功能针对性比较强。</li>
+<li>对于存储过程来说可以返回参数，而函数只能返回值或者表对象。</li>
+<li>存储过程一般是作为一个独立的部分来执行，而函数可以作为查询语句的一个部分来调用，由于函数可以返回一个表对象，因此它可以在查询语句中位于 FROM 关键字的后面。</li>
+</ul>
+</li>
+<li><p>区别：</p>
+<ul>
+<li>函数必须有返回值,而过程没有. </li>
+<li>函数可以单独执行.而过程必须通过 execute 执行. </li>
+<li>函数可以嵌入到 SQL 语句中执行.而过程不行.</li>
+</ul>
+</li>
+</ul>
+<p>其实我们可以将比较复杂的查询写成函数.然后到存储过程中去调用这些函数.</p>
+<h3 id="11-触发器的作用有哪些？"><a href="#11-触发器的作用有哪些？" class="headerlink" title="11. 触发器的作用有哪些？"></a>11. 触发器的作用有哪些？</h3><ul>
+<li><p>触发器可通过数据库中的相关表实现级联更改；通过级联引用完整性约束可以更有效地执行这些更改。</p>
+</li>
+<li><p>触发器可以强制比用 CHECK 约束定义的约束更为复杂的约束。与 CHECK 约束不同，触发器可以引用其它表中的列。例如，触发器可以使用另一个表中的 SELECT 比较插入或更新的数据，以及执行其它操作，如修改数据或显示用户定义错误信息。</p>
+</li>
+<li><p>触发器还可以强制执行业务规则</p>
+</li>
+<li><p>触发器也可以评估数据修改前后的表状态，并根据其差异采取对策。</p>
+</li>
+</ul>
+<h3 id="12-在千万级的数据库查询中，如何提高效率？"><a href="#12-在千万级的数据库查询中，如何提高效率？" class="headerlink" title="12. 在千万级的数据库查询中，如何提高效率？"></a>12. 在千万级的数据库查询中，如何提高效率？</h3><ul>
+<li><p>数据库设计方面</p>
+<ul>
+<li>对查询进行优化，应尽量避免全表扫描，首先应考虑在 where 及 order by 涉及的列上建立索引。</li>
+<li>应尽量避免在 where 子句中对字段进行 null 值判断，否则将导致引擎放弃使用索引而进行全表扫描，如： select id from t where num is null 可以在 num 上设置默认值 0，确保表中 num 列没有 null 值，然后这样查询： select id from t where num=0</li>
+<li>并不是所有索引对查询都有效，SQL 是根据表中数据来进行查询优化的，当索引列有大量数据重复时,查询可能不会去利用索引，如一表中有字段 sex，male、female 几乎各一半，那么即使在 sex 上建了索引也对查询效率起不了作用。</li>
+<li>索引并不是越多越好，索引固然可以提高相应的 select 的效率，但同时也降低了 insert 及 update 的效率，因为 insert 或 update 时有可能会重建索引，所以怎样建索引需要慎重考虑，视具体情况而定。一个表的索引数最好不要超过 6 个，若太多则应考虑一些不常使用到的列上建的索引是否有必要。</li>
+<li>应尽可能的避免更新索引数据列，因为索引数据列的顺序就是表记录的物理存储顺序，一旦该列值改变将导致整个表记录的顺序的调整，会耗费相当大的资源。若应用系统需要频繁更新索引数据列，那么需要考虑是否应将该索引建为索引。</li>
+<li>尽量使用数字型字段，若只含数值信息的字段尽量不要设计为字符型，这会降低查询和连接的性能，并会增加存储开销。这是因为引擎在处理查询和连接时会逐个比较字符串中每一个字符，而对于数字型而言只需要比较一次就够了。</li>
+<li>尽可能的使用 varchar/nvarchar 代替 char/nchar ，因为首先变长字段存储空间小，可以节省存储空间，其次对于查询来说，在一个相对较小的字段内搜索效率显然要高些。</li>
+<li>尽量使用表变量来代替临时表。如果表变量包含大量数据，请注意索引非常有限（只有主键索引）。</li>
+<li>避免频繁创建和删除临时表，以减少系统表资源的消耗。</li>
+<li>临时表并不是不可使用，适当地使用它们可以使某些例程更有效，例如，当需要重复引用大型表或常用表中的某个数据集时。但是，对于一次性事件，最好使用导出表。</li>
+<li>在新建临时表时，如果一次性插入数据量很大，那么可以使用 select into 代替 create table，避免造成大量 log ，以提高速度；如果数据量不大，为了缓和系统表的资源，应先 create table，然后 insert。</li>
+<li>如果使用到了临时表，在存储过程的最后务必将所有的临时表显式删除，先 truncate table ，然后 drop table ，这样可以避免系统表的较长时间锁定。</li>
+</ul>
+</li>
+<li><p>SQL 语句方面</p>
+<ul>
+<li><p>应尽量避免在 where 子句中使用!=或&lt;&gt;操作符，否则将引擎放弃使用索引而进行全表扫描。</p>
+</li>
+<li><p>应尽量避免在 where 子句中使用 or 来连接条件，否则将导致引擎放弃使用索引而进行全表扫描，如：select id from t where num=10 or num=20 可以这样查询： select id from t where num=10 union all select id from t where num=20</p>
+</li>
+<li><p>in 和 not in 也要慎用，否则会导致全表扫描，如： select id from t where num in(1,2,3) 对于连续的数值，能用 between 就不要用 in 了： select id from t where num between 1 and 3</p>
+</li>
+<li><p>下面的查询也将导致全表扫描： select id from t where name like ‘%abc%’</p>
+</li>
+<li><p>如果在 where 子句中使用参数，也会导致全表扫描。因为 SQL 只有在运行时才会解析局部变量，但优化程序不能将访问计划的选择推迟到运行时；它必须在编译时进行选择。然而，如果在编译时建立访问计划，变量的值还是未知的，因而无法作为索引选择的输入项。如下面语句将进行全表扫描： select id from t where num=@num 可以改为强制查询使用索引： select id from t with(index(索引名)) where num=@num</p>
+</li>
+<li><p>应尽量避免在 where 子句中对字段进行表达式操作，这将导致引擎放弃使用索引而进行全表扫描。如：select id from t where num/2=100 应改为: select id from t where num=100*2</p>
+</li>
+<li><p>应尽量避免在where子句中对字段进行函数操作，这将导致引擎放弃使用索引而进行全表扫描。</p>
+<ul>
+<li>如：select id from t where substring(name,1,3)= ‘ abc ’ name 以 abc 开 头 的 id </li>
+<li>改为select id from t where name like ‘abc%’ </li>
+<li>select id from t where datediff(day,createdate,’2005-11-30′)=0–‘2005-11-30’生成的 id </li>
+<li>应改为: select id from t where createdate&gt;=’2005-11-30′ and createdate&lt;’2005-12-1′</li>
+</ul>
+</li>
+<li><p>不要在 where 子句中的“=”左边进行函数、算术运算或其他表达式运算，否则系统将可能无法正确使用索引。</p>
+</li>
+<li><p>不要写一些没有意义的查询，如需要生成一个空表结构： select col1,col2 into #t from t where 1=0 这类代码不会返回任何结果集，但是会消耗系统资源的，应改成这样： create table #t(…)</p>
+</li>
+<li><p>很多时候用 exists 代替 in 是一个好的选择： select num from a where num in(select num from b) </p>
+</li>
+<li><p>用下面的语句替换： select num from a where exists(select 1 from b where num=a.num)</p>
+</li>
+<li><p>任何地方都不要使用 select * from t ，用具体的字段列表代替“*”，不要返回用不到的任何字段。</p>
+</li>
+<li><p>尽量避免使用游标，因为游标的效率较差，如果游标操作的数据超过 1 万行，那么就应该考虑改写。</p>
+</li>
+<li><p>尽量避免向客户端返回大数据量，若数据量过大，应该考虑相应需求是否合理。</p>
+</li>
+<li><p>尽量避免大事务操作，提高系统并发能力。</p>
+</li>
+</ul>
+</li>
+<li><p>java 方面：重点内容</p>
+<ul>
+<li>尽可能的少创造对象。</li>
+<li>合理摆正系统设计的位置。大量数据操作，和少量数据操作一定是分开的。大量的数据操作，肯定不是 ORM框架搞定的。</li>
+<li>使用 jDBC 链接数据库操作数据</li>
+<li>控制好内存，让数据流起来，而不是全部读到内存再处理，而是边读取边处理；</li>
+<li>合理利用内存，有的数据要缓存</li>
+</ul>
+</li>
+</ul>
+<h3 id="13-三大数据库的分页查询实现原理，pagebean的封装。"><a href="#13-三大数据库的分页查询实现原理，pagebean的封装。" class="headerlink" title="13. 三大数据库的分页查询实现原理，pagebean的封装。"></a>13. 三大数据库的分页查询实现原理，pagebean的封装。</h3><ul>
+<li>Oracle分页：ORCALE数据库实现分页查询可以使用使用rownum 伪列方法。</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--伪列</span></span><br><span class="line">   <span class="keyword">select</span> emp.<span class="operator">*</span>,rownum <span class="keyword">from</span> emp;</span><br><span class="line"><span class="comment">--分页：n页，一页a列 </span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> rownum <span class="keyword">between</span> a<span class="operator">*</span>n<span class="number">-2</span> <span class="keyword">and</span> a<span class="operator">*</span>n</span><br><span class="line"><span class="comment">--示例：查询工资4到第6名的员工信息</span></span><br><span class="line">     <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span></span><br><span class="line">        (<span class="keyword">select</span> e.<span class="operator">*</span>，rownum rn <span class="keyword">from</span> </span><br><span class="line">           (<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">order</span> <span class="keyword">by</span> sal) e) employee</span><br><span class="line">     <span class="keyword">where</span> rn <span class="keyword">between</span> <span class="number">4</span> <span class="keyword">and</span> <span class="number">6</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Mysql分页：MySQL数据库实现分页使用 LIMIT函数。LIMIT子 句可以用来限制由SELECT语句返回过来的数据数量，它有一个或两个参数，如果给出两个参数， 第一个参数指定返回的第一行在所有数据中的位置，从0开始（注意不是1），第二个参数指定最多返回行数。</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--示例：查询工资4到第6名的员工信息</span></span><br><span class="line">     <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">order</span> <span class="keyword">by</span> sal</span><br><span class="line">     limit <span class="number">4</span>,<span class="number">2</span> ;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Sqlserver分页：通过TOP函数来实现</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--示例：查询工资4到第6名的员工信息</span></span><br><span class="line"><span class="keyword">select</span> top <span class="number">2</span> <span class="operator">*</span> <span class="keyword">from</span> </span><br><span class="line">(<span class="keyword">select</span> <span class="operator">*</span>,<span class="built_in">row_number</span>() <span class="keyword">over</span>(<span class="keyword">order</span> <span class="keyword">by</span> sal) rownum <span class="keyword">from</span> emp )x <span class="keyword">where</span> x.rownum<span class="operator">&gt;</span><span class="number">4</span></span><br><span class="line"><span class="comment">--利用top 和 not in 实现,效率更高</span></span><br><span class="line"><span class="keyword">select</span> top <span class="number">2</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> empno <span class="keyword">not</span> <span class="keyword">in</span></span><br><span class="line">( <span class="keyword">select</span> top <span class="number">4</span> empno <span class="keyword">from</span> empno <span class="keyword">order</span> <span class="keyword">by</span> sal)</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> sal</span><br></pre></td></tr></table></figure>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/07/14/%E9%9D%A2%E8%AF%95%E9%A2%98-JavaWeb/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/07/14/%E9%9D%A2%E8%AF%95%E9%A2%98-SSM%E6%A1%86%E6%9E%B6%E9%9B%86/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

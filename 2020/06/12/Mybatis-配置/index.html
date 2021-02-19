@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Mybatis-配置 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="mybatis," />
+  
+
+  <meta name="description" content="官方文档 官方文档已经写的很清楚了，下面只是我比较常用的。 配置MyBatis 的配置文件包含了会深深影响 MyBatis 行为的设置和属性信息。 配置文档的顶层结构如下：  configuration（配置） properties（属性） settings（设置） typeAliases（类型别名） typeHandlers（类型处理器） objectFactory（对象工厂） plugins（">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mybatis-配置">
+<meta property="og:url" content="http://paphae.top/2020/06/12/Mybatis-%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="官方文档 官方文档已经写的很清楚了，下面只是我比较常用的。 配置MyBatis 的配置文件包含了会深深影响 MyBatis 行为的设置和属性信息。 配置文档的顶层结构如下：  configuration（配置） properties（属性） settings（设置） typeAliases（类型别名） typeHandlers（类型处理器） objectFactory（对象工厂） plugins（">
+<meta property="og:locale">
+<meta property="og:image" content="http://paphae.top/2020/06/12/Mybatis-%E9%85%8D%E7%BD%AE/Mybatis-%E9%85%8D%E7%BD%AE/2020051622224468.png">
+<meta property="article:published_time" content="2020-06-12T08:57:36.000Z">
+<meta property="article:modified_time" content="2020-06-14T09:27:47.934Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="mybatis">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://paphae.top/2020/06/12/Mybatis-%E9%85%8D%E7%BD%AE/Mybatis-%E9%85%8D%E7%BD%AE/2020051622224468.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%EF%BC%88properties%EF%BC%89"><span class="toc-text">属性（properties）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%EF%BC%88settings%EF%BC%89"><span class="toc-text">设置（settings）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Log4j%E7%9A%84%E6%97%A5%E5%BF%97%E5%BC%80%E5%90%AF%E5%8A%9F%E8%83%BD"><span class="toc-text">Log4j的日志开启功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%93%E5%AD%98"><span class="toc-text">缓存</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E5%88%AB%E5%90%8D%EF%BC%88typeAliases%EF%BC%89"><span class="toc-text">类型别名（typeAliases）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E4%BB%B6%EF%BC%88plugins%EF%BC%89"><span class="toc-text">插件（plugins）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E9%A1%B5"><span class="toc-text">分页</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%98%A0%E5%B0%84%E5%99%A8%EF%BC%88mappers%EF%BC%89"><span class="toc-text">映射器（mappers）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="toc-text">参考文章</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-Mybatis-配置" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Mybatis-配置</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.06.12</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/%E6%A1%86%E6%9E%B6/">框架</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p><a target="_blank" rel="noopener" href="https://mybatis.org/mybatis-3/zh/configuration.html">官方文档</a></p>
+<p>官方文档已经写的很清楚了，下面只是我比较常用的。</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>MyBatis 的配置文件包含了会深深影响 MyBatis 行为的设置和属性信息。 配置文档的顶层结构如下：</p>
+<ul>
+<li>configuration（配置）<ul>
+<li><a target="_blank" rel="noopener" href="https://mybatis.org/mybatis-3/zh/configuration.html#properties">properties（属性）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mybatis.org/mybatis-3/zh/configuration.html#settings">settings（设置）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mybatis.org/mybatis-3/zh/configuration.html#typeAliases">typeAliases（类型别名）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mybatis.org/mybatis-3/zh/configuration.html#typeHandlers">typeHandlers（类型处理器）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mybatis.org/mybatis-3/zh/configuration.html#objectFactory">objectFactory（对象工厂）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mybatis.org/mybatis-3/zh/configuration.html#plugins">plugins（插件）</a></li>
+<li>environments（环境配置）<ul>
+<li>environment（环境变量）<ul>
+<li>transactionManager（事务管理器）</li>
+<li>dataSource（数据源）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://mybatis.org/mybatis-3/zh/configuration.html#databaseIdProvider">databaseIdProvider（数据库厂商标识）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mybatis.org/mybatis-3/zh/configuration.html#mappers">mappers（映射器）</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="属性（properties）"><a href="#属性（properties）" class="headerlink" title="属性（properties）"></a>属性（properties）</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">value</span>=<span class="string">&quot;root&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;root&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>或读取资源文件</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">properties</span> <span class="attr">resource</span>=<span class="string">&quot;db.properties&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="设置（settings）"><a href="#设置（settings）" class="headerlink" title="设置（settings）"></a>设置（settings）</h3><h4 id="Log4j的日志开启功能"><a href="#Log4j的日志开启功能" class="headerlink" title="Log4j的日志开启功能"></a>Log4j的日志开启功能</h4><ul>
+<li><p>添加依赖</p>
+</li>
+<li><p>```xml</p>
+<!-- https://mvnrepository.com/artifact/log4j/log4j -->
+<dependency>
+    <groupId>log4j</groupId>
+    <artifactId>log4j</artifactId>
+    <version>1.2.17</version>
+</dependency>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 配置log4j的资源文件</span><br><span class="line"></span><br><span class="line">  - log4j.properties</span><br><span class="line"></span><br><span class="line">  - &#96;&#96;&#96;properties</span><br><span class="line">    ### Log4j配置 ### </span><br><span class="line">    ### 与Spring结合需要在web.xml中指定此文件位置，并添加监听器 ### </span><br><span class="line">    #定义log4j的输出级别和输出目的地（目的地可以自定义名称，和后面的对应） </span><br><span class="line">    #[ level ] , appenderName1 , appenderName2 </span><br><span class="line">    log4j.rootLogger&#x3D;DEBUG,console,file</span><br><span class="line">    </span><br><span class="line">    #-----------------------------------# </span><br><span class="line">    #1 定义日志输出目的地为控制台 </span><br><span class="line">    log4j.appender.console &#x3D; org.apache.log4j.ConsoleAppender</span><br><span class="line">    log4j.appender.console.Target &#x3D; System.out</span><br><span class="line">    log4j.appender.console.Threshold&#x3D;DEBUG</span><br><span class="line">    ####可以灵活地指定日志输出格式，下面一行是指定具体的格式 ### </span><br><span class="line">    #%c: 输出日志信息所属的类目，通常就是所在类的全名 </span><br><span class="line">    #%m: 输出代码中指定的消息,产生的日志具体信息  </span><br><span class="line">    #%n: 输出一个回车换行符，Windows平台为&quot;&#x2F;r&#x2F;n&quot;，Unix平台为&quot;&#x2F;n&quot;输出日志信息换行 </span><br><span class="line">    log4j.appender.console.layout &#x3D; org.apache.log4j.PatternLayout</span><br><span class="line">    log4j.appender.console.layout.ConversionPattern&#x3D;[%c]-%m%n</span><br><span class="line">    </span><br><span class="line">    #-----------------------------------# </span><br><span class="line">    #2 文件大小到达指定尺寸的时候产生一个新的文件  </span><br><span class="line">    log4j.appender.file &#x3D; org.apache.log4j.RollingFileAppender</span><br><span class="line">    #日志文件输出目录 </span><br><span class="line">    log4j.appender.file.File&#x3D;log&#x2F;tibet.log</span><br><span class="line">    #定义文件最大大小 </span><br><span class="line">    log4j.appender.file.MaxFileSize&#x3D;10mb</span><br><span class="line">    ###输出日志信息### </span><br><span class="line">    #最低级别 </span><br><span class="line">    log4j.appender.file.Threshold&#x3D;ERROR</span><br><span class="line">    log4j.appender.file.layout&#x3D;org.apache.log4j.PatternLayout</span><br><span class="line">    log4j.appender.file.layout.ConversionPattern&#x3D;[%p][%d&#123;yy-MM-dd&#125;][%c]%m%n</span><br><span class="line">    </span><br><span class="line">    #-----------------------------------# </span><br><span class="line">    #3 druid </span><br><span class="line">    log4j.logger.druid.sql&#x3D;INFO</span><br><span class="line">    log4j.logger.druid.sql.DataSource&#x3D;info</span><br><span class="line">    log4j.logger.druid.sql.Connection&#x3D;info</span><br><span class="line">    log4j.logger.druid.sql.Statement&#x3D;info</span><br><span class="line">    log4j.logger.druid.sql.ResultSet&#x3D;info</span><br><span class="line">    </span><br><span class="line">    #4 mybatis 显示SQL语句部分 </span><br><span class="line">    log4j.logger.org.mybatis&#x3D;DEBUG</span><br><span class="line">    #log4j.logger.cn.tibet.cas.dao&#x3D;DEBUG </span><br><span class="line">    #log4j.logger.org.mybatis.common.jdbc.SimpleDataSource&#x3D;DEBUG </span><br><span class="line">    #log4j.logger.org.mybatis.common.jdbc.ScriptRunner&#x3D;DEBUG </span><br><span class="line">    #log4j.logger.org.mybatis.sqlmap.engine.impl.SqlMapClientDelegate&#x3D;DEBUG </span><br><span class="line">    #log4j.logger.java.sql.Connection&#x3D;DEBUG </span><br><span class="line">    log4j.logger.java.sql&#x3D;DEBUG</span><br><span class="line">    log4j.logger.java.sql.Statement&#x3D;DEBUG</span><br><span class="line">    log4j.logger.java.sql.ResultSet&#x3D;DEBUG</span><br><span class="line">    log4j.logger.java.sql.PreparedStatement&#x3D;DEBUG</span><br></pre></td></tr></table></figure></li>
+<li><p>在mybatis的核心配置文件中开启mybaits的日志功能</p>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">settings</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 开启log4j来记录日志 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">&quot;logImpl&quot;</span> <span class="attr">value</span>=<span class="string">&quot;log4j&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h4><p>将用户<strong>经常查询的数据放在缓存（内存）中</strong>，用户去查询数据就不用从磁盘上(关系型数据库数据文件)查询，<strong>从缓存中查询，从而提高查询效率</strong>，解决了高并发系统的性能问题</p>
+<ul>
+<li><p>一级缓存</p>
+<ul>
+<li>作用域：sqlsession</li>
+<li>作用：当使用一个session执行俩次相同的方法的时候，本质上只执行一次sql语句。在第一个执行方法的时候，会把查询结果放入到一级缓存当中。在次执行这个方法的时候，首先查询缓存中有没有相应的查询结果，如果有，直接获取，不执行sql语句。</li>
+</ul>
+</li>
+<li><p>二级缓存</p>
+<ul>
+<li><p>使用步骤</p>
+<ul>
+<li>在mybatis的核心配置文件中配置<ul>
+<li>开启缓存</li>
+<li>代码： <code> &lt;setting name=&quot;cacheEnabled&quot; value=&quot;true&quot;/&gt;</code></li>
+</ul>
+</li>
+<li>在mapper开启二级缓存开关。<ul>
+<li>在mapper文件加入<cache/></li>
+</ul>
+</li>
+<li>使用不同session执行相同方法。<ul>
+<li>第一个session执行后，要进行关闭，避免与一级缓存发生重启。</li>
+<li>缓存传递<ul>
+<li>存在内存当中，查询接以对象的形式储在内存当中，所以该对应的实体类必须是可序列化接口。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>作用域：多个session之间。</p>
+</li>
+<li><p>作用：当第一个session执行sql语句后，会把查询结构以对象的形式存储在内存当中，在第一个session关闭后，第二个session执行相应的方法的时候，可以从二级缓存当中获取当时一个session执行该sql语句的结局</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="类型别名（typeAliases）"><a href="#类型别名（typeAliases）" class="headerlink" title="类型别名（typeAliases）"></a>类型别名（typeAliases）</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">typeAliases</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">typeAlias</span> <span class="attr">type</span>=<span class="string">&quot;com.paphae.domain.Emp&quot;</span> <span class="attr">alias</span>=<span class="string">&quot;emp&quot;</span>/&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--        &lt;package name=&quot;com.paphae.domain&quot;/&gt;--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">typeAliases</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="插件（plugins）"><a href="#插件（plugins）" class="headerlink" title="插件（plugins）"></a>插件（plugins）</h3><h4 id="分页"><a href="#分页" class="headerlink" title="分页"></a><a target="_blank" rel="noopener" href="https://pagehelper.github.io/docs/howtouse/">分页</a></h4><ul>
+<li><p>导入依赖</p>
+</li>
+<li><pre><code class="xml">&lt;!-- https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.github.pagehelper&lt;/groupId&gt;
+    &lt;artifactId&gt;pagehelper&lt;/artifactId&gt;
+    &lt;version&gt;5.1.10&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;!-- https://mvnrepository.com/artifact/com.github.jsqlparser/jsqlparser --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.github.jsqlparser&lt;/groupId&gt;
+    &lt;artifactId&gt;jsqlparser&lt;/artifactId&gt;
+    &lt;version&gt;3.1&lt;/version&gt;
+&lt;/dependency&gt;
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- #### 在 MyBatis 配置 xml 中配置拦截器插件</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;xml</span><br><span class="line">&lt;!--</span><br><span class="line">    plugins在配置文件中的位置必须符合要求，否则会报错，顺序如下:</span><br><span class="line">    properties?, settings?,</span><br><span class="line">    typeAliases?, typeHandlers?,</span><br><span class="line">    objectFactory?,objectWrapperFactory?,</span><br><span class="line">    plugins?,</span><br><span class="line">    environments?, databaseIdProvider?, mappers?</span><br><span class="line">--&gt;</span><br><span class="line">&lt;plugins&gt;</span><br><span class="line">    &lt;plugin interceptor&#x3D;&quot;com.github.pagehelper.PageInterceptor&quot;&gt;</span><br><span class="line">        &lt;property name&#x3D;&quot;helperDialect&quot; value&#x3D;&quot;mysql&quot;&#x2F;&gt;</span><br><span class="line">        &lt;property name&#x3D;&quot;rowBoundsWithCount&quot; value&#x3D;&quot;true&quot;&#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;plugin&gt;</span><br><span class="line">&lt;&#x2F;plugins&gt;</span><br></pre></td></tr></table></figure>
+### 环境配置（environments）
+</code></pre>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">environments</span> <span class="attr">default</span>=<span class="string">&quot;mysql&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">&quot;mysql&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">&quot;JDBC&quot;</span>/&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--            POOLED   连接池</span></span><br><span class="line"><span class="comment">                            UNPOOLED 普通连接--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">&quot;POOLED&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;driver&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;jdbc.driverClassName&#125;&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;url&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;jdbc.url&#125;&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;jdbc.username&#125;&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;jdbc.password&#125;&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">environment</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">environments</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="映射器（mappers）"><a href="#映射器（mappers）" class="headerlink" title="映射器（mappers）"></a>映射器（mappers）</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 使用相对于类路径的资源引用 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;org/mybatis/builder/AuthorMapper.xml&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;org/mybatis/builder/BlogMapper.xml&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;org/mybatis/builder/PostMapper.xml&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 将包内的映射器接口实现全部注册为映射器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">&quot;org.mybatis.builder&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>完成映射的要求是什么<br>要想将包内的映射器接口实现全部注册为映射器，最终要求：编译后的class文件和xml文件都在一个包下才行。（注意：java文件和xml文件可以不在一个包中，但是编译后的class文件和xml文件一定要在一个包中）</li>
+</ul>
+<p><img src="Mybatis-%E9%85%8D%E7%BD%AE/2020051622224468.png" alt="就像这样"></p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a target="_blank" rel="noopener" href="https://mybatis.org/mybatis-3/zh/configuration.html#mappers">mybatis – MyBatis 3 | 配置</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4Njg5MDA5NA==&mid=2247483937&idx=3&sn=977f8e1eeb0d4e46bab6d6140e856c83&chksm=ebd74320dca0ca3648e351f2f3d5196842e64d2e8ba14722ec2548da46df7e88832765e67f87&scene=21###wechat_redirect">Mybatis【配置文件】</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43820791/article/details/106166280">使用IDEA-Maven构建MyBatis项目时：映射器（mappers）将包内的映射器接口实现全部注册为映射器问题</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/fanfanzk1314/article/details/71480954">Mybatis中接口和对应的mapper文件位置配置详解</a></p>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/06/10/Mybatis-%E7%BC%93%E5%AD%98/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/06/12/Mybatis-%E6%98%A0%E5%B0%84%E5%99%A8/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

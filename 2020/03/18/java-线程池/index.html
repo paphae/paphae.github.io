@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>java-线程池 | 拥有武侠梦的猫</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="线程," />
+  
+
+  <meta name="description" content="线程池的概念和作用 在java中，如果每个请求到达就创建一个新线程，开销是相当大的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java-线程池">
+<meta property="og:url" content="http://paphae.top/2020/03/18/java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/index.html">
+<meta property="og:site_name" content="拥有武侠梦的猫">
+<meta property="og:description" content="线程池的概念和作用 在java中，如果每个请求到达就创建一个新线程，开销是相当大的">
+<meta property="og:locale">
+<meta property="og:image" content="http://paphae.top/2020/03/18/java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/%E5%9B%BE%E7%89%875.png">
+<meta property="og:image" content="http://paphae.top/2020/03/18/java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/%E5%9B%BE%E7%89%876.png">
+<meta property="og:image" content="http://paphae.top/2020/03/18/java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/%E5%9B%BE%E7%89%877.png">
+<meta property="og:image" content="http://paphae.top/2020/03/18/java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/%E5%9B%BE%E7%89%878.png">
+<meta property="og:image" content="http://paphae.top/2020/03/18/java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/%E5%9B%BE%E7%89%879.png">
+<meta property="og:image" content="http://paphae.top/2020/03/18/java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/%E5%9B%BE%E7%89%8710.png">
+<meta property="og:image" content="http://paphae.top/2020/03/18/java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/%E5%9B%BE%E7%89%8711.png">
+<meta property="og:image" content="http://paphae.top/2020/03/18/java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/%E5%9B%BE%E7%89%8712.png">
+<meta property="og:image" content="http://paphae.top/2020/03/18/java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/%E5%9B%BE%E7%89%8713.png">
+<meta property="og:image" content="http://paphae.top/2020/03/18/java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/%E5%9B%BE%E7%89%8714.png">
+<meta property="og:image" content="http://paphae.top/2020/03/18/java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/%E5%9B%BE%E7%89%8715.png">
+<meta property="og:image" content="http://paphae.top/2020/03/18/java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/%E5%9B%BE%E7%89%8716.png">
+<meta property="og:image" content="http://paphae.top/2020/03/18/java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/%E5%9B%BE%E7%89%8717.png">
+<meta property="article:published_time" content="2020-03-18T00:38:14.000Z">
+<meta property="article:modified_time" content="2020-05-06T00:43:20.275Z">
+<meta property="article:author" content="Paphae">
+<meta property="article:tag" content="线程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://paphae.top/2020/03/18/java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/%E5%9B%BE%E7%89%875.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E6%A6%82%E5%BF%B5%E5%92%8C%E4%BD%9C%E7%94%A8"><span class="toc-text">线程池的概念和作用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E7%BA%BF%E7%A8%8B"><span class="toc-text">工作线程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BA%BF%E7%A8%8B%E6%B1%A0"><span class="toc-text">自定义线程池</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E7%B1%BB"><span class="toc-text">测试类</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E5%8F%B7%E9%87%8F"><span class="toc-text">信号量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="toc-text">生产者消费者模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Executor"><span class="toc-text">Executor</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E5%99%A8"><span class="toc-text">任务调度器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Runnable%E4%B8%8ECallable"><span class="toc-text">Runnable与Callable</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lock%E9%94%81"><span class="toc-text">lock锁</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ThreadLoal"><span class="toc-text">ThreadLoal</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="toc-text">任务调度的类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Timer"><span class="toc-text">Timer</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-1"><span class="toc-text">总结</span></a></li></ol></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-java-线程池" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">java-线程池</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.03.18</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Paphae</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/javaSE/">javaSE</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="线程池的概念和作用"><a href="#线程池的概念和作用" class="headerlink" title="线程池的概念和作用"></a>线程池的概念和作用</h2><ul>
+<li><p>在java中，如果每个请求到达就创建一个新线程，开销是相当大的 </p>
+<a id="more"></a>
+</li>
+<li><p>在实际使用中，服务器在创建和销毁线程上花费的时间和消耗的系统资源都相当大，甚至可能要比在处理实际的用户请求的时间和资源要多的多。除了创建和销毁线程的开销之外，活动的线程也需要消耗系统资源。如果在一个JVM里创建太多的线程，可能会使系统由于过度消耗内存或“切换过度”而导致系统资源不足。为了防止资源不足，服务器应用程序需要采取一些办法来限制任何给定时刻处理的请求数目，尽可能减少创建和销毁线程的次数，特别是一些资源耗费比较大的线程的创建和销毁，尽量利用已有对象来进行服务，这就是“池化资源”技术产生的原因</p>
+</li>
+<li><p>线程池主要用来解决线程生命周期开销问题和资源不足问题。通过对多个任务重复使用线程，线程创建的开销就被分摊到了多个任务上了，而且由于在请求到达时线程已经存在，所以消除了线程创建所带来的延迟。这样，就可以立即为请求服务，使用应用程序响应更快 </p>
+</li>
+<li><p>通过适当的调整线程中的线程数目可以防止出现资源不足的情况 </p>
+</li>
+<li><p>当一个服务器接受到大量短小线程的请求时，使用线程池技术是非常合适的，它可以大大减少线程的创建和销毁次数，提高服务器的工作效率</p>
+</li>
+<li><p>一个比较简单的线程池至少应包含： </p>
+<ul>
+<li>线程池管理器 <ul>
+<li>创建、销毁并管理线程池，将工作线程放入线程池中 </li>
+</ul>
+</li>
+<li>工作线程 <ul>
+<li>一个可以循环执行任务的线程，在没有任务是进行等待 </li>
+</ul>
+</li>
+<li>任务列队 <ul>
+<li>提供一种缓冲机制，将没有处理的任务放在任务列队中 </li>
+</ul>
+</li>
+<li>任务接口 <ul>
+<li>每个任务必须实现的接口，主要用来规定任务的入口、任务执行完后的收尾工作、任务的执行状态等，工作线程通过该接口调度任务的执行</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="工作线程"><a href="#工作线程" class="headerlink" title="工作线程"></a>工作线程</h4><p><img src="java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/%E5%9B%BE%E7%89%875.png"></p>
+<h4 id="自定义线程池"><a href="#自定义线程池" class="headerlink" title="自定义线程池"></a>自定义线程池</h4><p><img src="java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/%E5%9B%BE%E7%89%876.png"></p>
+<h4 id="测试类"><a href="#测试类" class="headerlink" title="测试类"></a>测试类</h4><p><img src="java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/%E5%9B%BE%E7%89%877.png"></p>
+<h2 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h2><p>现实生活中存在很多进行资源协调调度的工具<br>红绿灯可以方便的对资源（路口）的使用情况进行调度，确定哪些资源的使用者在某一特定时刻可以对资源进行消费，从而保障多线程共享资源的可用性</p>
+<ul>
+<li>信号量，有时被称为信号灯，是在多线程环境下使用的一种设施, 它负责协调各个线程, 以保证它们能够正确、合理的使用公共资源 </li>
+<li>一个计数信号量。从概念上讲，信号量维护了一个许可集。如有必要，在许可可用前会阻塞每一个资源申请请求，然后再获取该许可。信号量提供一个方法添加一个许可，从而可能释放一个正在阻塞的获取者 </li>
+<li>信号量对可用许可进行计数，并采取相应的行动。拿到信号量许可的线程可以进入代码，否则就等待。通过申请和释放方法获取和释放访问许可</li>
+<li>还有一个生活中的常见案例能够更好的诠释信号量的作用：</li>
+<li>厕所有5个坑，假如有10个人要上厕所，那么同时只能有多少个人去上厕所呢？同时只能有5个人能够占用，当5个人中 的任何一个人让开后，其中等待的另外5个人中又有一个人可以占用了。另外等待的5个人中可以是随机获得优先机会，也可以是按照先来后到的顺序获得机会<h3 id="生产者消费者模式"><a href="#生产者消费者模式" class="headerlink" title="生产者消费者模式"></a>生产者消费者模式</h3></li>
+<li>Java实现生产者消费者模型问题是研究多线程程序时绕不开的经典问题之一：<br>它描述一块缓冲区作为仓库，生产者可以将产品放入仓库，消费者则可以从仓库中取走产品</li>
+<li>实际上，生产者消费者模式准确说应该是“生产者-消费者-仓储”模式，离开了仓储，生产者消费者模型就显得没有说服力了,对于此模型，应该明确一下几点：<ul>
+<li>生产者仅仅在仓储未满时候生产，仓满则停止生产</li>
+<li>消费者仅仅在仓储有产品时候才能消费，仓空则等待</li>
+<li>当消费者发现仓储没产品可消费时候会通知生产者生产</li>
+<li>生产者在生产出可消费产品时候，应该通知等待的消费者去消费</li>
+</ul>
+</li>
+</ul>
+<p>仓库类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WareHouse</span> </span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MAX=<span class="number">10</span>; </span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> number;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getNumber</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> number;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setNumber</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.number = number;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//入库</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">pop</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">		<span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(number&lt;MAX) &#123;</span><br><span class="line">				number++;</span><br><span class="line">				<span class="keyword">this</span>.notifyAll();</span><br><span class="line">			&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">					<span class="keyword">this</span>.wait();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//出库</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">		<span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(number&gt;<span class="number">0</span>) &#123;</span><br><span class="line">				number--;</span><br><span class="line">				<span class="keyword">this</span>.notifyAll();</span><br><span class="line">			&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">					<span class="keyword">this</span>.wait();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>生产者</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Producer</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> WareHouse house;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Producer</span><span class="params">(String name ,WareHouse house)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>(name);</span><br><span class="line">		<span class="keyword">this</span>.house=house;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</span><br><span class="line">			<span class="keyword">synchronized</span>(house) &#123;</span><br><span class="line">				<span class="keyword">try</span> &#123;</span><br><span class="line">					<span class="keyword">this</span>.house.pop();</span><br><span class="line">					Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">					System.out.println(<span class="keyword">this</span>.getName()+<span class="string">&quot;生产当前商品：&quot;</span>+<span class="keyword">this</span>.house.getNumber());</span><br><span class="line">				&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">					e.printStackTrace();</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>消费者</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Consumer</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> WareHouse house;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Consumer</span><span class="params">(String name ,WareHouse house)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>(name);</span><br><span class="line">		<span class="keyword">this</span>.house=house;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</span><br><span class="line">			<span class="keyword">synchronized</span> (house) &#123;</span><br><span class="line">				<span class="keyword">try</span> &#123;</span><br><span class="line">					<span class="keyword">this</span>.house.push();</span><br><span class="line">					Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">					System.out.println(<span class="keyword">this</span>.getName()+<span class="string">&quot;消费当前商品：&quot;</span>+<span class="keyword">this</span>.house.getNumber());</span><br><span class="line">				&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">					e.printStackTrace();</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><ul>
+<li>线程池主要用来解决线程生命周期开销问题和资源不足问题。通过对多个任务重复使用线程，线程创建的开销就被分摊到了多个任务上了，而且由于在请求到达时线程已经存在，所以消除了线程创建所带来的延迟。这样，就可以立即为请求服务，使用应用程序响应更快 </li>
+<li>信号量，有时被称为信号灯，是在多线程环境下使用的一种设施, 它负责协调各个线程, 以保证它们能够正确、合理的使用公共资源，一个计数信号量。从概念上讲，信号量维护了一个许可集。如有必要，在许可可用前会阻塞每一个资源申请请求，然后再获取该许可。信号量提供一个方法添加一个许可，从而可能释放一个正在阻塞的获取者 </li>
+<li>生产者-消费者模式描述一块缓冲区作为仓库，生产者可以将产品放入仓库，消费者则可以从仓库中取走产品</li>
+</ul>
+<h3 id="Executor"><a href="#Executor" class="headerlink" title="Executor"></a>Executor</h3><p>JDK5的异步框架基于Executor接口将任务提交和任务执行进行解耦，无需开发人员关注各类任务线程的实现，而是将后台异步执行的内容抽象为单个任务，ExecutorService和其各种功能强大的实现类提供了非常简便方式来提交任务并获取任务执行结果，封装了任务执行的全部过程<br><img src="java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/%E5%9B%BE%E7%89%878.png"></p>
+<ul>
+<li>引入的Executor框架的最大优点是把任务的提交和执行解耦，要执行任务的人只需把Task描述清楚，然后提交即可。这个Task是怎么被执行的，被谁执行的，什么时候执行的，提交的人就不用关心了。具体点讲，提交一个Callable对象给ExecutorService（如最常用的线程池ThreadPoolExecutor），将得到一个Future对象，调用Future对象的get方法等待执行结果就好了</li>
+<li>经过这样的封装，对于使用者来说，提交任务获取结果的过程大大简化，调用者直接从提交的地方就可以等待获取执行结果。而封装最大的效果是使得真正执行任务的线程们变得不为人知。<br><img src="java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/%E5%9B%BE%E7%89%879.png"></li>
+<li>Executor是一个可以提交可执行任务的工具，这个接口解耦了任务提交和执行细节（线程使用、调度等），Executor主要用来替代显示的创建和运行线程</li>
+<li>ExecutorService提供了异步的管理一个或多个线程终止、执行过程(Future)的方法 </li>
+<li>Executors类提供了一系列工厂方法用于创建任务执行器，返回的任务执行器都实现了ExecutorService接口（绝大部分执行器完成了池化操作）<h4 id="任务调度器"><a href="#任务调度器" class="headerlink" title="任务调度器"></a>任务调度器</h4><img src="java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/%E5%9B%BE%E7%89%8710.png"><br><img src="java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/%E5%9B%BE%E7%89%8711.png"></li>
+<li>submit(Callable)<ul>
+<li>和方法submit(Runnable)比较类似，但是区别在于它们接收不同的参数类型。Callable的实例与Runnable的实例很类似，但是Callable的call()方法可以返回一个结果而方法Runnable.run()则不能返回结果 </li>
+<li>Callable的返回值可以从方法submit(Callable)返回的Future对象中获取</li>
+</ul>
+</li>
+<li>inVokeAny()<ul>
+<li>接收一个包含Callable对象的集合作为参数。调用该方法不会返回Future对象，而是返回集合中某个Callable对象的结果，而且无法保证调用之后返回的结果是集合中的哪个Callable结果，只知道它是这些Callable中的一个 </li>
+<li>如果一个任务运行完毕或者抛出异常，方法会取消其它的Callable的执行</li>
+</ul>
+</li>
+</ul>
+<p><img src="java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/%E5%9B%BE%E7%89%8712.png"><br><img src="java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/%E5%9B%BE%E7%89%8713.png"></p>
+<ul>
+<li><p>invokeAll()</p>
+<ul>
+<li>会调用存在于参数集合中的所有 Callable 对象，并且返回一个包含Future对象的集合，可以通过这个返回的集合来管理每个Callable的执行结果</li>
+<li>需要注意的是，任务有可能因为异常而导致运行结束，所以它可能并不是真的成功运行了。但是我们没有办法通过 Future 对象来了解到这个差异</li>
+</ul>
+</li>
+<li><p>当使用 ExecutorService 完毕之后，我们应该关闭它，这样才能保证线程不会继续保持运行状态</p>
+</li>
+<li><p>举例来说，如果你的程序通过main() 方法启动，并且主线程退出了你的程序，如果你还有一个活动的 ExecutorService存在于程序中，那么程序将会继续保持运行状态。存在于ExecutorService中的活动线程会阻止Java虚拟机关闭</p>
+</li>
+<li><p>为了关闭在 ExecutorService 中的线程，需要调用 shutdown() 方法。ExecutorService 并不会马上关闭，而是不再接收新的任务，一旦所有的线程结束执行当前任务，ExecutorServie才会真的关闭。所有在调用shutdown()方法之前提交到ExecutorService的任务都会执行</p>
+</li>
+<li><p>如果希望立即关闭ExecutorService，可以调用shutdownNow()方法。它会尝试马上关闭所有正在执行的任务，并且跳过所有已经提交但是还没有运行的任务。但是对于正在执行的任务，是否能够成功关闭它是无法保证的，有可能他们真的被关闭掉了，也有可能它会壹直执行到任务结束</p>
+</li>
+</ul>
+<h3 id="Runnable与Callable"><a href="#Runnable与Callable" class="headerlink" title="Runnable与Callable"></a>Runnable与Callable</h3><ul>
+<li>正如前面所说，JDK1.5的任务调度框架将需要异步指定的代码抽象成一个独立的任务，而这些任务就由Runnable与Callable两个接口来确定 </li>
+<li>Runnable与Callable两个接口的区别在于： <ul>
+<li>Runnable提供的任务方法为run，它不能返回任何的结果 </li>
+<li>Callable接口提供的任务方法为call，它可以返回任务执行后的结果 </li>
+<li>两个接口都符合函数式接口的标准</li>
+</ul>
+</li>
+</ul>
+<h2 id="lock锁"><a href="#lock锁" class="headerlink" title="lock锁"></a>lock锁</h2><ul>
+<li><p>虽然我们现在已经可以理解同步代码块和同步方法的锁对象问题，但是我们并不能直接看到在哪里加了锁，在哪里释放了锁，为了更清晰的表达如何加锁和释放锁，JDK5中提供了一个新的锁对象Lock（接口），提供了更为清晰的语义 </p>
+</li>
+<li><p>JDK5中有一个Lock的默认实现：ReentrantLock： </p>
+<ul>
+<li>可重入的独占锁。该对象与synchronized关键字有着相同的表现和更清晰的语义，而且还具有一些扩展的功能。可重入锁被最近的一个成功lock的线程占有（unlock后释放）。该类有一个重要特性体现在构造器上，构造器接受一个可选参数，是否是公平锁，默认是非公平锁 </li>
+<li>公平锁：<ul>
+<li>先来一定先排队，一定先获取锁 </li>
+</ul>
+</li>
+<li>非公平锁：<ul>
+<li>不保证上述条件。非公平锁的吞吐量更高<br><img src="java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/%E5%9B%BE%E7%89%8714.png"><h3 id="ThreadLoal"><a href="#ThreadLoal" class="headerlink" title="ThreadLoal"></a>ThreadLoal</h3></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>ThreadLocal的作用： </p>
+<ul>
+<li>ThreadLocal用来解决多线程程序的并发问题</li>
+<li>ThreadLocal并不是一个Thread,而是Thread的局部变量,当使用ThreadLocal维护变量时,ThreadLocal为每个使用该变量的线程提供独立的变量副本,所以每个线程都可以独立地改变自己的副本,而不会影响其它线程所对应的副本</li>
+<li>从线程的角度看，目标变量就象是线程的本地变量，这也是类名中“Local”所要表达的意思 </li>
+</ul>
+</li>
+<li><p>ThreadLocal类中的方法:</p>
+<ul>
+<li>void set(T value)<ul>
+<li>将此线程局部变量的当前线程副本中的值设置为指定值</li>
+</ul>
+</li>
+<li>void remove()<ul>
+<li>移除此线程局部变量当前线程的值</li>
+</ul>
+</li>
+<li>protected T initialValue()<ul>
+<li>返回此线程局部变量的当前线程的“初始值”</li>
+</ul>
+</li>
+<li>T get()<ul>
+<li>返回此线程局部变量的当前线程副本中的值</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>Executor是一个可以提交可执行任务的工具，这个接口解耦了任务提交和执行细节（线程使用、调度等），Executor主要用来替代显示的创建和运行线程。Runnable和Callable都可以抽象任务供Executor框架执行，不同的是Runnable没有返回结果，Callable能够返回任务执行的结果<br>ThreadLocal用来解决多线程程序的并发问题，ThreadLocal并不是一个Thread,而是Thread的局部变量,当使用ThreadLocal维护变量时,ThreadLocal为每个使用该变量的线程提供独立的变量副本,所以每个线程都可以独立地改变自己的副本,而不会影响其它线程所对应的副本</p>
+<h2 id="任务调度的类型"><a href="#任务调度的类型" class="headerlink" title="任务调度的类型"></a>任务调度的类型</h2><p>最常见的任务调度类型<br>定时启动<br>循环执行</p>
+<ul>
+<li>什么叫定时任务调度？<br>规定一个时间</li>
+<li>重复任务是在项目运行过程中通过控制时间间隔完成反复执行的任务（如自动化数据备份），重复任务调度需要注意的要点：任务间隔延迟时间起点有区别<h3 id="Timer"><a href="#Timer" class="headerlink" title="Timer"></a>Timer</h3></li>
+<li>Timer是Java最早提供的一个任务调度器，它可以支持定时任务和重复任务的调度 </li>
+<li>Timer通过一个独立的线程通过wait/notify机制对所有的任务进行调度，但是用户无需关心内部的线程实现细节，仅需通过Timer类的相关调度方法即可实现任务的调度<br><img src="java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/%E5%9B%BE%E7%89%8715.png"><br>如果希望借助于Timer进行任务调度，必须要满足Timer对任务本身的抽象规定，从刚才的Timer调度方法列表中可以看出，所有的方法第一个共同的参数均为TimerTask的对象，用于声明需要调度的任务中需要执行的指令代码<br>TimerTask是一个抽象类，和Runnable接口一样，通过一个run()抽象方法来定义任务执行的内容（事实上run方法来源于Runnable接口，因为TimerTask是Runnable的子类），它还对Runnable接口做出了扩展，声明了两个典型的行为：<br><img src="java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/%E5%9B%BE%E7%89%8716.png"><br>由于每个Timer调度器对应单一的一个线程，因此一旦任何一个任务抛出了异常，调度器线程即会结束，其他任务无法继续执行<br><img src="java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/%E5%9B%BE%E7%89%8717.png"><br>注意：由于Java的天性，并且在开发JDK的过程中要考虑到不同平台，而不同平台的线程调度机制是不同的，因此各种平台下JVM 的线程调度机制也是不一致的。从而Timer不能保证任务在所指定的时间内执行。另外由于TimerTask是实现Runnable接口的，在TimerTask被放进线程队列睡眠一段时间（wait）之后，当到了指定的该唤起该TimerTask时，由于执行的确切时机取决于JVM的调度策略和当前还有多少线程在等待CPU处理。因此就不能保证任务在所指定的时间内执行。通常在如下两种情况下导致任务延迟执行：</li>
+<li>有大量线程在等待执行</li>
+<li>GC机制的影响导致延迟</li>
+</ul>
+<p>JDK5之后在Executor任务调度框架中提供了并行化（池化）的任务调度执行机制来代替Timer和TimerTask的组合，由于实现了池化的并发处理，因此就不存在某个任务抛出异常后导致所有人物均不能执行的问题</p>
+<ul>
+<li>替代工具是： java.util.concurrent.ScheduledThreadPoolExecutor</li>
+<li>由于它是一个ExecutorService的实现，因此它可以调度由Runnable或Callable抽象的两种任务 </li>
+</ul>
+<p>Quartz任务调度</p>
+<ul>
+<li>Quartz是一个完全由java编写的开源任务调度框架。尽管Quartz框架整合了许多额外功能， 但就其简易形式看，它非常易用。简单地创建一个实现org.quartz.Job接口的java类。Job接口包含唯一的方法：<br>public void execute(JobExecutionContext context) throws JobExecutionException;</li>
+<li>在Job接口实现类里面，添加一些业务代码到execute()方法。一旦配置好Job实现类并设定好调度时间表，Quartz将密切注意剩余时间。当调度程序确定该是通知执行任务的时候，Quartz框架将调用Job实现类上的execute()方法并允许做它该做的事情。无需报告任何东西给调度器或调用任何特定的东西。仅仅执行任务和结束任务即可。如果配置你的作业在随后再次被调用，Quartz框架将在恰当的时间再次调用它 </li>
+<li>而这个过程和Timer/TimerTask的搭配十分类似<br>Quartz框架的核心是调度器。调度器负责管理Quartz应用运行时环境。调度器不是靠自己做所有的工作，而是依赖框架内一些非常重要的部件。Quartz不仅仅是线程和线程管理。为确保可伸缩性，Quartz采用了基于多线程的架构。启动时，框架初始化一套worker线程，这套线程被调度器用来执行预定的作业。这就是Quartz怎样能并发运行多个作业的原理。Quartz依赖一套松耦合的线程池管理部件来管理线程环境</li>
+</ul>
+<h4 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h4><ul>
+<li>Timer是Java最早提供的一个任务调度器，它可以支持定时任务和重复任务的调度，如果希望借助于Timer进行任务调度，必须要满足Timer对任务本身的抽象规定，从刚才的Timer调度方法列表中可以看出，所有的方法第一个共同的参数均为TimerTask的对象，用于声明需要调度的任务中需要执行的指令代码 </li>
+<li>一个Timer调度器的所有任务都运行在一个线程中，存在单个任务出现异常导致所有任务不能执行的隐患，而JDK5之后的ScheduledThreadPoolExecutor提供了并发任务调用，不存在这个隐患 </li>
+<li>Quartz是一个完全由java编写的开源任务调度框架</li>
+</ul>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2020/03/18/java-%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/03/19/java-%E6%B3%9B%E5%9E%8B/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
